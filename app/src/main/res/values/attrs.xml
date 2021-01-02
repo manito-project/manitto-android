@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SantaEditText">
+        <attr name="rightButton" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="add" value="1"/>
+            <enum name="delete" value="2"/>
+        </attr>
+        <attr name="hint" format="string"/>
+    </declare-styleable>
+</resources>

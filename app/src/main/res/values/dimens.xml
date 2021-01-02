@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width_edittext_rightbutton">30dp</dimen>
+    <dimen name="margin_santaedittext_edittext_vertical">9dp</dimen>
+    <dimen name="margin_santaedittext_button_vertical">8dp</dimen>
+    <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
+</resources>
