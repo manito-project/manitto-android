@@ -2,18 +2,18 @@ package org.sopt.santamanitto
 
 import android.view.View
 
-fun Int.toDP(): Int {
+fun Float.toDP(): Float {
     return MetricsUtil.convertPixelsToDp(this, null)
 }
 
-fun Int.toPixel() : Int {
+fun Float.toPixel() : Float {
     return MetricsUtil.convertDpToPixel(this, null)
 }
 
-fun View.getDpFromPx(px: Int): Int {
+fun View.getDpFromPx(px: Float): Float {
     return MetricsUtil.convertPixelsToDp(px, this.context)
 }
 
-fun View.getPxFromDp(dp: Int): Int {
+fun View.getPxFromDp(dp: Float): Float {
     return MetricsUtil.convertDpToPixel(dp, this.context)
 }

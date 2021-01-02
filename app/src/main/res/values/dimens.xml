@@ -4,4 +4,7 @@
     <dimen name="margin_santaedittext_edittext_vertical">9dp</dimen>
     <dimen name="margin_santaedittext_button_vertical">8dp</dimen>
     <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
+
+    <dimen name="size_santabottombutton_text">18sp</dimen>
+    <dimen name="padding_santabottombutton_vertical">10dp</dimen>
 </resources>
