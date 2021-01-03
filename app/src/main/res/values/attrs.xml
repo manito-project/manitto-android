@@ -8,4 +8,9 @@
         </attr>
         <attr name="hint" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="SantaImageRoundButton">
+        <attr name="title" format="string"/>
+        <attr name="description" format="string"/>
+    </declare-styleable>
 </resources>
