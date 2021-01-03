@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:elevation="@dimen/elevation_shadow"
-            android:src="@drawable/ic_santa_head"
+            tool:src="@drawable/ic_rudolf_head"
             app:layout_constraintBottom_toTopOf="@+id/cardview_santaimageroundbutton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.401"
@@ -27,14 +27,10 @@
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.cardview.widget.CardView
+        <org.sopt.santamanitto.view.SantaCardView
             android:id="@+id/cardview_santaimageroundbutton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:foreground="?android:selectableItemBackground"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/radius_cardview"
-            app:cardElevation="@dimen/elevation_shadow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +70,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </org.sopt.santamanitto.view.SantaCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,12 +1,14 @@
 package org.sopt.santamanitto
 
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.util.TypedValue
 
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 
 fun View.setPaddingVerticalById(@DimenRes id: Int) {
@@ -28,12 +30,24 @@ fun View.setRippleEffect(isEnabled: Boolean) {
     }
 }
 
+fun View.getDimen(@DimenRes id: Int): Float {
+    return resources.getDimension(id)
+}
+
+fun View.getColor(@ColorRes id: Int): Int {
+    return ContextCompat.getColor(context, id)
+}
+
+fun View.getDrawable(@DrawableRes id: Int): Drawable? {
+    return ContextCompat.getDrawable(context, id)
+}
+
 fun TextView.setTextColorById(@ColorRes id: Int) {
-    setTextColor(ContextCompat.getColor(context, id))
+    setTextColor(getColor(id))
 }
 
 fun TextView.setTextSize(@DimenRes id: Int) {
-    setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(id))
+    setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimen(id))
 }
 
 fun TextView.setBold(isEnabled: Boolean) {
