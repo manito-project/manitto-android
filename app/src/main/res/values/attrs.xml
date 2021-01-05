@@ -13,4 +13,10 @@
         <attr name="title" format="string"/>
         <attr name="description" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="SantaCheckBox">
+        <attr name="text" format="string"/>
+        <attr name="isChecked" format="boolean"/>
+    </declare-styleable>
+
 </resources>

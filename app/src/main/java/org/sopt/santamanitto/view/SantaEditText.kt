@@ -58,6 +58,8 @@ class SantaEditText @JvmOverloads constructor(
             hint = typeArray.getString(R.styleable.SantaEditText_hint)
         }
 
+        typeArray.recycle()
+
         hint?.let { editText.hint = it }
 
         when (buttonStyle) {
