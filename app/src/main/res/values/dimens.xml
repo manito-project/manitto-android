@@ -18,4 +18,10 @@
     <dimen name="margin_santacheckbox_textpadding_start">15dp</dimen>
     <dimen name="size_santacheckbox_buttontext">16sp</dimen>
     <dimen name="width_santacheckbox_checkbox">25dp</dimen>
+
+    <dimen name="height_santapereiodpicker_minusbutton">25dp</dimen>
+    <dimen name="height_santaperiodpicker">40dp</dimen>
+    <dimen name="padding_santaperiodpicker_horizontal">12dp</dimen>
+    <dimen name="size_santaperiodpicker_text">17sp</dimen>
+    <dimen name="margin_santaperiodpicker_text_horizontal">16dp</dimen>
 </resources>
