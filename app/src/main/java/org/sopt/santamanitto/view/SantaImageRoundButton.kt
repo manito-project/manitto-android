@@ -65,6 +65,8 @@ class SantaImageRoundButton @JvmOverloads constructor(
             description = typeArray.getString(R.styleable.SantaImageRoundButton_description) ?: ""
         }
 
+        typeArray.recycle()
+
         //저장된 이미지가 있다면 (속성에서 백그라운드 지정해줬다면) 이미지뷰로 넘김
         imageDrawable?.let {
             imageView.setImageDrawable(it)

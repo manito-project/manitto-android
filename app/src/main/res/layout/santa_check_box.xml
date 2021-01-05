@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tool="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/padding_santacheckbox_horizontal">
+
+        <org.sopt.santamanitto.view.LiveCheckbox
+            android:id="@+id/checkbox_santacheckbox"
+            android:layout_width="@dimen/width_santacheckbox_checkbox"
+            android:layout_height="@dimen/width_santacheckbox_checkbox"
+            android:background="@drawable/selector_santa_check_box"
+            android:button="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_santacheckbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_santacheckbox_textpadding_start"
+            android:background="@null"
+            android:gravity="start|center"
+            android:textSize="@dimen/size_santacheckbox_buttontext"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/checkbox_santacheckbox"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="체크박스 설명" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_santacheckbox_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
