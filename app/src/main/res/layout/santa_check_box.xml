@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/padding_santacheckbox_horizontal">
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <org.sopt.santamanitto.view.LiveCheckbox
             android:id="@+id/checkbox_santacheckbox"
             android:layout_width="@dimen/width_santacheckbox_checkbox"
             android:layout_height="@dimen/width_santacheckbox_checkbox"
