@@ -23,7 +23,7 @@
         <attr name="buttonMode" format="enum">
             <enum name="minus" value="0"/>
             <enum name="add" value="1"/>
-            <enum name="delete" value="2"/>
+            <enum name="cancel" value="2"/>
         </attr>
     </declare-styleable>
 
