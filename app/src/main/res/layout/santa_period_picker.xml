@@ -14,13 +14,12 @@
     android:background="@drawable/round_ractangle_background_30"
     android:backgroundTint="@color/gray_1">
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <org.sopt.santamanitto.view.SantaSmallButton
         android:id="@+id/imagebutton_santaperiodpicker_minus"
         android:layout_width="0dp"
         android:layout_height="@dimen/height_santapereiodpicker_minusbutton"
         android:layout_marginStart="@dimen/padding_santaperiodpicker_horizontal"
-        android:background="@null"
-        android:src="@drawable/ic_btn_minus"
+        app:buttonMode="minus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,13 +36,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tool:text="n일 후" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <org.sopt.santamanitto.view.SantaSmallButton
         android:id="@+id/imagebutton_santaperiodpicker_plus"
         android:layout_width="0dp"
         android:layout_height="@dimen/height_santapereiodpicker_minusbutton"
         android:layout_marginEnd="@dimen/padding_santaperiodpicker_horizontal"
-        android:background="@null"
-        android:src="@drawable/ic_btn_plus"
+        app:buttonMode="add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

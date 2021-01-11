@@ -30,7 +30,7 @@ class SantaEditText @JvmOverloads constructor(
 
     private val editText = binding.edittextSantaedittext
 
-    private var rightButton = binding.imagebuttonSantaedittext
+    private var rightButton = binding.santasmallbuttonSantaedittext
 
 
     private var buttonStyle = BUTTON_NONE
@@ -65,7 +65,6 @@ class SantaEditText @JvmOverloads constructor(
         when (buttonStyle) {
             BUTTON_NONE -> rightButton.visibility = View.GONE
             BUTTON_ADD -> setAddImage()
-            //Todo: Please change the drawable to delete image
             BUTTON_DELETE -> setDeleteImage()
         }
 
@@ -89,12 +88,12 @@ class SantaEditText @JvmOverloads constructor(
     }
 
     private fun setAddImage() {
-        rightButton.setImageResource(R.drawable.bottonnn)
+        rightButton.setPlusImage()
         buttonStyle = BUTTON_ADD
     }
 
     private fun setDeleteImage() {
-        rightButton.setImageResource(R.drawable.circle_add_button)
+        rightButton.setCancelImage()
         buttonStyle = BUTTON_DELETE
     }
 }
