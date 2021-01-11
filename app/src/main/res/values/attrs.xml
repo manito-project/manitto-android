@@ -19,4 +19,12 @@
         <attr name="isChecked" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="SantaSmallButton">
+        <attr name="buttonMode" format="enum">
+            <enum name="minus" value="0"/>
+            <enum name="add" value="1"/>
+            <enum name="delete" value="2"/>
+        </attr>
+    </declare-styleable>
+
 </resources>
