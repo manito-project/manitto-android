@@ -24,18 +24,15 @@
             android:textColor="@drawable/color_santaedittext_edittext"
             android:textCursorDrawable="@drawable/cursor_edittext"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/imagebutton_santaedittext"
+            app:layout_constraintEnd_toStartOf="@id/santasmallbutton_santaedittext"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/imagebutton_santaedittext"
+        <org.sopt.santamanitto.view.SantaSmallButton
+            android:id="@+id/santasmallbutton_santaedittext"
             android:layout_width="@dimen/width_edittext_rightbutton"
             android:layout_height="@dimen/width_edittext_rightbutton"
             android:layout_marginVertical="@dimen/margin_santaedittext_button_vertical"
-            android:background="@null"
-            android:src="@drawable/circle_add_button"
-            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/edittext_santaedittext"
