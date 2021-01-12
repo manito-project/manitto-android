@@ -27,4 +27,10 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="SantaSwitch">
+        <attr name="onText" format="string"/>
+        <attr name="offText" format="string"/>
+        <attr name="isOn" format="boolean"/>
+    </declare-styleable>
+
 </resources>

@@ -24,4 +24,9 @@
     <dimen name="padding_santaperiodpicker_horizontal">12dp</dimen>
     <dimen name="size_santaperiodpicker_text">17sp</dimen>
     <dimen name="margin_santaperiodpicker_text_horizontal">16dp</dimen>
+
+    <dimen name="size_santaswitch_text">14sp</dimen>
+    <dimen name="margin_santaswitch_cursor">2dp</dimen>
+    <dimen name="height_santaswitch_min">33dp</dimen>
+    <dimen name="width_santaswitch_min">96dp</dimen>
 </resources>
