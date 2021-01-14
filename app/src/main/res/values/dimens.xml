@@ -43,4 +43,8 @@
     <dimen name="margin_santabackground_rudolf_start">39dp</dimen>
     <dimen name="padding_santabackground_backbutton_vertical">20dp</dimen>
     <dimen name="padding_santabackground_backbutton_horizontal">16dp</dimen>
+
+    <dimen name="margin_splash_logo_top">80dp</dimen>
+    <dimen name="height_splash_snow">100dp</dimen>
+    <dimen name="margin_splash_santa_horizontal">20dp</dimen>
 </resources>
