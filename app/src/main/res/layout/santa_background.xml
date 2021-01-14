@@ -66,6 +66,8 @@
             android:elevation="@dimen/elevation_shadow"
             android:textColor="@color/white"
             android:textSize="@dimen/size_santabackground_text"
+            android:textFontWeight="700"
+            app:fontWeight="700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/imageview_santabackground_santahead"
             app:layout_constraintStart_toStartOf="parent"

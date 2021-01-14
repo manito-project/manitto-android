@@ -45,4 +45,9 @@
         <attr name="backKey" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="SantaIndicator">
+        <attr name="isSelected" format="boolean"/>
+        <attr name="number" format="integer"/>
+    </declare-styleable>
+
 </resources>
