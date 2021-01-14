@@ -2,35 +2,47 @@
 <resources>
     <declare-styleable name="SantaEditText">
         <attr name="rightButton" format="enum">
-            <enum name="none" value="0"/>
-            <enum name="add" value="1"/>
-            <enum name="delete" value="2"/>
+            <enum name="none" value="0" />
+            <enum name="add" value="1" />
+            <enum name="delete" value="2" />
         </attr>
-        <attr name="hint" format="string"/>
+        <attr name="hint" format="string" />
     </declare-styleable>
 
     <declare-styleable name="SantaImageRoundButton">
-        <attr name="title" format="string"/>
-        <attr name="description" format="string"/>
+        <attr name="title" format="string" />
+        <attr name="description" format="string" />
     </declare-styleable>
 
     <declare-styleable name="SantaCheckBox">
-        <attr name="text" format="string"/>
-        <attr name="isChecked" format="boolean"/>
+        <attr name="text" format="string" />
+        <attr name="isChecked" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SantaSmallButton">
         <attr name="buttonMode" format="enum">
-            <enum name="minus" value="0"/>
-            <enum name="add" value="1"/>
-            <enum name="cancel" value="2"/>
+            <enum name="minus" value="0" />
+            <enum name="add" value="1" />
+            <enum name="cancel" value="2" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="SantaSwitch">
-        <attr name="onText" format="string"/>
-        <attr name="offText" format="string"/>
-        <attr name="isOn" format="boolean"/>
+        <attr name="onText" format="string" />
+        <attr name="offText" format="string" />
+        <attr name="isOn" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SantaBackground">
+        <attr name="backgroundStyle" format="enum">
+            <enum name="withLogoMode" value="0" />
+            <enum name="logoNoText" value="1" />
+            <enum name="noLogo" value="2" />
+            <enum name="onlyCharacter" value="3" />
+        </attr>
+        <attr name="backgroundText" format="string" />
+        <attr name="backKey" format="boolean"/>
     </declare-styleable>
 
 </resources>
