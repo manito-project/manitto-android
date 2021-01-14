@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.*
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     companion object {
