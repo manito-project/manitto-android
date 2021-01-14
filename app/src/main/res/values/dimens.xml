@@ -29,4 +29,18 @@
     <dimen name="margin_santaswitch_cursor">2dp</dimen>
     <dimen name="height_santaswitch_min">33dp</dimen>
     <dimen name="width_santaswitch_min">96dp</dimen>
+
+    <dimen name="width_santabackground_logo">80dp</dimen>
+    <dimen name="height_santabackground_logo">36dp</dimen>
+    <dimen name="margin_santabackground_logo_top">40dp</dimen>
+    <dimen name="size_santabackground_text">18sp</dimen>
+    <dimen name="margin_santabackground_santahead_end">16dp</dimen>
+    <dimen name="margin_santabackground_text_start">16dp</dimen>
+    <dimen name="margin_santabackground_text_bottom">25dp</dimen>
+    <dimen name="margin_santabackground_text_end">23dp</dimen>
+    <dimen name="height_santabackground_max">288dp</dimen>
+    <dimen name="margin_santabackground_snowman_bottom">23dp</dimen>
+    <dimen name="margin_santabackground_rudolf_start">39dp</dimen>
+    <dimen name="padding_santabackground_backbutton_vertical">20dp</dimen>
+    <dimen name="padding_santabackground_backbutton_horizontal">16dp</dimen>
 </resources>
