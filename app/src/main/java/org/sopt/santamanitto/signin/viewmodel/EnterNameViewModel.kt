@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.signin
+package org.sopt.santamanitto.signin.viewmodel
 
 
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
-class SignInViewModel: ViewModel() {
+class EnterNameViewModel: ViewModel() {
 
     var userName = MutableLiveData<String?>()
 

@@ -21,7 +21,6 @@
             android:id="@+id/textview_santaindicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/santaindicator_1"
             android:textColor="@color/white"
             android:textSize="@dimen/size_santaindicator_text"
             app:layout_constraintBottom_toBottomOf="@id/imageview_santaindicator"

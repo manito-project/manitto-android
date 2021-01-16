@@ -21,6 +21,7 @@
     <dimen name="margin_santacheckbox_textpadding_start">15dp</dimen>
     <dimen name="size_santacheckbox_buttontext">16sp</dimen>
     <dimen name="width_santacheckbox_checkbox">25dp</dimen>
+    <dimen name="margin_santacheckbox_vertical">15dp</dimen>
 
     <dimen name="height_santapereiodpicker_minusbutton">25dp</dimen>
     <dimen name="height_santaperiodpicker">40dp</dimen>
@@ -63,6 +64,8 @@
     <dimen name="padding_signin_cardview_bottom_additional">20dp</dimen>
     <dimen name="margin_signin_cardview_top">32dp</dimen>
     <dimen name="margin_signin_button_bottom">40dp</dimen>
+    <dimen name="margin_condition_divider_bottom">9dp</dimen>
+    <dimen name="margin_condition_divider_top">6dp</dimen>
 
 
 </resources>

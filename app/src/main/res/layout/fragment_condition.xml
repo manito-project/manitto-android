@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="org.sopt.santamanitto.signin.viewmodel.SignInViewModel" />-->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_condition"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backgroundText="@string/entername_background_welcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_condition_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_signin_title_top"
+            android:text="@string/condition_title"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_signin_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/santabackground_condition" />
+
+        <org.sopt.santamanitto.view.SantaIndicator
+            android:id="@+id/santaindicator_condition_indicator1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_signin_between_indicator"
+            app:isSelected="false"
+            app:layout_constraintBottom_toBottomOf="@id/textview_condition_title"
+            app:layout_constraintEnd_toStartOf="@id/santaindicator_condition_indicator2"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/textview_condition_title"
+            app:layout_constraintTop_toTopOf="@id/textview_condition_title"
+            app:number="1" />
+
+        <org.sopt.santamanitto.view.SantaIndicator
+            android:id="@+id/santaindicator_condition_indicator2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/padding_entire"
+            app:isSelected="true"
+            app:layout_constraintBottom_toBottomOf="@id/textview_condition_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/santaindicator_condition_indicator1"
+            app:layout_constraintTop_toTopOf="@id/textview_condition_title"
+            app:number="2" />
+
+        <org.sopt.santamanitto.view.SantaCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_signin_cardview_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_condition_title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.sopt.santamanitto.view.SantaCheckBox
+                    android:id="@+id/santacheckbox_condition_allagree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/margin_condition_divider_top"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@string/condition_all_agree" />
+
+                <View
+                    android:id="@+id/view_condition_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/margin_condition_divider_bottom"
+                    android:background="@color/gray_1"
+                    app:layout_constraintBottom_toTopOf="@id/santacheckbox_condition_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/santacheckbox_condition_allagree" />
+
+                <org.sopt.santamanitto.view.SantaCheckBox
+                    android:id="@+id/santacheckbox_condition_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_condition_divider"
+                    app:layout_constraintBottom_toTopOf="@id/santacheckbox_condition_2"
+                    app:text="@string/condition_1" />
+
+                <org.sopt.santamanitto.view.SantaCheckBox
+                    android:id="@+id/santacheckbox_condition_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_condition_divider_bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/santacheckbox_condition_1"
+                    app:text="@string/condition_2" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </org.sopt.santamanitto.view.SantaCardView>
+
+        <org.sopt.santamanitto.view.SantaBottomButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_signin_button_bottom"
+            android:text="@string/entername_button_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
