@@ -124,6 +124,7 @@
         </org.sopt.santamanitto.view.SantaCardView>
 
         <org.sopt.santamanitto.view.SantaBottomButton
+            android:id="@+id/santabottombutton_condition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"

@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
 import org.sopt.santamanitto.signin.viewmodel.ConditionViewModel
 
+@AndroidEntryPoint
 class ConditionFragment: Fragment() {
 
     private lateinit var binding: FragmentConditionBinding
@@ -30,8 +32,6 @@ class ConditionFragment: Fragment() {
         }
 
         initView()
-
-        subscribeUi()
 
         return binding.root
     }
@@ -58,9 +58,10 @@ class ConditionFragment: Fragment() {
                     .actionConditionFragmentToWebViewFragment(SecretString.urlOfPrivacyPolicy)
             findNavController().navigate(directions)
         }
-    }
 
-    private fun subscribeUi() {
-
+        binding.santabottombuttonCondition.setOnClickListener {
+            viewModel.saveUserName(args.userName)
+            //Todo: 메인 화면으로 이동 후 백스택 지우기
+        }
     }
 }
