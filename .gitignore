@@ -135,3 +135,6 @@ fabric.properties
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
+
+# Secret string class ex.url
+app/src/main/java/org/sopt/santamanitto/SecretString.kt

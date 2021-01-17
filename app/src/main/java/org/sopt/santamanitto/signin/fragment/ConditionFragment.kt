@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
 import org.sopt.santamanitto.signin.viewmodel.ConditionViewModel
 
@@ -43,6 +45,18 @@ class ConditionFragment: Fragment() {
         binding.santacheckboxConditionAllagree.run {
             addChildSantaCheckBox(binding.santacheckboxCondition1)
             addChildSantaCheckBox(binding.santacheckboxCondition2)
+        }
+
+        binding.santacheckboxCondition1.setOnClickListener {
+            val directions = ConditionFragmentDirections
+                    .actionConditionFragmentToWebViewFragment(SecretString.urlOfTOS)
+            findNavController().navigate(directions)
+        }
+
+        binding.santacheckboxCondition2.setOnClickListener {
+            val directions = ConditionFragmentDirections
+                    .actionConditionFragmentToWebViewFragment(SecretString.urlOfPrivacyPolicy)
+            findNavController().navigate(directions)
         }
     }
 
