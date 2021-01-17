@@ -47,8 +47,6 @@ class ConditionFragment: Fragment() {
     }
 
     private fun subscribeUi() {
-        binding.santacheckboxConditionAllagree.isCheckedLiveData.observe(viewLifecycleOwner) {
-            viewModel.setIsReady(it)
-        }
+
     }
 }

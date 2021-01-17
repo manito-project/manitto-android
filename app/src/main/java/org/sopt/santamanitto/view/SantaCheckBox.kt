@@ -3,9 +3,12 @@ package org.sopt.santamanitto.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.CheckBox
 import android.widget.FrameLayout
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
 import androidx.lifecycle.LiveData
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaCheckBoxBinding
@@ -15,7 +18,32 @@ class SantaCheckBox @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
-    
+
+    companion object {
+        @BindingAdapter("setChecked")
+        @JvmStatic
+        fun setChecked(view: SantaCheckBox, isChecked: Boolean) {
+            if (view.isChecked != isChecked) {
+                view.isChecked = isChecked
+            }
+        }
+
+        @InverseBindingAdapter(attribute = "setChecked", event = "checkedAttrChanged")
+        @JvmStatic
+        fun getChecked(view: SantaCheckBox) : Boolean {
+            return view.findViewById<CheckBox>(R.id.checkbox_santacheckbox).isChecked
+        }
+
+        @BindingAdapter("checkedAttrChanged")
+        @JvmStatic
+        fun setListener(view: SantaCheckBox, listener: InverseBindingListener) {
+            val checkBox = view.findViewById<CheckBox>(R.id.checkbox_santacheckbox)
+            checkBox.setOnCheckedChangeListener { _, _ ->
+                listener.onChange()
+            }
+        }
+    }
+
     private val binding = DataBindingUtil.inflate<SantaCheckBoxBinding>(
             LayoutInflater.from(context),
             R.layout.santa_check_box,
