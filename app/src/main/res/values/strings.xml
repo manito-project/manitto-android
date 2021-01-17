@@ -2,5 +2,15 @@
     <string name="app_name">santa manito</string>
 
     <string name="santaperiodpicker_period">%d일 후</string>
+    <string name="entername_background_welcome">안녕!\n산타 마니또에 온 것을 환영해:)</string>
+    <string name="entername_title">기본 설정</string>
+    <string name="entername_title_name">내 이름</string>
+    <string name="entername_edittext_hint">산타야! 너의 이름이 궁금해</string>
+    <string name="entername_button_next">다음</string>
 
+    <string name="condition_title">이용약관 동의</string>
+    <string name="condition_all_agree">전체 동의</string>
+    <string name="condition_1">(필수) 이용 약관 동의</string>
+    <string name="condition_2">(필수) 개인정보 수집 및 이용 동의</string>
+    <string name="condition_background_text">%s 산타야 반가워!\n곧 친구들의 산타가 될 수 있어</string>
 </resources>

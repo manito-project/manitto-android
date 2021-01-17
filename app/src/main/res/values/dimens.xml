@@ -2,14 +2,17 @@
 <resources>
     <dimen name="elevation_shadow">7dp</dimen>
     <dimen name="radius_cardview">10dp</dimen>
+    <dimen name="padding_entire">16dp</dimen>
 
     <dimen name="width_edittext_rightbutton">30dp</dimen>
     <dimen name="margin_santaedittext_edittext_vertical">9dp</dimen>
     <dimen name="margin_santaedittext_button_vertical">8dp</dimen>
     <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
+    <dimen name="size_santaedittext">16sp</dimen>
 
     <dimen name="size_santabottombutton_text">18sp</dimen>
     <dimen name="padding_santabottombutton_vertical">10dp</dimen>
+    <dimen name="height_santabottombutton">48dp</dimen>
 
     <dimen name="size_satnaimageroundbutton_title">17sp</dimen>
     <dimen name="size_santaimageroundbutton_description">14sp</dimen>
@@ -18,6 +21,7 @@
     <dimen name="margin_santacheckbox_textpadding_start">15dp</dimen>
     <dimen name="size_santacheckbox_buttontext">16sp</dimen>
     <dimen name="width_santacheckbox_checkbox">25dp</dimen>
+    <dimen name="margin_santacheckbox_vertical">15dp</dimen>
 
     <dimen name="height_santapereiodpicker_minusbutton">25dp</dimen>
     <dimen name="height_santaperiodpicker">40dp</dimen>
@@ -44,7 +48,24 @@
     <dimen name="padding_santabackground_backbutton_vertical">20dp</dimen>
     <dimen name="padding_santabackground_backbutton_horizontal">16dp</dimen>
 
+    <dimen name="size_santaindicator_text">15sp</dimen>
+
     <dimen name="margin_splash_logo_top">80dp</dimen>
     <dimen name="height_splash_snow">100dp</dimen>
     <dimen name="margin_splash_santa_horizontal">20dp</dimen>
+
+    <dimen name="size_signin_title">20sp</dimen>
+    <dimen name="margin_signin_title_top">30dp</dimen>
+    <dimen name="margin_signin_between_indicator">10dp</dimen>
+    <dimen name="size_signin_myname">18sp</dimen>
+    <dimen name="padding_signin_cardview_horizontal">10dp</dimen>
+    <dimen name="padding_signin_cardview_vertical">20dp</dimen>
+    <dimen name="margin_signin_edittext_top">15dp</dimen>
+    <dimen name="padding_signin_cardview_bottom_additional">20dp</dimen>
+    <dimen name="margin_signin_cardview_top">32dp</dimen>
+    <dimen name="margin_signin_button_bottom">40dp</dimen>
+    <dimen name="margin_condition_divider_bottom">9dp</dimen>
+    <dimen name="margin_condition_divider_top">6dp</dimen>
+
+
 </resources>

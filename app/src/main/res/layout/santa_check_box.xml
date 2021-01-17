@@ -19,6 +19,7 @@
             android:layout_height="@dimen/width_santacheckbox_checkbox"
             android:background="@drawable/selector_santa_check_box"
             android:button="@null"
+            android:layout_marginVertical="@dimen/margin_santacheckbox_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_santacheckbox_textpadding_start"
             android:background="@null"
+            android:textColor="@color/gray_3"
             android:gravity="start|center"
             android:textSize="@dimen/size_santacheckbox_buttontext"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +38,7 @@
             app:layout_constraintStart_toEndOf="@id/checkbox_santacheckbox"
             app:layout_constraintTop_toTopOf="parent"
             tool:text="체크박스 설명" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageview_santacheckbox_arrow"

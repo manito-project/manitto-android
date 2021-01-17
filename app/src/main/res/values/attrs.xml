@@ -7,6 +7,7 @@
             <enum name="delete" value="2" />
         </attr>
         <attr name="hint" format="string" />
+        <attr name="isSingleLine" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SantaImageRoundButton">
@@ -43,6 +44,11 @@
         </attr>
         <attr name="backgroundText" format="string" />
         <attr name="backKey" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SantaIndicator">
+        <attr name="isSelected" format="boolean"/>
+        <attr name="number" format="integer"/>
     </declare-styleable>
 
 </resources>

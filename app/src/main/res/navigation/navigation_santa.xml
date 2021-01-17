@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/santa_navigation"
+    app:startDestination="@id/enterNameFragment">
+    <fragment
+        android:id="@+id/enterNameFragment"
+        android:name="org.sopt.santamanitto.signin.fragment.EnterNameFragment"
+        android:label="EnterNameFragment" >
+        <action
+            android:id="@+id/action_enterNameFragment_to_conditionFragment"
+            app:destination="@id/conditionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/conditionFragment"
+        android:name="org.sopt.santamanitto.signin.fragment.ConditionFragment"
+        android:label="ConditionFragment" >
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_conditionFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="org.sopt.santamanitto.signin.fragment.WebViewFragment"
+        android:label="WebViewFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+</navigation>
