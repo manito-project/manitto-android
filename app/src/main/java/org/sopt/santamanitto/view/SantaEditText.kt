@@ -107,6 +107,10 @@ class SantaEditText @JvmOverloads constructor(
             hint = typeArray.getString(R.styleable.SantaEditText_hint)
         }
 
+        if (typeArray.hasValue(R.styleable.SantaEditText_isSingleLine)) {
+            editText.isSingleLine = typeArray.getBoolean(R.styleable.SantaEditText_isSingleLine, true)
+        }
+
         typeArray.recycle()
 
         hint?.let { editText.hint = it }

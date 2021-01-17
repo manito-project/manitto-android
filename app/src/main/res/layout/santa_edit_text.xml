@@ -19,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/margin_santaedittext_edittext_vertical"
+            android:singleLine="true"
             android:layout_marginEnd="@dimen/padding_santaedittext_root_horizontal"
             android:background="@null"
             android:fontFamily="@font/notosans_font_family"
