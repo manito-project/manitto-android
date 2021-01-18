@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.databinding.DataBindingUtil.*
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
+import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.preference.UserPreferenceManager
 import org.sopt.santamanitto.signin.fragment.SignInActivity
 import javax.inject.Inject

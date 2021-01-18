@@ -13,4 +13,13 @@ class UserPreferenceManager(private val preferenceManager: SharedPreferenceManag
     fun getUserName(): String? {
         return preferenceManager.getString(PREF_KEY_USER_NAME)
     }
+
+    fun setUuid(uuid: String) {
+        //Todo: UUID 값 저장
+    }
+
+    fun getUuid() : String {
+        //Todo: UUID 값 꺼내기
+        return ""
+    }
 }

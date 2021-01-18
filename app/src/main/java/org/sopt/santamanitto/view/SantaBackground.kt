@@ -8,7 +8,6 @@ import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaBackgroundBinding
-import org.sopt.santamanitto.getDimen
 
 
 class SantaBackground @JvmOverloads constructor(

@@ -6,7 +6,7 @@
     android:id="@+id/santa_navigation">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="org.sopt.santamanitto.MainFragment"
+        android:name="org.sopt.santamanitto.main.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main" />
 </navigation>

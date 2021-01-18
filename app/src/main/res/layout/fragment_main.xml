@@ -4,6 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.main.MainViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -74,11 +83,13 @@
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/padding_entire"
-            android:visibility="invisible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"
+            app:replaceAll="@{viewModel.myManittoHistory}"
+            setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
             tool:listitem="@layout/viewholder_my_manitto_history"
             tool:orientation="horizontal" />
 
@@ -92,7 +103,8 @@
             android:backgroundTint="@color/gray_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:visibility="@{viewModel.myManittoHistory.empty ? View.VISIBLE : View.INVISIBLE}">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageview_main_nomanittosnowman"

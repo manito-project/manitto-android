@@ -1,4 +1,4 @@
-package org.sopt.santamanitto
+package org.sopt.santamanitto.view
 
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable

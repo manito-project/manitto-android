@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import org.sopt.santamanitto.MainActivity
+import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
@@ -50,13 +50,13 @@ class ConditionFragment: Fragment() {
 
         binding.santacheckboxCondition1.setOnClickListener {
             val directions = ConditionFragmentDirections
-                    .actionConditionFragmentToWebViewFragment(SecretString.urlOfTOS)
+                    .actionConditionFragmentToWebViewFragment(SecretString.URL_OF_TOS)
             findNavController().navigate(directions)
         }
 
         binding.santacheckboxCondition2.setOnClickListener {
             val directions = ConditionFragmentDirections
-                    .actionConditionFragmentToWebViewFragment(SecretString.urlOfPrivacyPolicy)
+                    .actionConditionFragmentToWebViewFragment(SecretString.URL_OF_PRIVACY_POLICY)
             findNavController().navigate(directions)
         }
 

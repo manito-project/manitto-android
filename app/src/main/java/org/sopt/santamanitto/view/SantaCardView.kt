@@ -4,9 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.cardview.widget.CardView
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.getColor
-import org.sopt.santamanitto.getDimen
-import org.sopt.santamanitto.setRippleEffect
 
 class SantaCardView @JvmOverloads constructor(
         context: Context,
