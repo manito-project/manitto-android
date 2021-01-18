@@ -1,15 +1,16 @@
 package org.sopt.santamanitto.signin.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.MainActivity
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
@@ -61,7 +62,10 @@ class ConditionFragment: Fragment() {
 
         binding.santabottombuttonCondition.setOnClickListener {
             viewModel.saveUserName(args.userName)
-            //Todo: 메인 화면으로 이동 후 백스택 지우기
+            requireActivity().run {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         }
     }
 }
