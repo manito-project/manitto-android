@@ -29,7 +29,7 @@ class UserLocalDataSourceTest : TestCase() {
 
         MockitoAnnotations.initMocks(this)
 
-        mockUser = User("mockUser")
+        mockUser = User("mockUser", "100")
 
         userLocalDataSource = UserLocalDataSource(mockUserPreferenceManager)
     }

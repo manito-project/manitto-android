@@ -15,13 +15,13 @@ import org.sopt.santamanitto.util.eq
 
 class UserRepositoryTest {
 
-    private val mockUser = User("mockUserName", 100, Settings.Secure.ANDROID_ID,
+    private val mockUser = User("mockUserName", Settings.Secure.ANDROID_ID, 100,
         "fake : ${TimeUtil.getCurrentTime()}",
         "fake : ${TimeUtil.getCurrentTime()}",
         "FAKExxYxMDg5MjgxNCwiaXNzIOdVrK0"
     )
 
-    private val userFromServiceAPI = User(mockUser.userName, 500, mockUser.serialNumber,
+    private val userFromServiceAPI = User(mockUser.userName, mockUser.serialNumber, 500,
         "remote : ${TimeUtil.getCurrentTime()}", "remote : ${TimeUtil.getCurrentTime()}",
         "remote Access Token")
 

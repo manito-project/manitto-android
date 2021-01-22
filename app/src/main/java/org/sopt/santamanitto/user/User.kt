@@ -1,13 +1,14 @@
 package org.sopt.santamanitto.user
 
-import android.provider.Settings
+import com.google.gson.annotations.SerializedName
 import org.sopt.santamanitto.util.TimeUtil
 
 data class User(
+        @SerializedName("username")
         val userName: String,
+        val serialNumber: String,
         val id: Int = 0,
-        val serialNumber: String = Settings.Secure.ANDROID_ID,
-        val updateAt: String = TimeUtil.getCurrentTime(),
-        val createAt: String = TimeUtil.getCurrentTime(),
+        val updatedAt: String = TimeUtil.getCurrentTime(),
+        val createdAt: String = TimeUtil.getCurrentTime(),
         val accessToken: String = "null"
 )

@@ -19,7 +19,7 @@ class UserLocalDataSource(
                 userCreateTime == null || userAccessToken == null) {
             callback.onDataNotAvailable()
         } else {
-            callback.onUserLoaded(User(userName, userId, userSerialNumber, userUpdateTime, userCreateTime, userAccessToken))
+            callback.onUserLoaded(User(userName, userSerialNumber, userId, userUpdateTime, userCreateTime, userAccessToken))
         }
     }
 
@@ -38,8 +38,8 @@ class UserLocalDataSource(
             setUserId(user.id)
             setUserName(user.userName)
             setSerialNumber(user.serialNumber)
-            setUserUpdateTime(user.updateAt)
-            setUserCreateTime(user.createAt)
+            setUserUpdateTime(user.updatedAt)
+            setUserCreateTime(user.createdAt)
             setAccessToken(user.accessToken)
         }
     }

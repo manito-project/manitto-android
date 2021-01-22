@@ -69,7 +69,7 @@ class UserRepository(
     }
 
     override fun saveUser(name: String, callback: UserDataSource.SaveUserCallback?) {
-        val user = User(name)
+        val user = User(name, "tempSerialNumber")
         saveUser(user, callback)
     }
 

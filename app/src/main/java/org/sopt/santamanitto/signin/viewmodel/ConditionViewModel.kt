@@ -1,23 +1,31 @@
 package org.sopt.santamanitto.signin.viewmodel
 
-import android.provider.Settings
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.santamanitto.preference.UserPreferenceManager
+import org.sopt.santamanitto.user.User
+import org.sopt.santamanitto.user.source.UserDataSource
+import javax.inject.Named
 
 class ConditionViewModel @ViewModelInject constructor(
-        private val userPreferenceManager: UserPreferenceManager
+        @Named("userRepository") private val userRepository: UserDataSource
 ) : ViewModel() {
 
     val isReady = MutableLiveData<Boolean>()
 
-    fun setIsReady(boolean: Boolean) {
-        isReady.value = boolean
-    }
+    val userSaveSuccess = MutableLiveData(false)
+
+    val userSaveFail = MutableLiveData(false)
 
     fun signIn(userName: String) {
-        userPreferenceManager.setUserName(userName)
-        userPreferenceManager.setSerialNumber(Settings.Secure.ANDROID_ID)
+        userRepository.saveUser(userName, object: UserDataSource.SaveUserCallback {
+            override fun onUserSaved(user: User) {
+                userSaveSuccess.value = true
+            }
+
+            override fun onSaveFailed() {
+                userSaveFail.value = true
+            }
+        })
     }
 }

@@ -35,7 +35,7 @@ class FakeUserRemoteDataSource: UserDataSource {
     }
 
     override fun saveUser(name: String, callback: UserDataSource.SaveUserCallback?) {
-        val fakeUser = User(name, 100, Settings.Secure.ANDROID_ID,
+        val fakeUser = User(name, Settings.Secure.ANDROID_ID, 100,
             "fake : ${TimeUtil.getCurrentTime()}",
             "fake : ${TimeUtil.getCurrentTime()}",
             "FAKExxYxMDg5MjgxNCwiaXNzIOdVrK0"
