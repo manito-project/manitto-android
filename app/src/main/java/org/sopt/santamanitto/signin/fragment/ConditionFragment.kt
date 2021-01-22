@@ -2,6 +2,7 @@ package org.sopt.santamanitto.signin.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,27 @@ class ConditionFragment: Fragment() {
 
         initView()
 
+        subscribeUi()
+
         return binding.root
+    }
+
+    private fun subscribeUi() {
+        viewModel.userSaveSuccess.observe(viewLifecycleOwner) {
+            if (it) {
+                requireActivity().run {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+            }
+        }
+
+        viewModel.userSaveFail.observe(viewLifecycleOwner) {
+            if(it) {
+                //Todo: 계정 생성에 실패했다는 다이얼로그 띄우기
+                Log.e("ConditionFragment", "Fail to create new account")
+            }
+        }
     }
 
     private fun initView() {
@@ -61,11 +82,7 @@ class ConditionFragment: Fragment() {
         }
 
         binding.santabottombuttonCondition.setOnClickListener {
-            viewModel.saveUserName(args.userName)
-            requireActivity().run {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
+            viewModel.signIn(args.userName)
         }
     }
 }

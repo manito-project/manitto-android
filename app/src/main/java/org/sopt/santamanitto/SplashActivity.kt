@@ -1,17 +1,18 @@
 package org.sopt.santamanitto
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.*
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
 import org.sopt.santamanitto.main.MainActivity
-import org.sopt.santamanitto.preference.UserPreferenceManager
 import org.sopt.santamanitto.signin.fragment.SignInActivity
+import org.sopt.santamanitto.user.source.UserDataSource
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
@@ -21,7 +22,8 @@ class SplashActivity : AppCompatActivity() {
     }
 
     @Inject
-    lateinit var userPreferenceManager: UserPreferenceManager
+    @Named("userRepository")
+    lateinit var userRepository: UserDataSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +35,16 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun startNextActivity() {
-        val hasUserName = userPreferenceManager.getUserName() != null
-        if (hasUserName) {
-            startActivity(Intent(this, MainActivity::class.java))
-        } else {
-            startActivity(Intent(this, SignInActivity::class.java))
-        }
-        finish()
+        userRepository.getUserId(object: UserDataSource.GetUserIdCallback {
+            override fun onUserIdLoaded(id: Int) {
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                finish()
+            }
+
+            override fun onDataNotAvailable() {
+                startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
+                finish()
+            }
+        })
     }
 }
