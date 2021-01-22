@@ -7,7 +7,7 @@ class UserRepository(
         private val userRemoteDataSource: UserDataSource
 ): UserDataSource {
 
-    private var cachedUser: User? = null
+    var cachedUser: User? = null
 
     override fun getUser(callback: UserDataSource.GetUserCallback) {
         if (cachedUser != null) {
