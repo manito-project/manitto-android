@@ -1,4 +1,4 @@
-package org.sopt.santamanitto
+package org.sopt.santamanitto.util
 
 import android.content.Context
 import android.content.res.Resources

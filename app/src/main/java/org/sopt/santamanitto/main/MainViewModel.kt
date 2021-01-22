@@ -13,5 +13,5 @@ class MainViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     val myManittoHistory =
-        manittoDataSource.getMyManittoHistory(userPreferenceManager.getUuid())
+        manittoDataSource.getMyManittoHistory(userPreferenceManager.getSerialNumber()!!)
 }

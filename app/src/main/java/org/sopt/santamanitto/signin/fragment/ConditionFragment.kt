@@ -61,7 +61,7 @@ class ConditionFragment: Fragment() {
         }
 
         binding.santabottombuttonCondition.setOnClickListener {
-            viewModel.saveUserName(args.userName)
+            viewModel.signIn(args.userName)
             requireActivity().run {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
