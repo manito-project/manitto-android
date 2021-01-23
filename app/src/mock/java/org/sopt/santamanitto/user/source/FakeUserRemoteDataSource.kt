@@ -13,28 +13,22 @@ class FakeUserRemoteDataSource : UserDataSource {
 
     private val fakeJoinedRooms = mutableListOf<JoinedRoom>().apply {
         add(JoinedRoom(1, "fakeRoom1", false,
-            "2021/02/15", "2021/01/25",
-            null, null, null, null))
+            "2021-02-15 12:33:44", "2021-01-25 12:33:44"))
 
         add(JoinedRoom(2, "fakeRoom2", false,
-            "2021/02/10", "2021/01/24",
-            null, null, null, null))
+            "2021-02-10 12:33:44", "2021-01-24 12:33:44"))
 
         add(JoinedRoom(3, "fakeRoom3", true,
-            "2021/01/22", "2021/01/20",
-            null, null, null, null))
+            "2021-01-22 12:33:44", "2021-01-20 12:33:44"))
 
         add(JoinedRoom(4, "fakeRoom4", true,
-            "2021/01/14", "2021/01/12",
-            null, null, null, null))
+            "2021-01-14 12:33:44", "2021-01-12 12:33:44"))
 
         add(JoinedRoom(5, "fakeRoom5", true,
-            "2021/01/11", "2021/01/09",
-            null, null, null, null))
+            "2021-01-11 12:33:44", "2021-01-09 12:33:44"))
 
         add(JoinedRoom(6, "fakeRoom6", true,
-            "2021/01/05", "2021/01/01",
-            null, null, null, null))
+            "2021-01-05 12:33:44", "2021-01-01 12:33:44"))
     }
 
     override fun login(serialNumber: String, callback: UserDataSource.LoginCallback) {

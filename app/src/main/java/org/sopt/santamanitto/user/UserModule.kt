@@ -29,6 +29,11 @@ class UserModule {
     @Singleton
     @Named("cached")
     fun provideUserDataSource(
-        @Named("remote") userRemoteDataSource: UserDataSource
-    ) : UserDataSource = UserCachedDataSource(userRemoteDataSource)
+        @Named("remote") userRemoteDataSource: UserDataSource,
+        accessTokenContainer: AccessTokenContainer
+    ) : UserDataSource = UserCachedDataSource(userRemoteDataSource, accessTokenContainer)
+
+    @Provides
+    @Singleton
+    fun provideAccessToken() : AccessTokenContainer = AccessTokenContainer()
 }

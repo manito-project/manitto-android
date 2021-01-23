@@ -7,6 +7,10 @@
         <variable
             name="joinedRoom"
             type="org.sopt.santamanitto.data.JoinedRoom" />
+
+        <variable
+            name="personalRoomInfo"
+            type="org.sopt.santamanitto.room.PersonalRoomInfo" />
     </data>
 
     <org.sopt.santamanitto.view.SantaCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,6 +61,7 @@
                 android:paddingVertical="3dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/size_mymanitto_state_text"
+                app:setDayDifferent="@{joinedRoom.createdAt}"
                 app:layout_constraintBottom_toTopOf="@id/textview_mymanitto_mission"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/temp"
@@ -68,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_mymanitto_mission_top"
                 android:letterSpacing="-0.06"
+                android:text="@{personalRoomInfo.myMission.content}"
                 android:lineHeight="@dimen/lineheight_mymanitto_mission_text"
                 android:textColor="@color/gray_2"
                 android:textSize="@dimen/size_mymanitto_mission_text"

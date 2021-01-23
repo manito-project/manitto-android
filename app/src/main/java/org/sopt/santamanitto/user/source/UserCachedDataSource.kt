@@ -1,10 +1,12 @@
 package org.sopt.santamanitto.user.source
 
 import org.sopt.santamanitto.data.JoinedRoom
+import org.sopt.santamanitto.user.AccessTokenContainer
 import javax.inject.Named
 
 class UserCachedDataSource(
-    @Named("remote") private val userRemoteDataSource: UserDataSource
+    @Named("remote") private val userRemoteDataSource: UserDataSource,
+    private val accessTokenContainer: AccessTokenContainer
 ): UserDataSource {
 
     private var _cachedUser: User? = null
@@ -20,6 +22,7 @@ class UserCachedDataSource(
     override fun login(serialNumber: String, callback: UserDataSource.LoginCallback) {
         userRemoteDataSource.login(serialNumber, object : UserDataSource.LoginCallback {
             override fun onLoginSuccess(user: User) {
+                accessTokenContainer.accessToken = user.accessToken
                 _cachedUser = user
                 callback.onLoginSuccess(user)
             }
@@ -33,6 +36,7 @@ class UserCachedDataSource(
     override fun createAccount(userName: String, serialNumber: String, callback: UserDataSource.CreateAccountCallback) {
         userRemoteDataSource.createAccount(userName, serialNumber, object: UserDataSource.CreateAccountCallback {
             override fun onCreateAccountSuccess(user: User) {
+                accessTokenContainer.accessToken = user.accessToken
                 _cachedUser = user
                 callback.onCreateAccountSuccess(user)
             }

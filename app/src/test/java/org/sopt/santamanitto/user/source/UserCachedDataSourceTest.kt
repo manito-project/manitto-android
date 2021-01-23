@@ -11,6 +11,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.sopt.santamanitto.data.JoinedRoom
+import org.sopt.santamanitto.user.AccessTokenContainer
 import org.sopt.santamanitto.util.capture
 import org.sopt.santamanitto.util.eq
 
@@ -27,6 +28,8 @@ class UserCachedDataSourceTest {
     @Mock private lateinit var mockUser: User
 
     @Mock private lateinit var mockJoinedRooms: List<JoinedRoom>
+
+    @Mock private lateinit var mockAccessTokenContainer: AccessTokenContainer
 
     @Captor private lateinit var loginCaptor: ArgumentCaptor<UserDataSource.LoginCallback>
 
@@ -45,19 +48,12 @@ class UserCachedDataSourceTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        userCachedDataSource = UserCachedDataSource(userRemoteDataSource)
+        userCachedDataSource = UserCachedDataSource(userRemoteDataSource, mockAccessTokenContainer)
     }
 
     @Test
     fun loginSuccessTest() {
-        //로그인 시도
-        userCachedDataSource.login(mockSerialNumber, loginCallback)
-
-        //API 호출하는지 확인
-        verify(userRemoteDataSource).login(eq(mockSerialNumber), capture(loginCaptor))
-
-        //성공했을 때
-        loginCaptor.value.onLoginSuccess(mockUser)
+        tryLogin()
 
         //캐시가 null이 아닌지 확인
         assertNotNull(userCachedDataSource.cachedUser)
@@ -96,5 +92,23 @@ class UserCachedDataSourceTest {
         assertNotNull(userCachedDataSource.cachedJoinedRooms)
 
         verify(getJoinedRoomsCallback).onJoinedRoomsLoaded(eq(userCachedDataSource.cachedJoinedRooms!!))
+    }
+
+    @Test
+    fun accessTokenTest() {
+        tryLogin()
+
+        assertThat(mockAccessTokenContainer.accessToken, `is`(mockUser.accessToken))
+    }
+
+    private fun tryLogin() {
+        //로그인 시도
+        userCachedDataSource.login(mockSerialNumber, loginCallback)
+
+        //API 호출하는지 확인
+        verify(userRemoteDataSource).login(eq(mockSerialNumber), capture(loginCaptor))
+
+        //성공했을 때
+        loginCaptor.value.onLoginSuccess(mockUser)
     }
 }

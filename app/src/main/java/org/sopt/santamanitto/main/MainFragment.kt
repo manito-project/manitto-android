@@ -8,13 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentMainBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment: Fragment() {
 
     private lateinit var binding: FragmentMainBinding
 
-    private val adapter = JoinedRoomsAdapter()
+    @Inject
+    lateinit var adapter: JoinedRoomsAdapter
 
     private val viewModel: MainViewModel by viewModels()
 
