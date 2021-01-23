@@ -27,12 +27,6 @@ class UserModule {
 
     @Provides
     @Singleton
-    @Named("remote")
-    fun provideUserRemoteDataSource(userService: UserService) : UserDataSource =
-        UserRemoteDataSource(userService)
-
-    @Provides
-    @Singleton
     @Named("cached")
     fun provideUserDataSource(
         @Named("remote") userRemoteDataSource: UserDataSource

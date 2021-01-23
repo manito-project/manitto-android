@@ -34,9 +34,35 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        mock {
+            dimension "default"
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+            dimension "default"
+        }
+    }
+
+    android.variantFilter { variant ->
+        if (variant.buildType.name == 'release'
+                && variant.getFlavors().get(0).name == 'mock') {
+            variant.setIgnore(true)
         }
     }
 
