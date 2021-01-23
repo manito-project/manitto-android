@@ -55,11 +55,11 @@ class UserCachedDataSource(
         return cachedUser!!.userName
     }
 
-    override fun getJoinedRoom(callback: UserDataSource.GetJoinedRoomsCallback) {
+    override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
         if (cachedJoinedRooms != null && !isJoinedRoomDirty) {
             callback.onJoinedRoomsLoaded(cachedJoinedRooms!!)
         } else {
-            userRemoteDataSource.getJoinedRoom(object : UserDataSource.GetJoinedRoomsCallback {
+            userRemoteDataSource.getJoinedRoom(userId, object : UserDataSource.GetJoinedRoomsCallback {
                 override fun onJoinedRoomsLoaded(rooms: List<JoinedRoom>) {
                     _cachedJoinedRooms = rooms
                     isJoinedRoomDirty = false

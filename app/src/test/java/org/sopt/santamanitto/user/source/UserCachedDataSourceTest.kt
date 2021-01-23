@@ -38,7 +38,9 @@ class UserCachedDataSourceTest {
 
     private val mockSerialNumber = "M1o2c3k5S67e8r9ialNumber"
 
-    private val mockUserNamne = "mock"
+    private val mockUserName = "mock"
+
+    private val mockUserId = 1
 
     @Before
     fun setUp() {
@@ -66,9 +68,9 @@ class UserCachedDataSourceTest {
 
     @Test
     fun createAccountTest() {
-        userCachedDataSource.createAccount(mockUserNamne, mockSerialNumber, createAccountCallback)
+        userCachedDataSource.createAccount(mockUserName, mockSerialNumber, createAccountCallback)
 
-        verify(userRemoteDataSource).createAccount(eq(mockUserNamne), eq(mockSerialNumber), capture(createAccountCaptor))
+        verify(userRemoteDataSource).createAccount(eq(mockUserName), eq(mockSerialNumber), capture(createAccountCaptor))
 
         createAccountCaptor.value.onCreateAccountSuccess(mockUser)
 
@@ -80,16 +82,16 @@ class UserCachedDataSourceTest {
     @Test
     fun getJoinedRoomTest() {
         //첫 번째 시도
-        userCachedDataSource.getJoinedRoom(getJoinedRoomsCallback)
+        userCachedDataSource.getJoinedRoom(mockUserId, getJoinedRoomsCallback)
 
-        verify(userRemoteDataSource).getJoinedRoom(capture(getJoinedRoomsCaptor))
+        verify(userRemoteDataSource).getJoinedRoom(eq(mockUserId), capture(getJoinedRoomsCaptor))
 
         getJoinedRoomsCaptor.value.onJoinedRoomsLoaded(mockJoinedRooms)
 
         verify(getJoinedRoomsCallback).onJoinedRoomsLoaded(eq(mockJoinedRooms))
 
         //두 번째 시도는 캐시에서 가져오는가
-        userRemoteDataSource.getJoinedRoom(getJoinedRoomsCallback)
+        userRemoteDataSource.getJoinedRoom(mockUserId, getJoinedRoomsCallback)
 
         assertNotNull(userCachedDataSource.cachedJoinedRooms)
 

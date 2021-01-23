@@ -21,10 +21,17 @@ class MainFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = this@MainFragment
             viewModel = this@MainFragment.viewModel
             recyclerviewMainHistory.adapter = adapter
         }
 
+        initJoinedRooms()
+
         return binding.root
+    }
+
+    private fun initJoinedRooms() {
+        viewModel.getJoinedRooms()
     }
 }

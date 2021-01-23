@@ -78,6 +78,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_main_history"
+            setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
@@ -88,8 +89,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"
-            app:replaceAll="@{viewModel.getJoinedRooms()}"
-            setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
+            app:replaceAll="@{viewModel.joinedRooms}"
             tool:listitem="@layout/viewholder_joined_room"
             tool:orientation="horizontal" />
 
@@ -132,6 +132,17 @@
                 app:layout_constraintTop_toBottomOf="@id/imageview_main_nomanittosnowman" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar_main_joinedRooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/gray_1"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintEnd_toEndOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

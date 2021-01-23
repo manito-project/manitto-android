@@ -1,6 +1,5 @@
 package org.sopt.santamanitto.user.source
 
-import org.sopt.santamanitto.data.JoinedRoom
 import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.network.start
@@ -66,10 +65,10 @@ class UserRemoteDataSource(
         throw Exception("You cannot get UserName from remote data source.")
     }
 
-    override fun getJoinedRoom(callback: UserDataSource.GetJoinedRoomsCallback) {
-        userService.getJoinedRooms(getUserId()).start(object : RequestCallback<List<JoinedRoom>> {
-            override fun onSuccess(data: List<JoinedRoom>) {
-                callback.onJoinedRoomsLoaded(data)
+    override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
+        userService.getJoinedRooms(userId).start(object : RequestCallback<UserJoinedRoomsResponse> {
+            override fun onSuccess(data: UserJoinedRoomsResponse) {
+                callback.onJoinedRoomsLoaded(data.joinedRooms)
             }
 
             override fun onFail() {

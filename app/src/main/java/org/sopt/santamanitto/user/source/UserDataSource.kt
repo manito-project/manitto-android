@@ -32,5 +32,5 @@ interface UserDataSource {
 
     fun getUserName(): String
 
-    fun getJoinedRoom(callback: GetJoinedRoomsCallback)
+    fun getJoinedRoom(userId: Int, callback: GetJoinedRoomsCallback)
 }
