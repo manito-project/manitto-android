@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.user
+package org.sopt.santamanitto.user.source
 
 import com.google.gson.annotations.SerializedName
 import org.sopt.santamanitto.util.TimeUtil
@@ -8,7 +8,5 @@ data class User(
         val userName: String,
         val serialNumber: String,
         val id: Int = 0,
-        val updatedAt: String = TimeUtil.getCurrentTime(),
-        val createdAt: String = TimeUtil.getCurrentTime(),
         val accessToken: String = "null"
 )

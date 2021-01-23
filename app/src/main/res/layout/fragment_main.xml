@@ -88,9 +88,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"
-            app:replaceAll="@{viewModel.myManittoHistory}"
+            app:replaceAll="@{viewModel.getJoinedRooms()}"
             setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
-            tool:listitem="@layout/viewholder_my_manitto_history"
+            tool:listitem="@layout/viewholder_joined_room"
             tool:orientation="horizontal" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,7 +104,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:visibility="@{viewModel.myManittoHistory.empty ? View.VISIBLE : View.INVISIBLE}">
+            app:visibility="@{viewModel.joinedRooms.empty ? View.VISIBLE : View.INVISIBLE}">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageview_main_nomanittosnowman"

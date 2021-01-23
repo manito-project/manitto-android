@@ -1,32 +1,36 @@
 package org.sopt.santamanitto.user.source
 
-import org.sopt.santamanitto.user.User
+import org.sopt.santamanitto.data.JoinedRoom
 
 interface UserDataSource {
 
-    interface GetUserIdCallback {
-        fun onUserIdLoaded(id: Int)
+    interface LoginCallback {
+        fun onLoginSuccess(user: User)
+
+        fun onLoginFailed()
+    }
+
+    interface CreateAccountCallback {
+        fun onCreateAccountSuccess(user: User)
+
+        fun onCreateAccountFailed()
+    }
+
+    interface GetJoinedRoomsCallback {
+        fun onJoinedRoomsLoaded(rooms: List<JoinedRoom>)
 
         fun onDataNotAvailable()
     }
 
-    interface GetUserCallback {
-        fun onUserLoaded(user: User)
+    fun login(serialNumber: String, callback: LoginCallback)
 
-        fun onDataNotAvailable()
-    }
+    fun createAccount(userName: String, serialNumber: String, callback: CreateAccountCallback)
 
-    interface SaveUserCallback {
-        fun onUserSaved(user: User)
+    fun getUserId(): Int
 
-        fun onSaveFailed()
-    }
+    fun getAccessToken(): String
 
-    fun getUser(callback: GetUserCallback)
+    fun getUserName(): String
 
-    fun getUserId(callback: GetUserIdCallback)
-
-    fun saveUser(user: User, callback: SaveUserCallback?)
-
-    fun saveUser(name: String, callback: SaveUserCallback?)
+    fun getJoinedRoom(callback: GetJoinedRoomsCallback)
 }

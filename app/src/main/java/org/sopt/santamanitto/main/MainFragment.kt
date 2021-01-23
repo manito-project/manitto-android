@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 
@@ -15,7 +14,7 @@ class MainFragment: Fragment() {
 
     private lateinit var binding: FragmentMainBinding
 
-    private val adapter = MyManittoAdapter()
+    private val adapter = JoinedRoomsAdapter()
 
     private val viewModel: MainViewModel by viewModels()
 

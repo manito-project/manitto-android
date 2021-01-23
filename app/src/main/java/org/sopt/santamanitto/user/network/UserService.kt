@@ -1,16 +1,20 @@
 package org.sopt.santamanitto.user.network
 
+import org.sopt.santamanitto.data.JoinedRoom
 import org.sopt.santamanitto.network.Response
-import org.sopt.santamanitto.user.User
+import org.sopt.santamanitto.user.source.User
 import retrofit2.Call
 import retrofit2.http.*
 
 
 interface UserService {
     @POST("users")
-    fun saveUser(@Body body: User) : Call<Response<User>>
+    fun createAccount(@Body body: User) : Call<Response<User>>
 
     @GET("users/check-serial/{serialNumber}")
-    fun getUserFromSerialNumber(@Path("serialNumber") serialNumber: String)
+    fun login(@Path("serialNumber") serialNumber: String)
         : Call<Response<UserCheckResponse>>
+
+    @GET("users/{userId}")
+    fun getJoinedRooms(@Path("userId") userId: Int) : Call<Response<List<JoinedRoom>>>
 }

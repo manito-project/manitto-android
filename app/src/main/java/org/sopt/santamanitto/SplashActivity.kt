@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
 import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.signin.fragment.SignInActivity
+import org.sopt.santamanitto.user.source.User
 import org.sopt.santamanitto.user.source.UserDataSource
 import javax.inject.Inject
 import javax.inject.Named
@@ -22,8 +23,12 @@ class SplashActivity : AppCompatActivity() {
     }
 
     @Inject
-    @Named("userRepository")
-    lateinit var userRepository: UserDataSource
+    @Named("cached")
+    lateinit var userCachedDataSource: UserDataSource
+
+    @Inject
+    @Named("serialNumber")
+    lateinit var serialNumber: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +40,13 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun startNextActivity() {
-        userRepository.getUserId(object: UserDataSource.GetUserIdCallback {
-            override fun onUserIdLoaded(id: Int) {
+        userCachedDataSource.login(serialNumber, object: UserDataSource.LoginCallback {
+            override fun onLoginSuccess(user: User) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 finish()
             }
 
-            override fun onDataNotAvailable() {
+            override fun onLoginFailed() {
                 startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
                 finish()
             }

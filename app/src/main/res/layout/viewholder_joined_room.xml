@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="myManittoHistory"
-            type="org.sopt.santamanitto.data.MyManittoHistory" />
+            name="joinedRoom"
+            type="org.sopt.santamanitto.data.JoinedRoom" />
     </data>
 
     <org.sopt.santamanitto.view.SantaCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,7 +26,7 @@
                 android:textColor="@color/navy"
                 android:textFontWeight="700"
                 android:textSize="@dimen/size_mymanitto_title"
-                android:text="@{myManittoHistory.roomName}"
+                android:text="@{joinedRoom.roomName}"
                 app:layout_constraintBottom_toTopOf="@id/temp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +38,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_mymanitto_temp_top"
-                setManittoInfo="@{myManittoHistory.manitto}"
                 android:letterSpacing="-0.04"
                 android:lineHeight="21sp"
                 android:textColor="@color/gray_3"
@@ -56,7 +55,6 @@
                 android:backgroundTint="@color/red"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="3dp"
-                setState="@{myManittoHistory}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/size_mymanitto_state_text"
                 app:layout_constraintBottom_toTopOf="@id/textview_mymanitto_mission"
@@ -70,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_mymanitto_mission_top"
                 android:letterSpacing="-0.06"
-                android:text="@{myManittoHistory.mission}"
                 android:lineHeight="@dimen/lineheight_mymanitto_mission_text"
                 android:textColor="@color/gray_2"
                 android:textSize="@dimen/size_mymanitto_mission_text"
