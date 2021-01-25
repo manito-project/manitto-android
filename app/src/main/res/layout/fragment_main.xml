@@ -83,6 +83,7 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:orientation="horizontal"
+            android:overScrollMode="never"
             android:paddingHorizontal="@dimen/padding_entire"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
@@ -138,10 +139,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
-            app:layout_constraintEnd_toEndOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
-            app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"/>
+            app:layout_constraintEnd_toEndOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
