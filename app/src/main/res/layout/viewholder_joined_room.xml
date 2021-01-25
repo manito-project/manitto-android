@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="joinedRoom"
             type="org.sopt.santamanitto.data.JoinedRoom" />
@@ -11,9 +13,13 @@
         <variable
             name="personalRoomInfo"
             type="org.sopt.santamanitto.room.PersonalRoomInfo" />
+
+        <variable
+            name="userInfo"
+            type="org.sopt.santamanitto.user.source.User" />
     </data>
 
-    <org.sopt.santamanitto.view.SantaCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <org.sopt.santamanitto.view.SantaCardView
         android:layout_width="@dimen/width_mymanitto_viewholder"
         android:layout_height="@dimen/height_mymanitto_viewholder">
 
@@ -27,11 +33,10 @@
                 android:id="@+id/textview_mymanitto_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{joinedRoom.roomName}"
                 android:textColor="@color/navy"
                 android:textFontWeight="700"
                 android:textSize="@dimen/size_mymanitto_title"
-                android:text="@{joinedRoom.roomName}"
-                app:layout_constraintBottom_toTopOf="@id/temp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
@@ -45,10 +50,11 @@
                 android:letterSpacing="-0.04"
                 android:lineHeight="21sp"
                 android:textColor="@color/gray_3"
-                app:layout_constraintBottom_toTopOf="@id/textview_mymanitto_state"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_mymanitto_title"
-                tool:text="김성규의 마니또" />
+                app:layout_constraintVertical_chainStyle="packed"
+                app:setManittoInfo="@{userInfo.userName}"
+                tool:text="김성규의 산타" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textview_mymanitto_state"
@@ -57,29 +63,29 @@
                 android:layout_marginTop="@dimen/margin_mymanitto_state_top"
                 android:background="@drawable/round_ractangle_background_30"
                 android:backgroundTint="@color/red"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="3dp"
+                android:paddingHorizontal="@dimen/padding_mymanitto_daydiff_textview_horizontal"
+                android:paddingVertical="@dimen/padding_mymanitto_daydiff_textview_vertical"
                 android:textColor="@color/white"
                 android:textSize="@dimen/size_mymanitto_state_text"
-                app:setDayDifferent="@{joinedRoom.createdAt}"
-                app:layout_constraintBottom_toTopOf="@id/textview_mymanitto_mission"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/temp"
+                app:setDayDifferent="@{joinedRoom.createdAt}"
                 tool:text="1일째" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textview_mymanitto_mission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_mymanitto_mission_top"
                 android:letterSpacing="-0.06"
-                android:text="@{personalRoomInfo.myMission.content}"
                 android:lineHeight="@dimen/lineheight_mymanitto_mission_text"
+                android:text="@{personalRoomInfo.myMission.content}"
                 android:textColor="@color/gray_2"
                 android:textSize="@dimen/size_mymanitto_mission_text"
+                android:layout_marginTop="@dimen/margin_mymanitto_mittion_top"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_mymanitto_state"
+                app:layout_constraintTop_toBottomOf="@+id/textview_mymanitto_state"
+                app:layout_constraintVertical_bias="0.0"
                 tool:text="여기는 미션을 알려주는 공간입니다아 최대 2줄임" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

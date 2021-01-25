@@ -5,19 +5,25 @@ import org.sopt.santamanitto.data.JoinedRoom
 interface UserDataSource {
 
     interface LoginCallback {
-        fun onLoginSuccess(user: User)
+        fun onLoginSuccess(loginUser: LoginUser)
 
         fun onLoginFailed()
     }
 
     interface CreateAccountCallback {
-        fun onCreateAccountSuccess(user: User)
+        fun onCreateAccountSuccess(loginUser: LoginUser)
 
         fun onCreateAccountFailed()
     }
 
     interface GetJoinedRoomsCallback {
         fun onJoinedRoomsLoaded(rooms: List<JoinedRoom>)
+
+        fun onDataNotAvailable()
+    }
+
+    interface GetUserInfoCallback {
+        fun onUserInfoLoaded(user: User)
 
         fun onDataNotAvailable()
     }
@@ -33,4 +39,6 @@ interface UserDataSource {
     fun getUserName(): String
 
     fun getJoinedRoom(userId: Int, callback: GetJoinedRoomsCallback)
+
+    fun getUserInfo(userId: Int, callback: GetUserInfoCallback)
 }

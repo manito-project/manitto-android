@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
 import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.signin.fragment.SignInActivity
-import org.sopt.santamanitto.user.source.User
+import org.sopt.santamanitto.user.source.LoginUser
 import org.sopt.santamanitto.user.source.UserDataSource
 import javax.inject.Inject
 import javax.inject.Named
@@ -41,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun startNextActivity() {
         userCachedDataSource.login(serialNumber, object: UserDataSource.LoginCallback {
-            override fun onLoginSuccess(user: User) {
+            override fun onLoginSuccess(loginUser: LoginUser) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 finish()
             }

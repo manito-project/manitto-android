@@ -1,8 +1,8 @@
 package org.sopt.santamanitto.user.network
 
-import org.sopt.santamanitto.user.source.User
+import org.sopt.santamanitto.user.source.LoginUser
 
 data class UserCheckResponse(
-    val user: User,
-    val accessToken: String
+        val loginUser: LoginUser,
+        val accessToken: String
 )

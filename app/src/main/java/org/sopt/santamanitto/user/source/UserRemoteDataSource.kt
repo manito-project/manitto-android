@@ -20,9 +20,9 @@ class UserRemoteDataSource(
                 if (response.isSuccessful) {
                     if (response.body()!!.success) {
                         if (response.body()!!.message == "해당 시리얼 넘버를 가진 유저가 있습니다") {
-                            val result = response.body()!!.data.user
+                            val result = response.body()!!.data.loginUser
                             val accessToken = response.body()!!.data.accessToken
-                            callback.onLoginSuccess(User(result.userName, result.serialNumber, result.id, accessToken))
+                            callback.onLoginSuccess(LoginUser(result.userName, result.serialNumber, result.id, accessToken))
                         } else {
                             callback.onLoginFailed()
                         }
@@ -41,9 +41,9 @@ class UserRemoteDataSource(
     }
 
     override fun createAccount(userName: String, serialNumber: String, callback: UserDataSource.CreateAccountCallback) {
-        userService.createAccount(User(userName, serialNumber)).start(object:
-            RequestCallback<User> {
-            override fun onSuccess(data: User) {
+        userService.createAccount(LoginUser(userName, serialNumber)).start(object:
+            RequestCallback<LoginUser> {
+            override fun onSuccess(data: LoginUser) {
                 callback.onCreateAccountSuccess(data)
             }
 
@@ -66,9 +66,21 @@ class UserRemoteDataSource(
     }
 
     override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
-        userService.getJoinedRooms(userId).start(object : RequestCallback<UserJoinedRoomsResponse> {
-            override fun onSuccess(data: UserJoinedRoomsResponse) {
-                callback.onJoinedRoomsLoaded(data.joinedRooms)
+        getUserInfo(userId, object: UserDataSource.GetUserInfoCallback {
+            override fun onUserInfoLoaded(user: User) {
+                callback.onJoinedRoomsLoaded(user.joinedRooms)
+            }
+
+            override fun onDataNotAvailable() {
+                callback.onDataNotAvailable()
+            }
+        })
+    }
+
+    override fun getUserInfo(userId: Int, callback: UserDataSource.GetUserInfoCallback) {
+        userService.getUserInfo(userId).start(object : RequestCallback<User> {
+            override fun onSuccess(data: User) {
+                callback.onUserInfoLoaded(data)
             }
 
             override fun onFail() {

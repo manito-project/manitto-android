@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
 import org.sopt.santamanitto.room.source.RoomDataSource
+import org.sopt.santamanitto.user.source.UserDataSource
 import javax.inject.Named
 
 @InstallIn(FragmentComponent::class)
@@ -12,6 +13,7 @@ import javax.inject.Named
 class AdapterModule {
     @Provides
     fun provideJoinedRoomAdapter(
-        @Named("cached") cachedRoomDataSource: RoomDataSource
-    ): JoinedRoomsAdapter = JoinedRoomsAdapter(cachedRoomDataSource)
+            @Named("cached") cachedUserDataSource: UserDataSource,
+            @Named("cached") cachedRoomDataSource: RoomDataSource
+    ): JoinedRoomsAdapter = JoinedRoomsAdapter(cachedUserDataSource, cachedRoomDataSource)
 }

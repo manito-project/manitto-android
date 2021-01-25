@@ -8,6 +8,7 @@ import org.junit.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.Mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.sopt.santamanitto.data.JoinedRoom
@@ -15,27 +16,24 @@ import org.sopt.santamanitto.user.AccessTokenContainer
 import org.sopt.santamanitto.util.capture
 import org.sopt.santamanitto.util.eq
 
-class UserCachedDataSourceTest {
+class LoginUserCachedDataSourceTest {
 
     @Mock private lateinit var userRemoteDataSource: UserDataSource
 
-    @Mock private lateinit var loginCallback: UserDataSource.LoginCallback
-
-    @Mock private lateinit var createAccountCallback: UserDataSource.CreateAccountCallback
-
-    @Mock private lateinit var getJoinedRoomsCallback: UserDataSource.GetJoinedRoomsCallback
-
+    @Mock private lateinit var mockLoginUser: LoginUser
     @Mock private lateinit var mockUser: User
-
     @Mock private lateinit var mockJoinedRooms: List<JoinedRoom>
-
     @Mock private lateinit var mockAccessTokenContainer: AccessTokenContainer
 
+    @Mock private lateinit var loginCallback: UserDataSource.LoginCallback
+    @Mock private lateinit var createAccountCallback: UserDataSource.CreateAccountCallback
+    @Mock private lateinit var getJoinedRoomsCallback: UserDataSource.GetJoinedRoomsCallback
+    @Mock private lateinit var getUserInfoCallback: UserDataSource.GetUserInfoCallback
+
     @Captor private lateinit var loginCaptor: ArgumentCaptor<UserDataSource.LoginCallback>
-
     @Captor private lateinit var createAccountCaptor: ArgumentCaptor<UserDataSource.CreateAccountCallback>
-
     @Captor private lateinit var getJoinedRoomsCaptor: ArgumentCaptor<UserDataSource.GetJoinedRoomsCallback>
+    @Captor private lateinit var userInfoCaptor: ArgumentCaptor<UserDataSource.GetUserInfoCallback>
 
     private lateinit var userCachedDataSource: UserCachedDataSource
 
@@ -56,10 +54,10 @@ class UserCachedDataSourceTest {
         tryLogin()
 
         //캐시가 null이 아닌지 확인
-        assertNotNull(userCachedDataSource.cachedUser)
+        assertNotNull(userCachedDataSource.cachedLoginUser)
 
         //캐시에 든 값이 API가 반환한 값이 맞는지 확인
-        assertThat(userCachedDataSource.cachedUser, `is`(mockUser))
+        assertThat(userCachedDataSource.cachedLoginUser, `is`(mockLoginUser))
     }
 
     @Test
@@ -68,37 +66,38 @@ class UserCachedDataSourceTest {
 
         verify(userRemoteDataSource).createAccount(eq(mockUserName), eq(mockSerialNumber), capture(createAccountCaptor))
 
-        createAccountCaptor.value.onCreateAccountSuccess(mockUser)
+        createAccountCaptor.value.onCreateAccountSuccess(mockLoginUser)
 
-        assertNotNull(userCachedDataSource.cachedUser)
+        assertNotNull(userCachedDataSource.cachedLoginUser)
 
-        assertThat(userCachedDataSource.cachedUser, `is`(mockUser))
+        assertThat(userCachedDataSource.cachedLoginUser, `is`(mockLoginUser))
     }
 
     @Test
     fun getJoinedRoomTest() {
-        //첫 번째 시도
         userCachedDataSource.getJoinedRoom(mockUserId, getJoinedRoomsCallback)
-
         verify(userRemoteDataSource).getJoinedRoom(eq(mockUserId), capture(getJoinedRoomsCaptor))
-
         getJoinedRoomsCaptor.value.onJoinedRoomsLoaded(mockJoinedRooms)
-
         verify(getJoinedRoomsCallback).onJoinedRoomsLoaded(eq(mockJoinedRooms))
-
-        //두 번째 시도는 캐시에서 가져오는가
-        userRemoteDataSource.getJoinedRoom(mockUserId, getJoinedRoomsCallback)
-
         assertNotNull(userCachedDataSource.cachedJoinedRooms)
+        assertThat(userCachedDataSource.cachedJoinedRooms, `is`(mockJoinedRooms))
+    }
 
-        verify(getJoinedRoomsCallback).onJoinedRoomsLoaded(eq(userCachedDataSource.cachedJoinedRooms!!))
+    @Test
+    fun getUserInfoTest() {
+        userCachedDataSource.getUserInfo(mockUserId, getUserInfoCallback)
+        verify(userRemoteDataSource).getUserInfo(eq(mockUserId), capture(userInfoCaptor))
+        userInfoCaptor.value.onUserInfoLoaded(mockUser)
+        verify(getUserInfoCallback).onUserInfoLoaded(eq(mockUser))
+        assertNotNull(userCachedDataSource.cachedUsers[mockUserId])
+        assertThat(userCachedDataSource.cachedUsers[mockUserId], `is`(mockUser))
     }
 
     @Test
     fun accessTokenTest() {
         tryLogin()
 
-        assertThat(mockAccessTokenContainer.accessToken, `is`(mockUser.accessToken))
+        assertThat(mockAccessTokenContainer.accessToken, `is`(mockLoginUser.accessToken))
     }
 
     private fun tryLogin() {
@@ -109,6 +108,6 @@ class UserCachedDataSourceTest {
         verify(userRemoteDataSource).login(eq(mockSerialNumber), capture(loginCaptor))
 
         //성공했을 때
-        loginCaptor.value.onLoginSuccess(mockUser)
+        loginCaptor.value.onLoginSuccess(mockLoginUser)
     }
 }

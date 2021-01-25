@@ -2,6 +2,7 @@ package org.sopt.santamanitto.user.source
 
 import org.sopt.santamanitto.data.JoinedRoom
 import org.sopt.santamanitto.user.AccessTokenContainer
+import org.sopt.santamanitto.user.source.UserDataSource.*
 import javax.inject.Named
 
 class UserCachedDataSource(
@@ -9,9 +10,9 @@ class UserCachedDataSource(
     private val accessTokenContainer: AccessTokenContainer
 ): UserDataSource {
 
-    private var _cachedUser: User? = null
-    val cachedUser: User?
-        get() = _cachedUser
+    private var _cachedLoginUser: LoginUser? = null
+    val cachedLoginUser: LoginUser?
+        get() = _cachedLoginUser
 
     private var _cachedJoinedRooms: List<JoinedRoom>? = null
     val cachedJoinedRooms: List<JoinedRoom>?
@@ -19,12 +20,14 @@ class UserCachedDataSource(
 
     private var isJoinedRoomDirty = false
 
-    override fun login(serialNumber: String, callback: UserDataSource.LoginCallback) {
-        userRemoteDataSource.login(serialNumber, object : UserDataSource.LoginCallback {
-            override fun onLoginSuccess(user: User) {
-                accessTokenContainer.accessToken = user.accessToken
-                _cachedUser = user
-                callback.onLoginSuccess(user)
+    val cachedUsers = HashMap<Int, User>()
+
+    override fun login(serialNumber: String, callback: LoginCallback) {
+        userRemoteDataSource.login(serialNumber, object : LoginCallback {
+            override fun onLoginSuccess(loginUser: LoginUser) {
+                accessTokenContainer.accessToken = loginUser.accessToken
+                _cachedLoginUser = loginUser
+                callback.onLoginSuccess(loginUser)
             }
 
             override fun onLoginFailed() {
@@ -33,12 +36,12 @@ class UserCachedDataSource(
         })
     }
 
-    override fun createAccount(userName: String, serialNumber: String, callback: UserDataSource.CreateAccountCallback) {
-        userRemoteDataSource.createAccount(userName, serialNumber, object: UserDataSource.CreateAccountCallback {
-            override fun onCreateAccountSuccess(user: User) {
-                accessTokenContainer.accessToken = user.accessToken
-                _cachedUser = user
-                callback.onCreateAccountSuccess(user)
+    override fun createAccount(userName: String, serialNumber: String, callback: CreateAccountCallback) {
+        userRemoteDataSource.createAccount(userName, serialNumber, object: CreateAccountCallback {
+            override fun onCreateAccountSuccess(loginUser: LoginUser) {
+                accessTokenContainer.accessToken = loginUser.accessToken
+                _cachedLoginUser = loginUser
+                callback.onCreateAccountSuccess(loginUser)
             }
 
             override fun onCreateAccountFailed() {
@@ -48,26 +51,43 @@ class UserCachedDataSource(
     }
 
     override fun getUserId(): Int {
-        return cachedUser!!.id
+        return cachedLoginUser!!.id
     }
 
     override fun getAccessToken(): String {
-        return cachedUser!!.accessToken
+        return cachedLoginUser!!.accessToken
     }
 
     override fun getUserName(): String {
-        return cachedUser!!.userName
+        return cachedLoginUser!!.userName
     }
 
-    override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
+    override fun getJoinedRoom(userId: Int, callback: GetJoinedRoomsCallback) {
         if (cachedJoinedRooms != null && !isJoinedRoomDirty) {
             callback.onJoinedRoomsLoaded(cachedJoinedRooms!!)
         } else {
-            userRemoteDataSource.getJoinedRoom(userId, object : UserDataSource.GetJoinedRoomsCallback {
+            userRemoteDataSource.getJoinedRoom(userId, object : GetJoinedRoomsCallback {
                 override fun onJoinedRoomsLoaded(rooms: List<JoinedRoom>) {
                     _cachedJoinedRooms = rooms
                     isJoinedRoomDirty = false
                     callback.onJoinedRoomsLoaded(rooms)
+                }
+
+                override fun onDataNotAvailable() {
+                    callback.onDataNotAvailable()
+                }
+            })
+        }
+    }
+
+    override fun getUserInfo(userId: Int, callback: GetUserInfoCallback) {
+        if (cachedUsers.isNotEmpty() && cachedUsers.containsKey(userId)) {
+            callback.onUserInfoLoaded(cachedUsers[userId]!!)
+        } else {
+            userRemoteDataSource.getUserInfo(userId, object: GetUserInfoCallback {
+                override fun onUserInfoLoaded(user: User) {
+                    cachedUsers[userId] = user
+                    callback.onUserInfoLoaded(user)
                 }
 
                 override fun onDataNotAvailable() {

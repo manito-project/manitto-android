@@ -4,7 +4,7 @@ import org.sopt.santamanitto.data.JoinedRoom
 
 class FakeUserRemoteDataSource : UserDataSource {
 
-    private val fakeUser = User(
+    private val fakeLoginUser = LoginUser(
         "fakeUser",
         "f0a1k2e3u4e5s6e7r8",
         1,
@@ -26,13 +26,19 @@ class FakeUserRemoteDataSource : UserDataSource {
 
         add(JoinedRoom(5, "fakeRoom5", true,
             "2021-01-11 12:33:44", "2021-01-09 12:33:44"))
+    }
 
-        add(JoinedRoom(6, "fakeRoom6", true,
-            "2021-01-05 12:33:44", "2021-01-01 12:33:44"))
+    private val fakeUsers = HashMap<Int, User>().apply {
+        put(1, User(1, "fakeUser1", mutableListOf()))
+        put(2, User(2, "fakeUser2", mutableListOf()))
+        put(3, User(3, "fakeUser3", mutableListOf()))
+        put(4, User(4, "fakeUser4", mutableListOf()))
+        put(5, User(5, "fakeUser5", mutableListOf()))
+        put(6, User(6, "fakeUser6", mutableListOf()))
     }
 
     override fun login(serialNumber: String, callback: UserDataSource.LoginCallback) {
-        callback.onLoginSuccess(fakeUser)
+        callback.onLoginSuccess(fakeLoginUser)
     }
 
     override fun createAccount(
@@ -40,7 +46,7 @@ class FakeUserRemoteDataSource : UserDataSource {
         serialNumber: String,
         callback: UserDataSource.CreateAccountCallback
     ) {
-        callback.onCreateAccountSuccess(fakeUser)
+        callback.onCreateAccountSuccess(fakeLoginUser)
     }
 
     override fun getUserId(): Int {
@@ -57,5 +63,13 @@ class FakeUserRemoteDataSource : UserDataSource {
 
     override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
         callback.onJoinedRoomsLoaded(fakeJoinedRooms)
+    }
+
+    override fun getUserInfo(userId: Int, callback: UserDataSource.GetUserInfoCallback) {
+        if (fakeUsers.containsKey(userId)) {
+            callback.onUserInfoLoaded(fakeUsers[userId]!!)
+        } else {
+            callback.onDataNotAvailable()
+        }
     }
 }

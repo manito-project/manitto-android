@@ -78,7 +78,7 @@
     <dimen name="width_mymanitto_viewholder">145dp</dimen>
     <dimen name="size_mymanitto_title">17sp</dimen>
     <dimen name="padding_mymanitto_horizontal">14dp</dimen>
-    <dimen name="padding_mymanitto_veertical">15dp</dimen>
+    <dimen name="padding_mymanitto_veertical">17dp</dimen>
     <dimen name="size_mymanitto_mission_text">12sp</dimen>
     <dimen name="size_mymanitto_state_text">12sp</dimen>
     <dimen name="lineheight_mymanitto_mission_text">18sp</dimen>
@@ -87,6 +87,9 @@
     <dimen name="margin_mymanitto_mission_top">25dp</dimen>
     <dimen name="size_main_mymanitto">20sp</dimen>
     <dimen name="margin_mymanitto_item_decoration">16dp</dimen>
+    <dimen name="margin_mymanitto_mittion_top">25dp</dimen>
+    <dimen name="padding_mymanitto_daydiff_textview_horizontal">10dp</dimen>
+    <dimen name="padding_mymanitto_daydiff_textview_vertical">5dp</dimen>
 
 
 </resources>
