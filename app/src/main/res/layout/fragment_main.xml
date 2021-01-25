@@ -133,11 +133,10 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ProgressBar
+        <org.sopt.santamanitto.view.SantaLoading
             android:id="@+id/progressbar_main_joinedRooms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@color/gray_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintEnd_toEndOf="@id/constraintlayout_main_nomymanitto"

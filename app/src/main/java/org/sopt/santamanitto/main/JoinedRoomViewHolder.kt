@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.main
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
@@ -29,16 +30,17 @@ class JoinedRoomViewHolder(
                 cachedUserDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
                     override fun onUserInfoLoaded(user: User) {
                         binding.userInfo = user
+                        binding.santaloadingJoinedroom.visibility = View.GONE
                     }
 
                     override fun onDataNotAvailable() {
-                        //Todo: 데이터를 불러오지 못했다는 UI 보이기
+                        binding.santaloadingJoinedroom.setDataNotAvailable()
                     }
                 })
             }
 
             override fun onDataNotAvailable() {
-                //Todo: 데이터를 불러오지 못했다는 UI 보이기
+                binding.santaloadingJoinedroom.setDataNotAvailable()
             }
         })
     }

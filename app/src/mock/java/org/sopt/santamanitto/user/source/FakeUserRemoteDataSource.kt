@@ -5,27 +5,27 @@ import org.sopt.santamanitto.data.JoinedRoom
 class FakeUserRemoteDataSource : UserDataSource {
 
     private val fakeLoginUser = LoginUser(
-        "fakeUser",
-        "f0a1k2e3u4e5s6e7r8",
-        1,
-        "face1access2token3"
+            "fakeUser",
+            "f0a1k2e3u4e5s6e7r8",
+            1,
+            "face1access2token3"
     )
 
     private val fakeJoinedRooms = mutableListOf<JoinedRoom>().apply {
         add(JoinedRoom(1, "fakeRoom1", false,
-            "2021-02-15 12:33:44", "2021-01-25 12:33:44"))
+                "2021-02-15 12:33:44", "2021-01-25 12:33:44"))
 
         add(JoinedRoom(2, "fakeRoom2", false,
-            "2021-02-10 12:33:44", "2021-01-24 12:33:44"))
+                "2021-02-10 12:33:44", "2021-01-24 12:33:44"))
 
         add(JoinedRoom(3, "fakeRoom3", true,
-            "2021-01-22 12:33:44", "2021-01-20 12:33:44"))
+                "2021-01-22 12:33:44", "2021-01-20 12:33:44"))
 
         add(JoinedRoom(4, "fakeRoom4", true,
-            "2021-01-14 12:33:44", "2021-01-12 12:33:44"))
+                "2021-01-14 12:33:44", "2021-01-12 12:33:44"))
 
         add(JoinedRoom(5, "fakeRoom5", true,
-            "2021-01-11 12:33:44", "2021-01-09 12:33:44"))
+                "2021-01-11 12:33:44", "2021-01-09 12:33:44"))
     }
 
     private val fakeUsers = HashMap<Int, User>().apply {
@@ -42,9 +42,9 @@ class FakeUserRemoteDataSource : UserDataSource {
     }
 
     override fun createAccount(
-        userName: String,
-        serialNumber: String,
-        callback: UserDataSource.CreateAccountCallback
+            userName: String,
+            serialNumber: String,
+            callback: UserDataSource.CreateAccountCallback
     ) {
         callback.onCreateAccountSuccess(fakeLoginUser)
     }
