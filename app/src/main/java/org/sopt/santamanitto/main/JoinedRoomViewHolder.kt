@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.data.JoinedRoom
+import org.sopt.santamanitto.room.data.JoinedRoom
 import org.sopt.santamanitto.databinding.ViewholderJoinedRoomBinding
 import org.sopt.santamanitto.recyclerview.BaseViewHolder
-import org.sopt.santamanitto.room.PersonalRoomInfo
-import org.sopt.santamanitto.room.source.RoomDataSource
-import org.sopt.santamanitto.user.source.User
-import org.sopt.santamanitto.user.source.UserDataSource
+import org.sopt.santamanitto.room.data.PersonalRoomInfo
+import org.sopt.santamanitto.room.data.source.RoomDataSource
+import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.source.UserDataSource
 import org.sopt.santamanitto.util.TimeUtil
 
 class JoinedRoomViewHolder(

@@ -1,6 +1,6 @@
-package org.sopt.santamanitto.room.source
+package org.sopt.santamanitto.room.data.source
 
-import org.sopt.santamanitto.room.PersonalRoomInfo
+import org.sopt.santamanitto.room.data.PersonalRoomInfo
 
 interface RoomDataSource {
     interface GetPersonalRoomInfoCallback {

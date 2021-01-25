@@ -1,6 +1,8 @@
-package org.sopt.santamanitto.user.source
+package org.sopt.santamanitto.user.data.source
 
-import org.sopt.santamanitto.data.JoinedRoom
+import org.sopt.santamanitto.room.data.JoinedRoom
+import org.sopt.santamanitto.user.data.LoginUser
+import org.sopt.santamanitto.user.data.User
 
 class FakeUserRemoteDataSource : UserDataSource {
 

@@ -1,7 +1,6 @@
-package org.sopt.santamanitto.user.source
+package org.sopt.santamanitto.user.data
 
 import com.google.gson.annotations.SerializedName
-import org.sopt.santamanitto.util.TimeUtil
 
 data class LoginUser(
         @SerializedName("username")

@@ -3,10 +3,9 @@ package org.sopt.santamanitto.main
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import org.sopt.santamanitto.NetworkViewModel
-import org.sopt.santamanitto.data.JoinedRoom
-import org.sopt.santamanitto.user.source.UserDataSource
+import org.sopt.santamanitto.room.data.JoinedRoom
+import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
 
 class MainViewModel @ViewModelInject constructor(

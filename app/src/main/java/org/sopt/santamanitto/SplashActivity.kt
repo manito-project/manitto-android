@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
 import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.signin.fragment.SignInActivity
-import org.sopt.santamanitto.user.source.LoginUser
-import org.sopt.santamanitto.user.source.UserDataSource
+import org.sopt.santamanitto.user.data.LoginUser
+import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Inject
 import javax.inject.Named
 

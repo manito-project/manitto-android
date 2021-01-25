@@ -1,8 +1,10 @@
-package org.sopt.santamanitto.user.source
+package org.sopt.santamanitto.user.data.source
 
 import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.network.start
+import org.sopt.santamanitto.user.data.LoginUser
+import org.sopt.santamanitto.user.data.User
 import org.sopt.santamanitto.user.network.UserCheckResponse
 import org.sopt.santamanitto.user.network.UserService
 import retrofit2.Call

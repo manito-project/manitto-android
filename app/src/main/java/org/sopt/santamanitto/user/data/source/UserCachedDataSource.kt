@@ -1,8 +1,10 @@
-package org.sopt.santamanitto.user.source
+package org.sopt.santamanitto.user.data.source
 
-import org.sopt.santamanitto.data.JoinedRoom
+import org.sopt.santamanitto.room.data.JoinedRoom
 import org.sopt.santamanitto.user.AccessTokenContainer
-import org.sopt.santamanitto.user.source.UserDataSource.*
+import org.sopt.santamanitto.user.data.LoginUser
+import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.source.UserDataSource.*
 import javax.inject.Named
 
 class UserCachedDataSource(

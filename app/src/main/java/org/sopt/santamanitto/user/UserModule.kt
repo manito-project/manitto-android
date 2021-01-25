@@ -8,10 +8,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import org.sopt.santamanitto.user.network.UserService
-import org.sopt.santamanitto.user.source.UserCachedDataSource
-import org.sopt.santamanitto.user.source.UserDataSource
-import org.sopt.santamanitto.user.source.UserRemoteDataSource
+import org.sopt.santamanitto.user.data.source.UserCachedDataSource
+import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
 import javax.inject.Singleton
 

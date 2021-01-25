@@ -1,7 +1,7 @@
-package org.sopt.santamanitto.user.source
+package org.sopt.santamanitto.user.data
 
 import com.google.gson.annotations.SerializedName
-import org.sopt.santamanitto.data.JoinedRoom
+import org.sopt.santamanitto.room.data.JoinedRoom
 
 data class User(
         @SerializedName("id") val userId: Int,

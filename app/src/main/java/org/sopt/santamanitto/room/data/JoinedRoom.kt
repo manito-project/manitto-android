@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.data
+package org.sopt.santamanitto.room.data
 
 import com.google.gson.annotations.SerializedName
 

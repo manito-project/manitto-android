@@ -3,8 +3,8 @@ package org.sopt.santamanitto.signin.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.santamanitto.user.source.LoginUser
-import org.sopt.santamanitto.user.source.UserDataSource
+import org.sopt.santamanitto.user.data.LoginUser
+import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
 
 class ConditionViewModel @ViewModelInject constructor(

@@ -8,15 +8,15 @@
 
         <variable
             name="joinedRoom"
-            type="org.sopt.santamanitto.data.JoinedRoom" />
+            type="org.sopt.santamanitto.room.data.JoinedRoom" />
 
         <variable
             name="personalRoomInfo"
-            type="org.sopt.santamanitto.room.PersonalRoomInfo" />
+            type="org.sopt.santamanitto.room.data.PersonalRoomInfo" />
 
         <variable
             name="userInfo"
-            type="org.sopt.santamanitto.user.source.User" />
+            type="org.sopt.santamanitto.user.data.User" />
     </data>
 
     <org.sopt.santamanitto.view.SantaCardView

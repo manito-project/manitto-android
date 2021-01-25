@@ -1,8 +1,8 @@
 package org.sopt.santamanitto.user.network
 
 import org.sopt.santamanitto.network.Response
-import org.sopt.santamanitto.user.source.LoginUser
-import org.sopt.santamanitto.user.source.User
+import org.sopt.santamanitto.user.data.LoginUser
+import org.sopt.santamanitto.user.data.User
 import retrofit2.Call
 import retrofit2.http.*
 
