@@ -4,9 +4,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import org.sopt.santamanitto.user.data.source.UserDataSource
+import org.sopt.santamanitto.user.data.source.UserRemoteDataSource
 import org.sopt.santamanitto.user.network.UserService
-import org.sopt.santamanitto.user.source.UserDataSource
-import org.sopt.santamanitto.user.source.UserRemoteDataSource
 import javax.inject.Named
 import javax.inject.Singleton
 

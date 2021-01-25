@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.recyclerview
+package org.sopt.santamanitto.view.recyclerview
 
 import android.graphics.Rect
 import android.view.View

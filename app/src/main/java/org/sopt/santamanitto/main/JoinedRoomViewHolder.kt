@@ -7,7 +7,7 @@ import androidx.databinding.BindingAdapter
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.room.data.JoinedRoom
 import org.sopt.santamanitto.databinding.ViewholderJoinedRoomBinding
-import org.sopt.santamanitto.recyclerview.BaseViewHolder
+import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.data.source.RoomDataSource
 import org.sopt.santamanitto.user.data.User

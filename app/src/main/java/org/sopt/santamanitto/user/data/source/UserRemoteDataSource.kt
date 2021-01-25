@@ -22,7 +22,7 @@ class UserRemoteDataSource(
                 if (response.isSuccessful) {
                     if (response.body()!!.success) {
                         if (response.body()!!.message == "해당 시리얼 넘버를 가진 유저가 있습니다") {
-                            val result = response.body()!!.data.loginUser
+                            val result = response.body()!!.data.user
                             val accessToken = response.body()!!.data.accessToken
                             callback.onLoginSuccess(LoginUser(result.userName, result.serialNumber, result.id, accessToken))
                         } else {
