@@ -15,12 +15,16 @@ object TimeUtil {
     }
 
     fun getDifferentOfDays(from: Date, to: Date): Int {
-        val gap: Long = to.time - from.time
+        val gap: Long = from.time - to.time
         return (gap / ( 24 * 60 * 60 * 1000)).toInt()
     }
 
     fun getDateFromString(date: String): Date {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA)
         return inputFormat.parse(date)!!
+    }
+
+    fun isLaterThanNow(target: String): Boolean {
+        return getDateFromString(target).time >= Date().time
     }
 }

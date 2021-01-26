@@ -21,7 +21,7 @@ class FakeUserRemoteDataSource : UserDataSource {
                 "2021-02-10 12:33:44", "2021-01-24 12:33:44"))
 
         add(JoinedRoom(3, "fakeRoom3", true,
-                "2021-01-22 12:33:44", "2021-01-20 12:33:44"))
+                "2021-01-30 12:33:44", "2021-01-20 12:33:44"))
 
         add(JoinedRoom(4, "fakeRoom4", true,
                 "2021-01-14 12:33:44", "2021-01-12 12:33:44"))
