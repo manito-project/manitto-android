@@ -4,6 +4,8 @@ buildscript {
     ext.hilt_version = "2.29.1-alpha"
     ext.hiltViewModelVersion = '1.0.0-alpha02'
     ext.nav_version = "2.3.2"
+    ext.okhttpLoggingVersion = '4.7.2'
+    ext.retrofitVersion = '2.9.0'
 
     repositories {
         google()

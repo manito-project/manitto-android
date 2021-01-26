@@ -8,8 +8,6 @@ import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaSwitchBinding
-import org.sopt.santamanitto.getDimen
-import org.sopt.santamanitto.setRippleEffect
 
 class SantaSwitch @JvmOverloads constructor(
         context: Context,

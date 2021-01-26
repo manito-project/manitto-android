@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.main.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backgroundStyle="logoNoText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_main_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_main_guideline_bottom"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/santabackground_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <org.sopt.santamanitto.view.SantaImageRoundButton
+            android:id="@+id/santaimageroundbutton_main_makeroom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_santa_head"
+            app:description="@string/main_make_room_description"
+            app:layout_constraintBottom_toBottomOf="@id/view_main_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/santaimageroundbutton_main_join"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_main_guideline"
+            app:layout_constraintWidth_max="@dimen/width_santaimageroundbutton_max"
+            app:title="@string/main_make_room" />
+
+        <org.sopt.santamanitto.view.SantaImageRoundButton
+            android:id="@+id/santaimageroundbutton_main_join"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_rudolf_head"
+            app:description="@string/main_join_room_description"
+            app:layout_constraintBottom_toBottomOf="@id/view_main_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/santaimageroundbutton_main_makeroom"
+            app:layout_constraintTop_toBottomOf="@id/view_main_guideline"
+            app:layout_constraintWidth_max="@dimen/width_santaimageroundbutton_max"
+            app:title="@string/main_join_room" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_main_recyclerview_top"
+            android:text="@string/main_my_manitto_history"
+            android:textColor="@color/gray_3"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_main_mymanitto"
+            app:layout_constraintBottom_toTopOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_main_history"
+            setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/padding_entire"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"
+            app:replaceAll="@{viewModel.joinedRooms}"
+            tool:listitem="@layout/viewholder_joined_room"
+            tool:orientation="horizontal" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_main_nomymanitto"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_mymanitto_viewholder"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_main_recyclerview_bottom"
+            android:background="@drawable/round_ractangle_background"
+            android:backgroundTint="@color/gray_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:visibility="@{viewModel.joinedRooms.empty ? View.VISIBLE : View.INVISIBLE}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageview_main_nomanittosnowman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_main_nomanitto_snowman_bottom"
+                android:src="@drawable/ic_snowman"
+                app:layout_constraintBottom_toTopOf="@id/textview_main_nomanittonotice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.74"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_main_nomanittonotice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_no_manitto_notice"
+                android:textColor="@color/gray_2"
+                android:textSize="@dimen/size_main_no_manitto_notice"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageview_main_nomanittosnowman" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <org.sopt.santamanitto.view.SantaLoading
+            android:id="@+id/progressbar_main_joinedRooms"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintEnd_toEndOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

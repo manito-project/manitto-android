@@ -21,6 +21,7 @@
             android:layout_height="0dp"
             app:backgroundText="@string/entername_background_welcome"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,10 +78,10 @@
 
                 <org.sopt.santamanitto.view.SantaCheckBox
                     android:id="@+id/santacheckbox_condition_allagree"
+                    setChecked="@={viewModel.isReady()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/margin_condition_divider_top"
-                    setChecked="@={viewModel.isReady()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -101,10 +102,10 @@
                     android:id="@+id/santacheckbox_condition_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/santacheckbox_condition_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_condition_divider"
-                    app:layout_constraintBottom_toTopOf="@id/santacheckbox_condition_2"
                     app:text="@string/condition_1" />
 
                 <org.sopt.santamanitto.view.SantaCheckBox
@@ -129,8 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_signin_button_bottom"
-            android:text="@string/entername_button_next"
             android:enabled="@{viewModel.isReady()}"
+            android:text="@string/entername_button_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

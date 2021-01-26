@@ -21,6 +21,7 @@
             android:layout_height="0dp"
             app:backgroundText="@string/entername_background_welcome"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,11 +91,11 @@
                 <org.sopt.santamanitto.view.SantaEditText
                     setText="@={viewModel.userName}"
                     android:layout_width="match_parent"
-                    app:isSingleLine="false"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_signin_edittext_top"
                     android:layout_marginBottom="@dimen/padding_signin_cardview_bottom_additional"
                     app:hint="@string/entername_edittext_hint"
+                    app:isSingleLine="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

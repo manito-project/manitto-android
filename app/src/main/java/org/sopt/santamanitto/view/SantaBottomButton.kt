@@ -3,7 +3,6 @@ package org.sopt.santamanitto.view
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
-import androidx.databinding.BindingAdapter
 import org.sopt.santamanitto.*
 
 class SantaBottomButton : AppCompatButton {

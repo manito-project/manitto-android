@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="elevation_shadow">7dp</dimen>
+    <dimen name="elevation_shadow">4dp</dimen>
     <dimen name="radius_cardview">10dp</dimen>
     <dimen name="padding_entire">16dp</dimen>
 
@@ -16,6 +16,7 @@
 
     <dimen name="size_satnaimageroundbutton_title">17sp</dimen>
     <dimen name="size_santaimageroundbutton_description">14sp</dimen>
+    <dimen name="width_santaimageroundbutton_max">145dp</dimen>
 
     <dimen name="padding_santacheckbox_horizontal">16dp</dimen>
     <dimen name="margin_santacheckbox_textpadding_start">15dp</dimen>
@@ -66,6 +67,29 @@
     <dimen name="margin_signin_button_bottom">40dp</dimen>
     <dimen name="margin_condition_divider_bottom">9dp</dimen>
     <dimen name="margin_condition_divider_top">6dp</dimen>
+
+    <dimen name="margin_main_guideline_bottom">22dp</dimen>
+    <dimen name="margin_main_recyclerview_top">16dp</dimen>
+    <dimen name="margin_main_recyclerview_bottom">40dp</dimen>
+    <dimen name="size_main_no_manitto_notice">14sp</dimen>
+    <dimen name="margin_main_nomanitto_snowman_bottom">16dp</dimen>
+
+    <dimen name="height_mymanitto_viewholder">184dp</dimen>
+    <dimen name="width_mymanitto_viewholder">145dp</dimen>
+    <dimen name="size_mymanitto_title">17sp</dimen>
+    <dimen name="padding_mymanitto_horizontal">14dp</dimen>
+    <dimen name="padding_mymanitto_veertical">17dp</dimen>
+    <dimen name="size_mymanitto_mission_text">12sp</dimen>
+    <dimen name="size_mymanitto_state_text">12sp</dimen>
+    <dimen name="lineheight_mymanitto_mission_text">18sp</dimen>
+    <dimen name="margin_mymanitto_temp_top">16dp</dimen>
+    <dimen name="margin_mymanitto_state_top">7dp</dimen>
+    <dimen name="margin_mymanitto_mission_top">25dp</dimen>
+    <dimen name="size_main_mymanitto">20sp</dimen>
+    <dimen name="margin_mymanitto_item_decoration">16dp</dimen>
+    <dimen name="margin_mymanitto_mittion_top">25dp</dimen>
+    <dimen name="padding_mymanitto_daydiff_textview_horizontal">10dp</dimen>
+    <dimen name="padding_mymanitto_daydiff_textview_vertical">5dp</dimen>
 
 
 </resources>
