@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.signin.fragment
+package org.sopt.santamanitto.user.signin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

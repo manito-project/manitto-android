@@ -6,7 +6,7 @@
     app:startDestination="@id/enterNameFragment">
     <fragment
         android:id="@+id/enterNameFragment"
-        android:name="org.sopt.santamanitto.signin.fragment.EnterNameFragment"
+        android:name="org.sopt.santamanitto.user.signin.fragment.EnterNameFragment"
         tools:layout="@layout/fragment_enter_name"
         android:label="EnterNameFragment" >
         <action
@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/conditionFragment"
         tools:layout="@layout/fragment_condition"
-        android:name="org.sopt.santamanitto.signin.fragment.ConditionFragment"
+        android:name="org.sopt.santamanitto.user.signin.fragment.ConditionFragment"
         android:label="ConditionFragment" >
         <argument
             android:name="userName"
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="org.sopt.santamanitto.signin.fragment.WebViewFragment"
+        android:name="org.sopt.santamanitto.user.signin.fragment.WebViewFragment"
         tools:layout="@layout/fragment_webview"
         android:label="WebViewFragment" >
         <argument

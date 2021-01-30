@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.signin.fragment
+package org.sopt.santamanitto.user.signin.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

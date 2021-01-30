@@ -19,31 +19,6 @@ class SantaCheckBox @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    companion object {
-        @BindingAdapter("setChecked")
-        @JvmStatic
-        fun setChecked(view: SantaCheckBox, isChecked: Boolean) {
-            if (view.isChecked != isChecked) {
-                view.isChecked = isChecked
-            }
-        }
-
-        @InverseBindingAdapter(attribute = "setChecked", event = "checkedAttrChanged")
-        @JvmStatic
-        fun getChecked(view: SantaCheckBox) : Boolean {
-            return view.findViewById<CheckBox>(R.id.checkbox_santacheckbox).isChecked
-        }
-
-        @BindingAdapter("checkedAttrChanged")
-        @JvmStatic
-        fun setListener(view: SantaCheckBox, listener: InverseBindingListener) {
-            val checkBox = view.findViewById<CheckBox>(R.id.checkbox_santacheckbox)
-            checkBox.setOnCheckedChangeListener { _, _ ->
-                listener.onChange()
-            }
-        }
-    }
-
     private val binding = DataBindingUtil.inflate<SantaCheckBoxBinding>(
             LayoutInflater.from(context),
             R.layout.santa_check_box,

@@ -51,4 +51,8 @@
         <attr name="number" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="SantaCardView">
+        <attr name="moreRound" format="boolean"/>
+    </declare-styleable>
+
 </resources>
