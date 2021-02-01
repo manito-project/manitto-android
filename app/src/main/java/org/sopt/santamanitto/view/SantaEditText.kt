@@ -30,35 +30,6 @@ class SantaEditText @JvmOverloads constructor(
         private const val BUTTON_NONE = 0
         private const val BUTTON_ADD = 1
         private const val BUTTON_DELETE = 2
-
-        @BindingAdapter("setText")
-        @JvmStatic
-        fun setText(view: SantaEditText, text: String?) {
-            if (view.text != text) {
-                view.text = text
-            }
-        }
-
-        @InverseBindingAdapter(attribute = "setText", event = "textAttrChanged")
-        @JvmStatic
-        fun getText(view: SantaEditText) : String? {
-            return view.findViewById<AppCompatEditText>(R.id.edittext_santaedittext).text?.toString()
-        }
-
-        @BindingAdapter("textAttrChanged")
-        @JvmStatic
-        fun setListener(view: SantaEditText, listener: InverseBindingListener) {
-            val input = view.findViewById<AppCompatEditText>(R.id.edittext_santaedittext)
-            input.addTextChangedListener(object: TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    listener.onChange()
-                }
-
-                override fun afterTextChanged(s: Editable?) { }
-            })
-        }
     }
 
     private var binding: SantaEditTextBinding = DataBindingUtil.inflate(

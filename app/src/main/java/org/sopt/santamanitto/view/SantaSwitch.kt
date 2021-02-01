@@ -47,6 +47,8 @@ class SantaSwitch @JvmOverloads constructor(
 
     private var offText = ""
 
+    private var switchChangedListener: ((Boolean) -> Unit)? = null
+
     init {
         clipChildren = false
         cursor.setRippleEffect(false)
@@ -58,7 +60,7 @@ class SantaSwitch @JvmOverloads constructor(
                 0, 0)
 
         if (typeArray.hasValue(R.styleable.SantaSwitch_onText)) {
-             onText = typeArray.getString(R.styleable.SantaSwitch_onText) ?: ""
+            onText = typeArray.getString(R.styleable.SantaSwitch_onText) ?: ""
         }
 
         if (typeArray.hasValue(R.styleable.SantaSwitch_offText)) {
@@ -78,6 +80,7 @@ class SantaSwitch @JvmOverloads constructor(
         setOnClickListener {
             _isOn = !_isOn
             updateSwitchPosition()
+            switchChangedListener?.let { it(_isOn) }
         }
     }
 
@@ -112,6 +115,10 @@ class SantaSwitch @JvmOverloads constructor(
     private fun updateView() {
         onTextView.text = onText
         offTextView.text = offText
+    }
+
+    fun setOnSwitchChangedListener(listener: (Boolean) -> Unit) {
+        this.switchChangedListener = listener
     }
 
     //뷰 크기가 초기화되고 나서야 스위치의 첫 위치를 지정할 수 있음

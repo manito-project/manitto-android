@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/createRoomFragment"
-        android:name="org.sopt.santamanitto.room.fragment.CreateRoomFragment"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateRoomFragment"
         android:label="CreateRoomFragment"
         tools:layout="@layout/fragment_create_room"/>
 

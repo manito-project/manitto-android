@@ -15,7 +15,7 @@ class SantaPeriodPicker @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val DEFAULT_PERIOD = 7
+        const val DEFAULT_PERIOD = 7
         private const val MINIMUM_PERIOD = 3
         private const val MAXIMUM_PERIOD = 14
     }
@@ -34,6 +34,8 @@ class SantaPeriodPicker @JvmOverloads constructor(
 
     private var _period = DEFAULT_PERIOD
 
+    private var periodChangedListener: ((period: Int) -> Unit)? = null
+
     init {
         updateTextView()
         minusButton.setOnClickListener {
@@ -41,6 +43,7 @@ class SantaPeriodPicker @JvmOverloads constructor(
         }
         plusButton.setOnClickListener {
             period++
+
         }
     }
 
@@ -50,10 +53,15 @@ class SantaPeriodPicker @JvmOverloads constructor(
             if (value in MINIMUM_PERIOD..MAXIMUM_PERIOD) {
                 _period = value
                 updateTextView()
+                periodChangedListener?.let { it(period) }
             }
         }
 
     private fun updateTextView() {
         text.text = String.format(context.getString(R.string.santaperiodpicker_period), _period)
+    }
+
+    fun setOnPeriodChangedListener(listener: (Int) -> Unit) {
+        this.periodChangedListener = listener
     }
 }

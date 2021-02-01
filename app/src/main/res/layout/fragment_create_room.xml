@@ -4,6 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -87,6 +94,7 @@
 
                     <org.sopt.santamanitto.view.SantaEditText
                         android:id="@+id/edittext_createroom_roomname"
+                        setText="@={viewModel.roomName}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hint="@string/createroom_roomname_hint" />
@@ -113,8 +121,8 @@
                     <org.sopt.santamanitto.view.SantaPeriodPicker
                         android:id="@+id/santaperiodpicker_createroom_expiration"
                         android:layout_width="wrap_content"
-                        android:layout_marginVertical="@dimen/margin_createroom_crardview_titles_bottom"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_createroom_crardview_titles_bottom"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textview_createroom_expirationdescription"
@@ -156,8 +164,8 @@
                         android:gravity="center"
                         android:letterSpacing="-0.04"
                         android:paddingHorizontal="13dp"
-                        app:layout_constraintEnd_toStartOf="@id/santaswitch_createroom_ampm"
                         app:layout_constraintBottom_toBottomOf="@id/santaswitch_createroom_ampm"
+                        app:layout_constraintEnd_toStartOf="@id/santaswitch_createroom_ampm"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/santaswitch_createroom_ampm"
                         tool:text="10 : 00" />
@@ -166,8 +174,8 @@
                         android:id="@+id/santaswitch_createroom_ampm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginStart="@dimen/margin_createroom_santaswitch_start"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/textview_createroom_expirationpreview"
                         app:layout_constraintTop_toBottomOf="@id/textview_createroom_expirationtime"
                         app:offText="AM"
@@ -209,7 +217,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/textview_createroom_previewstart"
                         app:layout_constraintTop_toTopOf="@id/textview_createroom_previewstart"
-                        tool:text="2020/12/04 오전 10: 00에" />
+                        tool:text="2020/12/04 오전 10 : 00에" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textview_createroom_previewend"
@@ -247,6 +255,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_createroom_bottombutton_bottom"
+            android:enabled="@{!viewModel.nameIsNullOrEmpty}"
             android:text="@string/createroom_button_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
