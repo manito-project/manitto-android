@@ -91,7 +91,7 @@
                 <org.sopt.santamanitto.view.SantaEditText
                     setText="@={viewModel.userName}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/height_santaedittext_big"
                     android:layout_marginTop="@dimen/margin_signin_edittext_top"
                     android:layout_marginBottom="@dimen/padding_signin_cardview_bottom_additional"
                     app:hint="@string/entername_edittext_hint"

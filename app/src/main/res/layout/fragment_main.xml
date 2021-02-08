@@ -90,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"
-            app:replaceAll="@{viewModel.joinedRooms}"
+            replaceAll="@{viewModel.joinedRooms}"
             tool:listitem="@layout/viewholder_joined_room"
             tool:orientation="horizontal" />
 

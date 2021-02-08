@@ -20,7 +20,8 @@ import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaEditTextBinding
 
 
-class SantaEditText @JvmOverloads constructor(
+class SantaEditText @JvmOverloads
+constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
@@ -47,9 +48,9 @@ class SantaEditText @JvmOverloads constructor(
 
     private var hint: String? = null
 
-    private var addListener: (() -> Unit)? = null
+    private var addListener: ((String) -> Unit)? = null
 
-    private var deleteListener: (() -> Unit)? = null
+    private var deleteListener: ((String) -> Unit)? = null
 
     var text: String?
         get() = editText.text.toString()
@@ -57,10 +58,10 @@ class SantaEditText @JvmOverloads constructor(
             editText.setText(value)
         }
 
-    var editable: Editable?
-        get() = editText.text
+    var isEditable = true
         set(value) {
-            editText.text = value
+            editText.isEnabled = value
+            field = value
         }
 
     init {
@@ -68,7 +69,6 @@ class SantaEditText @JvmOverloads constructor(
                 attrs,
                 R.styleable.SantaEditText,
                 0, 0)
-
 
         if (typeArray.hasValue(R.styleable.SantaEditText_rightButton)) {
             buttonStyle = typeArray.getInt(R.styleable.SantaEditText_rightButton, BUTTON_NONE)
@@ -82,6 +82,17 @@ class SantaEditText @JvmOverloads constructor(
             editText.isSingleLine = typeArray.getBoolean(R.styleable.SantaEditText_isSingleLine, true)
         }
 
+        if (typeArray.hasValue(R.styleable.SantaEditText_isEditable)) {
+            isEditable = typeArray.getBoolean(R.styleable.SantaEditText_isEditable, true)
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaEditText_isSlim)) {
+            val isSlim = typeArray.getBoolean(R.styleable.SantaEditText_isSlim, false)
+            if (isSlim) {
+
+            }
+        }
+
         typeArray.recycle()
 
         hint?.let { editText.hint = it }
@@ -93,31 +104,42 @@ class SantaEditText @JvmOverloads constructor(
         }
 
         rightButton.setOnClickListener {
+            if (text.isNullOrBlank()) {
+                return@setOnClickListener
+            }
             if (buttonStyle == BUTTON_ADD) {
-                setDeleteImage()
-                editText.isEnabled = false
-                addListener?.let { listener -> listener() }
+                addListener?.let { listener ->
+                    setDeleteImage()
+                    isEditable = false
+                    listener(text!!)
+                }
             } else {
-                deleteListener?.let { listener -> listener() }
+                deleteListener?.let { listener -> listener(text!!) }
             }
         }
     }
 
-    fun setAddClickListener(listener: () -> Unit) {
+    fun setAddClickListener(listener: (String) -> Unit) {
         addListener = listener
     }
 
-    fun setDeleteClickListener(listener: () -> Unit) {
+    fun setDeleteClickListener(listener: (String) -> Unit) {
         deleteListener = listener
     }
 
-    private fun setAddImage() {
-        rightButton.setPlusImage()
+    fun setAddImage() {
+        rightButton.run {
+            rightButton.visibility = View.VISIBLE
+            setPlusImage()
+        }
         buttonStyle = BUTTON_ADD
     }
 
-    private fun setDeleteImage() {
-        rightButton.setCancelImage()
+    fun setDeleteImage() {
+        rightButton.run {
+            rightButton.visibility = View.VISIBLE
+            setCancelImage()
+        }
         buttonStyle = BUTTON_DELETE
     }
 }

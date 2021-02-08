@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.room
+package org.sopt.santamanitto.room.data
 
 import androidx.lifecycle.LiveData
 import org.sopt.santamanitto.view.SantaPeriodPicker
