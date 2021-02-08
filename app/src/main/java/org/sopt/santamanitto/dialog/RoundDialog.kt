@@ -15,10 +15,13 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import org.sopt.santamanitto.R
 import org.sopt.santamanitto.util.toPixel
+import org.sopt.santamanitto.view.setTextSize
 
 internal class RoundDialog(
         private val title: String?,
@@ -37,12 +40,10 @@ internal class RoundDialog(
 
     companion object {
         private const val TAG = "LTDialog"
-        private const val MARGIN_VERTICAL_TITLE_DP = 16
-        private const val MARGIN_VERTICAL_CONTENT_DP = 40
         private const val RADIUS_OF_DIALOG_DP = 20
         private const val DIVIDER_COLOR = "#e2e2e2"
         private const val DEFAULT_TEXT_SIZE_SP = 17f
-        private const val DIALOG_WITH_RATIO = 0.7
+        private const val DIALOG_WITH_RATIO = 0.91
     }
 
     private var contentView: View? = null
@@ -135,7 +136,7 @@ internal class RoundDialog(
             return
         }
         addDivider(parent, true)
-        contentView = contentLayout ?: getContentTextView(parent.context).apply { text = contentText }
+        contentView = contentLayout ?: getContentTextLayout(parent.context, parent, contentText!!)
         parent.addView(contentView)
     }
 
@@ -245,27 +246,29 @@ internal class RoundDialog(
     }
 
     private fun getTitleTextView(context: Context): TextView {
-        return getNewTextView(context, MARGIN_VERTICAL_TITLE_DP, hasColor = true, isBold = true)
+        return getNewTextView(context, context.resources.getDimension(R.dimen.margin_dialog_title_text_vertical), hasColor = true, isBold = true)
     }
 
-    private fun getContentTextView(context: Context): TextView {
-        return getNewTextView(context, MARGIN_VERTICAL_CONTENT_DP, false, contentTextBold)
+    private fun getContentTextLayout(context: Context, parent: ViewGroup, contentText: String): View {
+        val layout = LayoutInflater.from(context).inflate(R.layout.dialog_text_content_layout, parent, false)
+        layout.findViewById<AppCompatTextView>(R.id.textview_dialogcontent).text = contentText
+        return layout
     }
 
     private fun getButtonTextView(context: Context): TextView {
-        return getNewTextView(context, MARGIN_VERTICAL_TITLE_DP, hasColor = true, isBold = false)
+        return getNewTextView(context, context.resources.getDimension(R.dimen.margin_dialog_button_text_vertical), hasColor = true, isBold = false)
     }
 
-    private fun getNewTextView(context: Context, marginVertical: Int, hasColor: Boolean, isBold: Boolean): TextView {
+    private fun getNewTextView(context: Context, marginVertical: Float, hasColor: Boolean, isBold: Boolean): TextView {
         return TextView(context).apply {
             this.text = title
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             setPadding(
-                    0, marginVertical.toPixel(),
-                    0, marginVertical.toPixel()
+                    0, marginVertical.toInt(),
+                    0, marginVertical.toInt()
             )
             gravity = Gravity.CENTER
-            textSize = fontSize!!
+            setTextSize(R.dimen.size_dialog_text)
             if (hasColor && pointColor != null) {
                 setBackgroundResource(pointColor)
             }

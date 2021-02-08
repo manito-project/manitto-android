@@ -53,4 +53,6 @@
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
     <string name="createmission_skip_bottom_button">SKIP</string>
     <string name="createmission_mission_hint">미션을 입력해줘!</string>
+    <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션을 삭제하고 SKIP 하는 거 맞지?</string>
+    <string name="createmission_dialog_no_mission">아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?</string>
 </resources>
