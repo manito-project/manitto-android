@@ -10,14 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
+import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.ExpirationLiveData
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomViewModel
+import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 
 class CreateRoomFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateRoomBinding
 
     private val viewModel: CreateRoomViewModel by viewModels()
+
+    private var cachedPickerView: View? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -40,6 +44,9 @@ class CreateRoomFragment : Fragment() {
         binding.santaswitchCreateroomAmpm.setOnSwitchChangedListener { isAm ->
             viewModel.setAmPm(!isAm)
         }
+        binding.textviewCreateroomExpirationpreview.setOnClickListener {
+            showTimePicker()
+        }
 
         refreshUI(viewModel.expirationLiveData)
 
@@ -61,11 +68,43 @@ class CreateRoomFragment : Fragment() {
         binding.run {
             textviewCreateroomPreviewdate.text =
                     String.format(context?.getText(R.string.createroom_preview).toString(),
-                            expiration.year, expiration.month, expiration.day, amPmStr, expiration.hour, expiration.minute)
+                            expiration.year, expiration.month, expiration.day,
+                            amPmStr, expiration.hour, expiration.minute)
             textviewCreateroomPreviewstart.text =
                     String.format(context?.getText(R.string.createroom_preview_start).toString(), expiration.dayDiff)
             textviewCreateroomExpirationpreview.text =
-                    String.format(context?.getText(R.string.createroom_expiration_time).toString(), expiration.hour, expiration.minute)
+                    String.format(context?.getText(R.string.createroom_expiration_time).toString(),
+                            expiration.hour, expiration.minute)
         }
+    }
+
+    private fun showTimePicker() {
+        RoundDialogBuilder()
+                .setTitle(getString(R.string.createroom_dialog_expiration_time_setting))
+                .setContentView(getPickerView())
+                .addHorizontalButton(getString(R.string.dialog_cancel))
+                .addHorizontalButton(getString(R.string.dialog_confirm)) {
+                    val hour = it!!.findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_hour)
+                            .getCurrentNumber()
+                    val minute = it.findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
+                            .getCurrentNumber()
+                    viewModel.setTime(hour, minute)
+                }
+                .build()
+                .show(parentFragmentManager, "createroom_timepicker")
+    }
+
+    private fun getPickerView(): View {
+        if (cachedPickerView == null) {
+            cachedPickerView = LayoutInflater.from(requireContext())
+                    .inflate(R.layout.dialog_create_room_time_picker, binding.root as ViewGroup, false)
+                    .apply {
+                        findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_hour)
+                                .setInitialPosition(viewModel.expirationLiveData.hour - 1)
+                        findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
+                                .setInitialPosition(viewModel.expirationLiveData.minute)
+                    }
+        }
+        return cachedPickerView!!
     }
 }

@@ -42,6 +42,10 @@ fun View.getDrawable(@DrawableRes id: Int): Drawable? {
     return ContextCompat.getDrawable(context, id)
 }
 
+fun View.setPadding(padding: Int) {
+    setPadding(padding, padding, padding, padding)
+}
+
 fun TextView.setTextColorById(@ColorRes id: Int) {
     setTextColor(getColor(id))
 }

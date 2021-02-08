@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">santa manito</string>
 
+    <string name="dialog_confirm">확인</string>
+    <string name="dialog_cancel">취소</string>
+
     <string name="santaperiodpicker_period">%d일 후</string>
     <string name="entername_background_welcome">안녕!\n산타 마니또에 온 것을 환영해:)</string>
     <string name="entername_title">기본 설정</string>
@@ -42,4 +45,5 @@
     <string name="createroom_pm">오후</string>
     <string name="createroom_am">오전</string>
     <string name="createroom_expiration_time">%02d : %02d</string>
+    <string name="createroom_dialog_expiration_time_setting">공개 시간 설정</string>
 </resources>

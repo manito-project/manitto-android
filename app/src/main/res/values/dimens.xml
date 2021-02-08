@@ -105,6 +105,9 @@
     <dimen name="margin_createroom_roomname_title_bottom">12dp</dimen>
     <dimen name="margin_createroom_crardview_titles_bottom">7dp</dimen>
     <dimen name="margin_createroom_santaswitch_start">15dp</dimen>
+    <dimen name="padding_createroom_dialog_vertical">16dp</dimen>
+
+    <dimen name="size_santanumberpicker_text">17sp</dimen>
 
 
 </resources>

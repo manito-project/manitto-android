@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.util.DisplayMetrics
 
 object MetricsUtil {
+    @JvmStatic
     fun convertDpToPixel(dp: Float, context: Context?): Float {
         return if (context != null) {
             val resources = context.resources
@@ -26,4 +27,12 @@ object MetricsUtil {
             (px / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT))
         }
     }
+}
+
+internal fun Int.toDP(): Int {
+    return MetricsUtil.convertPixelsToDp(this.toFloat(), null).toInt()
+}
+
+internal fun Int.toPixel() : Int {
+    return MetricsUtil.convertDpToPixel(this.toFloat(), null).toInt()
 }

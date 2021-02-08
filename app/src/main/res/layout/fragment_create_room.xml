@@ -141,6 +141,7 @@
                     app:layout_constraintBottom_toTopOf="@id/view_createroom_guidline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:clipChildren="false"
                     app:layout_constraintTop_toBottomOf="@id/linearlayout_createroom_expiration">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -203,8 +204,9 @@
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="4dp"
                         app:layout_constraintVertical_chainStyle="packed"
-                        tool:text="7일 후인 " />
+                        tool:text="7일 후인" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textview_createroom_previewdate"

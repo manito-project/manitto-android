@@ -1,8 +1,6 @@
 package org.sopt.santamanitto.room
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.SantaPeriodPicker
 import java.util.*
 
@@ -32,7 +30,13 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
         get() = expirationDate.get(Calendar.DAY_OF_MONTH)
 
     val hour: Int
-        get() = expirationDate.get(Calendar.HOUR)
+        get() {
+            var convertedHour = expirationDate.get(Calendar.HOUR)
+            if (convertedHour == 0) {
+                convertedHour = 12
+            }
+            return convertedHour
+        }
 
     val minute: Int
         get() = expirationDate.get(Calendar.MINUTE)
@@ -50,7 +54,12 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
 
     fun setTime(hour: Int, minute: Int) {
         expirationDate.run {
-            set(Calendar.HOUR, hour)
+            val convertedHour = if (hour == 12) {
+                0
+            } else {
+                hour
+            }
+            set(Calendar.HOUR, convertedHour)
             set(Calendar.MINUTE, minute)
             postValue(this@ExpirationLiveData)
         }

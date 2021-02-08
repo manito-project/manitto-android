@@ -24,4 +24,8 @@ class CreateRoomViewModel : NetworkViewModel() {
     fun setAmPm(isAm: Boolean) {
         expirationLiveData.setAmPm(isAm)
     }
+
+    fun setTime(hour: Int, minute: Int) {
+        expirationLiveData.setTime(hour, minute)
+    }
 }
