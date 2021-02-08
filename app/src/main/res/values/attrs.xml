@@ -51,4 +51,13 @@
         <attr name="number" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="SantaCardView">
+        <attr name="moreRound" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SantaNumberPicker">
+        <attr name="minValue" format="integer"/>
+        <attr name="maxValue" format="integer"/>
+    </declare-styleable>
+
 </resources>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_createroom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backKey="true"
+            app:backgroundStyle="noLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_createroom_backgroundtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_createroom_bakcground_title"
+            android:elevation="@dimen/elevation_shadow"
+            android:text="@string/createroom_background_title"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_createroom_background_title"
+            app:layout_constraintBottom_toTopOf="@id/textview_createroom_backgrounddescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_createroom_backgrounddescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_createroom_background_description_bottom"
+            android:text="@string/createroom_background_description"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_createroom_background_description"
+            app:layout_constraintBottom_toBottomOf="@id/santabackground_createroom"
+            app:layout_constraintStart_toStartOf="@id/textview_createroom_backgroundtitle"
+            app:layout_constraintTop_toBottomOf="@id/textview_createroom_backgroundtitle" />
+
+        <org.sopt.santamanitto.view.SantaCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_createroom_cardview_top"
+            android:layout_marginBottom="@dimen/margin_createroom_cardview_bottom"
+            app:layout_constraintBottom_toTopOf="@id/santabottombutton_createroom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_createroom_backgrounddescription"
+            app:moreRound="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/padding_createroom_cardview_horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_createroom_roomname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@id/linearlayout_createroom_expiration"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_roomname"
+                        style="@style/TitleOfCreateRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_createroom_roomname_title_bottom"
+                        android:text="@string/createroom_room_name" />
+
+                    <org.sopt.santamanitto.view.SantaEditText
+                        android:id="@+id/edittext_createroom_roomname"
+                        setText="@={viewModel.roomName}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hint="@string/createroom_roomname_hint" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_createroom_expiration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@id/constraintlayout_createroom_expirationtime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearlayout_createroom_roomname">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_expiration"
+                        style="@style/TitleOfCreateRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/createroom_room_expiration" />
+
+                    <org.sopt.santamanitto.view.SantaPeriodPicker
+                        android:id="@+id/santaperiodpicker_createroom_expiration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_createroom_crardview_titles_bottom"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_expirationdescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/createroom_expiration_description"
+                        android:textColor="@color/gray_3"
+                        android:textSize="@dimen/size_createroom_expiration_description" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_createroom_expirationtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/view_createroom_guidline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:clipChildren="false"
+                    app:layout_constraintTop_toBottomOf="@id/linearlayout_createroom_expiration">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_expirationtime"
+                        style="@style/TitleOfCreateRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_createroom_crardview_titles_bottom"
+                        android:text="@string/textview_createroom_expiration_time"
+                        app:layout_constraintBottom_toTopOf="@id/santaswitch_createroom_ampm"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_expirationpreview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:background="@drawable/round_ractangle_background"
+                        android:backgroundTint="@color/gray_1"
+                        android:gravity="center"
+                        android:letterSpacing="-0.04"
+                        android:paddingHorizontal="13dp"
+                        app:layout_constraintBottom_toBottomOf="@id/santaswitch_createroom_ampm"
+                        app:layout_constraintEnd_toStartOf="@id/santaswitch_createroom_ampm"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/santaswitch_createroom_ampm"
+                        tool:text="10 : 00" />
+
+                    <org.sopt.santamanitto.view.SantaSwitch
+                        android:id="@+id/santaswitch_createroom_ampm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_createroom_santaswitch_start"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/textview_createroom_expirationpreview"
+                        app:layout_constraintTop_toBottomOf="@id/textview_createroom_expirationtime"
+                        app:offText="AM"
+                        app:onText="PM" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_createroom_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintlayout_createroom_expirationtime"
+                    app:layout_constraintVertical_bias="0.6">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_previewstart"
+                        style="@style/PreviewTextOfCreateRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toTopOf="@id/textview_createroom_previewend"
+                        app:layout_constraintEnd_toStartOf="@id/textview_createroom_previewdate"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="4dp"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tool:text="7일 후인" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_previewdate"
+                        style="@style/PreviewTextOfCreateRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"
+                        android:textFontWeight="700"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_createroom_previewstart"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/textview_createroom_previewstart"
+                        app:layout_constraintTop_toTopOf="@id/textview_createroom_previewstart"
+                        tool:text="2020/12/04 오전 10 : 00에" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_previewend"
+                        style="@style/PreviewTextOfCreateRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/createroom_preview_end"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textview_createroom_previewstart" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view_createroom_guidline"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.884" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </org.sopt.santamanitto.view.SantaCardView>
+
+        <org.sopt.santamanitto.view.SantaBottomButton
+            android:id="@+id/santabottombutton_createroom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_createroom_bottombutton_bottom"
+            android:enabled="@{!viewModel.nameIsNullOrEmpty}"
+            android:text="@string/createroom_button_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

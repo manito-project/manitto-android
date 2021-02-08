@@ -3,11 +3,12 @@ package org.sopt.santamanitto.util
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 object TimeUtil {
 
+    private const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
+
     fun getCurrentTime(): String {
-        return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA).format(Date())
+        return SimpleDateFormat(DATE_FORMAT, Locale.KOREA).format(Date())
     }
 
     fun getDifferentOfDaysFromNow(to: String): Int {
@@ -20,11 +21,23 @@ object TimeUtil {
     }
 
     fun getDateFromString(date: String): Date {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA)
+        val inputFormat = SimpleDateFormat(DATE_FORMAT, Locale.KOREA)
         return inputFormat.parse(date)!!
     }
 
     fun isLaterThanNow(target: String): Boolean {
         return getDateFromString(target).time >= Date().time
+    }
+
+    fun addDateToNow(days: Int): String {
+        return SimpleDateFormat(DATE_FORMAT, Locale.KOREA).format(
+                GregorianCalendar().apply {
+                    add(Calendar.DAY_OF_MONTH, days)
+                }.time
+        )
+    }
+
+    fun getTimeToString(expirationDate: GregorianCalendar): String {
+        return "${expirationDate.get(Calendar.HOUR)} : ${expirationDate.get(Calendar.MINUTE)}"
     }
 }

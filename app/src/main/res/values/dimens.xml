@@ -2,10 +2,11 @@
 <resources>
     <dimen name="elevation_shadow">4dp</dimen>
     <dimen name="radius_cardview">10dp</dimen>
+    <dimen name="radius_cardview_more">20dp</dimen>
     <dimen name="padding_entire">16dp</dimen>
 
     <dimen name="width_edittext_rightbutton">30dp</dimen>
-    <dimen name="margin_santaedittext_edittext_vertical">9dp</dimen>
+    <dimen name="margin_santaedittext_edittext_vertical">12dp</dimen>
     <dimen name="margin_santaedittext_button_vertical">8dp</dimen>
     <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
     <dimen name="size_santaedittext">16sp</dimen>
@@ -90,6 +91,23 @@
     <dimen name="margin_mymanitto_mittion_top">25dp</dimen>
     <dimen name="padding_mymanitto_daydiff_textview_horizontal">10dp</dimen>
     <dimen name="padding_mymanitto_daydiff_textview_vertical">5dp</dimen>
+
+    <dimen name="size_createroom_background_title">18sp</dimen>
+    <dimen name="size_createroom_background_description">15sp</dimen>
+    <dimen name="margin_createroom_background_description_bottom">80dp</dimen>
+    <dimen name="margin_createroom_bakcground_title">16dp</dimen>
+    <dimen name="margin_createroom_bottombutton_bottom">41dp</dimen>
+    <dimen name="margin_createroom_cardview_top">16dp</dimen>
+    <dimen name="margin_createroom_cardview_bottom">35dp</dimen>
+    <dimen name="padding_createroom_cardview_horizontal">30dp</dimen>
+    <dimen name="size_createroom_cardview_titles">16sp</dimen>
+    <dimen name="size_createroom_expiration_description">12sp</dimen>
+    <dimen name="margin_createroom_roomname_title_bottom">12dp</dimen>
+    <dimen name="margin_createroom_crardview_titles_bottom">7dp</dimen>
+    <dimen name="margin_createroom_santaswitch_start">15dp</dimen>
+    <dimen name="padding_createroom_dialog_vertical">16dp</dimen>
+
+    <dimen name="size_santanumberpicker_text">17sp</dimen>
 
 
 </resources>

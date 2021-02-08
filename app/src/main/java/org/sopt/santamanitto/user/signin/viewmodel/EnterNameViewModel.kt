@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.signin.viewmodel
+package org.sopt.santamanitto.user.signin.viewmodel
 
 
 import androidx.lifecycle.LiveData

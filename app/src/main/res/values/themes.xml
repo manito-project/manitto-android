@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="AppTheme.Base">
-    </style>
+    <style name="AppTheme" parent="AppTheme.Base"></style>
 
     <!-- Base application theme. -->
     <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -23,5 +22,17 @@
         <item name="android:radioButtonStyle">@style/customRadioButtonFontStyle</item>
         <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
     </style>
-    
+
+    <style name="TitleOfCreateRoom" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray_3</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/size_createroom_cardview_titles</item>
+    </style>
+
+    <style name="PreviewTextOfCreateRoom" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/size_createroom_expiration_description</item>
+        <item name="android:letterSpacing">-0.04</item>
+        <item name="android:textColor">@color/gray_3</item>
+    </style>
+
 </resources>

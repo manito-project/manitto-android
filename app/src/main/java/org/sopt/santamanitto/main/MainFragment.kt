@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentMainBinding
+import org.sopt.santamanitto.user.signin.fragment.ConditionFragmentDirections
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,6 +32,12 @@ class MainFragment: Fragment() {
         }
 
         initJoinedRooms()
+
+        binding.santaimageroundbuttonMainMakeroom.setOnClickListener {
+            val directions = MainFragmentDirections
+                .actionMainFragmentToCreateRoomFragment()
+            findNavController().navigate(directions)
+        }
 
         return binding.root
     }

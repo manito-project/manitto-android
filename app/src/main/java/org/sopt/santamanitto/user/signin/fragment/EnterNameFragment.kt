@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.signin.fragment
+package org.sopt.santamanitto.user.signin.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentEnterNameBinding
-import org.sopt.santamanitto.signin.viewmodel.EnterNameViewModel
+import org.sopt.santamanitto.user.signin.viewmodel.EnterNameViewModel
 
 @AndroidEntryPoint
 class EnterNameFragment : Fragment() {

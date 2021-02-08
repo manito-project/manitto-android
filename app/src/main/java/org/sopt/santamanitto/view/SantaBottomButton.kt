@@ -19,6 +19,7 @@ class SantaBottomButton : AppCompatButton {
         setPaddingVerticalById(R.dimen.padding_santabottombutton_vertical)
         setRippleEffect(true)
         setBold(true)
+        elevation = getDimen(R.dimen.elevation_shadow)
     }
 
     override fun setEnabled(enabled: Boolean) {

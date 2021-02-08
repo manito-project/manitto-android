@@ -24,6 +24,7 @@ class JoinedRoomViewHolder(
 
     override fun bind(data: JoinedRoom) {
         binding.joinedRoom = data
+        binding.temp.text = String.format(getString(R.string.joinedroom_manitto_info), data.roomName)
 
         setRoomState(data)
 
@@ -64,13 +65,5 @@ class JoinedRoomViewHolder(
 
     private fun getString(@StringRes resId: Int): String {
         return itemView.context.getString(resId)
-    }
-
-    companion object {
-        @BindingAdapter("app:setManittoInfo")
-        @JvmStatic
-        fun AppCompatTextView.setManittoInfo(name: String) {
-            text = String.format(context.getString(R.string.joinedroom_manitto_info), name)
-       }
     }
 }

@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.signin.fragment
+package org.sopt.santamanitto.user.signin.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +15,7 @@ import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
-import org.sopt.santamanitto.signin.viewmodel.ConditionViewModel
+import org.sopt.santamanitto.user.signin.viewmodel.ConditionViewModel
 
 @AndroidEntryPoint
 class ConditionFragment: Fragment() {
