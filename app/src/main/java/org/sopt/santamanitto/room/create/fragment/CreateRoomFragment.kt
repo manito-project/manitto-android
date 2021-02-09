@@ -6,20 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
-import org.sopt.santamanitto.room.ExpirationLiveData
-import org.sopt.santamanitto.room.create.viewmodel.CreateRoomViewModel
+import org.sopt.santamanitto.room.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 
 class CreateRoomFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateRoomBinding
 
-    private val viewModel: CreateRoomViewModel by viewModels()
+    private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
     private var cachedPickerView: View? = null
 
@@ -52,7 +52,15 @@ class CreateRoomFragment : Fragment() {
 
         subscribeUI()
 
+        setOnClickListener()
+
         return binding.root
+    }
+
+    private fun setOnClickListener() {
+        binding.santabottombuttonCreateroom.setOnClickListener {
+            findNavController().navigate(CreateRoomFragmentDirections.actionCreateRoomFragmentToCreateMissionsFragment())
+        }
     }
 
     private fun subscribeUI() {

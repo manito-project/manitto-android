@@ -4,12 +4,19 @@
     <dimen name="radius_cardview">10dp</dimen>
     <dimen name="radius_cardview_more">20dp</dimen>
     <dimen name="padding_entire">16dp</dimen>
+    <dimen name="margin_bottombutton_bottom">40dp</dimen>
+
+    <dimen name="margin_dialog_title_text_vertical">15dp</dimen>
+    <dimen name="margin_dialog_button_text_vertical">25dp</dimen>
+    <dimen name="size_dialog_text">17sp</dimen>
+    <dimen name="height_dialog_content">175dp</dimen>
 
     <dimen name="width_edittext_rightbutton">30dp</dimen>
-    <dimen name="margin_santaedittext_edittext_vertical">12dp</dimen>
-    <dimen name="margin_santaedittext_button_vertical">8dp</dimen>
+    <dimen name="margin_santaedittext_edittext_vertical">7dp</dimen>
+    <dimen name="margin_santaedittext_button_vertical">7dp</dimen>
     <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
     <dimen name="size_santaedittext">16sp</dimen>
+    <dimen name="height_santaedittext_big">48dp</dimen>
 
     <dimen name="size_santabottombutton_text">18sp</dimen>
     <dimen name="padding_santabottombutton_vertical">10dp</dimen>
@@ -96,7 +103,6 @@
     <dimen name="size_createroom_background_description">15sp</dimen>
     <dimen name="margin_createroom_background_description_bottom">80dp</dimen>
     <dimen name="margin_createroom_bakcground_title">16dp</dimen>
-    <dimen name="margin_createroom_bottombutton_bottom">41dp</dimen>
     <dimen name="margin_createroom_cardview_top">16dp</dimen>
     <dimen name="margin_createroom_cardview_bottom">35dp</dimen>
     <dimen name="padding_createroom_cardview_horizontal">30dp</dimen>
@@ -108,6 +114,17 @@
     <dimen name="padding_createroom_dialog_vertical">16dp</dimen>
 
     <dimen name="size_santanumberpicker_text">17sp</dimen>
+
+    <dimen name="size_createmission_cardview_title">13sp</dimen>
+    <dimen name="padding_createmission_cardview_top">20dp</dimen>
+    <dimen name="padding_createmission_cardview_horizontal">28dp</dimen>
+    <dimen name="margin_createmission_recyclerview_top">20dp</dimen>
+    <dimen name="padding_createmission_recyclerview_horizontal">12dp</dimen>
+    <dimen name="margin_createmission_recyclerview_items">15dp</dimen>
+    <dimen name="margin_createmission_skip_bottom">16dp</dimen>
+    <dimen name="padding_createmission_recyclerview_bottom">23dp</dimen>
+    <dimen name="margin_createmission_item_horizontal">18dp</dimen>
+    <dimen name="size_createmission_scrollbar">6dp</dimen>
 
 
 </resources>

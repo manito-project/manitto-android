@@ -2,13 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/mainFragment"
-    android:id="@+id/santa_navigation">
+    android:id="@+id/santa_navigation"
+    app:startDestination="@id/mainFragment">
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="org.sopt.santamanitto.main.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_createRoomFragment"
             app:destination="@id/createRoomFragment" />
@@ -18,6 +19,16 @@
         android:id="@+id/createRoomFragment"
         android:name="org.sopt.santamanitto.room.create.fragment.CreateRoomFragment"
         android:label="CreateRoomFragment"
-        tools:layout="@layout/fragment_create_room"/>
+        tools:layout="@layout/fragment_create_room">
+        <action
+            android:id="@+id/action_createRoomFragment_to_createMissionsFragment"
+            app:destination="@id/createMissionsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createMissionsFragment"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateMissionsFragment"
+        android:label="CreateMissionsFragment"
+        tools:layout="@layout/fragment_create_mission" />
 
 </navigation>

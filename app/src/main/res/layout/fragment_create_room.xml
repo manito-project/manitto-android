@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomViewModel" />
+            type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -96,7 +96,7 @@
                         android:id="@+id/edittext_createroom_roomname"
                         setText="@={viewModel.roomName}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/height_santaedittext_big"
                         app:hint="@string/createroom_roomname_hint" />
 
                 </LinearLayout>
@@ -256,7 +256,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
-            android:layout_marginBottom="@dimen/margin_createroom_bottombutton_bottom"
+            android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:enabled="@{!viewModel.nameIsNullOrEmpty}"
             android:text="@string/createroom_button_next"
             app:layout_constraintBottom_toBottomOf="parent"
