@@ -11,6 +11,9 @@ import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.room.create.setExpirationDiff
+import org.sopt.santamanitto.room.create.setExpirationPreview
+import org.sopt.santamanitto.room.create.setExpirationTime
 import org.sopt.santamanitto.room.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
@@ -68,21 +71,10 @@ class CreateRoomFragment : Fragment() {
     }
 
     private fun refreshUI(expiration: ExpirationLiveData) {
-        val amPmStr = if (expiration.isAm) {
-            context?.getString(R.string.createroom_am)
-        } else {
-            context?.getString(R.string.createroom_pm)
-        }
         binding.run {
-            textviewCreateroomPreviewdate.text =
-                    String.format(context?.getText(R.string.createroom_preview).toString(),
-                            expiration.year, expiration.month, expiration.day,
-                            amPmStr, expiration.hour, expiration.minute)
-            textviewCreateroomPreviewstart.text =
-                    String.format(context?.getText(R.string.createroom_preview_start).toString(), expiration.dayDiff)
-            textviewCreateroomExpirationpreview.text =
-                    String.format(context?.getText(R.string.createroom_expiration_time).toString(),
-                            expiration.hour, expiration.minute)
+            setExpirationDiff(textviewCreateroomPreviewstart, expiration)
+            setExpirationPreview(textviewCreateroomPreviewdate, expiration)
+            setExpirationTime(textviewCreateroomExpirationpreview, expiration)
         }
     }
 

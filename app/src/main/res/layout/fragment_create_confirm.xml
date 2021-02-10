@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -81,12 +81,14 @@
                     app:layout_constraintTop_toBottomOf="@id/textview_createconfirm_roomname">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createconfirm_expirationdiff"
                         style="@style/PreviewTextOfCreateConfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="7일 후인" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createconfirm_expirationpreview"
                         style="@style/PreviewTextOfCreateConfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
