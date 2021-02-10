@@ -58,4 +58,5 @@
 
     <string name="createconfirm_expiration_suffix"> 결과 공개!</string>
     <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
+    <string name="createconfirm_create_room">방 만들기</string>
 </resources>
