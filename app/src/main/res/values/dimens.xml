@@ -6,6 +6,8 @@
     <dimen name="padding_entire">16dp</dimen>
     <dimen name="margin_bottombutton_bottom">40dp</dimen>
     <dimen name="margin_space_letter">4dp</dimen>
+    <dimen name="padding_cardview_horizontal">30dp</dimen>
+    <dimen name="padding_cardview_vertical">25dp</dimen>
 
     <dimen name="margin_dialog_title_text_vertical">15dp</dimen>
     <dimen name="margin_dialog_button_text_vertical">25dp</dimen>
@@ -106,7 +108,6 @@
 
     <dimen name="margin_createroom_cardview_top">16dp</dimen>
     <dimen name="margin_createroom_cardview_bottom">35dp</dimen>
-    <dimen name="padding_createroom_cardview_horizontal">30dp</dimen>
     <dimen name="size_createroom_cardview_titles">16sp</dimen>
     <dimen name="size_createroom_expiration_description">12sp</dimen>
     <dimen name="margin_createroom_roomname_title_bottom">12dp</dimen>
@@ -132,6 +133,7 @@
     <dimen name="margin_createconfirm_preview_top">5dp</dimen>
     <dimen name="margin_createconfirm_divider_top">20dp</dimen>
     <dimen name="margin_createconfirm_no_mission_vertical">25dp</dimen>
+    <dimen name="margin_joinroom_edittext_top">10dp</dimen>
 
 
 </resources>

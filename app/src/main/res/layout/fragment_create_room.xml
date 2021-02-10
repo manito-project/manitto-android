@@ -55,7 +55,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="@dimen/padding_createroom_cardview_horizontal">
+                android:paddingHorizontal="@dimen/padding_cardview_horizontal">
 
                 <LinearLayout
                     android:id="@+id/linearlayout_createroom_roomname"
@@ -241,7 +241,7 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:enabled="@{!viewModel.nameIsNullOrEmpty}"
-            android:text="@string/createroom_button_next"
+            android:text="@string/button_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

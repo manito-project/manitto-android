@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_joinroom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backKey="true"
+            app:backgroundStyle="noLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:noLogoDescription="@string/joinroom_background_description"
+            app:noLogoTitle="@string/joinroom_background_title" />
+
+        <View
+            android:id="@+id/view_joinroom_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/santabackground_joinroom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <org.sopt.santamanitto.view.SantaCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_createroom_cardview_top"
+            android:layout_marginBottom="@dimen/margin_createroom_cardview_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_joinroom_guideline"
+            app:moreRound="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/padding_cardview_horizontal"
+                android:paddingVertical="@dimen/padding_cardview_vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_joinroom_cardtitle"
+                    style="@style/TitleOfCreateRoom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="참여 코드 입력"
+                    android:textSize="@dimen/size_createmission_cardview_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <org.sopt.santamanitto.view.SantaEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_santaedittext_big"
+                    android:layout_marginTop="@dimen/margin_joinroom_edittext_top"
+                    app:hint="@string/joinroom_participation_code_hint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_joinroom_cardtitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </org.sopt.santamanitto.view.SantaCardView>
+
+        <org.sopt.santamanitto.view.SantaBottomButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
+            android:text="@string/button_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

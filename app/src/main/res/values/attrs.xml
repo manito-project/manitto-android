@@ -46,6 +46,9 @@
         </attr>
         <attr name="backgroundText" format="string" />
         <attr name="backKey" format="boolean"/>
+        <attr name="noLogoTitle" format="string" />
+        <attr name="noLogoDescription" format="string"/>
+
     </declare-styleable>
 
     <declare-styleable name="SantaIndicator">

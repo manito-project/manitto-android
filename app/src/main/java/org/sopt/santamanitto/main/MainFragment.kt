@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.room.create.CreateRoomActivity
+import org.sopt.santamanitto.room.join.JoinRoomActivity
 import org.sopt.santamanitto.user.signin.fragment.ConditionFragmentDirections
 import javax.inject.Inject
 
@@ -35,15 +36,30 @@ class MainFragment: Fragment() {
 
         initJoinedRooms()
 
-        binding.santaimageroundbuttonMainMakeroom.setOnClickListener {
-            startCreateRoomActivity()
-        }
+        setOnClickListener()
 
         return binding.root
     }
 
+    private fun setOnClickListener() {
+        binding.run {
+            santaimageroundbuttonMainMakeroom.setOnClickListener {
+                startCreateRoomActivity()
+            }
+            santaimageroundbuttonMainJoin.setOnClickListener {
+                startJoinRoomActivity()
+            }
+        }
+    }
+
     private fun initJoinedRooms() {
         viewModel.getJoinedRooms()
+    }
+
+    private fun startJoinRoomActivity() {
+        requireActivity().run {
+            startActivity(Intent(this, JoinRoomActivity::class.java))
+        }
     }
 
     private fun startCreateRoomActivity() {
