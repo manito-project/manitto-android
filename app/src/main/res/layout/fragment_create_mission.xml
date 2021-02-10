@@ -22,40 +22,23 @@
             android:layout_height="0dp"
             app:backKey="true"
             app:backgroundStyle="noLogo"
+            app:noLogoDescription="@string/createmission_background_description"
+            app:noLogoTitle="@string/createmission_background_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_createmission_backgroundtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_entire"
-            android:layout_marginBottom="@dimen/margin_createroom_bakcground_title"
-            android:elevation="@dimen/elevation_shadow"
-            android:text="@string/createmission_background_title"
-            android:textColor="@color/white"
-            android:textFontWeight="700"
-            android:textSize="@dimen/size_createroom_background_title"
-            app:layout_constraintBottom_toTopOf="@id/textview_createmission_backgrounddescription"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_createmission_backgrounddescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_createroom_background_description_bottom"
-            android:text="@string/createmission_background_description"
-            android:textColor="@color/white"
-            android:textSize="@dimen/size_createroom_background_description"
+        <View
+            android:id="@+id/view_createmission_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/santabackground_createmission"
-            app:layout_constraintStart_toStartOf="@id/textview_createmission_backgroundtitle"
-            app:layout_constraintTop_toBottomOf="@id/textview_createmission_backgroundtitle" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <org.sopt.santamanitto.view.SantaCardView
             android:layout_width="0dp"
@@ -66,7 +49,7 @@
             app:layout_constraintBottom_toTopOf="@id/santabottombutton_createmission_skip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_createmission_backgrounddescription"
+            app:layout_constraintTop_toBottomOf="@id/view_createmission_guideline"
             app:moreRound="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
