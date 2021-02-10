@@ -13,8 +13,8 @@ import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
-import org.sopt.santamanitto.room.data.ExpirationLiveData
-import org.sopt.santamanitto.room.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 
 class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallback{
 

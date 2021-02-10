@@ -1,10 +1,9 @@
-package org.sopt.santamanitto.room.create
+package org.sopt.santamanitto.room.create.network
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import org.sopt.santamanitto.room.network.CreateRoomRequest
 
 @InstallIn(ActivityComponent::class)
 @Module

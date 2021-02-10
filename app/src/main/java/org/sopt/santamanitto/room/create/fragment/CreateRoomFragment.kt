@@ -14,7 +14,7 @@ import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.setExpirationTime
-import org.sopt.santamanitto.room.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 

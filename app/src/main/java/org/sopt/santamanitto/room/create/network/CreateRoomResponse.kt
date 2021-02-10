@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.room.network
+package org.sopt.santamanitto.room.create.network
 
 data class CreateRoomResponse(
     val isMatchingDone: Boolean,

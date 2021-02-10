@@ -4,14 +4,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import org.sopt.santamanitto.NetworkViewModel
-import org.sopt.santamanitto.room.data.CreateMissionLiveList
-import org.sopt.santamanitto.room.data.CreateRoomData
-import org.sopt.santamanitto.room.data.ExpirationLiveData
-import org.sopt.santamanitto.room.network.CreateRoomRequest
-import org.sopt.santamanitto.room.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.data.CreateMissionLiveList
+import org.sopt.santamanitto.room.create.network.CreateRoomData
+import org.sopt.santamanitto.room.create.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.network.CreateRoomRequest
+import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 
 class CreateRoomAndMissionViewModel @ViewModelInject constructor(
-        private val createRoomRequest: CreateRoomRequest) : NetworkViewModel() {
+        private val createRoomRequest: CreateRoomRequest
+) : NetworkViewModel() {
 
     val expirationLiveData = ExpirationLiveData()
 

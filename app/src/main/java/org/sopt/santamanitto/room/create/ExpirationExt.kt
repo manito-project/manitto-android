@@ -3,7 +3,7 @@ package org.sopt.santamanitto.room.create
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.room.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 
 @BindingAdapter("expirationDiff")
 fun setExpirationDiff(view: AppCompatTextView, expiration: ExpirationLiveData) {

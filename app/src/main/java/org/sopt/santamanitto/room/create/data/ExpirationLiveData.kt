@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.room.data
+package org.sopt.santamanitto.room.create.data
 
 import androidx.lifecycle.LiveData
 import org.sopt.santamanitto.util.TimeUtil

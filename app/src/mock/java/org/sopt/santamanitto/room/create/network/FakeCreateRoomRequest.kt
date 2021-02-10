@@ -1,8 +1,5 @@
-package org.sopt.santamanitto.room.create
+package org.sopt.santamanitto.room.create.network
 
-import org.sopt.santamanitto.room.data.CreateRoomData
-import org.sopt.santamanitto.room.network.CreateRoomRequest
-import org.sopt.santamanitto.room.network.CreateRoomResponse
 import org.sopt.santamanitto.util.TimeUtil
 
 class FakeCreateRoomRequest: CreateRoomRequest {
@@ -11,9 +8,11 @@ class FakeCreateRoomRequest: CreateRoomRequest {
         createRoomData: CreateRoomData,
         callback: CreateRoomRequest.CreateRoomCallback
     ) {
-        callback.onRoomCreated(CreateRoomResponse(
+        callback.onRoomCreated(
+            CreateRoomResponse(
             false, 1, createRoomData.roomName, createRoomData.expiration,
             "oU3lsEo", TimeUtil.getCurrentTimeByServerFormat(),
-            TimeUtil.getCurrentTimeByServerFormat()))
+            TimeUtil.getCurrentTimeByServerFormat())
+        )
     }
 }

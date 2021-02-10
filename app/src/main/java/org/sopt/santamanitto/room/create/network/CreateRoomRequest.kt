@@ -1,6 +1,4 @@
-package org.sopt.santamanitto.room.network
-
-import org.sopt.santamanitto.room.data.CreateRoomData
+package org.sopt.santamanitto.room.create.network
 
 interface CreateRoomRequest {
 

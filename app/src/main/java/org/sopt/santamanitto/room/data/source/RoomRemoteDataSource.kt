@@ -3,7 +3,7 @@ package org.sopt.santamanitto.room.data.source
 import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
-import org.sopt.santamanitto.room.network.RoomService
+import org.sopt.santamanitto.room.create.network.RoomService
 
 class RoomRemoteDataSource(private val roomService: RoomService) : RoomDataSource {
 
