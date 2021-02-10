@@ -1,23 +1,28 @@
 package org.sopt.santamanitto.room.create.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import org.sopt.santamanitto.databinding.FragmentCreateConfirmBinding
-import org.sopt.santamanitto.room.create.*
+import org.sopt.santamanitto.room.create.adaptor.CreateConfirmAdaptor
+import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
+import org.sopt.santamanitto.room.create.setExpirationDiff
+import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.room.data.ExpirationLiveData
+import org.sopt.santamanitto.room.network.CreateRoomResponse
 
-class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallback {
+class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallback{
 
     private lateinit var binding: FragmentCreateConfirmBinding
 
     private val createRoomAndMissionViewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
-    private val createConfirmAdapter = CreateConfirmAdapter(this)
+    private val createConfirmAdapter = CreateConfirmAdaptor(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentCreateConfirmBinding.inflate(inflater, container, false).apply {
@@ -32,7 +37,22 @@ class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallb
 
         subscribeUI()
 
+        setOnClickListener()
+
         return binding.root
+    }
+
+    private fun setOnClickListener() {
+        binding.santabottombuttonCreatemconfirm.setOnClickListener {
+            createRoomAndMissionViewModel.createRoom {
+                startMatchingRoomActivity(it)
+            }
+        }
+    }
+
+    private fun startMatchingRoomActivity(createRoomResponse: CreateRoomResponse) {
+        Log.d("CreateConfirmFragment", "createdRoom : $createRoomResponse")
+        //Todo: 매칭 룸으로 이동
     }
 
     private fun initRecyclerView() {

@@ -8,13 +8,13 @@ class TimeUtilTest {
 
     @Test
     fun getCurrentTime() {
-        println(TimeUtil.getCurrentTime())
+        println(TimeUtil.getCurrentTimeByLocalFormat())
     }
 
     @Test
     fun getDateFromStringTest() {
         val testCase1 = "2020-10-13 12:44:22"
-        val date = TimeUtil.getDateFromString(testCase1)
+        val date = TimeUtil.getDateInstanceFromLocalFormat(testCase1)
         print(date)
     }
 
@@ -26,8 +26,8 @@ class TimeUtilTest {
     }
 
     private fun getDifferentOfDaysTestCase(from: String, to: String): Int {
-        val fromDate = TimeUtil.getDateFromString(from)
-        val toDate = TimeUtil.getDateFromString(to)
+        val fromDate = TimeUtil.getDateInstanceFromLocalFormat(from)
+        val toDate = TimeUtil.getDateInstanceFromLocalFormat(to)
         return TimeUtil.getDifferentOfDays(fromDate, toDate)
     }
 }

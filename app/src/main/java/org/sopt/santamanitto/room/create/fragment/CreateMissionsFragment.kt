@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateMissionBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
-import org.sopt.santamanitto.room.create.CreateMissionAdaptor
+import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 
 class CreateMissionsFragment : Fragment(), CreateMissionAdaptor.CreateMissionCallback {

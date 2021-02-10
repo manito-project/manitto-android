@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
 import org.sopt.santamanitto.view.SantaEditText
 
 class CreateMissionViewHolder(private val callback: CreateMissionAdaptor.CreateMissionCallback,

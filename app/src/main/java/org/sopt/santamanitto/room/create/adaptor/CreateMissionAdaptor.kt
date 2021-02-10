@@ -1,10 +1,11 @@
-package org.sopt.santamanitto.room.create
+package org.sopt.santamanitto.room.create.adaptor
 
 import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.RecyclerView
+import org.sopt.santamanitto.room.create.CreateMissionViewHolder
 import org.sopt.santamanitto.view.SantaEditText
 
 open class CreateMissionAdaptor(private val createMissionCallback: CreateMissionCallback)

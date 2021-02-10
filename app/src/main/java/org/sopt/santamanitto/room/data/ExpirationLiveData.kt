@@ -1,8 +1,8 @@
 package org.sopt.santamanitto.room.data
 
 import androidx.lifecycle.LiveData
+import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.SantaPeriodPicker
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ExpirationLiveData : LiveData<ExpirationLiveData>() {
@@ -14,7 +14,7 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
         private const val INITIAL_AM_PM = Calendar.AM
     }
 
-    val expirationDate = GregorianCalendar().apply {
+    private val expirationDate = GregorianCalendar().apply {
         add(Calendar.DAY_OF_MONTH, SantaPeriodPicker.DEFAULT_PERIOD)
         set(Calendar.HOUR, INITIAL_HOUR)
         set(Calendar.MINUTE, INITIAL_MINUTE)
@@ -73,5 +73,9 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
             expirationDate.set(Calendar.AM_PM, Calendar.PM)
         }
         postValue(this)
+    }
+
+    override fun toString(): String {
+        return TimeUtil.getServerFormatFromGregorianCalendar(expirationDate)
     }
 }
