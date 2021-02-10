@@ -29,6 +29,16 @@
         android:id="@+id/createMissionsFragment"
         android:name="org.sopt.santamanitto.room.create.fragment.CreateMissionsFragment"
         android:label="CreateMissionsFragment"
-        tools:layout="@layout/fragment_create_mission" />
+        tools:layout="@layout/fragment_create_mission">
+        <action
+            android:id="@+id/action_createMissionsFragment_to_createConfirmFragment"
+            app:destination="@id/createConfirmFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createConfirmFragment"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateConfirmFragment"
+        android:label="CreateConfirmFragment"
+        tools:layout="@layout/fragment_create_confirm" />
 
 </navigation>

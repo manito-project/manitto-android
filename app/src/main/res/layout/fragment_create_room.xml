@@ -122,7 +122,7 @@
                         android:id="@+id/santaperiodpicker_createroom_expiration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/margin_createroom_crardview_titles_bottom"/>
+                        android:layout_marginVertical="@dimen/margin_createroom_crardview_titles_bottom" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textview_createroom_expirationdescription"
@@ -138,10 +138,10 @@
                     android:id="@+id/constraintlayout_createroom_expirationtime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clipChildren="false"
                     app:layout_constraintBottom_toTopOf="@id/view_createroom_guidline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:clipChildren="false"
                     app:layout_constraintTop_toBottomOf="@id/linearlayout_createroom_expiration">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -199,12 +199,12 @@
                         style="@style/PreviewTextOfCreateRoom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_space_letter"
                         app:layout_constraintBottom_toTopOf="@id/textview_createroom_previewend"
                         app:layout_constraintEnd_toStartOf="@id/textview_createroom_previewdate"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginEnd="4dp"
                         app:layout_constraintVertical_chainStyle="packed"
                         tool:text="7일 후인" />
 

@@ -6,8 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import org.sopt.santamanitto.room.data.source.CachedRoomDataSource
 import org.sopt.santamanitto.room.data.source.RoomDataSource
-import org.sopt.santamanitto.room.network.RoomService
-import retrofit2.Retrofit
 import javax.inject.Named
 import javax.inject.Singleton
 

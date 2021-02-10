@@ -1,6 +1,7 @@
-package org.sopt.santamanitto.room.data
+package org.sopt.santamanitto.room.create.data
 
 import androidx.lifecycle.LiveData
+import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.SantaPeriodPicker
 import java.util.*
 
@@ -72,5 +73,9 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
             expirationDate.set(Calendar.AM_PM, Calendar.PM)
         }
         postValue(this)
+    }
+
+    override fun toString(): String {
+        return TimeUtil.getServerFormatFromGregorianCalendar(expirationDate)
     }
 }

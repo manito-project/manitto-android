@@ -1,16 +1,17 @@
-package org.sopt.santamanitto.room.create
+package org.sopt.santamanitto.room.create.adaptor
 
 import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.RecyclerView
+import org.sopt.santamanitto.room.create.CreateMissionViewHolder
 import org.sopt.santamanitto.view.SantaEditText
 
-class CreateMissionAdaptor(private val createMissionCallback: CreateMissionCallback)
+open class CreateMissionAdaptor(private val createMissionCallback: CreateMissionCallback)
     : RecyclerView.Adapter<CreateMissionViewHolder>() {
 
-    private val missions = mutableListOf<String>()
+    protected val missions = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreateMissionViewHolder {
         val editText = getEditText(parent.context)

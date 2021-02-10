@@ -41,7 +41,7 @@
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
     <string name="createroom_button_next">다음</string>
     <string name="createroom_preview_start">%d일 후인</string>
-    <string name="createroom_preview">%d/%02d/%02d %s %02d : %02d에</string>
+    <string name="createroom_preview">%d/%02d/%02d %s %02d : %02d 에</string>
     <string name="createroom_pm">오후</string>
     <string name="createroom_am">오전</string>
     <string name="createroom_expiration_time">%02d : %02d</string>
@@ -55,4 +55,7 @@
     <string name="createmission_mission_hint">미션을 입력해줘!</string>
     <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션을 삭제하고 SKIP 하는 거 맞지?</string>
     <string name="createmission_dialog_no_mission">아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?</string>
+
+    <string name="createconfirm_expiration_suffix"> 결과 공개!</string>
+    <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
 </resources>

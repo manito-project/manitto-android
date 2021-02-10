@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.room.data
+package org.sopt.santamanitto.room.create.data
 
 import androidx.lifecycle.LiveData
 
@@ -6,6 +6,9 @@ class CreateMissionLiveList : LiveData<CreateMissionLiveList>() {
 
     private val missions = mutableListOf<String>()
 
+    init {
+        value = this
+    }
 
     fun addMission(mission: String) {
         missions.add(mission)
@@ -19,5 +22,14 @@ class CreateMissionLiveList : LiveData<CreateMissionLiveList>() {
 
     fun getMissions(): List<String> {
         return missions
+    }
+
+    fun isEmpty(): Boolean {
+        return missions.isEmpty()
+    }
+
+    fun clear() {
+        missions.clear()
+        value = this
     }
 }

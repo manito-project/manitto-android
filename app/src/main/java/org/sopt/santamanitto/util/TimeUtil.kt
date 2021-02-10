@@ -5,14 +5,19 @@ import java.util.*
 
 object TimeUtil {
 
-    private const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
+    private const val LOCAL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
+    private const val SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
-    fun getCurrentTime(): String {
-        return SimpleDateFormat(DATE_FORMAT, Locale.KOREA).format(Date())
+    fun getCurrentTimeByLocalFormat(): String {
+        return SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).format(Date())
+    }
+
+    fun getCurrentTimeByServerFormat(): String {
+        return SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).format(Date())
     }
 
     fun getDifferentOfDaysFromNow(to: String): Int {
-        return getDifferentOfDays(Date(), getDateFromString(to))
+        return getDifferentOfDays(Date(), getDateInstanceFromLocalFormat(to))
     }
 
     fun getDifferentOfDays(from: Date, to: Date): Int {
@@ -20,24 +25,16 @@ object TimeUtil {
         return (gap / ( 24 * 60 * 60 * 1000)).toInt()
     }
 
-    fun getDateFromString(date: String): Date {
-        val inputFormat = SimpleDateFormat(DATE_FORMAT, Locale.KOREA)
-        return inputFormat.parse(date)!!
+    fun getDateInstanceFromLocalFormat(localFormatString: String): Date {
+        val inputFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA)
+        return inputFormat.parse(localFormatString)!!
     }
 
     fun isLaterThanNow(target: String): Boolean {
-        return getDateFromString(target).time >= Date().time
+        return getDateInstanceFromLocalFormat(target).time >= Date().time
     }
 
-    fun addDateToNow(days: Int): String {
-        return SimpleDateFormat(DATE_FORMAT, Locale.KOREA).format(
-                GregorianCalendar().apply {
-                    add(Calendar.DAY_OF_MONTH, days)
-                }.time
-        )
-    }
-
-    fun getTimeToString(expirationDate: GregorianCalendar): String {
-        return "${expirationDate.get(Calendar.HOUR)} : ${expirationDate.get(Calendar.MINUTE)}"
+    fun getServerFormatFromGregorianCalendar(gregorianCalendar: GregorianCalendar): String {
+        return SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).format(Date(gregorianCalendar.timeInMillis))
     }
 }

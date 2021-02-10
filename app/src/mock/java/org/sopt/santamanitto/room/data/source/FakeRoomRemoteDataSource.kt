@@ -10,31 +10,36 @@ class FakeRoomRemoteDataSource: RoomDataSource {
                 1,
                 2,
                 MissionContent("fake my mission"),
-                MissionContent("fake mission to me"))
+                MissionContent("fake mission to me")
+        )
         )
         put(2, PersonalRoomInfo(
                 1,
                 3,
                 MissionContent("fake my mission"),
-                MissionContent("fake mission to me"))
+                MissionContent("fake mission to me")
+        )
         )
         put(3, PersonalRoomInfo(
                 1,
                 4,
                 MissionContent("fake my mission"),
-                MissionContent("fake mission to me"))
+                MissionContent("fake mission to me")
+        )
         )
         put(4, PersonalRoomInfo(
                 1,
                 5,
                 MissionContent("fake my mission"),
-                MissionContent("fake mission to me"))
+                MissionContent("fake mission to me")
+        )
         )
         put(5, PersonalRoomInfo(
                 1,
                 6,
                 MissionContent("fake my mission"),
-                MissionContent("fake mission to me"))
+                MissionContent("fake mission to me")
+        )
         )
     }
 
