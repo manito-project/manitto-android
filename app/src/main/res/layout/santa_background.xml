@@ -65,8 +65,8 @@
             android:layout_marginBottom="@dimen/margin_santabackground_text_bottom"
             android:elevation="@dimen/elevation_shadow"
             android:textColor="@color/white"
-            android:textSize="@dimen/size_santabackground_text"
             android:textFontWeight="700"
+            android:textSize="@dimen/size_santabackground_text"
             app:fontWeight="700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/imageview_santabackground_santahead"
@@ -119,6 +119,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="imageview_santabackground_rudolf, imageview_santabackground_snowman" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_santabackground_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_santabakcground_title"
+            android:elevation="@dimen/elevation_shadow"
+            tool:text="@string/createmission_background_title"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_santabackground_title"
+            app:layout_constraintBottom_toTopOf="@id/textview_santabackground_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_santabackground_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
+            android:elevation="@dimen/elevation_shadow"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_santabackground_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_santabackground_title"
+            app:layout_constraintTop_toBottomOf="@id/textview_santabackground_title"
+            tool:text="@string/createmission_background_description" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_santabackground_titledescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="textview_santabackground_title, textview_santabackground_description"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

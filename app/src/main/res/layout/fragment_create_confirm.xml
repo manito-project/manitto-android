@@ -35,7 +35,7 @@
             android:id="@+id/view_createconfirm_guideline"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/margin_createroom_background_description_bottom"
+            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/santabackground_createconfirm"
             app:layout_constraintEnd_toEndOf="parent"

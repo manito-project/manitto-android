@@ -43,6 +43,12 @@ class SantaBackground @JvmOverloads constructor(
 
     private val backButton = binding.imagebuttonSantabackgroundBack
 
+    private val titleAndDescription = binding.groupSantabackgroundTitledescription
+
+    private val titleTextView = binding.textviewSantabackgroundTitle
+
+    private val descriptionTextView = binding.textviewSantabackgroundDescription
+
     private var backgroundStyle = 0
 
     var isBackKeyEnabled: Boolean
@@ -59,6 +65,18 @@ class SantaBackground @JvmOverloads constructor(
         get() = textView.text.toString()
         set(value) {
             textView.text = value
+        }
+
+    var title: String
+        get() = titleTextView.text.toString()
+        set(value) {
+            titleTextView.text = value
+        }
+
+    var description: String
+        get() = descriptionTextView.text.toString()
+        set(value) {
+            descriptionTextView.text = value
         }
 
     init {
@@ -82,6 +100,14 @@ class SantaBackground @JvmOverloads constructor(
             isBackKeyEnabled = typeArray.getBoolean(R.styleable.SantaBackground_backKey, false)
         }
 
+        if (typeArray.hasValue(R.styleable.SantaBackground_noLogoTitle)) {
+            title = typeArray.getString(R.styleable.SantaBackground_noLogoTitle) ?: ""
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_noLogoDescription)) {
+            description = typeArray.getString(R.styleable.SantaBackground_noLogoDescription) ?: ""
+        }
+
         typeArray.recycle()
 
         updateView()
@@ -100,6 +126,7 @@ class SantaBackground @JvmOverloads constructor(
                 santa.visibility = View.GONE
                 santaHead.visibility = View.GONE
                 rudolfAndSnowMan.visibility = View.GONE
+                titleAndDescription.visibility = View.GONE
             }
 
             NO_LOGO -> {
@@ -115,11 +142,13 @@ class SantaBackground @JvmOverloads constructor(
                 textView.visibility = View.GONE
                 santaHead.visibility = View.GONE
                 snowImage.visibility = View.GONE
+                titleAndDescription.visibility = View.GONE
             }
 
             else -> {
                 santa.visibility = View.GONE
                 rudolfAndSnowMan.visibility = View.GONE
+                titleAndDescription.visibility = View.GONE
             }
         }
     }
