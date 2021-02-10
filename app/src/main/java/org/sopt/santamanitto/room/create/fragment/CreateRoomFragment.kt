@@ -39,7 +39,7 @@ class CreateRoomFragment : Fragment() {
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         binding.santabackgroundCreateroom.setOnBackKeyClickListener {
-            findNavController().navigateUp()
+            requireActivity().finish()
         }
         binding.santaperiodpickerCreateroomExpiration.setOnPeriodChangedListener { period ->
             viewModel.setDayDiff(period)

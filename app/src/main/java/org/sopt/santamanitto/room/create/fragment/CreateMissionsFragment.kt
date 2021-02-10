@@ -57,6 +57,9 @@ class CreateMissionsFragment : Fragment(), CreateMissionAdaptor.CreateMissionCal
                     showNoMissionDialog()
                 }
             }
+            santabackgroundCreatemission.setOnBackKeyClickListener {
+                findNavController().navigateUp()
+            }
         }
     }
 

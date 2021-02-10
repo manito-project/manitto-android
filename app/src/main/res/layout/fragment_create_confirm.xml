@@ -166,7 +166,7 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginTop="@dimen/margin_createroom_cardview_bottom"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
-            android:text="@string/createmission_done_bottom_button"
+            android:text="@string/createconfirm_create_room"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

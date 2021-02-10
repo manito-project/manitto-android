@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentMainBinding
+import org.sopt.santamanitto.room.create.CreateRoomActivity
 import org.sopt.santamanitto.user.signin.fragment.ConditionFragmentDirections
 import javax.inject.Inject
 
@@ -34,9 +36,7 @@ class MainFragment: Fragment() {
         initJoinedRooms()
 
         binding.santaimageroundbuttonMainMakeroom.setOnClickListener {
-            val directions = MainFragmentDirections
-                .actionMainFragmentToCreateRoomFragment()
-            findNavController().navigate(directions)
+            startCreateRoomActivity()
         }
 
         return binding.root
@@ -44,5 +44,11 @@ class MainFragment: Fragment() {
 
     private fun initJoinedRooms() {
         viewModel.getJoinedRooms()
+    }
+
+    private fun startCreateRoomActivity() {
+        requireActivity().run {
+            startActivity(Intent(this, CreateRoomActivity::class.java))
+        }
     }
 }
