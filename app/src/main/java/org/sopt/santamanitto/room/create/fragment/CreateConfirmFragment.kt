@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.databinding.FragmentCreateConfirmBinding
 import org.sopt.santamanitto.room.create.adaptor.CreateConfirmAdaptor
 import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
@@ -43,9 +44,14 @@ class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallb
     }
 
     private fun setOnClickListener() {
-        binding.santabottombuttonCreatemconfirm.setOnClickListener {
-            createRoomAndMissionViewModel.createRoom {
-                startMatchingRoomActivity(it)
+        binding.run {
+            santabottombuttonCreatemconfirm.setOnClickListener {
+                createRoomAndMissionViewModel.createRoom {
+                    startMatchingRoomActivity(it)
+                }
+            }
+            santabackgroundCreateconfirm.setOnBackKeyClickListener {
+                findNavController().navigateUp()
             }
         }
     }
