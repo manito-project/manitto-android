@@ -204,7 +204,7 @@
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="@dimen/margin_space_letter"
                         app:layout_constraintVertical_chainStyle="packed"
                         tool:text="7일 후인" />
 

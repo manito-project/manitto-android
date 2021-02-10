@@ -5,6 +5,7 @@
     <dimen name="radius_cardview_more">20dp</dimen>
     <dimen name="padding_entire">16dp</dimen>
     <dimen name="margin_bottombutton_bottom">40dp</dimen>
+    <dimen name="margin_space_letter">4dp</dimen>
 
     <dimen name="margin_dialog_title_text_vertical">15dp</dimen>
     <dimen name="margin_dialog_button_text_vertical">25dp</dimen>
@@ -125,6 +126,12 @@
     <dimen name="padding_createmission_recyclerview_bottom">23dp</dimen>
     <dimen name="margin_createmission_item_horizontal">18dp</dimen>
     <dimen name="size_createmission_scrollbar">6dp</dimen>
+
+    <dimen name="margin_createconfirm_roomname_top">20dp</dimen>
+    <dimen name="size_createconfirm_expiration_description">14sp</dimen>
+    <dimen name="margin_createconfirm_preview_top">5dp</dimen>
+    <dimen name="margin_createconfirm_divider_top">20dp</dimen>
+    <dimen name="margin_createconfirm_no_mission_vertical">25dp</dimen>
 
 
 </resources>

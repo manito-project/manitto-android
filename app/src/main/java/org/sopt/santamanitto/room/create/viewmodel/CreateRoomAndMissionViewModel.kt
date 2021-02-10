@@ -14,6 +14,12 @@ class CreateRoomAndMissionViewModel : NetworkViewModel() {
 
     val missions = CreateMissionLiveList()
 
+    val missionIsEmpty = Transformations.map(missions) {
+        it.getMissions().isEmpty()
+    }
+
+    var heightOfRecyclerView: Int = 0
+
     var nameIsNullOrEmpty = Transformations.map(roomName) {
         it.isNullOrBlank()
     }
