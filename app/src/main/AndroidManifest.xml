@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Base"
         android:usesCleartextTraffic="true">
-        <activity android:name="org.sopt.santamanitto.user.signin.SignInActivity" />
+        <activity android:name=".room.create.CreateRoomActivity" />
+        <activity android:name=".user.signin.SignInActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
