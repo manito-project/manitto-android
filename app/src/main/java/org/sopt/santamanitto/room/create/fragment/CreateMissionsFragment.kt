@@ -81,6 +81,7 @@ class CreateMissionsFragment : Fragment(), CreateMissionAdaptor.CreateMissionCal
                     .setContentText(getString(R.string.createmission_dialog_skip_has_mission), true)
                     .addHorizontalButton(getString(R.string.dialog_cancel))
                     .addHorizontalButton(getString(R.string.dialog_confirm)) {
+                        viewModel.clearMission()
                         navigateConfirmFragment()
                     }
                     .build()

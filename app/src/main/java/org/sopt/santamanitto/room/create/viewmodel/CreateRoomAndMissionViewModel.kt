@@ -47,4 +47,8 @@ class CreateRoomAndMissionViewModel : NetworkViewModel() {
     fun hasMissions(): Boolean {
         return missions.getMissions().isNotEmpty()
     }
- }
+
+    fun clearMission() {
+        missions.clear()
+    }
+}

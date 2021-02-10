@@ -27,4 +27,9 @@ class CreateMissionLiveList : LiveData<CreateMissionLiveList>() {
     fun isEmpty(): Boolean {
         return missions.isEmpty()
     }
+
+    fun clear() {
+        missions.clear()
+        value = this
+    }
 }

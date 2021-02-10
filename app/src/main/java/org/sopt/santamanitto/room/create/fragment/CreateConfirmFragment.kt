@@ -26,8 +26,6 @@ class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallb
             recyclerviewCreateconfirm.adapter = createConfirmAdapter
         }
 
-        //initVisibility()
-
         initRecyclerView()
 
         refreshUI(createRoomAndMissionViewModel.expirationLiveData)
