@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.room.create.network
+package org.sopt.santamanitto.room.network
 
 import dagger.Module
 import dagger.Provides
@@ -10,5 +10,6 @@ import dagger.hilt.android.components.ActivityComponent
 class CreateRoomRequestModule {
 
     @Provides
-    fun provideFakeCreateRoomRequest(): CreateRoomRequest = FakeCreateRoomRequest()
+    fun provideCreateRoomRequest(roomService: RoomService): RoomRequest =
+        RoomRequestImpl(roomService)
 }

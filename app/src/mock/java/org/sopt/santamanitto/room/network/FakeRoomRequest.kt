@@ -1,12 +1,14 @@
-package org.sopt.santamanitto.room.create.network
+package org.sopt.santamanitto.room.network
 
+import org.sopt.santamanitto.room.create.network.CreateRoomData
+import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 import org.sopt.santamanitto.util.TimeUtil
 
-class FakeCreateRoomRequest: CreateRoomRequest {
+class FakeRoomRequest: RoomRequest {
 
     override fun createRoom(
         createRoomData: CreateRoomData,
-        callback: CreateRoomRequest.CreateRoomCallback
+        callback: RoomRequest.CreateRoomCallback
     ) {
         callback.onRoomCreated(
             CreateRoomResponse(

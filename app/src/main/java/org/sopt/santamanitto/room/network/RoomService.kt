@@ -1,6 +1,8 @@
-package org.sopt.santamanitto.room.create.network
+package org.sopt.santamanitto.room.network
 
 import org.sopt.santamanitto.network.Response
+import org.sopt.santamanitto.room.create.network.CreateRoomData
+import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import retrofit2.Call
 import retrofit2.http.Body

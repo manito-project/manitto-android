@@ -11,4 +11,8 @@ class JoinRoomViewModel: NetworkViewModel() {
     val isJoinCodeEmpty = Transformations.map(joinCode) {
         it.isNullOrEmpty()
     }
+
+    fun joinRoom() {
+
+    }
 }

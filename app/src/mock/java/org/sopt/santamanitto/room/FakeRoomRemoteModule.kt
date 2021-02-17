@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
-class RoomRemoteModule {
+class FakeRoomRemoteModule {
 
     @Provides
     @Singleton

@@ -1,6 +1,9 @@
-package org.sopt.santamanitto.room.create.network
+package org.sopt.santamanitto.room.network
 
-interface CreateRoomRequest {
+import org.sopt.santamanitto.room.create.network.CreateRoomData
+import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+
+interface RoomRequest {
 
     interface CreateRoomCallback {
         fun onRoomCreated(createdRoom: CreateRoomResponse)
