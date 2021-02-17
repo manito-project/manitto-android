@@ -2,6 +2,13 @@
 
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.room.join.JoinRoomViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -59,6 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <org.sopt.santamanitto.view.SantaEditText
+                    setText="@={viewModel.joinCode}"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_santaedittext_big"
                     android:layout_marginTop="@dimen/margin_joinroom_edittext_top"
@@ -78,6 +86,7 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:text="@string/button_next"
+            android:enabled="@{!viewModel.isJoinCodeEmpty()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
