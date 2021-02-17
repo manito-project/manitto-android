@@ -9,11 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import org.sopt.santamanitto.SecretString
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.room.create.CreateRoomActivity
-import org.sopt.santamanitto.room.join.JoinRoomActivity
-import org.sopt.santamanitto.user.signin.fragment.ConditionFragmentDirections
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,7 +44,7 @@ class MainFragment: Fragment() {
                 startCreateRoomActivity()
             }
             santaimageroundbuttonMainJoin.setOnClickListener {
-                startJoinRoomActivity()
+                navigateJoinRoomFragment()
             }
         }
     }
@@ -56,10 +53,8 @@ class MainFragment: Fragment() {
         viewModel.getJoinedRooms()
     }
 
-    private fun startJoinRoomActivity() {
-        requireActivity().run {
-            startActivity(Intent(this, JoinRoomActivity::class.java))
-        }
+    private fun navigateJoinRoomFragment() {
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToJoinRoomFragment())
     }
 
     private fun startCreateRoomActivity() {

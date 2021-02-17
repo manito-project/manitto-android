@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
 
 class JoinRoomFragment: Fragment() {
@@ -26,7 +27,7 @@ class JoinRoomFragment: Fragment() {
     private fun setOnClickListener() {
         binding.run {
             santabackgroundJoinroom.setOnBackKeyClickListener {
-                requireActivity().finish()
+                findNavController().navigateUp()
             }
         }
     }

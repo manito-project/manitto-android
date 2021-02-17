@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Base"
         android:usesCleartextTraffic="true">
-        <activity android:name=".room.join.JoinRoomActivity"></activity>
         <activity android:name=".room.create.CreateRoomActivity" />
         <activity android:name=".user.signin.SignInActivity" />
         <activity android:name=".SplashActivity">
