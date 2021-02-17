@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
+import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
 
 @AndroidEntryPoint
@@ -71,27 +73,28 @@ class JoinRoomFragment: Fragment() {
 
     private fun showAlreadyMatchedDialog(isShow: Boolean) {
         if (isShow) {
-            showErrorDialog("AlreadyMatched")
-            //Todo: 문자열 지정하기
+            showErrorDialog(getString(R.string.joinroom_dialog_already_matched))
         }
     }
 
     private fun showDuplicatedMemberDialog(isShow: Boolean) {
         if (isShow) {
-            showErrorDialog("DuplicatedMember")
-            //Todo: 문자열 지정하기
+            showErrorDialog(getString(R.string.joinroom_dialog_duplicated_member))
         }
     }
 
     private fun showWrongInvitationCodeDialog(isShow: Boolean) {
         if (isShow) {
-            showErrorDialog("WrongInvitationCode")
-            //Todo: 문자열 지정하기
+            showErrorDialog(getString(R.string.joinroom_dialog_wrong_invitation_code))
         }
     }
 
     private fun showErrorDialog(message: String) {
         Log.d(TAG, "showErrorDialog: $message")
-        //Todo: 다이얼로그 띄우기
+        RoundDialogBuilder()
+            .setContentText(message)
+            .addHorizontalButton(getString(R.string.dialog_confirm))
+            .build()
+            .show(parentFragmentManager, "error_dialog")
     }
 }
