@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <org.sopt.santamanitto.view.SantaEditText
-                    setText="@={viewModel.joinCode}"
+                    setText="@={viewModel.invitationCode}"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_santaedittext_big"
                     android:layout_marginTop="@dimen/margin_joinroom_edittext_top"
@@ -81,12 +81,13 @@
         </org.sopt.santamanitto.view.SantaCardView>
 
         <org.sopt.santamanitto.view.SantaBottomButton
+            android:id="@+id/santabottomButton_joinroom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:text="@string/button_next"
-            android:enabled="@{!viewModel.isJoinCodeEmpty()}"
+            android:enabled="@{!viewModel.isInvitationCodeEmpty()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
