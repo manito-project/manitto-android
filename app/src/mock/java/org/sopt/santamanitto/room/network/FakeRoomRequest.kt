@@ -2,9 +2,6 @@ package org.sopt.santamanitto.room.network
 
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
-import org.sopt.santamanitto.room.join.exception.AlreadyMatchedException
-import org.sopt.santamanitto.room.join.exception.DuplicatedMemberException
-import org.sopt.santamanitto.room.join.exception.WrongInvitationCodeException
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomInfo
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
@@ -40,13 +37,13 @@ class FakeRoomRequest : RoomRequest {
                 )
 
             "member" ->
-                throw DuplicatedMemberException()
+                callback.onFailed(RoomRequest.JoinRoomError.DuplicatedMember)
 
             "matched" ->
-                throw AlreadyMatchedException()
+                callback.onFailed(RoomRequest.JoinRoomError.AlreadyMatched)
 
             else ->
-                throw WrongInvitationCodeException()
+                callback.onFailed(RoomRequest.JoinRoomError.WrongInvitationCode)
         }
     }
 }

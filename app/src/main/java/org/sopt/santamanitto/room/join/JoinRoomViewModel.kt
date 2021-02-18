@@ -5,13 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import org.sopt.santamanitto.NetworkViewModel
-import org.sopt.santamanitto.room.join.exception.AlreadyMatchedException
-import org.sopt.santamanitto.room.join.exception.DuplicatedMemberException
-import org.sopt.santamanitto.room.join.exception.JoinRoomException
-import org.sopt.santamanitto.room.join.exception.WrongInvitationCodeException
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
 import org.sopt.santamanitto.room.network.RoomRequest
+import org.sopt.santamanitto.room.network.RoomRequest.JoinRoomError
 
 class JoinRoomViewModel @ViewModelInject constructor(
     private val roomRequest: RoomRequest
@@ -24,11 +21,11 @@ class JoinRoomViewModel @ViewModelInject constructor(
     }
 
     private val _isDuplicatedMember = MutableLiveData(false)
-    val isDuplicatedMember : LiveData<Boolean>
+    val isDuplicatedMember: LiveData<Boolean>
         get() = _isDuplicatedMember
 
     private val _isWrongInvitationCode = MutableLiveData(false)
-    val isWrongInvitationCode : LiveData<Boolean>
+    val isWrongInvitationCode: LiveData<Boolean>
         get() = _isWrongInvitationCode
 
     private val _isAlreadyMatchedRoom = MutableLiveData(false)
@@ -36,24 +33,21 @@ class JoinRoomViewModel @ViewModelInject constructor(
         get() = _isAlreadyMatchedRoom
 
     fun joinRoom(callback: (JoinRoomResponse) -> Unit) {
-        try {
-            roomRequest.joinRoom(JoinRoomData(invitationCode.value!!),
-                object : RoomRequest.JoinRoomCallback {
+        roomRequest.joinRoom(JoinRoomData(invitationCode.value!!),
+            object : RoomRequest.JoinRoomCallback {
 
-                    override fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse) {
-                        callback(joinedRoom)
-                    }
+                override fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse) {
+                    callback(joinedRoom)
+                }
 
-                    override fun onFailed() {
-                        _networkErrorOccur.value = true
+                override fun onFailed(joinRoomError: JoinRoomError) {
+                    when (joinRoomError) {
+                        JoinRoomError.WrongInvitationCode -> _isWrongInvitationCode.value = true
+                        JoinRoomError.AlreadyMatched -> _isAlreadyMatchedRoom.value = true
+                        JoinRoomError.DuplicatedMember -> _isDuplicatedMember.value = true
+                        else -> _networkErrorOccur.value = true
                     }
-                })
-        } catch (e: JoinRoomException) {
-            when (e) {
-                is DuplicatedMemberException -> _isDuplicatedMember.value = true
-                is WrongInvitationCodeException -> _isWrongInvitationCode.value = true
-                is AlreadyMatchedException -> _isAlreadyMatchedRoom.value = true
-            }
-        }
+                }
+            })
     }
 }
