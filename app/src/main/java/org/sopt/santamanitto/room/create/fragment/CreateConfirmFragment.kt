@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.create.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 
 class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallback{
 
@@ -57,8 +59,12 @@ class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallb
     }
 
     private fun startMatchingRoomActivity(createRoomResponse: CreateRoomResponse) {
-        Log.d("CreateConfirmFragment", "createdRoom : $createRoomResponse")
-        //Todo: 매칭 룸으로 이동
+        requireActivity().run {
+            startActivity(Intent(this, ManittoRoomActivity::class.java).apply {
+                putExtra(ManittoRoomActivity.EXTRA_ROOM_ID, createRoomResponse.id)
+            })
+            finish()
+        }
     }
 
     private fun initRecyclerView() {

@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.join
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
+import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 
 @AndroidEntryPoint
 class JoinRoomFragment: Fragment() {
@@ -67,8 +69,11 @@ class JoinRoomFragment: Fragment() {
 
     private fun startManittoRoomActivity(joinRoomResponse: JoinRoomResponse) {
         requireActivity().run {
-            //Todo: 마니또 방 액티비티로 이동
+            startActivity(Intent(this, ManittoRoomActivity::class.java).apply {
+                putExtra(ManittoRoomActivity.EXTRA_ROOM_ID, joinRoomResponse.room.id)
+            })
         }
+        findNavController().navigateUp()
     }
 
     private fun showAlreadyMatchedDialog(isShow: Boolean) {

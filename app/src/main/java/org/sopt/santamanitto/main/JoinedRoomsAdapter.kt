@@ -12,10 +12,16 @@ class JoinedRoomsAdapter(
     private val cachedRoomDataSource: RoomDataSource
 ) : BaseAdapter<JoinedRoom>() {
 
+    private var listener: ((roomId: Int, isMatched: Boolean) -> Unit)? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): BaseViewHolder<JoinedRoom, *> {
-        return JoinedRoomViewHolder(parent, cachedUserDataSource, cachedRoomDataSource)
+        return JoinedRoomViewHolder(parent, cachedUserDataSource, cachedRoomDataSource, listener)
+    }
+
+    fun setOnItemClickListener(listener: (roomId: Int, isMatched: Boolean) -> Unit) {
+        this.listener = listener
     }
 }

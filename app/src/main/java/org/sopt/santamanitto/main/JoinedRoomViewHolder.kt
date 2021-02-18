@@ -19,12 +19,19 @@ import org.sopt.santamanitto.view.setBackgroundTint
 class JoinedRoomViewHolder(
         parent: ViewGroup,
         private val cachedUserDataSource: UserDataSource,
-        private val cachedRoomDataSource: RoomDataSource
+        private val cachedRoomDataSource: RoomDataSource,
+        private var listener: ((roomId: Int, isMatched: Boolean) -> Unit)? = null
 ) : BaseViewHolder<JoinedRoom, ViewholderJoinedRoomBinding>(R.layout.viewholder_joined_room, parent) {
 
     override fun bind(data: JoinedRoom) {
         binding.joinedRoom = data
         binding.temp.text = String.format(getString(R.string.joinedroom_manitto_info), data.roomName)
+
+        listener?.let {
+            binding.root.setOnClickListener {
+                it(data.roomId, data.isMatchingDone)
+            }
+        }
 
         setRoomState(data)
 
