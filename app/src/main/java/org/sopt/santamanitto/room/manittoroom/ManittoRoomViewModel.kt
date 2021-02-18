@@ -1,10 +1,16 @@
 package org.sopt.santamanitto.room.manittoroom
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.sopt.santamanitto.NetworkViewModel
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
+import org.sopt.santamanitto.room.network.RoomRequest
 
-class ManittoRoomViewModel: NetworkViewModel() {
+class ManittoRoomViewModel @ViewModelInject constructor(
+    private val roomRequest: RoomRequest
+): NetworkViewModel() {
 
     private var _roomId = -1
     var roomId: Int
@@ -27,5 +33,23 @@ class ManittoRoomViewModel: NetworkViewModel() {
     private val _roomDescription = MutableLiveData<String>(null)
     val roomDescription: LiveData<String>
         get() = _roomDescription
+
+    private val _members = MutableLiveData<List<ManittoRoomMember>>()
+    val members : LiveData<List<ManittoRoomMember>>
+        get() = _members
+
+    fun refreshManittoRoomInfo() {
+        roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
+            override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
+                _roomName.value = manittoRoomData.roomName
+                _roomDescription.value = manittoRoomData.expiration
+                _members.value = manittoRoomData.members
+            }
+
+            override fun onFailed() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
 
 }

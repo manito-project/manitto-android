@@ -64,8 +64,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/padding_createmission_cardview_horizontal"
-                    android:layout_marginTop="@dimen/margin_createconfirm_roomname_top"
                     android:text="@string/waitingroom_cardview_title"
+                    app:layout_constraintBottom_toTopOf="@+id/view_waitingroom_divider"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +95,9 @@
                     app:layout_constraintTop_toBottomOf="@id/textview_waitingroom_invitationcode" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_waitingroom"
                     style="@style/RecyclerViewScrollbar"
+                    replaceAll="@{viewModel.members}"
                     setItemMargin="@{@dimen/margin_waitingroom_recyclerview_items}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -105,6 +107,7 @@
                     android:orientation="vertical"
                     android:overScrollMode="never"
                     android:paddingStart="@dimen/padding_waitingroom_recyclerview_start"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toTopOf="@id/textview_waitingroom_notice"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
