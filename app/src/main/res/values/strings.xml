@@ -66,4 +66,9 @@
     <string name="joinroom_dialog_duplicated_member">이미 참여 중인 방이야!</string>
     <string name="joinroom_dialog_already_matched">참여가 불가능한 방이야!</string>
     <string name="joinroom_dialog_wrong_invitation_code">참여가 불가능한 방이야!</string>
+
+    <string name="waitingroom_cardview_title">참여자</string>
+    <string name="waitingroom_copy_invitation_code">참여 코드 복사</string>
+    <string name="waitingroom_notice_owner">방장 산타는 참여자가 다 모이면 하단 버튼을 눌러줘:)</string>
+    <string name="waitingroom_bottombutton">마니또 랜덤 매칭하기</string>
 </resources>

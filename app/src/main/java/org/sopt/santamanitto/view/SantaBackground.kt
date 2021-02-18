@@ -161,4 +161,12 @@ class SantaBackground @JvmOverloads constructor(
                 heightMeasureSpec.coerceAtMost(getDimen(R.dimen.height_santabackground_max).toInt())
         }
     }
+
+    fun setNoLogoDescription(description: String?) {
+        descriptionTextView.text = description
+    }
+
+    fun setNoLogoTitle(title: String?) {
+        titleTextView.text = title
+    }
 }

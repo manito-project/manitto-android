@@ -23,7 +23,7 @@
         <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
     </style>
 
-    <style name="TitleOfCreateRoom" parent="Widget.AppCompat.TextView">
+    <style name="TitleOfCardView" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray_3</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/size_createroom_cardview_titles</item>
@@ -39,6 +39,12 @@
         <item name="android:textSize">@dimen/size_createconfirm_expiration_description</item>
         <item name="android:letterSpacing">-0.04</item>
         <item name="android:textColor">@color/gray_3</item>
+    </style>
+
+    <style name="RecyclerViewScrollbar">
+        <item name="android:scrollbarSize">@dimen/size_createmission_scrollbar</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_round_30</item>
+        <item name="android:scrollbars">vertical</item>
     </style>
 
 </resources>
