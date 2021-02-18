@@ -35,8 +35,19 @@ class WaitingRoomFragment: Fragment() {
             recyclerviewWaitingroom.adapter = memberAdapter
         }
 
-        manittoRoomViewModel.refreshManittoRoomInfo()
+        setOnClickListener()
 
         return binding.root
+    }
+
+    private fun setOnClickListener() {
+        binding.santabackgroundWaitingroom.setOnBackKeyClickListener {
+            requireActivity().finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        manittoRoomViewModel.refreshManittoRoomInfo()
     }
 }

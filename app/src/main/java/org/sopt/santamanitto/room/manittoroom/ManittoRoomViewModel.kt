@@ -30,9 +30,9 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val roomName: LiveData<String>
         get() = _roomName
 
-    private val _roomDescription = MutableLiveData<String>(null)
-    val roomDescription: LiveData<String>
-        get() = _roomDescription
+    private val _expiration = MutableLiveData<String>(null)
+    val expiration: LiveData<String>
+        get() = _expiration
 
     private val _members = MutableLiveData<List<ManittoRoomMember>>()
     val members : LiveData<List<ManittoRoomMember>>
@@ -42,7 +42,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
                 _roomName.value = manittoRoomData.roomName
-                _roomDescription.value = manittoRoomData.expiration
+                _expiration.value = manittoRoomData.expiration
                 _members.value = manittoRoomData.members
             }
 

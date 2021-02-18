@@ -14,9 +14,9 @@ fun setExpirationDiff(view: AppCompatTextView, expiration: ExpirationLiveData) {
 fun setExpirationPreview(view: AppCompatTextView, expiration: ExpirationLiveData) {
     val context = view.context
     val amPmStr = if (expiration.isAm) {
-        context.getString(R.string.createroom_am)
+        context.getString(R.string.am)
     } else {
-        context.getString(R.string.createroom_pm)
+        context.getString(R.string.pm)
     }
     view.text =
             String.format(context.getText(R.string.createroom_preview).toString(),

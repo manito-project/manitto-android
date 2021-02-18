@@ -27,7 +27,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:noLogoDescription="@{viewModel.roomDescription}"
+            setExpirationDescription="@{viewModel.expiration}"
             app:noLogoTitle="@{viewModel.roomName}"
             tool:noLogoDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
             tool:noLogoTitle="마니또 방 이름" />

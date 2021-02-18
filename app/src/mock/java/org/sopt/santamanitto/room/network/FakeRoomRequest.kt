@@ -58,7 +58,7 @@ class FakeRoomRequest : RoomRequest {
                 "FakeRoom",
                 "oU3lsEo-",
                 "false",
-                "2021-02-30 00:00:00",
+                "2021-02-28 11:01:00",
                 "2021-02-21 14:47:10",
                 ManittoRoomCreator(
                     1,

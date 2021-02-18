@@ -37,4 +37,26 @@ object TimeUtil {
     fun getServerFormatFromGregorianCalendar(gregorianCalendar: GregorianCalendar): String {
         return SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).format(Date(gregorianCalendar.timeInMillis))
     }
+
+    fun getGregorianCalendarFromLocalFormat(localFormatString: String): GregorianCalendar {
+        return GregorianCalendar().apply {
+            timeInMillis = getDateInstanceFromLocalFormat(localFormatString).time
+        }
+    }
+
+    fun getDayDiffFromNow(localFormatString: String): Int {
+        val now = GregorianCalendar()
+        initHourAndBelow(now)
+        val target = getGregorianCalendarFromLocalFormat(localFormatString)
+        initHourAndBelow(target)
+        return ((target.timeInMillis - now.timeInMillis) / ( 24 * 60 * 60 * 1000)).toInt() + 1
+    }
+
+    private fun initHourAndBelow(gregorianCalendar: GregorianCalendar) {
+        gregorianCalendar.apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+    }
 }
