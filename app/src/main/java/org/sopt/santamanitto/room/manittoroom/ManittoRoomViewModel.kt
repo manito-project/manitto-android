@@ -26,6 +26,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
             _isMatched = value
         }
 
+    private var _invitationCode = ""
+    val invitationCode: String
+        get() = _invitationCode
+
     private val _roomName = MutableLiveData<String>(null)
     val roomName: LiveData<String>
         get() = _roomName
@@ -44,6 +48,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                 _roomName.value = manittoRoomData.roomName
                 _expiration.value = manittoRoomData.expiration
                 _members.value = manittoRoomData.members
+                _invitationCode = manittoRoomData.invitationCode
             }
 
             override fun onFailed() {

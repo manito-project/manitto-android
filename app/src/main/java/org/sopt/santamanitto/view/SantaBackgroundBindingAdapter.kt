@@ -6,7 +6,10 @@ import org.sopt.santamanitto.util.TimeUtil
 import java.util.*
 
 @BindingAdapter("setExpirationDescription")
-fun setExpirationDescription(view: SantaBackground, expiration: String) {
+fun setExpirationDescription(view: SantaBackground, expiration: String?) {
+    if (expiration == null) {
+        return
+    }
     val calendar = TimeUtil.getGregorianCalendarFromLocalFormat(expiration)
     val amPm = if (calendar.get(Calendar.AM_PM) == Calendar.AM) {
         view.context.getString(R.string.am)
