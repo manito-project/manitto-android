@@ -7,11 +7,11 @@ import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.create.data.CreateMissionLiveList
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
-import org.sopt.santamanitto.room.create.network.CreateRoomRequest
+import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 
 class CreateRoomAndMissionViewModel @ViewModelInject constructor(
-        private val createRoomRequest: CreateRoomRequest
+        private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
     val expirationLiveData = ExpirationLiveData()
@@ -60,7 +60,7 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
 
     fun createRoom(callback: (CreateRoomResponse) -> Unit) {
         val createRoomData = CreateRoomData(roomName.value!!, expirationLiveData.toString(), missions.getMissions())
-        createRoomRequest.createRoom(createRoomData, object : CreateRoomRequest.CreateRoomCallback {
+        roomRequest.createRoom(createRoomData, object : RoomRequest.CreateRoomCallback {
             override fun onRoomCreated(createdRoom: CreateRoomResponse) {
                 callback(createdRoom)
             }

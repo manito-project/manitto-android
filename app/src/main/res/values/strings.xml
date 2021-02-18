@@ -4,12 +4,13 @@
     <string name="dialog_confirm">확인</string>
     <string name="dialog_cancel">취소</string>
 
+    <string name="button_next">다음</string>
+
     <string name="santaperiodpicker_period">%d일 후</string>
     <string name="entername_background_welcome">안녕!\n산타 마니또에 온 것을 환영해:)</string>
     <string name="entername_title">기본 설정</string>
     <string name="entername_title_name">내 이름</string>
     <string name="entername_edittext_hint">산타야! 너의 이름이 궁금해</string>
-    <string name="entername_button_next">다음</string>
 
     <string name="condition_title">이용약관 동의</string>
     <string name="condition_all_agree">전체 동의</string>
@@ -39,7 +40,6 @@
     <string name="createroom_expiration_description">최소 3일 부터 최대 14일까지 기간을 설정할 수 있어~</string>
     <string name="textview_createroom_expiration_time">산타 마니또 공개 시간</string>
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
-    <string name="createroom_button_next">다음</string>
     <string name="createroom_preview_start">%d일 후인</string>
     <string name="createroom_preview">%d/%02d/%02d %s %02d : %02d 에</string>
     <string name="createroom_pm">오후</string>
@@ -59,4 +59,11 @@
     <string name="createconfirm_expiration_suffix"> 결과 공개!</string>
     <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
     <string name="createconfirm_create_room">방 만들기</string>
+
+    <string name="joinroom_background_title">방 입장하기</string>
+    <string name="joinroom_background_description">코드를 입력하면 방으로 이동할거야!\n산타 마니또를 찾아 떠나볼까?</string>
+    <string name="joinroom_participation_code_hint">참여코드를 입력해주세요</string>
+    <string name="joinroom_dialog_duplicated_member">이미 참여 중인 방이야!</string>
+    <string name="joinroom_dialog_already_matched">참여가 불가능한 방이야!</string>
+    <string name="joinroom_dialog_wrong_invitation_code">참여가 불가능한 방이야!</string>
 </resources>
