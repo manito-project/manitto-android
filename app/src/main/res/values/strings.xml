@@ -6,6 +6,9 @@
 
     <string name="button_next">다음</string>
 
+    <string name="pm">오후</string>
+    <string name="am">오전</string>
+
     <string name="santaperiodpicker_period">%d일 후</string>
     <string name="entername_background_welcome">안녕!\n산타 마니또에 온 것을 환영해:)</string>
     <string name="entername_title">기본 설정</string>
@@ -42,8 +45,6 @@
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
     <string name="createroom_preview_start">%d일 후인</string>
     <string name="createroom_preview">%d/%02d/%02d %s %02d : %02d 에</string>
-    <string name="createroom_pm">오후</string>
-    <string name="createroom_am">오전</string>
     <string name="createroom_expiration_time">%02d : %02d</string>
     <string name="createroom_dialog_expiration_time_setting">공개 시간 설정</string>
 
@@ -66,4 +67,11 @@
     <string name="joinroom_dialog_duplicated_member">이미 참여 중인 방이야!</string>
     <string name="joinroom_dialog_already_matched">참여가 불가능한 방이야!</string>
     <string name="joinroom_dialog_wrong_invitation_code">참여가 불가능한 방이야!</string>
+
+    <string name="waitingroom_cardview_title">참여자</string>
+    <string name="waitingroom_copy_invitation_code">참여 코드 복사</string>
+    <string name="waitingroom_notice_owner">방장 산타는 참여자가 다 모이면 하단 버튼을 눌러줘:)</string>
+    <string name="waitingroom_bottombutton">마니또 랜덤 매칭하기</string>
+    <string name="manittoroom_description">오늘부터 %d일 후인 %d월 %d일\n%s %02d:%02d까지 진행되는 마니또</string>
+    <string name="waitingroom_snackbar_invitation_code">참여 코드가 복사되었습니다</string>
 </resources>

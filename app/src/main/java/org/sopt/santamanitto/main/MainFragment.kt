@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.room.create.CreateRoomActivity
+import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,9 +32,9 @@ class MainFragment: Fragment() {
             recyclerviewMainHistory.adapter = adapter
         }
 
-        initJoinedRooms()
-
         setOnClickListener()
+
+        initJoinedRooms()
 
         return binding.root
     }
@@ -45,6 +46,15 @@ class MainFragment: Fragment() {
             }
             santaimageroundbuttonMainJoin.setOnClickListener {
                 navigateJoinRoomFragment()
+            }
+        }
+
+        adapter.setOnItemClickListener { roomId, isMatched ->
+            requireActivity().run {
+                startActivity(Intent(this, ManittoRoomActivity::class.java).apply {
+                    putExtra(ManittoRoomActivity.EXTRA_ROOM_ID, roomId)
+                    putExtra(ManittoRoomActivity.EXTRA_IS_MATCHED, isMatched)
+                })
             }
         }
     }

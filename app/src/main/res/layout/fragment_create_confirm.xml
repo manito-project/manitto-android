@@ -46,7 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
-            android:layout_marginTop="@dimen/margin_createroom_cardview_top"
+            android:layout_marginTop="@dimen/margin_cardview_to_guidline_top"
             app:layout_constraintBottom_toTopOf="@id/santabottombutton_createmconfirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_createconfirm_roomname"
-                    style="@style/TitleOfCreateRoom"
+                    style="@style/TitleOfCardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
@@ -135,6 +135,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_createconfirm"
+                    style="@style/RecyclerViewScrollbar"
                     setItemMargin="@{@dimen/margin_createmission_recyclerview_items}"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
@@ -144,9 +145,6 @@
                     android:overScrollMode="never"
                     android:paddingHorizontal="@dimen/padding_createmission_recyclerview_horizontal"
                     android:paddingBottom="@dimen/padding_createmission_recyclerview_bottom"
-                    android:scrollbarSize="@dimen/size_createmission_scrollbar"
-                    android:scrollbarThumbVertical="@drawable/scrollbar_round_30"
-                    android:scrollbars="vertical"
                     android:visibility="@{viewModel.missionIsEmpty ? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"

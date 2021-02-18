@@ -10,6 +10,7 @@ import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomErrorBody
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -61,6 +62,18 @@ class RoomRequestImpl(
 
             override fun onFailure(call: Call<Response<JoinRoomResponse>>, t: Throwable) {
                 callback.onFailed(RoomRequest.JoinRoomError.Els)
+            }
+        })
+    }
+
+    override fun getManittoRoomData(roomId: Int, callback: RoomRequest.GetManittoRoomCallback) {
+        roomService.getManittoRoomData(roomId).start(object: RequestCallback<ManittoRoomData> {
+            override fun onSuccess(data: ManittoRoomData) {
+                callback.onLoadManittoRoomData(data)
+            }
+
+            override fun onFail() {
+                callback.onFailed()
             }
         })
     }
