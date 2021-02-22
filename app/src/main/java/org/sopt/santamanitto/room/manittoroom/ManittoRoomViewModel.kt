@@ -7,8 +7,11 @@ import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.network.RoomRequest
+import org.sopt.santamanitto.user.data.source.UserDataSource
+import javax.inject.Named
 
 class ManittoRoomViewModel @ViewModelInject constructor(
+    @Named("cached") private val userDataSource: UserDataSource,
     private val roomRequest: RoomRequest
 ): NetworkViewModel() {
 
@@ -42,6 +45,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val members : LiveData<List<ManittoRoomMember>>
         get() = _members
 
+    private val _isAdmin = MutableLiveData(false)
+    val isAdmin: LiveData<Boolean>
+        get() = _isAdmin
+
     fun refreshManittoRoomInfo() {
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
@@ -49,6 +56,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                 _expiration.value = manittoRoomData.expiration
                 _members.value = manittoRoomData.members
                 _invitationCode = manittoRoomData.invitationCode
+                _isAdmin.value = userDataSource.getUserId() == manittoRoomData.creator.userId
             }
 
             override fun onFailed() {
