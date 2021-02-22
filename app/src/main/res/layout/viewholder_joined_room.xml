@@ -53,7 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_mymanitto_title"
                 app:layout_constraintVertical_chainStyle="packed"
-                tool:text="김성규의 산타" />
+                android:text="@string/joinedroom_santa_info_before_matching" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textview_mymanitto_state"

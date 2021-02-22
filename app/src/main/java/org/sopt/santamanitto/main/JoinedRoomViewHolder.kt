@@ -25,7 +25,6 @@ class JoinedRoomViewHolder(
 
     override fun bind(data: JoinedRoom) {
         binding.joinedRoom = data
-        binding.temp.text = String.format(getString(R.string.joinedroom_manitto_info), data.roomName)
 
         listener?.let {
             binding.root.setOnClickListener {
@@ -35,6 +34,11 @@ class JoinedRoomViewHolder(
 
         setRoomState(data)
 
+        if (!data.isMatchingDone) {
+            clearLoading()
+            return
+        }
+
         cachedRoomDataSource.getPersonalRoomInfo(data.roomId, object : RoomDataSource.GetPersonalRoomInfoCallback {
             override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
                 binding.personalRoomInfo = personalRoomInfo
@@ -42,7 +46,7 @@ class JoinedRoomViewHolder(
                 cachedUserDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
                     override fun onUserInfoLoaded(user: User) {
                         binding.userInfo = user
-                        binding.santaloadingJoinedroom.visibility = View.GONE
+                        clearLoading()
                     }
 
                     override fun onDataNotAvailable() {
@@ -55,6 +59,10 @@ class JoinedRoomViewHolder(
                 binding.santaloadingJoinedroom.setDataNotAvailable()
             }
         })
+    }
+
+    private fun clearLoading() {
+        binding.santaloadingJoinedroom.visibility = View.GONE
     }
 
     private fun setRoomState(data: JoinedRoom) {
