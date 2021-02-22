@@ -1,7 +1,11 @@
 package org.sopt.santamanitto.room.network
 
+import android.os.Handler
+import android.os.Looper
+import kotlinx.coroutines.*
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.data.MissionContent
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomInfo
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
@@ -66,33 +70,41 @@ class FakeRoomRequest : RoomRequest {
                     "12fsfe2"
                 ),
                 mutableListOf<ManittoRoomMission>().apply {
-                    add(ManittoRoomMission(
-                        1,
-                        "Fake Mission 1"
-                    ))
-                    add(ManittoRoomMission(
-                        2,
-                        "Fake Mission 2"
-                    ))
-                    add(ManittoRoomMission(
-                        3,
-                        "Fake Mission 3"
-                    ))
-                    add(ManittoRoomMission(
-                        4,
-                        "Fake Mission 4"
-                    ))
+                    add(
+                        ManittoRoomMission(
+                            1,
+                            "Fake Mission 1"
+                        )
+                    )
+                    add(
+                        ManittoRoomMission(
+                            2,
+                            "Fake Mission 2"
+                        )
+                    )
+                    add(
+                        ManittoRoomMission(
+                            3,
+                            "Fake Mission 3"
+                        )
+                    )
+                    add(
+                        ManittoRoomMission(
+                            4,
+                            "Fake Mission 4"
+                        )
+                    )
                 },
                 mutableListOf<ManittoRoomMember>().apply {
                     add(
                         ManittoRoomMember(
-                        1,
-                        "FakeFirstUser",
-                        ManittoRoomRelations(
-                            2,
-                            3
+                            1,
+                            "FakeFirstUser",
+                            ManittoRoomRelations(
+                                2,
+                                3
+                            )
                         )
-                    )
                     )
                     add(
                         ManittoRoomMember(
@@ -117,5 +129,37 @@ class FakeRoomRequest : RoomRequest {
                 }
             )
         )
+    }
+
+    override fun matchManitto(roomId: Int, callback: RoomRequest.MatchManittoCallback) {
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            callback.onSuccessMatching(mutableListOf<ManittoRoomMatchedMissions>().apply {
+                add(
+                    ManittoRoomMatchedMissions(
+                        1,
+                        2,
+                        3,
+                        MissionContent("FakeMission1")
+                    )
+                )
+                add(
+                    ManittoRoomMatchedMissions(
+                        2,
+                        3,
+                        1,
+                        MissionContent("FakeMission2")
+                    )
+                )
+                add(
+                    ManittoRoomMatchedMissions(
+                        3,
+                        1,
+                        2,
+                        MissionContent("FakeMission3")
+                    )
+                )
+            })
+        }, 5000L)
     }
 }

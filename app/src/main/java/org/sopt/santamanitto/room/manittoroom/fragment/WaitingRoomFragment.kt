@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentWaitingRoomBinding
@@ -60,11 +61,20 @@ class WaitingRoomFragment: Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
+            santabottombuttonWaitingroom.setOnClickListener {
+                manittoRoomViewModel.match()
+                navigateMatchingFragment()
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
         manittoRoomViewModel.refreshManittoRoomInfo()
+    }
+
+    private fun navigateMatchingFragment() {
+        findNavController()
+            .navigate(WaitingRoomFragmentDirections.actionWaitingRoomFragmentToMatchingFragment())
     }
 }
