@@ -10,7 +10,9 @@ import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomErrorBody
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
+import org.sopt.santamanitto.room.manittoroom.network.ManittoMatchingData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -70,6 +72,18 @@ class RoomRequestImpl(
         roomService.getManittoRoomData(roomId).start(object: RequestCallback<ManittoRoomData> {
             override fun onSuccess(data: ManittoRoomData) {
                 callback.onLoadManittoRoomData(data)
+            }
+
+            override fun onFail() {
+                callback.onFailed()
+            }
+        })
+    }
+
+    override fun matchManitto(roomId: Int, callback: RoomRequest.MatchManittoCallback) {
+        roomService.matchManitto(ManittoMatchingData(roomId)).start(object: RequestCallback<List<ManittoRoomMatchedMissions>> {
+            override fun onSuccess(data: List<ManittoRoomMatchedMissions>) {
+                callback.onSuccessMatching(data)
             }
 
             override fun onFail() {
