@@ -1,11 +1,13 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentWaitingRoomBinding
@@ -59,6 +61,11 @@ class WaitingRoomFragment: Fragment() {
                     getString(org.sopt.santamanitto.R.string.waitingroom_snackbar_invitation_code),
                     Snackbar.LENGTH_SHORT
                 ).show()
+            }
+            santabottombuttonWaitingroom.setOnClickListener {
+                //Todo: 매칭 프래그먼트로 이동
+                Log.d(TAG, "navigationToMatchingFragment(): go!")
+                manittoRoomViewModel.match()
             }
         }
     }

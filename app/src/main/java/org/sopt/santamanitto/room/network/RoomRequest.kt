@@ -5,6 +5,7 @@ import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 
 interface RoomRequest {
 
@@ -26,6 +27,12 @@ interface RoomRequest {
         fun onFailed()
     }
 
+    interface MatchManittoCallback {
+        fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>)
+
+        fun onFailed()
+    }
+
     enum class JoinRoomError {
         WrongInvitationCode, DuplicatedMember, AlreadyMatched, Els
     }
@@ -35,4 +42,6 @@ interface RoomRequest {
     fun joinRoom(joinRoomData: JoinRoomData, callback: JoinRoomCallback)
 
     fun getManittoRoomData(roomId: Int, callback: GetManittoRoomCallback)
+
+    fun matchManitto(roomId: Int, callback: MatchManittoCallback)
 }

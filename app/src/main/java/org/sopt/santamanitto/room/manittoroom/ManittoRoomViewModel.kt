@@ -1,12 +1,15 @@
 package org.sopt.santamanitto.room.manittoroom
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.network.RoomRequest
+import org.sopt.santamanitto.user.data.User
 import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
 
@@ -14,6 +17,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     @Named("cached") private val userDataSource: UserDataSource,
     private val roomRequest: RoomRequest
 ): NetworkViewModel() {
+
+    companion object {
+        private const val TAG = "ManittoRoomViewModel"
+    }
 
     private var _roomId = -1
     var roomId: Int
@@ -49,6 +56,14 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val isAdmin: LiveData<Boolean>
         get() = _isAdmin
 
+    private val _myManittoName = MutableLiveData("")
+    val myManittoName : LiveData<String>
+        get() = _myManittoName
+
+    private val _myMission = MutableLiveData("")
+    val myMission: LiveData<String>
+        get() = _myMission
+
     fun refreshManittoRoomInfo() {
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
@@ -60,6 +75,44 @@ class ManittoRoomViewModel @ViewModelInject constructor(
             }
 
             override fun onFailed() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
+
+    fun match() {
+        roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
+            override fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>) {
+                isMatched = true
+                findMyMission(missions)
+                Log.d(TAG, "matchResult : $missions")
+            }
+
+            override fun onFailed() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
+
+    private fun findMyMission(missions: List<ManittoRoomMatchedMissions>) {
+        for (mission in missions) {
+            if (mission.userId == userDataSource.getUserId()) {
+                setMyMissionInfo(mission)
+                return
+            }
+        }
+        _networkErrorOccur.value = true
+    }
+
+    private fun setMyMissionInfo(mission: ManittoRoomMatchedMissions) {
+        _myMission.value = mission.myMission.content
+        Log.d(TAG, "myMission : ${mission.myMission.content}")
+        userDataSource.getUserInfo(mission.manittoUserId, object: UserDataSource.GetUserInfoCallback {
+            override fun onUserInfoLoaded(user: User) {
+                _myManittoName.value = user.userName
+            }
+
+            override fun onDataNotAvailable() {
                 _networkErrorOccur.value = true
             }
         })
