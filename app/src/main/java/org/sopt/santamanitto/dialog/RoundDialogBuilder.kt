@@ -15,6 +15,7 @@ class RoundDialogBuilder {
 
     private var title: String? = null
     private var contentText: String? = null
+    private var invitationCode: String? = null
 
     private var enableCancel: Boolean = true
     private var contentIsBold: Boolean = false
@@ -26,6 +27,8 @@ class RoundDialogBuilder {
 
     private var verticalButtons: List<RoundDialogButton>? = null
     private var horizontalButtons: List<RoundDialogButton>? = null
+
+    private var invitationCodeCallback: (() -> Unit)? = null
 
     /**
      * You can get RoundDialog instance of DialogFragment by calling this.
@@ -40,6 +43,8 @@ class RoundDialogBuilder {
                 contentView,
                 contentText,
                 contentIsBold,
+                invitationCode,
+                invitationCodeCallback,
                 horizontalButtons,
                 verticalButtons,
                 textSize,
@@ -241,6 +246,12 @@ class RoundDialogBuilder {
      */
     fun enableCancel(enableCancel: Boolean) : RoundDialogBuilder {
         this.enableCancel = enableCancel
+        return this
+    }
+
+    fun setInvitationCode(invitationCode: String, listener: () -> Unit): RoundDialogBuilder {
+        this.invitationCode = invitationCode
+        this.invitationCodeCallback = listener
         return this
     }
 }
