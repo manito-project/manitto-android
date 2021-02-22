@@ -24,8 +24,6 @@ class CreateRoomFragment : Fragment() {
 
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
-    private var cachedPickerView: View? = null
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -95,16 +93,13 @@ class CreateRoomFragment : Fragment() {
     }
 
     private fun getPickerView(): View {
-        if (cachedPickerView == null) {
-            cachedPickerView = LayoutInflater.from(requireContext())
-                    .inflate(R.layout.dialog_create_room_time_picker, binding.root as ViewGroup, false)
-                    .apply {
-                        findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_hour)
-                                .setInitialPosition(viewModel.expirationLiveData.hour - 1)
-                        findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
-                                .setInitialPosition(viewModel.expirationLiveData.minute)
-                    }
-        }
-        return cachedPickerView!!
+        return LayoutInflater.from(requireContext())
+                .inflate(R.layout.dialog_create_room_time_picker, binding.root as ViewGroup, false)
+                .apply {
+                    findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_hour)
+                            .setInitialPosition(viewModel.expirationLiveData.hour - 1)
+                    findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
+                            .setInitialPosition(viewModel.expirationLiveData.minute)
+                }
     }
 }
