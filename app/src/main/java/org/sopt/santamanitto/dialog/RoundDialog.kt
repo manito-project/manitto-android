@@ -28,6 +28,8 @@ internal class RoundDialog(
         private val contentLayout: View?,
         private val contentText: String?,
         private val contentTextBold: Boolean,
+        private val invitationCode: String?,
+        private val invitationCodeCallback: (() -> Unit)? = null,
         private val horizontalButtons: List<RoundDialogButton>?,
         private val verticalButtons: List<RoundDialogButton>?,
         private var fontSize: Float?,
@@ -141,7 +143,7 @@ internal class RoundDialog(
     }
 
     private fun initButtons(parent: ViewGroup) {
-        if (horizontalButtons == null && verticalButtons == null) {
+        if (horizontalButtons == null && verticalButtons == null && invitationCode == null) {
             return
         }
 
@@ -150,26 +152,37 @@ internal class RoundDialog(
             orientation = LinearLayout.VERTICAL
         }
 
-        verticalButtons?.let {
+        if (invitationCode != null) {
+            val invitationCodeView = LayoutInflater.from(buttonLayout.context)
+                    .inflate(R.layout.dialog_invitation_code, buttonLayout, false)
+            invitationCodeView.findViewById<AppCompatTextView>(R.id.textview_invitationcode).text = invitationCode
+            invitationCodeView.findViewById<AppCompatTextView>(R.id.textview_invitationcode_copybutton).setOnClickListener {
+                invitationCodeCallback?.let { it() }
+                dismiss()
+            }
             addDivider(buttonLayout, true)
-            makeButtons(it, buttonLayout, false)
-        }
-
-        horizontalButtons?.let {
-            addDivider(buttonLayout, true)
-            //가로 버튼을 담을 하나의 LinearLayout을 생성
-            val verticalButtonLayout = LinearLayout(parent.context).apply {
-                layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-                orientation = LinearLayout.HORIZONTAL
+            buttonLayout.addView(invitationCodeView)
+        } else {
+            verticalButtons?.let {
+                addDivider(buttonLayout, true)
+                makeButtons(it, buttonLayout, false)
             }
 
-            //생성한 LinearLayout에 버튼들을 추가
-            makeButtons(it, verticalButtonLayout, true)
+            horizontalButtons?.let {
+                addDivider(buttonLayout, true)
+                //가로 버튼을 담을 하나의 LinearLayout을 생성
+                val verticalButtonLayout = LinearLayout(parent.context).apply {
+                    layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                    orientation = LinearLayout.HORIZONTAL
+                }
 
-            //버튼이 추가된 LinearLayout을 다이얼로그에 추가
-            buttonLayout.addView(verticalButtonLayout)
+                //생성한 LinearLayout에 버튼들을 추가
+                makeButtons(it, verticalButtonLayout, true)
+
+                //버튼이 추가된 LinearLayout을 다이얼로그에 추가
+                buttonLayout.addView(verticalButtonLayout)
+            }
         }
-
         parent.addView(buttonLayout)
     }
 
@@ -242,6 +255,9 @@ internal class RoundDialog(
     private fun checkIsIllegalAttribute() {
         if (contentText != null && contentLayout != null) {
             throw IllegalArgumentException("Content text and content view cannot be coexist")
+        }
+        if ((horizontalButtons != null || verticalButtons != null) && invitationCode != null) {
+            throw IllegalArgumentException("Buttons and invitationCode cannot be coexist")
         }
     }
 

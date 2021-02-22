@@ -61,6 +61,7 @@
     <string name="createconfirm_expiration_suffix"> 결과 공개!</string>
     <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
     <string name="createconfirm_create_room">방 만들기</string>
+    <string name="createconfirm_done_dialog">참여코드 생성 완료!</string>
 
     <string name="joinroom_background_title">방 입장하기</string>
     <string name="joinroom_background_description">코드를 입력하면 방으로 이동할거야!\n산타 마니또를 찾아 떠나볼까?</string>

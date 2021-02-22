@@ -19,7 +19,7 @@ class WaitingRoomFragment: Fragment() {
 
     companion object {
         private const val TAG = "WaitingRoomFragment"
-        private const val INVITATION_CODE_LABEL = "InvitationCode"
+        const val INVITATION_CODE_LABEL = "InvitationCode"
     }
 
     private lateinit var binding: FragmentWaitingRoomBinding
