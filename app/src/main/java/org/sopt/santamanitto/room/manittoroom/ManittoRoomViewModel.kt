@@ -1,6 +1,5 @@
 package org.sopt.santamanitto.room.manittoroom
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -72,6 +71,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                 _members.value = manittoRoomData.members
                 _invitationCode = manittoRoomData.invitationCode
                 _isAdmin.value = userDataSource.getUserId() == manittoRoomData.creator.userId
+                _isMatched = manittoRoomData.isMatched
             }
 
             override fun onFailed() {
@@ -85,7 +85,6 @@ class ManittoRoomViewModel @ViewModelInject constructor(
             override fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>) {
                 isMatched = true
                 findMyMission(missions)
-                Log.d(TAG, "matchResult : $missions")
             }
 
             override fun onFailed() {
@@ -106,7 +105,6 @@ class ManittoRoomViewModel @ViewModelInject constructor(
 
     private fun setMyMissionInfo(mission: ManittoRoomMatchedMissions) {
         _myMission.value = mission.myMission.content
-        Log.d(TAG, "myMission : ${mission.myMission.content}")
         userDataSource.getUserInfo(mission.manittoUserId, object: UserDataSource.GetUserInfoCallback {
             override fun onUserInfoLoaded(user: User) {
                 _myManittoName.value = user.userName
@@ -117,5 +115,4 @@ class ManittoRoomViewModel @ViewModelInject constructor(
             }
         })
     }
-
 }

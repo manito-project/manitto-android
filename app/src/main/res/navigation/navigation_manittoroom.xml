@@ -9,5 +9,19 @@
         android:id="@+id/waitingRoomFragment"
         android:name="org.sopt.santamanitto.room.manittoroom.fragment.WaitingRoomFragment"
         android:label="WaitingRoomFragment"
-        tool:layout="@layout/fragment_waiting_room"/>
+        tool:layout="@layout/fragment_waiting_room">
+
+        <action
+            android:id="@+id/action_waitingRoomFragment_to_matchingFragment"
+            app:destination="@id/matchingFragment"
+            app:popUpTo="@id/matchingFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/matchingFragment"
+        android:name="org.sopt.santamanitto.room.manittoroom.fragment.MatchingFragment"
+        android:label="MatchingFragment"
+        tool:layout="@layout/fragment_matching" />
+
 </navigation>

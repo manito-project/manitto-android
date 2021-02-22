@@ -1,7 +1,6 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,9 +62,8 @@ class WaitingRoomFragment: Fragment() {
                 ).show()
             }
             santabottombuttonWaitingroom.setOnClickListener {
-                //Todo: 매칭 프래그먼트로 이동
-                Log.d(TAG, "navigationToMatchingFragment(): go!")
                 manittoRoomViewModel.match()
+                navigateMatchingFragment()
             }
         }
     }
@@ -73,5 +71,10 @@ class WaitingRoomFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         manittoRoomViewModel.refreshManittoRoomInfo()
+    }
+
+    private fun navigateMatchingFragment() {
+        findNavController()
+            .navigate(WaitingRoomFragmentDirections.actionWaitingRoomFragmentToMatchingFragment())
     }
 }
