@@ -1,5 +1,7 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -43,6 +45,8 @@ class MatchingFragment: Fragment() {
             isDelayDone = true
         }, DELAY_MILLIS)
 
+        setAnimation()
+
         return binding.root
     }
 
@@ -55,6 +59,16 @@ class MatchingFragment: Fragment() {
     override fun onPause() {
         super.onPause()
         isInBackground = true
+    }
+
+    private fun setAnimation() {
+        ObjectAnimator.ofFloat(binding.imageviewMatchingRoulette, View.ROTATION, -360f, 0f)
+            .apply {
+                duration = DELAY_MILLIS
+                repeatCount = ValueAnimator.INFINITE
+                repeatMode = ValueAnimator.RESTART
+            }
+            .start()
     }
 
     private fun navigateMissionFragment() {
