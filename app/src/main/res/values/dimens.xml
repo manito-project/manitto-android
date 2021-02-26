@@ -159,5 +159,14 @@
     <dimen name="padding_dialog_invitationcode_button_vertical">6dp</dimen>
     <dimen name="height_invitationcode_root">96dp</dimen>
 
+    <dimen name="height_matching_roulette_max">272dp</dimen>
+    <dimen name="height_matching_character">70dp</dimen>
+    <dimen name="width_matching_character">43dp</dimen>
+    <dimen name="margin_matching_character">13dp</dimen>
+    <dimen name="margin_matching_logo_top">48dp</dimen>
+    <dimen name="width_matching_logo">72dp</dimen>
+    <dimen name="height_matching_logo">33dp</dimen>
+    <dimen name="size_matching_text">12sp</dimen>
+
 
 </resources>

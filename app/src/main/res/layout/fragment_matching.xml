@@ -1,12 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/navy">
 
-        <!-- Todo: 레이아웃 작성하기 -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1: 1.561"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.366"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.289"
+            app:layout_constraintWidth_percent="0.803"
+            app:srcCompat="@drawable/ic_snow_matching" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/width_matching_logo"
+            android:layout_height="@dimen/height_matching_logo"
+            android:layout_marginTop="@dimen/margin_matching_logo_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_logo" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/imageview_matching_socks1"
+            app:layout_constraintEnd_toEndOf="@id/imageview_matching_socks1"
+            app:layout_constraintHorizontal_bias="0.62"
+            app:layout_constraintStart_toStartOf="@id/imageview_matching_socks1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_matching_socks1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.109"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1979"
+            app:srcCompat="@drawable/ic_socks_red" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/imageview_matching_socks2"
+            app:layout_constraintEnd_toEndOf="@id/imageview_matching_socks2"
+            app:layout_constraintHorizontal_bias="0.67"
+            app:layout_constraintStart_toStartOf="@id/imageview_matching_socks2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_matching_socks2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.848"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.148"
+            app:srcCompat="@drawable/ic_socks_green" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_matching_roulette"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:maxWidth="@dimen/height_matching_roulette_max"
+            android:maxHeight="@dimen/height_matching_roulette_max"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4277"
+            app:layout_constraintWidth_percent="0.7556"
+            app:srcCompat="@drawable/ic_roulette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_matching_tree1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/view_matching_flour"
+            app:layout_constraintEnd_toStartOf="@id/linearlayout_matching_characters"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_tree" />
+
+        <LinearLayout
+            android:id="@+id/linearlayout_matching_characters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/view_matching_flour"
+            app:layout_constraintEnd_toStartOf="@id/imageview_matching_tree2"
+            app:layout_constraintStart_toEndOf="@id/imageview_matching_tree1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/width_matching_character"
+                android:layout_height="@dimen/height_matching_character"
+                app:srcCompat="@drawable/ic_snowman" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/width_matching_character"
+                android:layout_height="@dimen/height_matching_character"
+                android:layout_marginHorizontal="@dimen/margin_matching_character"
+                app:srcCompat="@drawable/ic_santa" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/width_matching_character"
+                android:layout_height="@dimen/height_matching_character"
+                app:srcCompat="@drawable/ic_rudolf" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_matching_tree2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/view_matching_flour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/linearlayout_matching_characters"
+            app:srcCompat="@drawable/ic_tree" />
+
+        <View
+            android:id="@+id/view_matching_flour"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/matching_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_matching_text"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_matching_characters"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageview_matching_roulette" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
