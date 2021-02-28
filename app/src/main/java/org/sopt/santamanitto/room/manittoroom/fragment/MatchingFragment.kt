@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
@@ -64,9 +65,10 @@ class MatchingFragment: Fragment() {
     private fun setAnimation() {
         ObjectAnimator.ofFloat(binding.imageviewMatchingRoulette, View.ROTATION, -360f, 0f)
             .apply {
-                duration = DELAY_MILLIS
+                duration = 500
                 repeatCount = ValueAnimator.INFINITE
                 repeatMode = ValueAnimator.RESTART
+                interpolator = LinearInterpolator()
             }
             .start()
     }
