@@ -79,4 +79,8 @@
     <string name="waitingroom_snackbar_invitation_code">참여 코드가 복사되었습니다</string>
 
     <string name="matching_text">산타 마니또 매칭중\n잠시만 기다려줘:)</string>
+
+    <string name="matched_bottom_button">홈으로 가기</string>
+    <string name="matched_mission_title">미션은</string>
+    <string name="matched_manitto_title">%s 산타의 마니또는</string>
 </resources>

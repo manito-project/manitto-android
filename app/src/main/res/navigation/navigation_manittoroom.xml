@@ -14,7 +14,14 @@
         <action
             android:id="@+id/action_waitingRoomFragment_to_matchingFragment"
             app:destination="@id/matchingFragment"
-            app:popUpTo="@id/matchingFragment" />
+            app:popUpTo="@+id/navigation_manittoroom.xml"
+            app:popUpToInclusive="true"/>
+
+        <action
+            android:id="@+id/action_waitingRoomFragment_to_matchedFragment"
+            app:destination="@id/matchedFragment"
+            app:popUpTo="@+id/navigation_manittoroom.xml"
+            app:popUpToInclusive="true"/>
 
     </fragment>
 
@@ -22,6 +29,20 @@
         android:id="@+id/matchingFragment"
         android:name="org.sopt.santamanitto.room.manittoroom.fragment.MatchingFragment"
         android:label="MatchingFragment"
-        tool:layout="@layout/fragment_matching" />
+        tool:layout="@layout/fragment_matching">
+
+        <action
+            android:id="@+id/action_matchingFragment_to_matchedFragment"
+            app:destination="@id/matchedFragment"
+            app:popUpTo="@+id/navigation_manittoroom.xml"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/matchedFragment"
+        android:name="org.sopt.santamanitto.room.manittoroom.fragment.MatchedFragment"
+        android:label="MatchedFragment"
+        tool:layout="@layout/fragment_matched" />
 
 </navigation>
