@@ -13,6 +13,7 @@ import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -81,7 +82,7 @@ class MatchingFragment: Fragment() {
                 return@launch
             }
 
-            //Todo: 미션 프래그먼트로 이동
+            findNavController().navigate(MatchingFragmentDirections.actionMatchingFragmentToMatchedFragment())
         }
     }
 }

@@ -63,6 +63,9 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val myMission: LiveData<String>
         get() = _myMission
 
+    val myName: String
+        get() = userDataSource.getUserName()
+
     fun refreshManittoRoomInfo() {
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {

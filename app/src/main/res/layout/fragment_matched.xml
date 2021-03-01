@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_matched"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backKey="true"
+            app:backgroundStyle="noLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            setExpirationDescription="@{viewModel.expiration}"
+            app:noLogoTitle="@{viewModel.roomName}"
+            tool:noLogoDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
+            tool:noLogoTitle="마니또 방 이름" />
+
+        <View
+            android:id="@+id/view_matched_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/santabackground_matched"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <org.sopt.santamanitto.view.SantaCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_cardview_to_guidline_top"
+            android:layout_marginBottom="@dimen/margin_waitingroom_cardview_bottom"
+            app:layout_constraintBottom_toTopOf="@id/santabottombutton_matched"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_matched_guideline"
+            app:moreRound="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:paddingHorizontal="@dimen/padding_createmission_cardview_horizontal"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_matched_title"
+                    style="@style/TitleOfCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tool:text="이영진 산타의 마니또는"
+                    android:layout_marginTop="@dimen/padding_matched_cardview_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_matched_manitto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tool:text="김성규"
+                    android:textColor="@color/white"
+                    android:textFontWeight="700"
+                    android:text="@{viewModel.myManittoName}"
+                    android:layout_marginTop="@dimen/margin_matched_manitto_top"
+                    android:textSize="@dimen/size_matched_manitto"
+                    android:paddingHorizontal="@dimen/padding_matched_manitto_horizontal"
+                    android:paddingVertical="@dimen/padding_matched_manitto_vertical"
+                    android:background="@drawable/round_ractangle_background_30"
+                    android:backgroundTint="@color/navy"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_matched_title"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_matched_missiontitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_matched_mission_title_bottom"
+                    style="@style/TitleOfCardView"
+                    android:text="@string/matched_mission_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/textview_matched_mission"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_matched_mission"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_ractangle_background"
+                    android:backgroundTint="@color/gray_1"
+                    android:padding="@dimen/padding_matched_mission"
+                    android:textSize="@dimen/size_matched_mission"
+                    android:text="\n\n"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="@dimen/margin_matched_mission_bottom"
+                    app:layout_constraintBottom_toTopOf="@id/imageview_matched_tree"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageview_matched_tree"
+                    android:layout_width="@dimen/width_matched_tree"
+                    android:layout_height="@dimen/height_matched_tree"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/ic_tree"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/width_matched_tree"
+                    android:layout_height="@dimen/height_matched_tree"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/ic_tree"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </org.sopt.santamanitto.view.SantaCardView>
+
+        <org.sopt.santamanitto.view.SantaBottomButton
+            android:id="@+id/santabottombutton_matched"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
+            android:text="@string/matched_bottom_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
