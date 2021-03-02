@@ -4,12 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.sopt.santamanitto.NetworkViewModel
+import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.User
 import org.sopt.santamanitto.user.data.source.UserDataSource
+import org.sopt.santamanitto.util.TimeUtil
 import javax.inject.Named
 
 class ManittoRoomViewModel @ViewModelInject constructor(
@@ -28,12 +30,8 @@ class ManittoRoomViewModel @ViewModelInject constructor(
             _roomId = value
         }
 
-    private var _isMatched = false
-    var isMatched: Boolean
-        get() = _isMatched
-        set(value) {
-            _isMatched = value
-        }
+    var isMatched = false
+    var isFinished = false
 
     private var _invitationCode = ""
     val invitationCode: String
@@ -42,6 +40,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     private val _roomName = MutableLiveData<String>(null)
     val roomName: LiveData<String>
         get() = _roomName
+
+    private val _period = MutableLiveData<Int>()
+    val period: LiveData<Int>
+        get() = _period
 
     private val _expiration = MutableLiveData<String>(null)
     val expiration: LiveData<String>
@@ -59,9 +61,17 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val myManittoName : LiveData<String>
         get() = _myManittoName
 
+    private val _mySantaName = MutableLiveData("")
+    val mySantaName : LiveData<String>
+        get() = _mySantaName
+
     private val _myMission = MutableLiveData("")
     val myMission: LiveData<String>
         get() = _myMission
+
+    private val _missionToMe = MutableLiveData("")
+    val missionToMe: LiveData<String>
+        get() = _missionToMe
 
     val myName: String
         get() = userDataSource.getUserName()
@@ -69,12 +79,15 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     fun refreshManittoRoomInfo() {
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
-                _roomName.value = manittoRoomData.roomName
-                _expiration.value = manittoRoomData.expiration
-                _members.value = manittoRoomData.members
-                _invitationCode = manittoRoomData.invitationCode
-                _isAdmin.value = userDataSource.getUserId() == manittoRoomData.creator.userId
-                _isMatched = manittoRoomData.isMatched
+                manittoRoomData.run {
+                    _roomName.value = roomName
+                    _expiration.value = expiration
+                    _members.value = members
+                    _invitationCode = invitationCode
+                    _isAdmin.value = userDataSource.getUserId() == creator.userId
+                    this@ManittoRoomViewModel.isMatched = isMatched
+                    _period.value = getPeriod(createdAt, expiration)
+                }
             }
 
             override fun onFailed() {
@@ -91,6 +104,39 @@ class ManittoRoomViewModel @ViewModelInject constructor(
             }
 
             override fun onFailed() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
+
+    fun getPersonalRelationInfo() {
+        roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
+            override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
+                userDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
+                    override fun onUserInfoLoaded(user: User) {
+                        _myManittoName.value = user.userName
+                    }
+
+                    override fun onDataNotAvailable() {
+                        _networkErrorOccur.value = true
+                    }
+                })
+
+                userDataSource.getUserInfo(personalRoomInfo.santaUserId, object : UserDataSource.GetUserInfoCallback {
+                    override fun onUserInfoLoaded(user: User) {
+                        _mySantaName.value = user.userName
+                    }
+
+                    override fun onDataNotAvailable() {
+                        _networkErrorOccur.value = true
+                    }
+                })
+
+                _myMission.value = personalRoomInfo.myMission.content
+                _missionToMe.value = personalRoomInfo.missionToMe.content
+            }
+
+            override fun onDataNotAvailable() {
                 _networkErrorOccur.value = true
             }
         })
@@ -117,5 +163,9 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                 _networkErrorOccur.value = true
             }
         })
+    }
+
+    private fun getPeriod(createdAt: String, expiration: String): Int {
+        return TimeUtil.getDifferentOfDays(expiration, createdAt)
     }
 }

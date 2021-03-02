@@ -16,7 +16,7 @@ import org.sopt.santamanitto.util.ClipBoardUtil
 
 
 @AndroidEntryPoint
-class WaitingRoomFragment: Fragment() {
+class WaitingRoomFragment : Fragment() {
 
     companion object {
         private const val TAG = "WaitingRoomFragment"
@@ -34,6 +34,14 @@ class WaitingRoomFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        if (manittoRoomViewModel.isMatched) {
+            if (manittoRoomViewModel.isFinished) {
+                navigateFinishFragment()
+            } else {
+                navigateMatchingFragment()
+            }
+        }
+
         binding = FragmentWaitingRoomBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = manittoRoomViewModel
@@ -71,6 +79,11 @@ class WaitingRoomFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         manittoRoomViewModel.refreshManittoRoomInfo()
+    }
+
+    private fun navigateFinishFragment() {
+        findNavController()
+            .navigate(WaitingRoomFragmentDirections.actionWaitingRoomFragmentToFinishFragment())
     }
 
     private fun navigateMatchingFragment() {

@@ -17,14 +17,24 @@ fun setExpirationDescription(view: SantaBackground, expiration: String?) {
         view.context.getString(R.string.pm)
     }
     view.setNoLogoDescription(
-        String.format(
-            view.context.getString(R.string.manittoroom_description),
-            TimeUtil.getDayDiffFromNow(expiration),
-            calendar.get(Calendar.MONTH) + 1,
-            calendar.get(Calendar.DAY_OF_MONTH),
-            amPm,
-            calendar.get(Calendar.HOUR),
-            calendar.get(Calendar.MINUTE)
-        )
+            String.format(
+                    view.context.getString(R.string.manittoroom_description),
+                    TimeUtil.getDayDiffFromNow(expiration),
+                    calendar.get(Calendar.MONTH) + 1,
+                    calendar.get(Calendar.DAY_OF_MONTH),
+                    amPm,
+                    calendar.get(Calendar.HOUR),
+                    calendar.get(Calendar.MINUTE)
+            )
+    )
+}
+
+@BindingAdapter("setFinishDescription")
+fun setFinishDescription(view: SantaBackground, period: Int?) {
+    if (period == null) {
+        return
+    }
+    view.setNoLogoDescription(
+            String.format(view.context.getString(R.string.finish_manitto_title), period)
     )
 }
