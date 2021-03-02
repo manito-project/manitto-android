@@ -1,0 +1,27 @@
+package org.sopt.santamanitto.room.manittoroom
+
+import android.view.ViewGroup
+import org.sopt.santamanitto.R
+import org.sopt.santamanitto.databinding.ItemResultBinding
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
+import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.source.UserDataSource
+import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
+
+class ResultViewHolder(
+    parent: ViewGroup,
+    private val userDataSource: UserDataSource
+) : BaseViewHolder<ManittoRoomMember, ItemResultBinding>(R.layout.item_result, parent) {
+
+    override fun bind(data: ManittoRoomMember) {
+        binding.textviewItemresultSanta.text = data.userName
+
+        userDataSource.getUserInfo(data.relations.manittoUserId, object : UserDataSource.GetUserInfoCallback {
+            override fun onUserInfoLoaded(user: User) {
+                binding.textviewItemresultMinitto.text = user.userName
+            }
+
+            override fun onDataNotAvailable() { }
+        })
+    }
+}

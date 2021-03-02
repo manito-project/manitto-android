@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentManittoRoomFinishBinding
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
@@ -44,7 +45,15 @@ class FinishFragment: Fragment() {
 
         manittoRoomViewModel.getPersonalRelationInfo()
 
+        binding.santabottombuttonFinish.setOnClickListener {
+            navigateResultFragment()
+        }
+
         return binding.root
+    }
+
+    private fun navigateResultFragment() {
+        findNavController().navigate(FinishFragmentDirections.actionFinishFragmentToResultFragment())
     }
 
     private fun initMissionText() {

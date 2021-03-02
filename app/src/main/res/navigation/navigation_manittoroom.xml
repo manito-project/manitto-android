@@ -49,6 +49,20 @@
         android:id="@+id/finishFragment"
         android:name="org.sopt.santamanitto.room.manittoroom.fragment.FinishFragment"
         android:label="FinishFragment"
-        tool:layout="@layout/fragment_manitto_room_finish" />
+        tool:layout="@layout/fragment_manitto_room_finish">
+
+        <action
+            android:id="@+id/action_finishFragment_to_resultFragment"
+            app:destination="@id/resultFragment"
+            app:popUpTo="@+id/navigation_manittoroom.xml"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="org.sopt.santamanitto.room.manittoroom.fragment.ResultFragment"
+        android:label="ResultFragment"
+        tool:layout="@layout/fragment_result" />
 
 </navigation>
