@@ -75,7 +75,6 @@ class MatchingFragment: Fragment() {
     }
 
     private fun navigateMissionFragment() {
-        Log.d(TAG, "coroutine(): start")
         manittoRoomViewModel.viewModelScope.launch(Dispatchers.Default) {
             while ((!manittoRoomViewModel.isMatched || !isDelayDone) && !isInBackground) { }
             if (isInBackground) {

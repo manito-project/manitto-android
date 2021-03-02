@@ -25,6 +25,13 @@ object TimeUtil {
         return (gap / ( 24 * 60 * 60 * 1000)).toInt()
     }
 
+    fun getDifferentOfDays(from: String, to: String): Int {
+        val fromTime = getGregorianCalendarFromLocalFormat(from).timeInMillis
+        val toTime = getGregorianCalendarFromLocalFormat(to).timeInMillis
+        val gap: Long = fromTime - toTime
+        return (gap / ( 24 * 60 * 60 * 1000)).toInt()
+    }
+
     fun getDateInstanceFromLocalFormat(localFormatString: String): Date {
         val inputFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA)
         return inputFormat.parse(localFormatString)!!

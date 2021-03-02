@@ -7,6 +7,8 @@ import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.data.PersonalRoomInfo
+import org.sopt.santamanitto.room.data.source.RoomDataSource
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomErrorBody
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
@@ -88,6 +90,18 @@ class RoomRequestImpl(
 
             override fun onFail() {
                 callback.onFailed()
+            }
+        })
+    }
+
+    override fun getPersonalRoomInfo(roomId: Int, callback: RoomRequest.GetPersonalRoomInfoCallback) {
+        roomService.getRoomPersonalInfo(roomId).start(object: RequestCallback<PersonalRoomInfo> {
+            override fun onSuccess(data: PersonalRoomInfo) {
+                callback.onLoadPersonalRoomInfo(data)
+            }
+
+            override fun onFail() {
+                callback.onDataNotAvailable()
             }
         })
     }

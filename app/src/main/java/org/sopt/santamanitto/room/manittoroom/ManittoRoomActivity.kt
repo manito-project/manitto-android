@@ -17,6 +17,7 @@ class ManittoRoomActivity : AppCompatActivity() {
         private const val TAG = "ManittoRoomActivity"
         const val EXTRA_ROOM_ID = "roomId"
         const val EXTRA_IS_MATCHED = "isMatched"
+        const val EXTRA_IS_FINISHED = "isFinished"
     }
 
     private val manittoRoomViewModel: ManittoRoomViewModel by viewModels()
@@ -34,5 +35,7 @@ class ManittoRoomActivity : AppCompatActivity() {
         }
         val isMatched = intent.getBooleanExtra(EXTRA_IS_MATCHED, false)
         manittoRoomViewModel.isMatched = isMatched
+        val isFinished = intent.getBooleanExtra(EXTRA_IS_FINISHED, false)
+        manittoRoomViewModel.isFinished = isFinished
     }
 }

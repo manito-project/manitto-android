@@ -43,6 +43,7 @@
             <enum name="logoNoText" value="1" />
             <enum name="noLogo" value="2" />
             <enum name="onlyCharacter" value="3" />
+            <enum name="onlyText" value="4" />
         </attr>
         <attr name="backgroundText" format="string" />
         <attr name="backKey" format="boolean"/>

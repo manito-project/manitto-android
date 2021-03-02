@@ -21,6 +21,7 @@ class SantaBackground @JvmOverloads constructor(
         private const val LOGO_NO_TEXT = 1
         private const val NO_LOGO = 2
         private const val ONLY_CHARACTER = 3
+        private const val ONLY_TEXT = 4
     }
 
     private val binding = DataBindingUtil.inflate<SantaBackgroundBinding>(
@@ -143,6 +144,15 @@ class SantaBackground @JvmOverloads constructor(
                 santaHead.visibility = View.GONE
                 snowImage.visibility = View.GONE
                 titleAndDescription.visibility = View.GONE
+            }
+
+            ONLY_TEXT -> {
+                textView.visibility = View.GONE
+                logo.visibility = View.GONE
+                snowImage.visibility = View.GONE
+                santaHead.visibility = View.GONE
+                rudolfAndSnowMan.visibility = View.GONE
+                santa.visibility = View.GONE
             }
 
             else -> {

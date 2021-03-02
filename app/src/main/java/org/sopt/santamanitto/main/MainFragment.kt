@@ -49,11 +49,12 @@ class MainFragment: Fragment() {
             }
         }
 
-        adapter.setOnItemClickListener { roomId, isMatched ->
+        adapter.setOnItemClickListener { roomId, isMatched, isFinished ->
             requireActivity().run {
                 startActivity(Intent(this, ManittoRoomActivity::class.java).apply {
                     putExtra(ManittoRoomActivity.EXTRA_ROOM_ID, roomId)
                     putExtra(ManittoRoomActivity.EXTRA_IS_MATCHED, isMatched)
+                    putExtra(ManittoRoomActivity.EXTRA_IS_FINISHED, isFinished)
                 })
             }
         }

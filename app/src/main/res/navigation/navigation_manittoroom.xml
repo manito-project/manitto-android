@@ -15,13 +15,13 @@
             android:id="@+id/action_waitingRoomFragment_to_matchingFragment"
             app:destination="@id/matchingFragment"
             app:popUpTo="@+id/navigation_manittoroom.xml"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
         <action
-            android:id="@+id/action_waitingRoomFragment_to_matchedFragment"
-            app:destination="@id/matchedFragment"
+            android:id="@+id/action_waitingRoomFragment_to_finishFragment"
+            app:destination="@id/finishFragment"
             app:popUpTo="@+id/navigation_manittoroom.xml"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -35,7 +35,7 @@
             android:id="@+id/action_matchingFragment_to_matchedFragment"
             app:destination="@id/matchedFragment"
             app:popUpTo="@+id/navigation_manittoroom.xml"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -44,5 +44,11 @@
         android:name="org.sopt.santamanitto.room.manittoroom.fragment.MatchedFragment"
         android:label="MatchedFragment"
         tool:layout="@layout/fragment_matched" />
+
+    <fragment
+        android:id="@+id/finishFragment"
+        android:name="org.sopt.santamanitto.room.manittoroom.fragment.FinishFragment"
+        android:label="FinishFragment"
+        tool:layout="@layout/fragment_manitto_room_finish" />
 
 </navigation>
