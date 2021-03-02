@@ -34,9 +34,12 @@ class MainFragment: Fragment() {
 
         setOnClickListener()
 
-        initJoinedRooms()
-
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initJoinedRooms()
     }
 
     private fun setOnClickListener() {

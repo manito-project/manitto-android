@@ -18,6 +18,7 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
         add(Calendar.DAY_OF_MONTH, SantaPeriodPicker.DEFAULT_PERIOD)
         set(Calendar.HOUR, INITIAL_HOUR)
         set(Calendar.MINUTE, INITIAL_MINUTE)
+        set(Calendar.MILLISECOND, 0)
         set(Calendar.AM_PM, INITIAL_AM_PM)
     }
 
@@ -76,6 +77,6 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
     }
 
     override fun toString(): String {
-        return TimeUtil.getServerFormatFromGregorianCalendar(expirationDate)
+        return TimeUtil.getLocalFormatFromGregorianCalendar(expirationDate)
     }
 }

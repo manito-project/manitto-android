@@ -45,6 +45,10 @@ object TimeUtil {
         return SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).format(Date(gregorianCalendar.timeInMillis))
     }
 
+    fun getLocalFormatFromGregorianCalendar(gregorianCalendar: GregorianCalendar): String {
+        return SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).format(Date(gregorianCalendar.timeInMillis))
+    }
+
     fun getGregorianCalendarFromLocalFormat(localFormatString: String): GregorianCalendar {
         return GregorianCalendar().apply {
             timeInMillis = getDateInstanceFromLocalFormat(localFormatString).time
