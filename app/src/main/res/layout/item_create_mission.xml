@@ -7,8 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_createmission_item_horizontal"
-        app:isSingleLine="false"
+        app:hint="@string/createmission_mission_hint"
         app:isEditable="false"
-        app:hint="@string/createmission_mission_hint" />
+        app:isSingleLine="false"
+        app:maxLines="3" />
 
 </layout>

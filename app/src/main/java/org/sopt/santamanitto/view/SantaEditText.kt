@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaEditTextBinding
+import java.util.*
 
 
 class SantaEditText @JvmOverloads
@@ -92,6 +93,13 @@ constructor(
             }
         }
 
+        if (typeArray.hasValue(R.styleable.SantaEditText_maxLines)) {
+            val maxLines = typeArray.getInt(R.styleable.SantaEditText_maxLines, -1)
+            if (maxLines != -1) {
+                setMaxLines(maxLines)
+            }
+        }
+
         typeArray.recycle()
 
         hint?.let { editText.hint = it }
@@ -144,5 +152,9 @@ constructor(
 
     fun setMaxLength(maxLength: Int) {
         editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
+    }
+
+    fun setMaxLines(maxLines: Int) {
+        editText.maxLines = maxLines
     }
 }

@@ -152,6 +152,7 @@
                     android:layout_marginBottom="@dimen/margin_matched_mission_bottom"
                     android:background="@drawable/round_ractangle_background"
                     android:backgroundTint="@color/gray_1"
+                    android:maxLines="3"
                     android:padding="@dimen/padding_matched_mission"
                     android:text="\n\n"
                     android:textSize="@dimen/size_matched_mission"
