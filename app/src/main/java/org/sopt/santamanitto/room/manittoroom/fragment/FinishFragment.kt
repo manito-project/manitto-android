@@ -46,11 +46,20 @@ class FinishFragment: Fragment() {
                 })
             }
 
-        binding.santabottombuttonFinish.setOnClickListener {
-            navigateResultFragment()
-        }
+        setOnClickListener()
 
         return binding.root
+    }
+
+    private fun setOnClickListener() {
+        binding.run {
+            santabottombuttonFinish.setOnClickListener {
+                navigateResultFragment()
+            }
+            santabackgroundFinish.setOnBackKeyClickListener {
+                requireActivity().finish()
+            }
+        }
     }
 
     private fun navigateResultFragment() {
