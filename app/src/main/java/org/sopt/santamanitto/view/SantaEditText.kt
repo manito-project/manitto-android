@@ -97,7 +97,7 @@ constructor(
         hint?.let { editText.hint = it }
 
         when (buttonStyle) {
-            BUTTON_NONE -> rightButton.visibility = View.GONE
+            BUTTON_NONE -> rightButton.visibility = View.INVISIBLE
             BUTTON_ADD -> setAddImage()
             BUTTON_DELETE -> setDeleteImage()
         }
