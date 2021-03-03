@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentManittoRoomFinishBinding
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.view.setLayoutHeight
@@ -70,7 +71,11 @@ class FinishFragment: Fragment() {
         binding.textviewFinishMission.run {
             setLayoutHeight(this, this.height)
             manittoRoomViewModel.missionToMe.observe(viewLifecycleOwner) {
-                text = it
+                text = if (it.isNullOrEmpty()) {
+                    getString(R.string.matched_no_mission)
+                } else {
+                    it
+                }
             }
         }
     }
