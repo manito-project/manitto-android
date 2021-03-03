@@ -65,6 +65,7 @@
             app:title="@string/main_join_room" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_main_joinedroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_entire"
@@ -75,6 +76,18 @@
             android:textSize="@dimen/size_main_mymanitto"
             app:layout_constraintBottom_toTopOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/imagebutton_main_refresh"
+            android:layout_width="wrap_content"
+            android:onClick="@{() -> viewModel.refresh()}"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/textview_main_joinedroom"
+            app:layout_constraintBottom_toBottomOf="@id/textview_main_joinedroom"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_refresh"
+            android:background="@null"
+            android:padding="@dimen/padding_entire"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_main_history"

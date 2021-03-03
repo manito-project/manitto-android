@@ -10,6 +10,7 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.source.UserCachedDataSource
 import org.sopt.santamanitto.user.data.source.UserDataSource
 import org.sopt.santamanitto.util.TimeUtil
 import javax.inject.Named
@@ -97,6 +98,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     }
 
     fun match() {
+        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
         roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
             override fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>) {
                 isMatched = true
