@@ -13,6 +13,9 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T, *>>() {
     override fun getItemCount(): Int = items.size
 
     fun setList(data: List<T>) {
+        if (data == items) {
+            return
+        }
         clear()
         addAll(data)
     }

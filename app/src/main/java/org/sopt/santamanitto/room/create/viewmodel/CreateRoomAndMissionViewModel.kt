@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.create.viewmodel
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -9,8 +10,13 @@ import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.data.source.CachedRoomDataSource
+import org.sopt.santamanitto.user.data.source.UserCachedDataSource
+import org.sopt.santamanitto.user.data.source.UserDataSource
+import javax.inject.Named
 
 class CreateRoomAndMissionViewModel @ViewModelInject constructor(
+        @Named("cached") private val userDataSource: UserDataSource,
         private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
@@ -69,5 +75,7 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
                 _networkErrorOccur.value = true
             }
         })
+
+        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
     }
 }

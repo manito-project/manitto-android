@@ -20,7 +20,7 @@ class UserCachedDataSource(
     val cachedJoinedRooms: List<JoinedRoom>?
         get() = _cachedJoinedRooms
 
-    private var isJoinedRoomDirty = false
+    var isJoinedRoomDirty = false
 
     val cachedUsers = HashMap<Int, User>()
 

@@ -9,9 +9,13 @@ import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.room.network.RoomRequest.JoinRoomError
+import org.sopt.santamanitto.user.data.source.UserCachedDataSource
+import org.sopt.santamanitto.user.data.source.UserDataSource
+import javax.inject.Named
 
 class JoinRoomViewModel @ViewModelInject constructor(
-    private val roomRequest: RoomRequest
+        @Named("cached") private val userDataSource: UserDataSource,
+        private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
     val invitationCode = MutableLiveData<String>(null)
@@ -34,20 +38,21 @@ class JoinRoomViewModel @ViewModelInject constructor(
 
     fun joinRoom(callback: (JoinRoomResponse) -> Unit) {
         roomRequest.joinRoom(JoinRoomData(invitationCode.value!!),
-            object : RoomRequest.JoinRoomCallback {
+                object : RoomRequest.JoinRoomCallback {
 
-                override fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse) {
-                    callback(joinedRoom)
-                }
-
-                override fun onFailed(joinRoomError: JoinRoomError) {
-                    when (joinRoomError) {
-                        JoinRoomError.WrongInvitationCode -> _isWrongInvitationCode.value = true
-                        JoinRoomError.AlreadyMatched -> _isAlreadyMatchedRoom.value = true
-                        JoinRoomError.DuplicatedMember -> _isDuplicatedMember.value = true
-                        else -> _networkErrorOccur.value = true
+                    override fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse) {
+                        callback(joinedRoom)
                     }
-                }
-            })
+
+                    override fun onFailed(joinRoomError: JoinRoomError) {
+                        when (joinRoomError) {
+                            JoinRoomError.WrongInvitationCode -> _isWrongInvitationCode.value = true
+                            JoinRoomError.AlreadyMatched -> _isAlreadyMatchedRoom.value = true
+                            JoinRoomError.DuplicatedMember -> _isDuplicatedMember.value = true
+                            else -> _networkErrorOccur.value = true
+                        }
+                    }
+                })
+        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
     }
 }

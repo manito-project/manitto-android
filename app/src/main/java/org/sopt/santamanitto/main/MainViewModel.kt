@@ -9,7 +9,7 @@ import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
 
 class MainViewModel @ViewModelInject constructor(
-    @Named("cached") private val userCachedDataSource: UserDataSource
+    @Named("cached") private val userDataSource: UserDataSource
 ) : NetworkViewModel() {
 
     private var _joinedRooms = MutableLiveData<List<JoinedRoom>?>(null)
@@ -17,8 +17,8 @@ class MainViewModel @ViewModelInject constructor(
         get() = _joinedRooms
 
     fun getJoinedRooms() {
-        userCachedDataSource.getJoinedRoom(
-            userCachedDataSource.getUserId(),
+        userDataSource.getJoinedRoom(
+            userDataSource.getUserId(),
             object : UserDataSource.GetJoinedRoomsCallback {
                 override fun onJoinedRoomsLoaded(rooms: List<JoinedRoom>) {
                     _isLoading.value = false
