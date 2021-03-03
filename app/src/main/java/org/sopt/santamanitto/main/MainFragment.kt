@@ -32,9 +32,19 @@ class MainFragment: Fragment() {
             recyclerviewMainHistory.adapter = adapter
         }
 
+        subscribeUI()
+
         setOnClickListener()
 
         return binding.root
+    }
+
+    private fun subscribeUI() {
+        viewModel.isRefreshing.observe(viewLifecycleOwner) {
+            if (it) {
+                adapter.clear()
+            }
+        }
     }
 
     override fun onResume() {

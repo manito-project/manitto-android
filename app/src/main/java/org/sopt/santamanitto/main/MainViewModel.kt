@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.data.JoinedRoom
+import org.sopt.santamanitto.user.data.source.UserCachedDataSource
 import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
 
@@ -16,7 +17,13 @@ class MainViewModel @ViewModelInject constructor(
     val joinedRooms: LiveData<List<JoinedRoom>?>
         get() = _joinedRooms
 
+    private var _isRefreshing = MutableLiveData(false)
+    val isRefreshing: LiveData<Boolean>
+        get() = _isRefreshing
+
     fun getJoinedRooms() {
+        _isRefreshing.value = (userDataSource as UserCachedDataSource).isJoinedRoomDirty
+        _isLoading.value = true
         userDataSource.getJoinedRoom(
             userDataSource.getUserId(),
             object : UserDataSource.GetJoinedRoomsCallback {
@@ -29,5 +36,11 @@ class MainViewModel @ViewModelInject constructor(
                     _networkErrorOccur.value = true
                 }
             })
+        _isRefreshing.value = false
+    }
+
+    fun refresh() {
+        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
+        getJoinedRooms()
     }
 }
