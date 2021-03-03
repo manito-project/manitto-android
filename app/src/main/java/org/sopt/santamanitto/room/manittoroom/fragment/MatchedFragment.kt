@@ -52,7 +52,11 @@ class MatchedFragment : Fragment() {
         binding.textviewMatchedMission.run {
             setLayoutHeight(this, this.height)
             manittoRoomViewModel.myMission.observe(viewLifecycleOwner) {
-                text = it
+                text = if (it.isNullOrEmpty()) {
+                    getString(R.string.matched_no_mission)
+                } else {
+                    it
+                }
             }
         }
     }
