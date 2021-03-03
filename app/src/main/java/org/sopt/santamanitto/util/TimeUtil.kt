@@ -2,6 +2,7 @@ package org.sopt.santamanitto.util
 
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 object TimeUtil {
 
@@ -18,7 +19,8 @@ object TimeUtil {
 
     private fun getDayDiff(later: Long, early: Long): Int {
         val gap: Long = later - early
-        return (gap / (24 * 60 * 60 * 1000)).toInt()
+        val dayDiff: Float = (gap / (24f * 60 * 60 * 1000))
+        return dayDiff.roundToInt()
     }
 
     private fun getDateInstanceFromLocalFormat(localFormatString: String): Date {
