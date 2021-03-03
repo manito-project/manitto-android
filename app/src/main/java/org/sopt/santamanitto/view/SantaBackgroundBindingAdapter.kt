@@ -3,6 +3,7 @@ package org.sopt.santamanitto.view
 import androidx.databinding.BindingAdapter
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.util.TimeUtil
+import java.lang.StringBuilder
 import java.util.*
 
 @BindingAdapter("setExpirationDescription")
@@ -16,10 +17,17 @@ fun setExpirationDescription(view: SantaBackground, expiration: String?) {
     } else {
         view.context.getString(R.string.pm)
     }
-    view.setNoLogoDescription(
-            String.format(
-                    view.context.getString(R.string.manittoroom_description),
-                    TimeUtil.getDayDiffFromNow(expiration),
+    val dayDiff = TimeUtil.getDayDiffFromNow(expiration)
+    val description = StringBuilder()
+    if (dayDiff == 0) {
+        description.append(view.context.getString(R.string.manittoroom_description_today_prefix))
+    } else {
+        description.append(String.format(
+                view.context.getString(R.string.manittoroom_description_not_today_prefix), dayDiff)
+        )
+    }
+    description.append(" ").append(
+            String.format(view.context.getString(R.string.manittoroom_description_suffix),
                     calendar.get(Calendar.MONTH) + 1,
                     calendar.get(Calendar.DAY_OF_MONTH),
                     amPm,
@@ -27,6 +35,8 @@ fun setExpirationDescription(view: SantaBackground, expiration: String?) {
                     calendar.get(Calendar.MINUTE)
             )
     )
+
+    view.setNoLogoDescription(description.toString())
 }
 
 @BindingAdapter("setFinishDescription")

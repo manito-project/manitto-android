@@ -7,5 +7,5 @@ data class ManittoRoomMatchedMissions(
     @SerializedName("UserId") val userId: Int,
     @SerializedName("SantaUserId") val santaUserId: Int,
     @SerializedName("ManittoUserId") val manittoUserId: Int,
-    @SerializedName("MyMission") val myMission: MissionContent
+    @SerializedName("MyMission") val myMission: MissionContent?
 )

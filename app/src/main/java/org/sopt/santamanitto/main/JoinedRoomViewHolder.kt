@@ -4,15 +4,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.room.data.JoinedRoom
 import org.sopt.santamanitto.databinding.ViewholderJoinedRoomBinding
-import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
+import org.sopt.santamanitto.room.data.JoinedRoom
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
-import org.sopt.santamanitto.room.data.source.RoomDataSource
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.User
 import org.sopt.santamanitto.user.data.source.UserDataSource
 import org.sopt.santamanitto.util.TimeUtil
+import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 import org.sopt.santamanitto.view.setBackgroundTint
 
 class JoinedRoomViewHolder(
@@ -68,7 +67,7 @@ class JoinedRoomViewHolder(
     private fun setRoomState(data: JoinedRoom) {
         binding.textviewMymanittoState.text = if (data.isMatchingDone) {
             if (TimeUtil.isLaterThanNow(data.expiration)) {
-                String.format(getString(R.string.joinedroom_daydiff), TimeUtil.getDifferentOfDaysFromNow(data.createdAt + 1))
+                String.format(getString(R.string.joinedroom_daydiff), TimeUtil.getDayDiffFromNow(data.createdAt) + 1)
             } else {
                 binding.textviewMymanittoState.setBackgroundTint(R.color.gray_3)
                 getString(R.string.joinedroom_state_done)

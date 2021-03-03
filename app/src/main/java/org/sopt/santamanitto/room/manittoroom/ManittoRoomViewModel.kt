@@ -65,12 +65,12 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val mySantaName : LiveData<String>
         get() = _mySantaName
 
-    private val _myMission = MutableLiveData("")
-    val myMission: LiveData<String>
+    private val _myMission = MutableLiveData<String?>("")
+    val myMission: LiveData<String?>
         get() = _myMission
 
     private val _missionToMe = MutableLiveData("")
-    val missionToMe: LiveData<String>
+    val missionToMe: LiveData<String?>
         get() = _missionToMe
 
     val myName: String
@@ -132,8 +132,8 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                     }
                 })
 
-                _myMission.value = personalRoomInfo.myMission.content
-                _missionToMe.value = personalRoomInfo.missionToMe.content
+                _myMission.value = personalRoomInfo.myMission?.content
+                _missionToMe.value = personalRoomInfo.missionToMe?.content
             }
 
             override fun onDataNotAvailable() {
@@ -153,7 +153,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     }
 
     private fun setMyMissionInfo(mission: ManittoRoomMatchedMissions) {
-        _myMission.value = mission.myMission.content
+        _myMission.value = mission.myMission?.content
         userDataSource.getUserInfo(mission.manittoUserId, object: UserDataSource.GetUserInfoCallback {
             override fun onUserInfoLoaded(user: User) {
                 _myManittoName.value = user.userName
@@ -166,6 +166,6 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     }
 
     private fun getPeriod(createdAt: String, expiration: String): Int {
-        return TimeUtil.getDifferentOfDays(expiration, createdAt)
+        return TimeUtil.getDayDiff(expiration, createdAt)
     }
 }
