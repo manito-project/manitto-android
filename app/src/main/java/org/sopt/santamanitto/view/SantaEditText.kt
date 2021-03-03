@@ -1,21 +1,12 @@
 package org.sopt.santamanitto.view
 
 import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
+import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.widget.addTextChangedListener
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaEditTextBinding
 
@@ -51,6 +42,7 @@ constructor(
     private var addListener: ((String) -> Unit)? = null
 
     private var deleteListener: ((String) -> Unit)? = null
+
 
     var text: String?
         get() = editText.text.toString()
@@ -90,6 +82,13 @@ constructor(
             val isSlim = typeArray.getBoolean(R.styleable.SantaEditText_isSlim, false)
             if (isSlim) {
 
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaEditText_maxLength)) {
+            val maxLength = typeArray.getInt(R.styleable.SantaEditText_maxLength, -1)
+            if (maxLength != -1) {
+                setMaxLength(maxLength)
             }
         }
 
@@ -141,5 +140,9 @@ constructor(
             setCancelImage()
         }
         buttonStyle = BUTTON_DELETE
+    }
+
+    fun setMaxLength(maxLength: Int) {
+        editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
     }
 }

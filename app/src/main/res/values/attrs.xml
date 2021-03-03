@@ -10,6 +10,7 @@
         <attr name="isSingleLine" format="boolean"/>
         <attr name="isEditable" format="boolean"/>
         <attr name="isSlim" format="boolean"/>
+        <attr name="maxLength" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="SantaImageRoundButton">
