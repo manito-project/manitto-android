@@ -21,7 +21,10 @@ class FinishFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        manittoRoomViewModel.refreshManittoRoomInfo()
+        manittoRoomViewModel.run {
+            refreshManittoRoomInfo()
+            getPersonalRelationInfo()
+        }
     }
 
     override fun onCreateView(
@@ -42,8 +45,6 @@ class FinishFragment: Fragment() {
                     }
                 })
             }
-
-        manittoRoomViewModel.getPersonalRelationInfo()
 
         binding.santabottombuttonFinish.setOnClickListener {
             navigateResultFragment()

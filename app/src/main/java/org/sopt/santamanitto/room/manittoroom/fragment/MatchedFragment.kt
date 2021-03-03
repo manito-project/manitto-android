@@ -19,6 +19,14 @@ class MatchedFragment : Fragment() {
 
     private val manittoRoomViewModel: ManittoRoomViewModel by activityViewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        manittoRoomViewModel.run {
+            refreshManittoRoomInfo()
+            getPersonalRelationInfo()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMatchedBinding.inflate(inflater, container, false).apply {
             viewModel = manittoRoomViewModel
