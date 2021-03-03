@@ -65,8 +65,8 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val mySantaName : LiveData<String>
         get() = _mySantaName
 
-    private val _myMission = MutableLiveData("")
-    val myMission: LiveData<String>
+    private val _myMission = MutableLiveData<String?>("")
+    val myMission: LiveData<String?>
         get() = _myMission
 
     private val _missionToMe = MutableLiveData("")
