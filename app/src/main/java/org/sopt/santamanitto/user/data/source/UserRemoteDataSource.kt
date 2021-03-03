@@ -9,6 +9,7 @@ import org.sopt.santamanitto.user.network.UserCheckResponse
 import org.sopt.santamanitto.user.network.UserService
 import retrofit2.Call
 import retrofit2.Callback
+import java.util.*
 
 class UserRemoteDataSource(
     private val userService: UserService,
@@ -70,7 +71,7 @@ class UserRemoteDataSource(
     override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
         getUserInfo(userId, object: UserDataSource.GetUserInfoCallback {
             override fun onUserInfoLoaded(user: User) {
-                callback.onJoinedRoomsLoaded(user.joinedRooms)
+                callback.onJoinedRoomsLoaded(user.joinedRooms.reversed())
             }
 
             override fun onDataNotAvailable() {
