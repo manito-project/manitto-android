@@ -166,6 +166,6 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     }
 
     private fun getPeriod(createdAt: String, expiration: String): Int {
-        return TimeUtil.getDifferentOfDays(expiration, createdAt)
+        return TimeUtil.getDayDiff(expiration, createdAt)
     }
 }
