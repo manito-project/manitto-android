@@ -79,6 +79,7 @@
                         android:id="@+id/edittext_createroom_roomname"
                         setText="@={viewModel.roomName}"
                         android:layout_width="match_parent"
+                        app:maxLength="15"
                         android:layout_height="@dimen/height_santaedittext_big"
                         app:hint="@string/createroom_roomname_hint" />
 
