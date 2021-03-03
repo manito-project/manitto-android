@@ -14,9 +14,6 @@
             name="personalRoomInfo"
             type="org.sopt.santamanitto.room.data.PersonalRoomInfo" />
 
-        <variable
-            name="userInfo"
-            type="org.sopt.santamanitto.user.data.User" />
     </data>
 
     <org.sopt.santamanitto.view.SantaCardView
@@ -43,7 +40,7 @@
                 tool:text="마니또 방 이름" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/temp"
+                android:id="@+id/textview_mymanitto_manittoinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_mymanitto_temp_top"
@@ -67,7 +64,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/size_mymanitto_state_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/temp"
+                app:layout_constraintTop_toBottomOf="@id/textview_mymanitto_manittoinfo"
                 tool:text="1일째" />
 
             <androidx.appcompat.widget.AppCompatTextView

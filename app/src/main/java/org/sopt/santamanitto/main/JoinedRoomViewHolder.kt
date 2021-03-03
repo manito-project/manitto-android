@@ -44,7 +44,7 @@ class JoinedRoomViewHolder(
 
                 cachedUserDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
                     override fun onUserInfoLoaded(user: User) {
-                        binding.userInfo = user
+                        binding.textviewMymanittoManittoinfo.text = String.format(getString(R.string.joinedroom_manitto_info), user.userName)
                         clearLoading()
                     }
 
