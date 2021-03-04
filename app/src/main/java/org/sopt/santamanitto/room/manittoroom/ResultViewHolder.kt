@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.manittoroom
 
+import android.view.View
 import android.view.ViewGroup
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemResultBinding
@@ -18,10 +19,15 @@ class ResultViewHolder(
 
         userDataSource.getUserInfo(data.relations.manittoUserId, object : UserDataSource.GetUserInfoCallback {
             override fun onUserInfoLoaded(user: User) {
-                binding.textviewItemresultMinitto.text = user.userName
+                binding.run {
+                    textviewItemresultMinitto.text = user.userName
+                    santaloadingItemresult.visibility = View.GONE
+                }
             }
 
-            override fun onDataNotAvailable() { }
+            override fun onDataNotAvailable() {
+                binding.santaloadingItemresult.setError(true)
+            }
         })
     }
 }
