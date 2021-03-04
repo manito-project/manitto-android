@@ -49,13 +49,13 @@ class JoinedRoomViewHolder(
                     }
 
                     override fun onDataNotAvailable() {
-                        binding.santaloadingJoinedroom.setDataNotAvailable()
+                        binding.santaloadingJoinedroom.setError(true)
                     }
                 })
             }
 
             override fun onDataNotAvailable() {
-                binding.santaloadingJoinedroom.setDataNotAvailable()
+                binding.santaloadingJoinedroom.setError(true)
             }
         })
     }

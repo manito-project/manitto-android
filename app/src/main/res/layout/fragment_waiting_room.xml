@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel" />
@@ -114,6 +116,16 @@
                     app:layout_constraintTop_toBottomOf="@id/view_waitingroom_divider"
                     tool:ignore="RtlSymmetry"
                     tool:listitem="@layout/item_member" />
+
+                <org.sopt.santamanitto.view.SantaLoading
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{viewModel.members == null ? View.VISIBLE : View.GONE}"
+                    app:error="@{viewModel.networkErrorOccur}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_waitingroom_notice"

@@ -23,8 +23,12 @@ class SantaLoading @JvmOverloads constructor(
 
     private val textView = binding.textviewSantaloading
 
-    fun setDataNotAvailable() {
-        progressbar.visibility = View.GONE
-        textView.visibility = View.VISIBLE
+    fun setError(isError: Boolean) {
+        if (isError) {
+            progressbar.visibility = View.GONE
+            textView.visibility = View.VISIBLE
+        } else {
+            textView.visibility = View.GONE
+        }
     }
 }
