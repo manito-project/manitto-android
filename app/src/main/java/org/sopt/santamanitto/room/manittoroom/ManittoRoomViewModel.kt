@@ -78,6 +78,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         get() = userDataSource.getUserName()
 
     fun refreshManittoRoomInfo() {
+        startLoading()
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
                 manittoRoomData.run {
@@ -88,6 +89,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                     _isAdmin.value = userDataSource.getUserId() == creator.userId
                     this@ManittoRoomViewModel.isMatched = isMatched
                     _period.value = getPeriod(createdAt, expiration)
+                    stopLoading()
                 }
             }
 
@@ -98,6 +100,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     }
 
     fun match() {
+        startLoading()
         (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
         roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
             override fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>) {
@@ -112,11 +115,14 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     }
 
     fun getPersonalRelationInfo() {
+        startLoading()
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
             override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
+                startLoading()
                 userDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
                     override fun onUserInfoLoaded(user: User) {
                         _myManittoName.value = user.userName
+                        stopLoading()
                     }
 
                     override fun onDataNotAvailable() {
@@ -127,6 +133,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                 userDataSource.getUserInfo(personalRoomInfo.santaUserId, object : UserDataSource.GetUserInfoCallback {
                     override fun onUserInfoLoaded(user: User) {
                         _mySantaName.value = user.userName
+                        stopLoading()
                     }
 
                     override fun onDataNotAvailable() {
@@ -159,6 +166,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         userDataSource.getUserInfo(mission.manittoUserId, object: UserDataSource.GetUserInfoCallback {
             override fun onUserInfoLoaded(user: User) {
                 _myManittoName.value = user.userName
+                stopLoading()
             }
 
             override fun onDataNotAvailable() {

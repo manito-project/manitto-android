@@ -120,7 +120,7 @@
                 <org.sopt.santamanitto.view.SantaLoading
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{viewModel.members == null ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
                     app:error="@{viewModel.networkErrorOccur}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
