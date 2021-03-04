@@ -41,6 +41,7 @@ class JoinRoomViewModel @ViewModelInject constructor(
                 object : RoomRequest.JoinRoomCallback {
 
                     override fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse) {
+                        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
                         callback(joinedRoom)
                     }
 
@@ -53,6 +54,5 @@ class JoinRoomViewModel @ViewModelInject constructor(
                         }
                     }
                 })
-        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
     }
 }
