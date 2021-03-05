@@ -67,7 +67,7 @@ class JoinedRoomViewHolder(
     private fun setRoomState(data: JoinedRoom) {
         binding.textviewMymanittoState.text = if (data.isMatchingDone) {
             if (TimeUtil.isLaterThanNow(data.expiration)) {
-                String.format(getString(R.string.joinedroom_daydiff), TimeUtil.getDayDiffFromNow(data.createdAt) + 1)
+                String.format(getString(R.string.joinedroom_daydiff), TimeUtil.getDayDiffFromNow(data.createdAt) * -1 + 1)
             } else {
                 binding.textviewMymanittoState.setBackgroundTint(R.color.gray_3)
                 getString(R.string.joinedroom_state_done)
