@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SantaEditText">
+        <attr name="rightButton" format="enum">
+            <enum name="none" value="0" />
+            <enum name="add" value="1" />
+            <enum name="delete" value="2" />
+        </attr>
+        <attr name="hint" format="string" />
+        <attr name="isSingleLine" format="boolean"/>
+        <attr name="isEditable" format="boolean"/>
+        <attr name="isSlim" format="boolean"/>
+        <attr name="maxLength" format="integer" />
+        <attr name="maxLines" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SantaImageRoundButton">
+        <attr name="title" format="string" />
+        <attr name="description" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="SantaCheckBox">
+        <attr name="text" format="string" />
+        <attr name="isChecked" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SantaSmallButton">
+        <attr name="buttonMode" format="enum">
+            <enum name="minus" value="0" />
+            <enum name="add" value="1" />
+            <enum name="cancel" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SantaSwitch">
+        <attr name="onText" format="string" />
+        <attr name="offText" format="string" />
+        <attr name="isOn" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SantaBackground">
+        <attr name="backgroundStyle" format="enum">
+            <enum name="withLogoMode" value="0" />
+            <enum name="logoNoText" value="1" />
+            <enum name="noLogo" value="2" />
+            <enum name="onlyCharacter" value="3" />
+            <enum name="onlyText" value="4" />
+        </attr>
+        <attr name="backgroundText" format="string" />
+        <attr name="backKey" format="boolean"/>
+        <attr name="noLogoTitle" format="string" />
+        <attr name="noLogoDescription" format="string"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="SantaIndicator">
+        <attr name="isSelected" format="boolean"/>
+        <attr name="number" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="SantaCardView">
+        <attr name="moreRound" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SantaNumberPicker">
+        <attr name="minValue" format="integer"/>
+        <attr name="maxValue" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="SantaBottomButton">
+        <attr name="isGrayButton" format="boolean"/>
+    </declare-styleable>
+
+</resources>

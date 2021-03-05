@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_ractangle_background"
+        android:backgroundTint="@color/gray_1"
+        android:paddingHorizontal="@dimen/padding_santaedittext_root_horizontal">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edittext_santaedittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_santaedittext_edittext_vertical"
+            android:singleLine="true"
+            android:layout_marginEnd="@dimen/padding_santaedittext_root_horizontal"
+            android:background="@null"
+            android:fontFamily="@font/notosans_font_family"
+            android:textSize="@dimen/size_santaedittext"
+            android:lineHeight="23.68dp"
+            android:letterSpacing="-0.03"
+            android:textColor="@drawable/color_santaedittext_edittext"
+            android:textCursorDrawable="@drawable/cursor_edittext"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/santasmallbutton_santaedittext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <org.sopt.santamanitto.view.SantaSmallButton
+            android:id="@+id/santasmallbutton_santaedittext"
+            android:layout_width="@dimen/width_edittext_rightbutton"
+            android:layout_height="@dimen/width_edittext_rightbutton"
+            android:layout_marginVertical="@dimen/margin_santaedittext_button_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edittext_santaedittext"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_santaperiodpicker"
+    android:background="@drawable/round_ractangle_background_30"
+    android:backgroundTint="@color/gray_1">
+
+    <org.sopt.santamanitto.view.SantaSmallButton
+        android:id="@+id/imagebutton_santaperiodpicker_minus"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_santapereiodpicker_minusbutton"
+        android:layout_marginStart="@dimen/padding_santaperiodpicker_horizontal"
+        app:buttonMode="minus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_santaperiodpicker_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_santaperiodpicker_text_horizontal"
+        android:textSize="@dimen/size_santaperiodpicker_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imagebutton_santaperiodpicker_plus"
+        app:layout_constraintStart_toEndOf="@id/imagebutton_santaperiodpicker_minus"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="n일 후" />
+
+    <org.sopt.santamanitto.view.SantaSmallButton
+        android:id="@+id/imagebutton_santaperiodpicker_plus"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_santapereiodpicker_minusbutton"
+        android:layout_marginEnd="@dimen/padding_santaperiodpicker_horizontal"
+        app:buttonMode="add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_santaperiodpicker_minusarea"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/view_santaperiodpicker_plusarea"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_santaperiodpicker_plusarea"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_santaperiodpicker_minusarea"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

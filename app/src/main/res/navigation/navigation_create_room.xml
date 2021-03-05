@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_create_room"
+    app:startDestination="@id/createRoomFragment">
+
+    <fragment
+        android:id="@+id/createRoomFragment"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateRoomFragment"
+        android:label="CreateRoomFragment"
+        tools:layout="@layout/fragment_create_room">
+        <action
+            android:id="@+id/action_createRoomFragment_to_createMissionsFragment"
+            app:destination="@id/createMissionsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createMissionsFragment"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateMissionsFragment"
+        android:label="CreateMissionsFragment"
+        tools:layout="@layout/fragment_create_mission">
+        <action
+            android:id="@+id/action_createMissionsFragment_to_createConfirmFragment"
+            app:destination="@id/createConfirmFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createConfirmFragment"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateConfirmFragment"
+        android:label="CreateConfirmFragment"
+        tools:layout="@layout/fragment_create_confirm" />
+
+</navigation>

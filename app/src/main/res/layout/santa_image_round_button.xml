@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <ImageView
+            android:id="@+id/imageview_santaimageroundbutton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="@dimen/elevation_shadow"
+            tool:src="@drawable/ic_rudolf_head"
+            app:layout_constraintBottom_toTopOf="@+id/cardview_santaimageroundbutton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.401"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <org.sopt.santamanitto.view.SantaCardView
+            android:id="@+id/cardview_santaimageroundbutton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_santaimageroundbutton">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textview_santaimageroundbutton_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_satnaimageroundbutton_title"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray_3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.225"
+                    app:layout_constraintVertical_chainStyle="spread"
+                    tool:text="타이틀 문구" />
+
+                <TextView
+                    android:id="@+id/textview_santaimageroundbutton_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/size_santaimageroundbutton_description"
+                    android:textColor="@color/gray_3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.745"
+                    tool:text="셜명 문구" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </org.sopt.santamanitto.view.SantaCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

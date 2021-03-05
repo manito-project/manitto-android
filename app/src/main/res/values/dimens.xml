@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="elevation_shadow">4dp</dimen>
+    <dimen name="radius_cardview">10dp</dimen>
+    <dimen name="radius_cardview_more">20dp</dimen>
+    <dimen name="padding_entire">16dp</dimen>
+    <dimen name="margin_bottombutton_bottom">40dp</dimen>
+    <dimen name="margin_space_letter">4dp</dimen>
+    <dimen name="padding_cardview_horizontal">30dp</dimen>
+    <dimen name="padding_cardview_vertical">25dp</dimen>
+    <dimen name="margin_cardview_to_guidline_top">16dp</dimen>
+
+    <dimen name="margin_dialog_title_text_vertical">15dp</dimen>
+    <dimen name="margin_dialog_button_text_vertical">25dp</dimen>
+    <dimen name="size_dialog_text">17sp</dimen>
+    <dimen name="height_dialog_content">175dp</dimen>
+
+    <dimen name="width_edittext_rightbutton">30dp</dimen>
+    <dimen name="margin_santaedittext_edittext_vertical">7dp</dimen>
+    <dimen name="margin_santaedittext_button_vertical">7dp</dimen>
+    <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
+    <dimen name="size_santaedittext">16sp</dimen>
+    <dimen name="height_santaedittext_big">48dp</dimen>
+
+    <dimen name="size_santabottombutton_text">18sp</dimen>
+    <dimen name="padding_santabottombutton_vertical">10dp</dimen>
+    <dimen name="height_santabottombutton">48dp</dimen>
+
+    <dimen name="size_satnaimageroundbutton_title">17sp</dimen>
+    <dimen name="size_santaimageroundbutton_description">14sp</dimen>
+    <dimen name="width_santaimageroundbutton_max">145dp</dimen>
+
+    <dimen name="padding_santacheckbox_horizontal">16dp</dimen>
+    <dimen name="margin_santacheckbox_textpadding_start">15dp</dimen>
+    <dimen name="size_santacheckbox_buttontext">16sp</dimen>
+    <dimen name="width_santacheckbox_checkbox">25dp</dimen>
+    <dimen name="margin_santacheckbox_vertical">15dp</dimen>
+
+    <dimen name="height_santapereiodpicker_minusbutton">25dp</dimen>
+    <dimen name="height_santaperiodpicker">40dp</dimen>
+    <dimen name="padding_santaperiodpicker_horizontal">12dp</dimen>
+    <dimen name="size_santaperiodpicker_text">17sp</dimen>
+    <dimen name="margin_santaperiodpicker_text_horizontal">16dp</dimen>
+
+    <dimen name="size_santaswitch_text">14sp</dimen>
+    <dimen name="margin_santaswitch_cursor">2dp</dimen>
+    <dimen name="height_santaswitch_min">33dp</dimen>
+    <dimen name="width_santaswitch_min">96dp</dimen>
+
+    <dimen name="width_santabackground_logo">80dp</dimen>
+    <dimen name="height_santabackground_logo">36dp</dimen>
+    <dimen name="margin_santabackground_logo_top">40dp</dimen>
+    <dimen name="size_santabackground_text">18sp</dimen>
+    <dimen name="margin_santabackground_santahead_end">16dp</dimen>
+    <dimen name="margin_santabackground_text_start">16dp</dimen>
+    <dimen name="margin_santabackground_text_bottom">25dp</dimen>
+    <dimen name="margin_santabackground_text_end">23dp</dimen>
+    <dimen name="height_santabackground_max">288dp</dimen>
+    <dimen name="margin_santabackground_snowman_bottom">23dp</dimen>
+    <dimen name="margin_santabackground_rudolf_start">39dp</dimen>
+    <dimen name="padding_santabackground_backbutton_vertical">20dp</dimen>
+    <dimen name="padding_santabackground_backbutton_horizontal">16dp</dimen>
+    <dimen name="size_santabackground_title">18sp</dimen>
+    <dimen name="size_santabackground_description">15sp</dimen>
+    <dimen name="margin_santabackground_description_bottom">80dp</dimen>
+    <dimen name="margin_santabakcground_title">16dp</dimen>
+
+    <dimen name="size_santaindicator_text">15sp</dimen>
+
+    <dimen name="margin_splash_logo_top">80dp</dimen>
+    <dimen name="height_splash_snow">100dp</dimen>
+    <dimen name="margin_splash_santa_horizontal">20dp</dimen>
+
+    <dimen name="size_signin_title">20sp</dimen>
+    <dimen name="margin_signin_title_top">30dp</dimen>
+    <dimen name="margin_signin_between_indicator">10dp</dimen>
+    <dimen name="size_signin_myname">18sp</dimen>
+    <dimen name="padding_signin_cardview_horizontal">10dp</dimen>
+    <dimen name="padding_signin_cardview_vertical">20dp</dimen>
+    <dimen name="margin_signin_edittext_top">15dp</dimen>
+    <dimen name="padding_signin_cardview_bottom_additional">20dp</dimen>
+    <dimen name="margin_signin_cardview_top">32dp</dimen>
+    <dimen name="margin_signin_button_bottom">40dp</dimen>
+    <dimen name="margin_condition_divider_bottom">9dp</dimen>
+    <dimen name="margin_condition_divider_top">6dp</dimen>
+
+    <dimen name="margin_main_guideline_bottom">22dp</dimen>
+    <dimen name="margin_main_recyclerview_top">16dp</dimen>
+    <dimen name="margin_main_recyclerview_bottom">40dp</dimen>
+    <dimen name="size_main_no_manitto_notice">14sp</dimen>
+    <dimen name="margin_main_nomanitto_snowman_bottom">16dp</dimen>
+
+    <dimen name="height_mymanitto_viewholder">184dp</dimen>
+    <dimen name="width_mymanitto_viewholder">145dp</dimen>
+    <dimen name="size_mymanitto_title">17sp</dimen>
+    <dimen name="padding_mymanitto_horizontal">14dp</dimen>
+    <dimen name="padding_mymanitto_veertical">17dp</dimen>
+    <dimen name="size_mymanitto_mission_text">12sp</dimen>
+    <dimen name="size_mymanitto_state_text">12sp</dimen>
+    <dimen name="lineheight_mymanitto_mission_text">18sp</dimen>
+    <dimen name="margin_mymanitto_temp_top">16dp</dimen>
+    <dimen name="margin_mymanitto_state_top">7dp</dimen>
+    <dimen name="margin_mymanitto_mission_top">25dp</dimen>
+    <dimen name="size_main_mymanitto">20sp</dimen>
+    <dimen name="margin_mymanitto_item_decoration">16dp</dimen>
+    <dimen name="margin_mymanitto_mittion_top">25dp</dimen>
+    <dimen name="padding_mymanitto_daydiff_textview_horizontal">10dp</dimen>
+    <dimen name="padding_mymanitto_daydiff_textview_vertical">5dp</dimen>
+
+    <dimen name="margin_createroom_cardview_bottom">35dp</dimen>
+    <dimen name="size_createroom_cardview_titles">16sp</dimen>
+    <dimen name="size_createroom_expiration_description">12sp</dimen>
+    <dimen name="margin_createroom_roomname_title_bottom">12dp</dimen>
+    <dimen name="margin_createroom_crardview_titles_bottom">7dp</dimen>
+    <dimen name="margin_createroom_santaswitch_start">15dp</dimen>
+    <dimen name="padding_createroom_dialog_vertical">16dp</dimen>
+
+    <dimen name="size_santanumberpicker_text">17sp</dimen>
+
+    <dimen name="size_createmission_cardview_title">13sp</dimen>
+    <dimen name="padding_createmission_cardview_top">20dp</dimen>
+    <dimen name="padding_createmission_cardview_horizontal">28dp</dimen>
+    <dimen name="margin_createmission_recyclerview_top">20dp</dimen>
+    <dimen name="padding_createmission_recyclerview_horizontal">12dp</dimen>
+    <dimen name="margin_createmission_recyclerview_items">15dp</dimen>
+    <dimen name="margin_createmission_skip_bottom">16dp</dimen>
+    <dimen name="padding_createmission_recyclerview_bottom">23dp</dimen>
+    <dimen name="margin_createmission_item_horizontal">18dp</dimen>
+    <dimen name="size_createmission_scrollbar">6dp</dimen>
+
+    <dimen name="margin_createconfirm_roomname_top">20dp</dimen>
+    <dimen name="size_createconfirm_expiration_description">14sp</dimen>
+    <dimen name="margin_createconfirm_preview_top">5dp</dimen>
+    <dimen name="margin_createconfirm_divider_top">20dp</dimen>
+    <dimen name="margin_createconfirm_no_mission_vertical">25dp</dimen>
+
+    <dimen name="margin_joinroom_edittext_top">10dp</dimen>
+
+    <dimen name="margin_waitingroom_cardview_bottom">24dp</dimen>
+    <dimen name="padding_waitingroom_invitation_code_horizontal">8dp</dimen>
+    <dimen name="padding_waitingroom_invitation_code_vertical">3dp</dimen>
+    <dimen name="margin_waitingroom_invitation_code_top">27dp</dimen>
+    <dimen name="margin_waitingroom_divider_top">20dp</dimen>
+    <dimen name="size_waitingroom_invitation_code">10sp</dimen>
+    <dimen name="margin_waitingroom_recyclerview_top">19dp</dimen>
+    <dimen name="margin_waitingroom_recyclerview_bottom">12dp</dimen>
+    <dimen name="margin_waitingroom_recyclerview_end">12dp</dimen>
+    <dimen name="padding_waitingroom_recyclerview_start">28dp</dimen>
+    <dimen name="margin_waitingroom_notice_bottom">15dp</dimen>
+    <dimen name="size_waitingroom_notice">12sp</dimen>
+    <dimen name="margin_waitingroom_recyclerview_items">16dp</dimen>
+
+    <dimen name="height_memberitem_imageview">30dp</dimen>
+    <dimen name="margin_memberitem_image_end">12dp</dimen>
+    <dimen name="size_memberitem_name">17sp</dimen>
+
+    <dimen name="size_dialog_invitationcode_copy">12sp</dimen>
+    <dimen name="padding_dialog_invitationcode_button_horizontal">10dp</dimen>
+    <dimen name="padding_dialog_invitationcode_button_vertical">6dp</dimen>
+    <dimen name="height_invitationcode_root">96dp</dimen>
+
+    <dimen name="height_matching_roulette_max">272dp</dimen>
+    <dimen name="height_matching_character">70dp</dimen>
+    <dimen name="width_matching_character">43dp</dimen>
+    <dimen name="margin_matching_character">13dp</dimen>
+    <dimen name="margin_matching_logo_top">48dp</dimen>
+    <dimen name="width_matching_logo">72dp</dimen>
+    <dimen name="height_matching_logo">33dp</dimen>
+    <dimen name="size_matching_text">12sp</dimen>
+    <dimen name="padding_matched_cardview_vertical">20dp</dimen>
+    <dimen name="size_matched_manitto">20sp</dimen>
+    <dimen name="padding_matched_manitto_horizontal">44dp</dimen>
+    <dimen name="padding_matched_manitto_vertical">12dp</dimen>
+    <dimen name="margin_matched_manitto_top">30dp</dimen>
+    <dimen name="width_matched_tree">54dp</dimen>
+    <dimen name="height_matched_tree">73dp</dimen>
+    <dimen name="margin_matched_mission_bottom">15dp</dimen>
+    <dimen name="margin_matched_mission_title_bottom">20dp</dimen>
+    <dimen name="padding_matched_mission">12dp</dimen>
+    <dimen name="size_matched_mission">15sp</dimen>
+
+    <dimen name="margin_finish_redsocks_end">30dp</dimen>
+    <dimen name="margin_finish_greensocks_end">28dp</dimen>
+    <dimen name="width_finish_characters_layout">120dp</dimen>
+    <dimen name="height_finish_characters_layout">57dp</dimen>
+    <dimen name="margin_finish_characters_layout_end">16dp</dimen>
+
+    <dimen name="margin_result_divider_top">18dp</dimen>
+    <dimen name="padding_result_recyclerview_vertical">16dp</dimen>
+    <dimen name="padding_itemresult_text_horizontal">14dp</dimen>
+    <dimen name="padding_itemresult_text_vertical">6dp</dimen>
+    <dimen name="margin_result_recyclerview_item">15dp</dimen>
+
+
+</resources>

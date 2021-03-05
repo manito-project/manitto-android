@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.user.signin.viewmodel.EnterNameViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_entername"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backgroundText="@string/entername_background_welcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_entername_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_signin_title_top"
+            android:text="@string/entername_title"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_signin_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/santabackground_entername" />
+
+        <org.sopt.santamanitto.view.SantaIndicator
+            android:id="@+id/santaindicator_entername_indicator1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_signin_between_indicator"
+            app:isSelected="true"
+            app:layout_constraintBottom_toBottomOf="@id/textview_entername_title"
+            app:layout_constraintEnd_toStartOf="@id/santaindicator_entername_indicator2"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/textview_entername_title"
+            app:layout_constraintTop_toTopOf="@id/textview_entername_title"
+            app:number="1" />
+
+        <org.sopt.santamanitto.view.SantaIndicator
+            android:id="@+id/santaindicator_entername_indicator2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/padding_entire"
+            app:isSelected="false"
+            app:layout_constraintBottom_toBottomOf="@id/textview_entername_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/santaindicator_entername_indicator1"
+            app:layout_constraintTop_toTopOf="@id/textview_entername_title"
+            app:number="2" />
+
+        <org.sopt.santamanitto.view.SantaCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_signin_cardview_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_entername_title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/padding_signin_cardview_horizontal"
+                android:paddingVertical="@dimen/padding_signin_cardview_vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_entername_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/entername_title_name"
+                    android:textFontWeight="700"
+                    android:textSize="@dimen/size_signin_myname"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <org.sopt.santamanitto.view.SantaEditText
+                    setText="@={viewModel.userName}"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_santaedittext_big"
+                    android:layout_marginTop="@dimen/margin_signin_edittext_top"
+                    android:layout_marginBottom="@dimen/padding_signin_cardview_bottom_additional"
+                    app:hint="@string/entername_edittext_hint"
+                    app:isSingleLine="true"
+                    app:maxLength="5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_entername_title2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </org.sopt.santamanitto.view.SantaCardView>
+
+        <org.sopt.santamanitto.view.SantaBottomButton
+            android:id="@+id/santabottombutton_entername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_signin_button_bottom"
+            android:enabled="@{viewModel.isUserNameValid()}"
+            android:text="@string/button_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

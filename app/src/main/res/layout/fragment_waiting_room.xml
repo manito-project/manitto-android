@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_waitingroom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backKey="true"
+            app:backgroundStyle="noLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            setExpirationDescription="@{viewModel.expiration}"
+            app:noLogoTitle="@{viewModel.roomName}"
+            tool:noLogoDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
+            tool:noLogoTitle="마니또 방 이름" />
+
+        <View
+            android:id="@+id/view_waitingroom_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/santabackground_waitingroom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <org.sopt.santamanitto.view.SantaCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_cardview_to_guidline_top"
+            android:layout_marginBottom="@dimen/margin_waitingroom_cardview_bottom"
+            app:layout_constraintBottom_toTopOf="@id/santabottombutton_waitingroom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_waitingroom_guideline"
+            app:moreRound="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_waitingroom_cardviewtitle"
+                    style="@style/TitleOfCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_createmission_cardview_horizontal"
+                    android:text="@string/waitingroom_cardview_title"
+                    app:layout_constraintBottom_toTopOf="@+id/view_waitingroom_divider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_waitingroom_invitationcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_waitingroom_invitation_code_top"
+                    android:layout_marginEnd="@dimen/padding_createmission_cardview_horizontal"
+                    android:background="@drawable/background_invitation_code_button"
+                    android:paddingHorizontal="@dimen/padding_waitingroom_invitation_code_horizontal"
+                    android:paddingVertical="@dimen/padding_waitingroom_invitation_code_vertical"
+                    android:text="@string/waitingroom_copy_invitation_code"
+                    android:textSize="@dimen/size_waitingroom_invitation_code"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tool:ignore="SmallSp" />
+
+                <View
+                    android:id="@+id/view_waitingroom_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/margin_waitingroom_divider_top"
+                    android:background="@color/gray_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_waitingroom_invitationcode" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_waitingroom"
+                    style="@style/RecyclerViewScrollbar"
+                    replaceAll="@{viewModel.members}"
+                    setItemMargin="@{@dimen/margin_waitingroom_recyclerview_items}"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_waitingroom_recyclerview_top"
+                    android:layout_marginEnd="@dimen/margin_waitingroom_recyclerview_end"
+                    android:layout_marginBottom="@dimen/margin_waitingroom_recyclerview_bottom"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:paddingStart="@dimen/padding_waitingroom_recyclerview_start"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/textview_waitingroom_notice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_waitingroom_divider"
+                    tool:ignore="RtlSymmetry"
+                    tool:listitem="@layout/item_member" />
+
+                <org.sopt.santamanitto.view.SantaLoading
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+                    app:error="@{viewModel.networkErrorOccur}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_waitingroom_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
+                    android:layout_marginBottom="@dimen/margin_waitingroom_notice_bottom"
+                    android:text="@{viewModel.isAdmin() ? @string/waitingroom_notice_admin : @string/waitingroom_notice_participant}"
+                    android:textSize="@dimen/size_waitingroom_notice"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </org.sopt.santamanitto.view.SantaCardView>
+
+        <org.sopt.santamanitto.view.SantaBottomButton
+            android:id="@+id/santabottombutton_waitingroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isAdmin()}"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
+            android:text="@string/waitingroom_bottombutton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

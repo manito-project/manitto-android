@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tool="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_ractangle_bottom_background"
+            android:elevation="@dimen/elevation_shadow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_santabackground_snow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_shadow"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_snow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4292" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/imagebutton_santabackground_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:elevation="@dimen/elevation_shadow"
+            android:paddingHorizontal="@dimen/padding_santabackground_backbutton_horizontal"
+            android:paddingVertical="@dimen/padding_santabackground_backbutton_vertical"
+            android:src="@drawable/ic_btn_back"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_santabackground_logo"
+            android:layout_width="@dimen/width_santabackground_logo"
+            android:layout_height="@dimen/height_santabackground_logo"
+            android:layout_marginTop="@dimen/margin_santabackground_logo_top"
+            android:elevation="@dimen/elevation_shadow"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_santabackground"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_santabackground_text_start"
+            android:layout_marginEnd="@dimen/margin_santabackground_text_end"
+            android:layout_marginBottom="@dimen/margin_santabackground_text_bottom"
+            android:elevation="@dimen/elevation_shadow"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_santabackground_text"
+            app:fontWeight="700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageview_santabackground_santahead"
+            app:layout_constraintStart_toStartOf="parent"
+            tool:text="안녕!\n산타 마니또에 온 것을 환영해:)" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_santabackground_santahead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_santabackground_santahead_end"
+            android:elevation="@dimen/elevation_shadow"
+            android:src="@drawable/ic_santa_head_long"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_santabackground_santa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_shadow"
+            android:src="@drawable/ic_santa_widht_chimney"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_santabackground_snowman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_santabackground_snowman_bottom"
+            android:elevation="@dimen/elevation_shadow"
+            android:src="@drawable/ic_snowman"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_santabackground_rudolf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_santabackground_rudolf_start"
+            android:layout_marginBottom="@dimen/margin_santabackground_snowman_bottom"
+            android:elevation="@dimen/elevation_shadow"
+            android:src="@drawable/ic_rudolf"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_santabackground_rudolfnsnowman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="imageview_santabackground_rudolf, imageview_santabackground_snowman" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_santabackground_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_santabakcground_title"
+            android:elevation="@dimen/elevation_shadow"
+            tool:text="@string/createmission_background_title"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_santabackground_title"
+            app:layout_constraintBottom_toTopOf="@id/textview_santabackground_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_santabackground_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
+            android:elevation="@dimen/elevation_shadow"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_santabackground_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_santabackground_title"
+            app:layout_constraintTop_toBottomOf="@id/textview_santabackground_title"
+            tool:text="@string/createmission_background_description" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_santabackground_titledescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="textview_santabackground_title, textview_santabackground_description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

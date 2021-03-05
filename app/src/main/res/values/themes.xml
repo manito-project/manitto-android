@@ -1,6 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="AppTheme.Base"></style>
+
     <!-- Base application theme. -->
-    <style name="Theme.SantaManito" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -10,7 +13,38 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/navy</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
+        <item name="android:buttonStyle">@style/customButtonFontStyle</item>
+        <item name="android:editTextStyle">@style/customEditTextFontStyle</item>
+        <item name="android:radioButtonStyle">@style/customRadioButtonFontStyle</item>
+        <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
     </style>
+
+    <style name="TitleOfCardView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray_3</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/size_createroom_cardview_titles</item>
+    </style>
+
+    <style name="PreviewTextOfCreateRoom" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/size_createroom_expiration_description</item>
+        <item name="android:letterSpacing">-0.04</item>
+        <item name="android:textColor">@color/gray_3</item>
+    </style>
+
+    <style name="PreviewTextOfCreateConfirm" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/size_createconfirm_expiration_description</item>
+        <item name="android:letterSpacing">-0.04</item>
+        <item name="android:textColor">@color/gray_3</item>
+    </style>
+
+    <style name="RecyclerViewScrollbar">
+        <item name="android:scrollbarSize">@dimen/size_createmission_scrollbar</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_round_30</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
 </resources>
