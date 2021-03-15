@@ -5,6 +5,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -15,8 +16,8 @@ android {
         applicationId "org.sopt.santamanitto"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -98,7 +99,9 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     //firebase
-    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
