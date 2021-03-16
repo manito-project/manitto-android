@@ -24,6 +24,7 @@ class SharedPreferenceModule {
             SharedPreferenceManagerImpl(sharedPreferences)
 
     @Provides
+    @Singleton
     fun provideUserPreferenceManager(sharedPreferenceManager: SharedPreferenceManager): UserPreferenceManager =
             UserPreferenceManager(sharedPreferenceManager)
 }

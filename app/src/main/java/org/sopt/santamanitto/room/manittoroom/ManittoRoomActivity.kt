@@ -1,11 +1,10 @@
 package org.sopt.santamanitto.room.manittoroom
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.DataBindingUtil.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil.setContentView
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ActivityManittoRoomBinding
