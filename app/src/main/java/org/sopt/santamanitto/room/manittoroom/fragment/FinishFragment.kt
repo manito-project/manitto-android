@@ -20,14 +20,6 @@ class FinishFragment: Fragment() {
 
     private val manittoRoomViewModel: ManittoRoomViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        manittoRoomViewModel.run {
-            refreshManittoRoomInfo()
-            getPersonalRelationInfo()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +38,11 @@ class FinishFragment: Fragment() {
                     }
                 })
             }
+
+        manittoRoomViewModel.run {
+            refreshManittoRoomInfo()
+            getPersonalRelationInfo()
+        }
 
         setOnClickListener()
 
