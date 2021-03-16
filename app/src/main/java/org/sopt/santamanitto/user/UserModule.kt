@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.sopt.santamanitto.preference.UserPreferenceManager
 import org.sopt.santamanitto.user.data.source.UserCachedDataSource
 import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
@@ -28,10 +29,6 @@ class UserModule {
     @Named("cached")
     fun provideUserDataSource(
         @Named("remote") userRemoteDataSource: UserDataSource,
-        accessTokenContainer: AccessTokenContainer
-    ) : UserDataSource = UserCachedDataSource(userRemoteDataSource, accessTokenContainer)
-
-    @Provides
-    @Singleton
-    fun provideAccessToken() : AccessTokenContainer = AccessTokenContainer()
+        userPreferenceManager: UserPreferenceManager
+    ) : UserDataSource = UserCachedDataSource(userRemoteDataSource, userPreferenceManager)
 }

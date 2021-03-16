@@ -35,6 +35,10 @@ class ResultFragment: Fragment() {
             recyclerviewResult.adapter = resultAdapter
         }
 
+        if (manittoRoomViewModel.members.value.isNullOrEmpty()) {
+            manittoRoomViewModel.refreshManittoRoomInfo()
+        }
+
         manittoRoomViewModel.members.observe(viewLifecycleOwner) {
             binding.textviewResultTitle.text = String.format(getString(R.string.result_title), it.size)
         }

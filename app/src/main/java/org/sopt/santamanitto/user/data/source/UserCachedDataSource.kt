@@ -1,7 +1,7 @@
 package org.sopt.santamanitto.user.data.source
 
+import org.sopt.santamanitto.preference.UserPreferenceManager
 import org.sopt.santamanitto.room.data.JoinedRoom
-import org.sopt.santamanitto.user.AccessTokenContainer
 import org.sopt.santamanitto.user.data.LoginUser
 import org.sopt.santamanitto.user.data.User
 import org.sopt.santamanitto.user.data.source.UserDataSource.*
@@ -9,7 +9,7 @@ import javax.inject.Named
 
 class UserCachedDataSource(
     @Named("remote") private val userRemoteDataSource: UserDataSource,
-    private val accessTokenContainer: AccessTokenContainer
+    private val userPreferenceManager: UserPreferenceManager
 ): UserDataSource {
 
     private var _cachedLoginUser: LoginUser? = null
@@ -27,7 +27,7 @@ class UserCachedDataSource(
     override fun login(serialNumber: String, callback: LoginCallback) {
         userRemoteDataSource.login(serialNumber, object : LoginCallback {
             override fun onLoginSuccess(loginUser: LoginUser) {
-                accessTokenContainer.accessToken = loginUser.accessToken
+                initUserPreference(loginUser, serialNumber)
                 _cachedLoginUser = loginUser
                 callback.onLoginSuccess(loginUser)
             }
@@ -41,7 +41,7 @@ class UserCachedDataSource(
     override fun createAccount(userName: String, serialNumber: String, callback: CreateAccountCallback) {
         userRemoteDataSource.createAccount(userName, serialNumber, object: CreateAccountCallback {
             override fun onCreateAccountSuccess(loginUser: LoginUser) {
-                accessTokenContainer.accessToken = loginUser.accessToken
+                initUserPreference(loginUser, serialNumber)
                 _cachedLoginUser = loginUser
                 callback.onCreateAccountSuccess(loginUser)
             }
@@ -53,14 +53,17 @@ class UserCachedDataSource(
     }
 
     override fun getUserId(): Int {
+        initCachedLoginUser()
         return cachedLoginUser!!.id
     }
 
     override fun getAccessToken(): String {
+        initCachedLoginUser()
         return cachedLoginUser!!.accessToken
     }
 
     override fun getUserName(): String {
+        initCachedLoginUser()
         return cachedLoginUser!!.userName
     }
 
@@ -96,6 +99,23 @@ class UserCachedDataSource(
                     callback.onDataNotAvailable()
                 }
             })
+        }
+    }
+
+    private fun initUserPreference(loginUser: LoginUser, serialNumber: String) {
+        userPreferenceManager.run {
+            setAccessToken(loginUser.accessToken)
+            setUserId(loginUser.id)
+            setUserUpdateTime(loginUser.userName)
+            setSerialNumber(serialNumber)
+        }
+    }
+
+    private fun initCachedLoginUser() {
+        if (_cachedLoginUser == null) {
+            userPreferenceManager.let {
+                _cachedLoginUser = LoginUser(it.getUserName()!!, it.getSerialNumber()!!, it.getUserId()!!, it.getAccessToken()!!)
+            }
         }
     }
 }

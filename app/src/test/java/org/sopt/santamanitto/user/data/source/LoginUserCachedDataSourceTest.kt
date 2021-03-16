@@ -10,8 +10,8 @@ import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
+import org.sopt.santamanitto.preference.UserPreferenceManager
 import org.sopt.santamanitto.room.data.JoinedRoom
-import org.sopt.santamanitto.user.AccessTokenContainer
 import org.sopt.santamanitto.user.data.LoginUser
 import org.sopt.santamanitto.user.data.User
 import org.sopt.santamanitto.util.capture
@@ -24,7 +24,7 @@ class LoginUserCachedDataSourceTest {
     @Mock private lateinit var mockLoginUser: LoginUser
     @Mock private lateinit var mockUser: User
     @Mock private lateinit var mockJoinedRooms: List<JoinedRoom>
-    @Mock private lateinit var mockAccessTokenContainer: AccessTokenContainer
+    @Mock private lateinit var mockUserPreferenceManager: UserPreferenceManager
 
     @Mock private lateinit var loginCallback: UserDataSource.LoginCallback
     @Mock private lateinit var createAccountCallback: UserDataSource.CreateAccountCallback
@@ -47,7 +47,7 @@ class LoginUserCachedDataSourceTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        userCachedDataSource = UserCachedDataSource(userRemoteDataSource, mockAccessTokenContainer)
+        userCachedDataSource = UserCachedDataSource(userRemoteDataSource, mockUserPreferenceManager)
     }
 
     @Test
@@ -98,7 +98,7 @@ class LoginUserCachedDataSourceTest {
     fun accessTokenTest() {
         tryLogin()
 
-        assertThat(mockAccessTokenContainer.accessToken, `is`(mockLoginUser.accessToken))
+        assertThat(mockUserPreferenceManager.getAccessToken(), `is`(mockLoginUser.accessToken))
     }
 
     private fun tryLogin() {

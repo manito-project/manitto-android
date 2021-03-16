@@ -7,10 +7,9 @@ import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.santamanitto.SecretString
-import org.sopt.santamanitto.user.AccessTokenContainer
+import org.sopt.santamanitto.preference.UserPreferenceManager
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -33,11 +32,11 @@ class NetworkModule {
     @Provides
     @Singleton
     @AuthInterceptorOkHttpClient
-    fun provideAuthInterceptorOkHttpClient(accessTokenContainer: AccessTokenContainer): OkHttpClient {
+    fun provideAuthInterceptorOkHttpClient(userPreferenceManager: UserPreferenceManager): OkHttpClient {
         return OkHttpClient.Builder()
                 .addInterceptor {
                     val request = it.request().newBuilder()
-                            .addHeader("jwt", accessTokenContainer.accessToken)
+                            .addHeader("jwt", userPreferenceManager.getAccessToken()!!)
                             .build()
                     it.proceed(request)
                 }
