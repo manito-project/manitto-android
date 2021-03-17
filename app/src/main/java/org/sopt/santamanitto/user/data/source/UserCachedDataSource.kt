@@ -106,7 +106,7 @@ class UserCachedDataSource(
         userPreferenceManager.run {
             setAccessToken(loginUser.accessToken)
             setUserId(loginUser.id)
-            setUserUpdateTime(loginUser.userName)
+            setUserName(loginUser.userName)
             setSerialNumber(serialNumber)
         }
     }
