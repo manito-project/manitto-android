@@ -20,6 +20,12 @@ android {
         versionName "1.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(rootProject.file('./local.properties').newDataInputStream())
+        buildConfigField("String", "BASE_URL", properties['baseUrl'])
+        buildConfigField("String", "TOS_URL", properties['tosUrl'])
+        buildConfigField("String", "PRIVACY_POLICY_RUL", properties['privacyPolicyUrl'])
     }
 
     android {
