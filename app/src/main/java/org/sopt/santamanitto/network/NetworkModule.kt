@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.sopt.santamanitto.SecretString
+import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.preference.UserPreferenceManager
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,7 +18,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    fun provideBaseUrl(): String = SecretString.BASE_URL
+    fun provideBaseUrl(): String = BuildConfig.BASE_URL
 
     @Provides
     @Singleton
