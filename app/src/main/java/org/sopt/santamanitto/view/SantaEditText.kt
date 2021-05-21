@@ -2,6 +2,7 @@ package org.sopt.santamanitto.view
 
 import android.content.Context
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -156,5 +157,13 @@ constructor(
 
     fun setMaxLines(maxLines: Int) {
         editText.maxLines = maxLines
+    }
+
+    fun addTextChangeListener(textWatcher: TextWatcher) {
+        editText.addTextChangedListener(textWatcher)
+    }
+
+    fun setSelection(index: Int) {
+        editText.setSelection(index)
     }
 }

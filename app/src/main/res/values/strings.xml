@@ -92,4 +92,6 @@
     <string name="finish_title">나를 챙겨준 산타는?</string>
     <string name="result_bottom">홈으로 가기</string>
     <string name="result_title">총 %d명</string>
+
+    <string name="santanameinput_alert">・이름은 최대 %d자까지 설정 가능해</string>
 </resources>
