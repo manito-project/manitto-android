@@ -30,10 +30,16 @@ class SantaNameInput @JvmOverloads constructor(
     private var preText: String? = null
     private var isWarning = false
 
+    var text: String?
+        get() = nameInput.text
+        set(value) {
+            nameInput.text = value
+        }
+
     init {
         alertMessage.setTextByIdWithArgs(R.string.santanameinput_alert, MAX_LENGTH)
 
-        nameInput.addTextChangeListener(object: TextWatcher {
+        addTextChangeListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 preText = s.toString()
             }
@@ -61,5 +67,9 @@ class SantaNameInput @JvmOverloads constructor(
 
             override fun afterTextChanged(s: Editable?) { }
         })
+    }
+
+    fun addTextChangeListener(textWatcher: TextWatcher) {
+        nameInput.addTextChangeListener(textWatcher)
     }
 }
