@@ -191,5 +191,7 @@
     <dimen name="padding_itemresult_text_vertical">6dp</dimen>
     <dimen name="margin_result_recyclerview_item">15dp</dimen>
 
+    <dimen name="size_santainputname_alert">10dp</dimen>
+
 
 </resources>

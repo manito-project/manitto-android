@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.view.recyclerview
+package org.sopt.santamanitto.view
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,14 +21,13 @@ object SantaEditTextBindingAdapter {
     @InverseBindingAdapter(attribute = "setText", event = "textAttrChanged")
     @JvmStatic
     fun getText(view: SantaEditText) : String? {
-        return view.findViewById<AppCompatEditText>(R.id.edittext_santaedittext).text?.toString()
+        return view.text
     }
 
     @BindingAdapter("textAttrChanged")
     @JvmStatic
     fun setListener(view: SantaEditText, listener: InverseBindingListener) {
-        val input = view.findViewById<AppCompatEditText>(R.id.edittext_santaedittext)
-        input.addTextChangedListener(object: TextWatcher {
+        view.addTextChangeListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

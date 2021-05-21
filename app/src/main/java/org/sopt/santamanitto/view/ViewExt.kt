@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 
 fun View.setPaddingVerticalById(@DimenRes id: Int) {
@@ -60,4 +61,12 @@ fun TextView.setBold(isEnabled: Boolean) {
     } else {
         typeface = Typeface.DEFAULT
     }
+}
+
+fun TextView.setTextById(@StringRes id: Int) {
+    text = resources.getString(id)
+}
+
+fun TextView.setTextByIdWithArgs(@StringRes id: Int, vararg args: Any) {
+    text = resources.getString(id, *args)
 }

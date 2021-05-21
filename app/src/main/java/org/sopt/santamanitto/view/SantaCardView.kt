@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.cardview.widget.CardView
 import org.sopt.santamanitto.R
 
-class SantaCardView @JvmOverloads constructor(
+open class SantaCardView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

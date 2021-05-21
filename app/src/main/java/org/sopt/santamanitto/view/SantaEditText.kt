@@ -1,12 +1,15 @@
 package org.sopt.santamanitto.view
 
 import android.content.Context
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.InverseBindingListener
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaEditTextBinding
 import java.util.*
@@ -17,7 +20,7 @@ constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : LinearLayout(context, attrs, defStyleAttr), TextObservable {
 
     companion object {
         private const val BUTTON_NONE = 0
@@ -45,7 +48,7 @@ constructor(
     private var deleteListener: ((String) -> Unit)? = null
 
 
-    var text: String?
+    override var text: String?
         get() = editText.text.toString()
         set(value) {
             editText.setText(value)
@@ -156,5 +159,26 @@ constructor(
 
     fun setMaxLines(maxLines: Int) {
         editText.maxLines = maxLines
+    }
+
+    override fun addTextChangeListener(textWatcher: TextWatcher) {
+        editText.addTextChangedListener(textWatcher)
+    }
+
+    override fun textAttrChanged(view: TextObservable, listener: InverseBindingListener)  {
+        view.addTextChangeListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                listener.onChange()
+            }
+
+            override fun afterTextChanged(s: Editable?) { }
+        })
+    }
+
+
+    fun setSelection(index: Int) {
+        editText.setSelection(index)
     }
 }
