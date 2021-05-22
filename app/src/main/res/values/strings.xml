@@ -5,6 +5,7 @@
     <string name="dialog_cancel">취소</string>
 
     <string name="button_next">다음</string>
+    <string name="button_change">변경</string>
 
     <string name="pm">오후</string>
     <string name="am">오전</string>
@@ -94,4 +95,6 @@
     <string name="result_title">총 %d명</string>
 
     <string name="santanameinput_alert">・이름은 최대 %d자까지 설정 가능해</string>
+
+    <string name="editname_background">내 이름을\n변경할 수 있어!</string>
 </resources>

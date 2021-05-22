@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <org.sopt.santamanitto.view.SantaBackground
+            android:id="@+id/santabackground_editname"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:backKey="true"
+            app:backgroundText="@string/editname_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <org.sopt.santamanitto.view.SantaNameInput
+            android:id="@+id/nameinput_editname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_editname_cardview_top"
+            app:layout_constraintBottom_toTopOf="@id/santabottombutton_editname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/santabackground_editname"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <org.sopt.santamanitto.view.SantaBottomButton
+            android:id="@+id/santabottombutton_editname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginBottom="@dimen/margin_signin_button_bottom"
+            android:text="@string/button_change"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameinput_editname" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
