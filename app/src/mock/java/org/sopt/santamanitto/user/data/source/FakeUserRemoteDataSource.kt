@@ -63,6 +63,10 @@ class FakeUserRemoteDataSource : UserDataSource {
         return ""
     }
 
+    override fun changeUserName(newName: String, callback: (isSuccess: Boolean) -> Unit) {
+        callback.invoke(newName != "fail")
+    }
+
     override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
         callback.onJoinedRoomsLoaded(fakeJoinedRooms)
     }

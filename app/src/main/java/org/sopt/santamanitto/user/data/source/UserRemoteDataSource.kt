@@ -68,6 +68,10 @@ class UserRemoteDataSource(
         throw Exception("You cannot get UserName from remote data source.")
     }
 
+    override fun changeUserName(newName: String, callback: (isSuccess: Boolean) -> Unit) {
+        //Todo: Network 통신
+    }
+
     override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
         getUserInfo(userId, object: UserDataSource.GetUserInfoCallback {
             override fun onUserInfoLoaded(user: User) {

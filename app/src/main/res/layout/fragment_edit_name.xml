@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="org.sopt.santamanitto.user.mypage.EditNameViewModel" />
@@ -27,11 +28,11 @@
 
         <org.sopt.santamanitto.view.SantaNameInput
             android:id="@+id/nameinput_editname"
+            setText="@={viewModel.newName}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginTop="@dimen/margin_editname_cardview_top"
-            setText="@={viewModel.newName}"
             android:hint="@{viewModel.previousName}"
             app:layout_constraintBottom_toTopOf="@id/santabottombutton_editname"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_signin_button_bottom"
+            android:enabled="@{viewModel.isUserNameValid ? true : false}"
+            android:onClick="@{() -> viewModel.requestChangeName()}"
             android:text="@string/button_change"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

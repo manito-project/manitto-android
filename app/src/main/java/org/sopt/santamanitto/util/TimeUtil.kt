@@ -57,4 +57,10 @@ object TimeUtil {
             set(Calendar.MILLISECOND, 0)
         }
     }
+
+    //For Fake
+    fun getCurrentTimeByServerFormat(): String =
+        SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).format(Date())
+
+
 }

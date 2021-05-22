@@ -22,7 +22,7 @@ class UserCachedDataSource(
 
     var isJoinedRoomDirty = false
 
-    val cachedUsers = HashMap<Int, User>()
+    private var isUserNameDirty = false
 
     override fun login(serialNumber: String, callback: LoginCallback) {
         userRemoteDataSource.login(serialNumber, object : LoginCallback {
@@ -67,6 +67,16 @@ class UserCachedDataSource(
         return cachedLoginUser!!.userName
     }
 
+    override fun changeUserName(newName: String, callback: (isSuccess: Boolean) -> Unit) {
+        userRemoteDataSource.changeUserName(newName) {
+            if (it) {
+                isUserNameDirty = true
+                userPreferenceManager.setUserName(newName)
+            }
+            callback.invoke(it)
+        }
+    }
+
     override fun getJoinedRoom(userId: Int, callback: GetJoinedRoomsCallback) {
         if (cachedJoinedRooms != null && !isJoinedRoomDirty) {
             callback.onJoinedRoomsLoaded(cachedJoinedRooms!!)
@@ -86,12 +96,8 @@ class UserCachedDataSource(
     }
 
     override fun getUserInfo(userId: Int, callback: GetUserInfoCallback) {
-        if (cachedUsers.isNotEmpty() && cachedUsers.containsKey(userId)) {
-            callback.onUserInfoLoaded(cachedUsers[userId]!!)
-        } else {
             userRemoteDataSource.getUserInfo(userId, object: GetUserInfoCallback {
                 override fun onUserInfoLoaded(user: User) {
-                    cachedUsers[userId] = user
                     callback.onUserInfoLoaded(user)
                 }
 
@@ -99,7 +105,6 @@ class UserCachedDataSource(
                     callback.onDataNotAvailable()
                 }
             })
-        }
     }
 
     private fun initUserPreference(loginUser: LoginUser, serialNumber: String) {
@@ -112,7 +117,8 @@ class UserCachedDataSource(
     }
 
     private fun initCachedLoginUser() {
-        if (_cachedLoginUser == null) {
+        if (_cachedLoginUser == null || isUserNameDirty) {
+            isUserNameDirty = false
             userPreferenceManager.let {
                 _cachedLoginUser = LoginUser(it.getUserName()!!, it.getSerialNumber()!!, it.getUserId()!!, it.getAccessToken()!!)
             }

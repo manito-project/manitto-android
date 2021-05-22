@@ -40,6 +40,8 @@ interface UserDataSource {
 
     fun getUserName(): String
 
+    fun changeUserName(newName: String, callback: (isSuccess: Boolean) -> Unit)
+
     fun getJoinedRoom(userId: Int, callback: GetJoinedRoomsCallback)
 
     fun getUserInfo(userId: Int, callback: GetUserInfoCallback)
