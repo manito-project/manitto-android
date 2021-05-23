@@ -3,16 +3,18 @@ package org.sopt.santamanitto.user.data.source
 import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.network.start
-import org.sopt.santamanitto.user.data.LoginUser
-import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserInfoResponse
+import org.sopt.santamanitto.user.mypage.UserNameRequest
+import org.sopt.santamanitto.user.mypage.UserNameResponse
 import org.sopt.santamanitto.user.network.UserCheckResponse
 import org.sopt.santamanitto.user.network.UserService
 import retrofit2.Call
 import retrofit2.Callback
-import java.util.*
 
+@Deprecated("UserRemoteDataSource is deprecated")
 class UserRemoteDataSource(
-    private val userService: UserService,
+    private val userService: UserService
 ): UserDataSource {
     override fun login(serialNumber: String, callback: UserDataSource.LoginCallback) {
         userService.login(serialNumber).enqueue(object: Callback<Response<UserCheckResponse>> {
@@ -25,7 +27,7 @@ class UserRemoteDataSource(
                         if (response.body()!!.message == "해당 시리얼 넘버를 가진 유저가 있습니다") {
                             val result = response.body()!!.data.user
                             val accessToken = response.body()!!.data.accessToken
-                            callback.onLoginSuccess(LoginUser(result.userName, result.serialNumber, result.id, accessToken))
+                            callback.onLoginSuccess(LoginUserResponse(result.userName, result.serialNumber, result.id, accessToken))
                         } else {
                             callback.onLoginFailed()
                         }
@@ -44,9 +46,9 @@ class UserRemoteDataSource(
     }
 
     override fun createAccount(userName: String, serialNumber: String, callback: UserDataSource.CreateAccountCallback) {
-        userService.createAccount(LoginUser(userName, serialNumber)).start(object:
-            RequestCallback<LoginUser> {
-            override fun onSuccess(data: LoginUser) {
+        userService.createAccount(LoginUserResponse(userName, serialNumber)).start(object:
+            RequestCallback<LoginUserResponse> {
+            override fun onSuccess(data: LoginUserResponse) {
                 callback.onCreateAccountSuccess(data)
             }
 
@@ -68,14 +70,22 @@ class UserRemoteDataSource(
         throw Exception("You cannot get UserName from remote data source.")
     }
 
-    override fun changeUserName(newName: String, callback: (isSuccess: Boolean) -> Unit) {
-        //Todo: Network 통신
+    override fun changeUserName(userId: Int, newName: String, callback: (isSuccess: Boolean) -> Unit) {
+        userService.changeUserName(userId, UserNameRequest(newName)).start(object: RequestCallback<UserNameResponse> {
+            override fun onSuccess(data: UserNameResponse) {
+                callback.invoke(true)
+            }
+
+            override fun onFail() {
+                callback.invoke(false)
+            }
+        })
     }
 
     override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {
         getUserInfo(userId, object: UserDataSource.GetUserInfoCallback {
-            override fun onUserInfoLoaded(user: User) {
-                callback.onJoinedRoomsLoaded(user.joinedRooms.reversed())
+            override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
+                callback.onJoinedRoomsLoaded(userInfoResponse.joinedRooms.reversed())
             }
 
             override fun onDataNotAvailable() {
@@ -85,8 +95,8 @@ class UserRemoteDataSource(
     }
 
     override fun getUserInfo(userId: Int, callback: UserDataSource.GetUserInfoCallback) {
-        userService.getUserInfo(userId).start(object : RequestCallback<User> {
-            override fun onSuccess(data: User) {
+        userService.getUserInfo(userId).start(object : RequestCallback<UserInfoResponse> {
+            override fun onSuccess(data: UserInfoResponse) {
                 callback.onUserInfoLoaded(data)
             }
 

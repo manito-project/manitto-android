@@ -5,14 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import org.sopt.santamanitto.NetworkViewModel
+import org.sopt.santamanitto.user.data.controller.UserAuthController
+import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
 import org.sopt.santamanitto.user.data.source.UserDataSource
 import javax.inject.Named
 
 class EditNameViewModel @ViewModelInject constructor(
-    @Named("cached") private val userCachedDataSource: UserDataSource
+        private val userMetadataSource: CachedUserMetadataSource,
+        private val userAuthController: UserAuthController
 ) : NetworkViewModel() {
 
-    val previousName = userCachedDataSource.getUserName()
+    val previousName = userMetadataSource.getUserName()
 
     val newName = MutableLiveData<String>(null)
 
@@ -29,8 +32,9 @@ class EditNameViewModel @ViewModelInject constructor(
             _requestDone.value = true
             return
         }
-        userCachedDataSource.changeUserName(newName.value!!) {
+        userAuthController.changeUserName(userMetadataSource.getUserId(), newName.value!!) {
             if (it) {
+                userMetadataSource.setUserNameDirty()
                 _requestDone.value = true
             } else {
                 _networkErrorOccur.value = true

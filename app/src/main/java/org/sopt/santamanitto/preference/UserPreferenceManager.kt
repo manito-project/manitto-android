@@ -1,6 +1,8 @@
 package org.sopt.santamanitto.preference
 
-class UserPreferenceManager(private val preferenceManager: SharedPreferenceManager) {
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
+
+class UserPreferenceManager(private val preferenceManager: SharedPreferenceManager) : UserMetadataSource {
 
     companion object {
         private const val PREF_KEY_USER_ID = "user_id"
@@ -11,19 +13,11 @@ class UserPreferenceManager(private val preferenceManager: SharedPreferenceManag
         private const val PREF_KEY_ACCESS_TOKEN = "access_token"
     }
 
-    fun setUserId(userId: Int) {
+    override fun setUserId(userId: Int) {
         preferenceManager.setInt(PREF_KEY_USER_ID, userId)
     }
 
-    fun getUserId(): Int? {
-        val result = preferenceManager.getInt(PREF_KEY_USER_ID, -1)
-
-        return if (result == -1) {
-            null
-        } else {
-            result
-        }
-    }
+    override fun getUserId(): Int = preferenceManager.getInt(PREF_KEY_USER_ID, -1)
 
     fun setSerialNumber(serialNumber: String) {
         preferenceManager.setString(PREF_KEY_SERIAL_NUMBER, serialNumber)
@@ -33,13 +27,11 @@ class UserPreferenceManager(private val preferenceManager: SharedPreferenceManag
         return preferenceManager.getString(PREF_KEY_SERIAL_NUMBER)
     }
 
-    fun setUserName(userName: String) {
+    override fun setUserName(userName: String) {
         preferenceManager.setString(PREF_KEY_USER_NAME, userName)
     }
 
-    fun getUserName(): String? {
-        return preferenceManager.getString(PREF_KEY_USER_NAME)
-    }
+    override fun getUserName(): String = preferenceManager.getString(PREF_KEY_USER_NAME) ?: ""
 
     fun setUserUpdateTime(updateAt: String) {
         preferenceManager.setString(PREF_KEY_USER_UPDATE_AT, updateAt)
@@ -57,11 +49,9 @@ class UserPreferenceManager(private val preferenceManager: SharedPreferenceManag
         return preferenceManager.getString(PREF_KEY_USER_CREATE_AT)
     }
 
-    fun setAccessToken(accessToken: String) {
+    override fun setAccessToken(accessToken: String) {
         preferenceManager.setString(PREF_KEY_ACCESS_TOKEN, accessToken)
     }
 
-    fun getAccessToken(): String? {
-        return preferenceManager.getString(PREF_KEY_ACCESS_TOKEN)
-    }
+    override fun getAccessToken(): String = preferenceManager.getString(PREF_KEY_ACCESS_TOKEN) ?: ""
 }

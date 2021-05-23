@@ -12,8 +12,8 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.sopt.santamanitto.preference.UserPreferenceManager
 import org.sopt.santamanitto.room.data.JoinedRoom
-import org.sopt.santamanitto.user.data.LoginUser
-import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserInfoResponse
 import org.sopt.santamanitto.util.capture
 import org.sopt.santamanitto.util.eq
 
@@ -21,8 +21,8 @@ class LoginUserCachedDataSourceTest {
 
     @Mock private lateinit var userRemoteDataSource: UserDataSource
 
-    @Mock private lateinit var mockLoginUser: LoginUser
-    @Mock private lateinit var mockUser: User
+    @Mock private lateinit var mockLoginUser: LoginUserResponse
+    @Mock private lateinit var mockUser: UserInfoResponse
     @Mock private lateinit var mockJoinedRooms: List<JoinedRoom>
     @Mock private lateinit var mockUserPreferenceManager: UserPreferenceManager
 

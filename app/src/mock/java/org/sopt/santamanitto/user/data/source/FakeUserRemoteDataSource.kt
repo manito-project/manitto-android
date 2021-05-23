@@ -63,7 +63,7 @@ class FakeUserRemoteDataSource : UserDataSource {
         return ""
     }
 
-    override fun changeUserName(newName: String, callback: (isSuccess: Boolean) -> Unit) {
+    override fun changeUserName(userId: Int, newName: String, callback: (isSuccess: Boolean) -> Unit) {
         callback.invoke(newName != "fail")
     }
 

@@ -1,19 +1,19 @@
 package org.sopt.santamanitto.user.data.source
 
 import org.sopt.santamanitto.room.data.JoinedRoom
-import org.sopt.santamanitto.user.data.LoginUser
-import org.sopt.santamanitto.user.data.User
-
+import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserInfoResponse
+@Deprecated("UserDataSource is deprecated")
 interface UserDataSource {
 
     interface LoginCallback {
-        fun onLoginSuccess(loginUser: LoginUser)
+        fun onLoginSuccess(loginUserResponse: LoginUserResponse)
 
         fun onLoginFailed()
     }
 
     interface CreateAccountCallback {
-        fun onCreateAccountSuccess(loginUser: LoginUser)
+        fun onCreateAccountSuccess(loginUserResponse: LoginUserResponse)
 
         fun onCreateAccountFailed()
     }
@@ -25,7 +25,7 @@ interface UserDataSource {
     }
 
     interface GetUserInfoCallback {
-        fun onUserInfoLoaded(user: User)
+        fun onUserInfoLoaded(userInfoResponse: UserInfoResponse)
 
         fun onDataNotAvailable()
     }
@@ -40,7 +40,7 @@ interface UserDataSource {
 
     fun getUserName(): String
 
-    fun changeUserName(newName: String, callback: (isSuccess: Boolean) -> Unit)
+    fun changeUserName(userId: Int, newName: String, callback: (isSuccess: Boolean) -> Unit)
 
     fun getJoinedRoom(userId: Int, callback: GetJoinedRoomsCallback)
 
