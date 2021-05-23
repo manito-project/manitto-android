@@ -89,6 +89,7 @@
     <dimen name="margin_main_recyclerview_bottom">40dp</dimen>
     <dimen name="size_main_no_manitto_notice">14sp</dimen>
     <dimen name="margin_main_nomanitto_snowman_bottom">16dp</dimen>
+    <dimen name="margin_main_setting_top">32dp</dimen>
 
     <dimen name="height_mymanitto_viewholder">184dp</dimen>
     <dimen name="width_mymanitto_viewholder">145dp</dimen>

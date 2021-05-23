@@ -28,6 +28,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/imagebutton_main_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_main_setting_top"
+            android:background="@null"
+            android:src="@drawable/ic_setting"
+            android:padding="@dimen/padding_entire"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/view_main_guideline"
             android:layout_width="match_parent"
@@ -80,17 +91,18 @@
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/imagebutton_main_refresh"
             android:layout_width="wrap_content"
-            android:onClick="@{() -> viewModel.refresh()}"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/textview_main_joinedroom"
+            android:background="@null"
+            android:onClick="@{() -> viewModel.refresh()}"
+            android:padding="@dimen/padding_entire"
+            android:src="@drawable/ic_refresh"
             app:layout_constraintBottom_toBottomOf="@id/textview_main_joinedroom"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_refresh"
-            android:background="@null"
-            android:padding="@dimen/padding_entire"/>
+            app:layout_constraintTop_toTopOf="@id/textview_main_joinedroom" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_main_history"
+            replaceAll="@{viewModel.joinedRooms}"
             setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,7 +115,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"
-            replaceAll="@{viewModel.joinedRooms}"
             tool:listitem="@layout/viewholder_joined_room"
             tool:orientation="horizontal" />
 

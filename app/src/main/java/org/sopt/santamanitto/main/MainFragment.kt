@@ -60,6 +60,9 @@ class MainFragment: Fragment() {
             santaimageroundbuttonMainJoin.setOnClickListener {
                 navigateJoinRoomFragment()
             }
+            imagebuttonMainSetting.setOnClickListener {
+                navigateSettingFragment()
+            }
         }
 
         adapter.setOnItemClickListener { roomId, isMatched, isFinished ->
@@ -75,6 +78,11 @@ class MainFragment: Fragment() {
 
     private fun initJoinedRooms() {
         viewModel.getJoinedRooms()
+    }
+
+    private fun navigateSettingFragment() {
+        //Todo: 세팅 화면이 추가되면 거기를 먼저 거쳐야 함
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToEditNameFragment())
     }
 
     private fun navigateJoinRoomFragment() {
