@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_joinRoomFragment"
             app:destination="@id/joinRoomFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_editNameFragment"
+            app:destination="@id/editNameFragment" />
     </fragment>
 
     <fragment
@@ -20,5 +23,9 @@
         android:name="org.sopt.santamanitto.room.join.JoinRoomFragment"
         android:label="JoinRoomFragment"
         tools:layout="@layout/fragment_join_room" />
+    <fragment
+        android:id="@+id/editNameFragment"
+        android:name="org.sopt.santamanitto.user.mypage.EditNameFragment"
+        android:label="EditNameFragment" />
 
 </navigation>

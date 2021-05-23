@@ -37,6 +37,12 @@ class SantaNameInput @JvmOverloads constructor(
             nameInput.text = value
         }
 
+    var hint: String?
+        get() = nameInput.hint
+        set(value) {
+            nameInput.hint = value
+        }
+
     init {
         alertMessage.setTextByIdWithArgs(R.string.santanameinput_alert, MAX_LENGTH)
 

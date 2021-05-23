@@ -1,12 +1,13 @@
 package org.sopt.santamanitto.user.data.source
 
 import org.sopt.santamanitto.room.data.JoinedRoom
-import org.sopt.santamanitto.user.data.LoginUser
-import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserInfoResponse
 
+@Deprecated("FakeUserRemoteDataSource is deprecated")
 class FakeUserRemoteDataSource : UserDataSource {
 
-    private val fakeLoginUser = LoginUser(
+    private val fakeLoginUser = LoginUserResponse(
             "fakeUser",
             "f0a1k2e3u4e5s6e7r8",
             1,
@@ -30,13 +31,13 @@ class FakeUserRemoteDataSource : UserDataSource {
                 "2021-01-11 12:33:44", "2021-01-09 12:33:44"))
     }
 
-    private val fakeUsers = HashMap<Int, User>().apply {
-        put(1, User(1, "fakeUser1", mutableListOf()))
-        put(2, User(2, "fakeUser2", mutableListOf()))
-        put(3, User(3, "fakeUser3", mutableListOf()))
-        put(4, User(4, "fakeUser4", mutableListOf()))
-        put(5, User(5, "fakeUser5", mutableListOf()))
-        put(6, User(6, "fakeUser6", mutableListOf()))
+    private val fakeUsers = HashMap<Int, UserInfoResponse>().apply {
+        put(1, UserInfoResponse(1, "fakeUser1", mutableListOf()))
+        put(2, UserInfoResponse(2, "fakeUser2", mutableListOf()))
+        put(3, UserInfoResponse(3, "fakeUser3", mutableListOf()))
+        put(4, UserInfoResponse(4, "fakeUser4", mutableListOf()))
+        put(5, UserInfoResponse(5, "fakeUser5", mutableListOf()))
+        put(6, UserInfoResponse(6, "fakeUser6", mutableListOf()))
     }
 
     override fun login(serialNumber: String, callback: UserDataSource.LoginCallback) {
@@ -61,6 +62,10 @@ class FakeUserRemoteDataSource : UserDataSource {
 
     override fun getUserName(): String {
         return ""
+    }
+
+    override fun changeUserName(userId: Int, newName: String, callback: (isSuccess: Boolean) -> Unit) {
+        callback.invoke(newName != "fail")
     }
 
     override fun getJoinedRoom(userId: Int, callback: UserDataSource.GetJoinedRoomsCallback) {

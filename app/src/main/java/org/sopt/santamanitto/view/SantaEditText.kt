@@ -41,11 +41,15 @@ constructor(
 
     private var buttonStyle = BUTTON_NONE
 
-    private var hint: String? = null
-
     private var addListener: ((String) -> Unit)? = null
 
     private var deleteListener: ((String) -> Unit)? = null
+
+    var hint: String?
+        get() = editText.hint.toString()
+        set(value) {
+            editText.hint = value
+        }
 
 
     override var text: String?
@@ -104,8 +108,6 @@ constructor(
         }
 
         typeArray.recycle()
-
-        hint?.let { editText.hint = it }
 
         when (buttonStyle) {
             BUTTON_NONE -> rightButton.visibility = View.INVISIBLE

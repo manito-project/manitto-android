@@ -9,8 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.sopt.santamanitto.preference.UserPreferenceManager
+import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
 import org.sopt.santamanitto.user.data.source.UserCachedDataSource
 import org.sopt.santamanitto.user.data.source.UserDataSource
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -22,13 +24,18 @@ class UserModule {
     @Provides
     @Named("serialNumber")
     fun provideSerialNumber(@ApplicationContext context: Context) =
-        Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+            Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
 
     @Provides
     @Singleton
     @Named("cached")
     fun provideUserDataSource(
-        @Named("remote") userRemoteDataSource: UserDataSource,
-        userPreferenceManager: UserPreferenceManager
-    ) : UserDataSource = UserCachedDataSource(userRemoteDataSource, userPreferenceManager)
+            @Named("remote") userRemoteDataSource: UserDataSource,
+            userPreferenceManager: UserPreferenceManager
+    ): UserDataSource = UserCachedDataSource(userRemoteDataSource, userPreferenceManager)
+
+    @Provides
+    @Singleton
+    fun provideUserMetadataSource(userPreferenceManager: UserPreferenceManager): CachedUserMetadataSource =
+            CachedUserMetadataSource(userPreferenceManager)
 }

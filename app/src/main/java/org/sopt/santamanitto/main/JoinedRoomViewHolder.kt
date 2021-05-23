@@ -8,7 +8,7 @@ import org.sopt.santamanitto.databinding.ViewholderJoinedRoomBinding
 import org.sopt.santamanitto.room.data.JoinedRoom
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.user.data.User
+import org.sopt.santamanitto.user.data.UserInfoResponse
 import org.sopt.santamanitto.user.data.source.UserDataSource
 import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
@@ -43,8 +43,8 @@ class JoinedRoomViewHolder(
                 binding.personalRoomInfo = personalRoomInfo
 
                 cachedUserDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(user: User) {
-                        binding.textviewMymanittoManittoinfo.text = String.format(getString(R.string.joinedroom_manitto_info), user.userName)
+                    override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
+                        binding.textviewMymanittoManittoinfo.text = String.format(getString(R.string.joinedroom_manitto_info), userInfoResponse.userName)
                         clearLoading()
                     }
 
