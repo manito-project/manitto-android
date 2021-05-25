@@ -63,48 +63,18 @@
             app:layout_constraintTop_toTopOf="@id/textview_entername_title"
             app:number="2" />
 
-        <org.sopt.santamanitto.view.SantaCardView
+        <org.sopt.santamanitto.view.SantaNameInput
+            setText="@={viewModel.userName}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginTop="@dimen/margin_signin_cardview_top"
+            android:hint="@string/entername_edittext_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_entername_title">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/padding_signin_cardview_horizontal"
-                android:paddingVertical="@dimen/padding_signin_cardview_vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textview_entername_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/entername_title_name"
-                    android:textFontWeight="700"
-                    android:textSize="@dimen/size_signin_myname"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <org.sopt.santamanitto.view.SantaEditText
-                    setText="@={viewModel.userName}"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_santaedittext_big"
-                    android:layout_marginTop="@dimen/margin_signin_edittext_top"
-                    android:layout_marginBottom="@dimen/padding_signin_cardview_bottom_additional"
-                    app:hint="@string/entername_edittext_hint"
-                    app:isSingleLine="true"
-                    app:maxLength="5"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_entername_title2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </org.sopt.santamanitto.view.SantaCardView>
+        </org.sopt.santamanitto.view.SantaNameInput>
 
         <org.sopt.santamanitto.view.SantaBottomButton
             android:id="@+id/santabottombutton_entername"
