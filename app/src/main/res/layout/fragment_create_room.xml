@@ -57,7 +57,7 @@
                 android:layout_height="match_parent"
                 android:paddingHorizontal="@dimen/padding_cardview_horizontal">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearlayout_createroom_roomname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,18 +72,32 @@
                         style="@style/TitleOfCardView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_createroom_roomname_title_bottom"
-                        android:text="@string/createroom_room_name" />
+                        android:text="@string/createroom_room_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_alert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/size_santainputname_alert"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_createroom_roomname"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/textview_createroom_roomname"
+                        tool:text="@string/santanameinput_alert" />
+
 
                     <org.sopt.santamanitto.view.SantaEditText
                         android:id="@+id/edittext_createroom_roomname"
                         setText="@={viewModel.roomName}"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_santaedittext_big"
+                        android:layout_marginTop="@dimen/margin_createroom_roomname_title_bottom"
                         app:hint="@string/createroom_roomname_hint"
-                        app:maxLength="15" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textview_createroom_roomname" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/linearlayout_createroom_expiration"

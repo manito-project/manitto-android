@@ -9,6 +9,4 @@ interface TextObservable {
     var text: String?
 
     fun addTextChangeListener(textWatcher: TextWatcher)
-
-    fun textAttrChanged(view: TextObservable, listener: InverseBindingListener)
 }
