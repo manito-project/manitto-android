@@ -41,14 +41,14 @@
     <string name="createroom_background_description">친구들이 방을 잘 찾아올 수 있도록\n방 이름과 종료일을 지정해보자!</string>
     <string name="createroom_room_name">방 이름</string>
     <string name="createroom_roomname_hint">방 이름을 지어줘!</string>
-    <string name="createroom_room_expiration">산타 마니또 공개일 설정</string>
+    <string name="createroom_room_expiration">산타 마니또 종료일 설정</string>
     <string name="createroom_expiration_description">최소 3일 부터 최대 14일까지 기간을 설정할 수 있어~</string>
-    <string name="textview_createroom_expiration_time">산타 마니또 공개 시간</string>
+    <string name="textview_createroom_expiration_time">산타 마니또 종료 시간</string>
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
     <string name="createroom_preview_start">%d일 후인</string>
     <string name="createroom_preview">%d/%02d/%02d %s %02d : %02d 에</string>
     <string name="createroom_expiration_time">%02d : %02d</string>
-    <string name="createroom_dialog_expiration_time_setting">공개 시간 설정</string>
+    <string name="createroom_dialog_expiration_time_setting">종료 시간 설정</string>
 
     <string name="createmission_background_title">미션 만들기</string>
     <string name="createmission_background_description">흥미딘딘한 산타 마니또를 위해\n미션을 추가해볼까?</string>
