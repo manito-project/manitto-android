@@ -167,20 +167,44 @@ constructor(
         editText.addTextChangedListener(textWatcher)
     }
 
-    override fun textAttrChanged(view: TextObservable, listener: InverseBindingListener)  {
-        view.addTextChangeListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                listener.onChange()
-            }
-
-            override fun afterTextChanged(s: Editable?) { }
-        })
-    }
-
 
     fun setSelection(index: Int) {
         editText.setSelection(index)
+    }
+
+    class SantaEditLimitLengthWatcher(
+            private val nameInput: SantaEditText,
+            private val maxLength: Int,
+            private val onWarning: (isWarning: Boolean) -> Unit
+    ) : TextWatcher {
+
+        private var isWarning = false
+        private var preText = ""
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            preText = s.toString()
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s.isNullOrEmpty() || s == preText) {
+                return
+            }
+            if (s.length > maxLength) {
+                nameInput.run {
+                    text = s.substring(0, maxLength)
+                    setSelection(maxLength)
+                }
+                if (!isWarning) {
+                    isWarning = true
+                    onWarning.invoke(isWarning)
+                }
+            } else {
+                if (isWarning) {
+                    isWarning = false
+                    onWarning.invoke(isWarning)
+                }
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
     }
 }

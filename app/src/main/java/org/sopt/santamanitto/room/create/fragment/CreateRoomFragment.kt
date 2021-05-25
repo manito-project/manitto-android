@@ -16,9 +16,15 @@ import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.setExpirationTime
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
+import org.sopt.santamanitto.view.SantaEditText
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
+import org.sopt.santamanitto.view.setTextColorById
 
 class CreateRoomFragment : Fragment() {
+
+    companion object {
+        private const val MAX_ROOM_NAME_LENGTH = 17
+    }
 
     private lateinit var binding: FragmentCreateRoomBinding
 
@@ -34,33 +40,55 @@ class CreateRoomFragment : Fragment() {
             viewModel = this@CreateRoomFragment.viewModel
         }
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        binding.santabackgroundCreateroom.setOnBackKeyClickListener {
-            requireActivity().finish()
-        }
-        binding.santaperiodpickerCreateroomExpiration.setOnPeriodChangedListener { period ->
-            viewModel.setDayDiff(period)
-        }
-        binding.santaswitchCreateroomAmpm.setOnSwitchChangedListener { isAm ->
-            viewModel.setAmPm(!isAm)
-        }
-        binding.textviewCreateroomExpirationpreview.setOnClickListener {
-            showTimePicker()
-        }
+        initView()
 
         refreshUI(viewModel.expirationLiveData)
 
         subscribeUI()
 
         setOnClickListener()
+    }
 
-        return binding.root
+    private fun initView() {
+        binding.textviewCreateroomAlert.text = String.format(getString(R.string.santanameinput_alert), MAX_ROOM_NAME_LENGTH)
+
+        binding.edittextCreateroomRoomname.run {
+            addTextChangeListener(SantaEditText.SantaEditLimitLengthWatcher(this, MAX_ROOM_NAME_LENGTH) {
+                if (it) {
+                    binding.textviewCreateroomAlert.setTextColorById(R.color.red)
+                } else {
+                    binding.textviewCreateroomAlert.setTextColorById(R.color.gray_3)
+                }
+            })
+
+        }
     }
 
     private fun setOnClickListener() {
-        binding.santabottombuttonCreateroom.setOnClickListener {
-            findNavController().navigate(CreateRoomFragmentDirections.actionCreateRoomFragmentToCreateMissionsFragment())
+        binding.run {
+            santabottombuttonCreateroom.setOnClickListener {
+                findNavController().navigate(CreateRoomFragmentDirections.actionCreateRoomFragmentToCreateMissionsFragment())
+            }
+            santabackgroundCreateroom.setOnBackKeyClickListener {
+                requireActivity().finish()
+            }
+            santaperiodpickerCreateroomExpiration.setOnPeriodChangedListener { period ->
+                this@CreateRoomFragment.viewModel.setDayDiff(period)
+            }
+            santaswitchCreateroomAmpm.setOnSwitchChangedListener { isAm ->
+                this@CreateRoomFragment.viewModel.setAmPm(!isAm)
+            }
+            textviewCreateroomExpirationpreview.setOnClickListener {
+                showTimePicker()
+            }
         }
     }
 
