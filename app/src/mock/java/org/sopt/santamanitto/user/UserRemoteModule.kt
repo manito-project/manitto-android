@@ -7,8 +7,6 @@ import dagger.hilt.android.components.ApplicationComponent
 import org.sopt.santamanitto.user.data.controller.*
 import org.sopt.santamanitto.user.data.source.FakeUserRemoteDataSource
 import org.sopt.santamanitto.user.data.source.UserDataSource
-import org.sopt.santamanitto.user.network.UserAuthService
-import org.sopt.santamanitto.user.network.UserService
 import javax.inject.Named
 import javax.inject.Singleton
 

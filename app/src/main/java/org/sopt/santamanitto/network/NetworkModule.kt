@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.preference.UserPreferenceManager
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
@@ -32,11 +33,11 @@ class NetworkModule {
     @Provides
     @Singleton
     @AuthInterceptorOkHttpClient
-    fun provideAuthInterceptorOkHttpClient(userPreferenceManager: UserPreferenceManager): OkHttpClient {
+    fun provideAuthInterceptorOkHttpClient(userMetadataSource: UserMetadataSource): OkHttpClient {
         return OkHttpClient.Builder()
                 .addInterceptor {
                     val request = it.request().newBuilder()
-                            .addHeader("jwt", userPreferenceManager.getAccessToken()!!)
+                            .addHeader("jwt", userMetadataSource.getAccessToken())
                             .build()
                     it.proceed(request)
                 }

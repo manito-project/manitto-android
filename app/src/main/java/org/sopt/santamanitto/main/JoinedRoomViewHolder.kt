@@ -9,14 +9,14 @@ import org.sopt.santamanitto.room.data.JoinedRoom
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.UserInfoResponse
-import org.sopt.santamanitto.user.data.source.UserDataSource
+import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 import org.sopt.santamanitto.view.setBackgroundTint
 
 class JoinedRoomViewHolder(
     parent: ViewGroup,
-    private val cachedUserDataSource: UserDataSource,
+    private val userAuthController: UserAuthController,
     private val roomRequest: RoomRequest,
     private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null
 ) : BaseViewHolder<JoinedRoom, ViewholderJoinedRoomBinding>(R.layout.viewholder_joined_room, parent) {
@@ -42,7 +42,7 @@ class JoinedRoomViewHolder(
             override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
                 binding.personalRoomInfo = personalRoomInfo
 
-                cachedUserDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
+                userAuthController.getUserInfo(personalRoomInfo.manittoUserId, object: UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
                         binding.textviewMymanittoManittoinfo.text = String.format(getString(R.string.joinedroom_manitto_info), userInfoResponse.userName)
                         clearLoading()

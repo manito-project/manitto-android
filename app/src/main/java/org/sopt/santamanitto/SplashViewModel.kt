@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.sopt.santamanitto.user.data.LoginUserResponse
 import org.sopt.santamanitto.user.data.controller.UserController
-import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Named
 
 class SplashViewModel @ViewModelInject constructor(
-        private val userController: UserController,
-        private val cachedUserMetadataSource: CachedUserMetadataSource,
-        @Named("serialNumber") private val serialNumber: String
+    private val userController: UserController,
+    private val userMetadataSource: UserMetadataSource,
+    @Named("serialNumber") private val serialNumber: String
 ) : ViewModel() {
 
     private val _loginSuccess = MutableLiveData(LoginState.WAITING)
@@ -22,7 +22,7 @@ class SplashViewModel @ViewModelInject constructor(
     fun login() {
         userController.login(serialNumber, object : UserController.LoginCallback {
             override fun onLoginSuccess(loginUserResponse: LoginUserResponse) {
-                cachedUserMetadataSource.run {
+                userMetadataSource.run {
                     loginUserResponse.let {
                         setUserName(it.userName)
                         setAccessToken(it.accessToken)
