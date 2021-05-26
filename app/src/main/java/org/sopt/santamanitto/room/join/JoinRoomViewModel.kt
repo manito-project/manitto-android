@@ -9,12 +9,10 @@ import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.room.network.RoomRequest.JoinRoomError
-import org.sopt.santamanitto.user.data.source.UserCachedDataSource
-import org.sopt.santamanitto.user.data.source.UserDataSource
-import javax.inject.Named
+import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 
 class JoinRoomViewModel @ViewModelInject constructor(
-        @Named("cached") private val userDataSource: UserDataSource,
+        private val cachedMainUserDataSource: CachedMainUserDataSource,
         private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
@@ -41,7 +39,7 @@ class JoinRoomViewModel @ViewModelInject constructor(
                 object : RoomRequest.JoinRoomCallback {
 
                     override fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse) {
-                        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
+                        cachedMainUserDataSource.isJoinedRoomDirty = true
                         callback(joinedRoom)
                     }
 

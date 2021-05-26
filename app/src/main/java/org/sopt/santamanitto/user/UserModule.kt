@@ -9,10 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.sopt.santamanitto.preference.UserPreferenceManager
-import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
-import org.sopt.santamanitto.user.data.source.UserCachedDataSource
-import org.sopt.santamanitto.user.data.source.UserDataSource
-import org.sopt.santamanitto.user.data.source.UserMetadataSource
+import org.sopt.santamanitto.user.data.controller.UserAuthController
+import org.sopt.santamanitto.user.data.source.*
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -28,14 +26,18 @@ class UserModule {
 
     @Provides
     @Singleton
-    @Named("cached")
-    fun provideUserDataSource(
-            @Named("remote") userRemoteDataSource: UserDataSource,
-            userPreferenceManager: UserPreferenceManager
-    ): UserDataSource = UserCachedDataSource(userRemoteDataSource, userPreferenceManager)
+    fun provideCachedUserMetadataSource(userPreferenceManager: UserPreferenceManager): CachedUserMetadataSource =
+        CachedUserMetadataSource(userPreferenceManager)
 
     @Provides
     @Singleton
-    fun provideUserMetadataSource(userPreferenceManager: UserPreferenceManager): CachedUserMetadataSource =
+    fun provideUserMetadataSource(userPreferenceManager: UserPreferenceManager): UserMetadataSource =
             CachedUserMetadataSource(userPreferenceManager)
+
+    @Provides
+    @Singleton
+    fun provideCachedMainUserData(
+        userMetadataSource: UserMetadataSource,
+        userAuthController: UserAuthController
+    ): CachedMainUserDataSource = CachedMainUserDataSource(userMetadataSource, userAuthController)
 }

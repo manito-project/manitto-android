@@ -1,6 +1,7 @@
-package org.sopt.santamanitto.user.signin.viewmodel
+package org.sopt.santamanitto
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.sopt.santamanitto.user.data.LoginUserResponse
@@ -8,22 +9,19 @@ import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Named
 
-class ConditionViewModel @ViewModelInject constructor(
+class SplashViewModel @ViewModelInject constructor(
     private val userController: UserController,
     private val userMetadataSource: UserMetadataSource,
     @Named("serialNumber") private val serialNumber: String
 ) : ViewModel() {
 
-    val isReady = MutableLiveData<Boolean>()
+    private val _loginSuccess = MutableLiveData(LoginState.WAITING)
+    val loginSuccess: LiveData<LoginState>
+        get() = _loginSuccess
 
-    val userSaveSuccess = MutableLiveData(false)
-
-    val userSaveFail = MutableLiveData(false)
-
-    fun signIn(userName: String) {
-        userController.createAccount(userName, serialNumber, object : UserController.CreateAccountCallback {
-
-            override fun onCreateAccountSuccess(loginUserResponse: LoginUserResponse) {
+    fun login() {
+        userController.login(serialNumber, object : UserController.LoginCallback {
+            override fun onLoginSuccess(loginUserResponse: LoginUserResponse) {
                 userMetadataSource.run {
                     loginUserResponse.let {
                         setUserName(it.userName)
@@ -31,12 +29,16 @@ class ConditionViewModel @ViewModelInject constructor(
                         setUserId(it.id)
                     }
                 }
-                userSaveSuccess.value = true
+                _loginSuccess.value = LoginState.SUCCESS
             }
 
-            override fun onCreateAccountFailed() {
-                userSaveFail.value = true
+            override fun onLoginFailed() {
+                _loginSuccess.value = LoginState.FAIL
             }
         })
+    }
+
+    enum class LoginState {
+        SUCCESS, FAIL, WAITING
     }
 }
