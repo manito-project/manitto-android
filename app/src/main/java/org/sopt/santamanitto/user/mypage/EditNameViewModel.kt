@@ -7,8 +7,6 @@ import androidx.lifecycle.Transformations
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
-import org.sopt.santamanitto.user.data.source.UserDataSource
-import javax.inject.Named
 
 class EditNameViewModel @ViewModelInject constructor(
         private val userMetadataSource: CachedUserMetadataSource,

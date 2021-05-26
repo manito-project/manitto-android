@@ -26,14 +26,6 @@ class UserModule {
 
     @Provides
     @Singleton
-    @Named("cached")
-    fun provideUserDataSource(
-            @Named("remote") userRemoteDataSource: UserDataSource,
-            userPreferenceManager: UserPreferenceManager
-    ): UserDataSource = UserCachedDataSource(userRemoteDataSource, userPreferenceManager)
-
-    @Provides
-    @Singleton
     fun provideCachedUserMetadataSource(userPreferenceManager: UserPreferenceManager): CachedUserMetadataSource =
         CachedUserMetadataSource(userPreferenceManager)
 

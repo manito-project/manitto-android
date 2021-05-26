@@ -4,12 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.sopt.santamanitto.user.data.LoginUserResponse
-import org.sopt.santamanitto.user.data.source.UserDataSource
+import org.sopt.santamanitto.user.data.controller.UserController
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Named
 
 class ConditionViewModel @ViewModelInject constructor(
-        @Named("cached") private val userCachedDataSource: UserDataSource,
-        @Named("serialNumber") private val serialNumber: String
+    private val userController: UserController,
+    private val userMetadataSource: UserMetadataSource,
+    @Named("serialNumber") private val serialNumber: String
 ) : ViewModel() {
 
     val isReady = MutableLiveData<Boolean>()
@@ -19,9 +21,16 @@ class ConditionViewModel @ViewModelInject constructor(
     val userSaveFail = MutableLiveData(false)
 
     fun signIn(userName: String) {
-        userCachedDataSource.createAccount(userName, serialNumber, object : UserDataSource.CreateAccountCallback {
+        userController.createAccount(userName, serialNumber, object : UserController.CreateAccountCallback {
 
             override fun onCreateAccountSuccess(loginUserResponse: LoginUserResponse) {
+                userMetadataSource.run {
+                    loginUserResponse.let {
+                        setUserName(it.userName)
+                        setAccessToken(it.accessToken)
+                        setUserId(it.id)
+                    }
+                }
                 userSaveSuccess.value = true
             }
 

@@ -33,7 +33,7 @@ class SplashViewModel @ViewModelInject constructor(
             }
 
             override fun onLoginFailed() {
-                _loginSuccess.value = LoginState.SUCCESS
+                _loginSuccess.value = LoginState.FAIL
             }
         })
     }
