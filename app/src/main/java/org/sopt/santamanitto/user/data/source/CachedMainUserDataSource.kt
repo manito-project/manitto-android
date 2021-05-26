@@ -20,8 +20,8 @@ class CachedMainUserDataSource(
                 object : UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
                         isJoinedRoomDirty = false
-                        joinedRooms = userInfoResponse.joinedRooms
-                        callback.onJoinedRoomsLoaded(userInfoResponse.joinedRooms)
+                        joinedRooms = userInfoResponse.joinedRooms.reversed()
+                        callback.onJoinedRoomsLoaded(joinedRooms!!)
                     }
 
                     override fun onDataNotAvailable() {
