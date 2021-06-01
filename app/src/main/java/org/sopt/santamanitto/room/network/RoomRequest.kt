@@ -53,4 +53,6 @@ interface RoomRequest {
     fun matchManitto(roomId: Int, callback: MatchManittoCallback)
 
     fun getPersonalRoomInfo(roomId: Int, callback: GetPersonalRoomInfoCallback)
+
+    fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit)
 }

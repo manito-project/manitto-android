@@ -179,6 +179,7 @@
     <dimen name="margin_matched_mission_title_bottom">20dp</dimen>
     <dimen name="padding_matched_mission">12dp</dimen>
     <dimen name="size_matched_mission">15sp</dimen>
+    <dimen name="margin_matched_buttons">16dp</dimen>
 
     <dimen name="margin_finish_redsocks_end">30dp</dimen>
     <dimen name="margin_finish_greensocks_end">28dp</dimen>

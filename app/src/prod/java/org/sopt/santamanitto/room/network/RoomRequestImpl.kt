@@ -106,6 +106,18 @@ class RoomRequestImpl(
         })
     }
 
+    override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        roomService.exitRoom(ExitRoomRequest(roomId.toString())).start(object: RequestCallback<ExitRoomResponse> {
+            override fun onSuccess(data: ExitRoomResponse) {
+                callback.invoke(true)
+            }
+
+            override fun onFail() {
+                callback.invoke(false)
+            }
+        })
+    }
+
     fun convert(errorBody: ResponseBody): JoinRoomErrorBody {
         return retrofitClient.responseBodyConverter<JoinRoomErrorBody>(
             JoinRoomErrorBody::class.java,

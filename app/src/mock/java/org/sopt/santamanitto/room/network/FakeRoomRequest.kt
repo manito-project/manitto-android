@@ -213,4 +213,8 @@ class FakeRoomRequest : RoomRequest {
             callback.onDataNotAvailable()
         }
     }
+
+    override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        callback.invoke(true)
+    }
 }
