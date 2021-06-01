@@ -31,4 +31,7 @@ interface RoomService {
 
     @POST("rooms/match")
     fun matchManitto(@Body manittoMatchingData: ManittoMatchingData): Call<Response<List<ManittoRoomMatchedMissions>>>
+
+    @POST("rooms/exit")
+    fun exitRoom(@Body exitRoomRequest: ExitRoomRequest): Call<Response<ExitRoomResponse>>
 }

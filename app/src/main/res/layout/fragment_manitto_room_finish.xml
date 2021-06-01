@@ -132,12 +132,12 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_matched_buttons"
             android:text="@string/finish_bottom_button"
-            app:layout_constraintBottom_toTopOf="@id/santabottombutton_finish_delete"
+            app:layout_constraintBottom_toTopOf="@id/santabottombutton_finish_exit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <org.sopt.santamanitto.view.SantaBottomButton
-            android:id="@+id/santabottombutton_finish_delete"
+            android:id="@+id/santabottombutton_finish_exit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"

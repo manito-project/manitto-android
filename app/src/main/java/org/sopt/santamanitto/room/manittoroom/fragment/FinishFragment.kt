@@ -12,6 +12,7 @@ import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentManittoRoomFinishBinding
 import org.sopt.santamanitto.databinding.LayoutFinishBinding
 import org.sopt.santamanitto.databinding.LayoutResultBinding
+import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.ResultAdapter
 import org.sopt.santamanitto.view.setLayoutHeight
@@ -96,6 +97,9 @@ class FinishFragment: Fragment() {
             santabackgroundFinish.setOnBackKeyClickListener {
                 requireActivity().finish()
             }
+            santabottombuttonFinishExit.setOnClickListener {
+                showExitDialog()
+            }
         }
     }
 
@@ -136,5 +140,23 @@ class FinishFragment: Fragment() {
                 }
             }
         }
+    }
+
+    private fun showExitDialog() {
+        val message = String.format("%s\n이 방을 나가는 거 맞지?", manittoRoomViewModel.roomName.value)
+        RoundDialogBuilder()
+                .setContentText(message)
+                .addHorizontalButton(getString(R.string.dialog_cancel))
+                .addHorizontalButton(getString(R.string.dialog_confirm)) {
+                    manittoRoomViewModel.exitRoom {
+                        if (it) {
+                            requireActivity().finish()
+                        } else {
+                            //Todo: 에러 발생
+                        }
+                    }
+                }
+                .build()
+                .show(childFragmentManager, "exit")
     }
 }

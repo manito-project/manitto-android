@@ -153,6 +153,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         })
     }
 
+    fun exitRoom(callback: (Boolean) -> Unit) {
+        roomRequest.exitRoom(roomId, callback)
+    }
+
     private fun findMyMission(missions: List<ManittoRoomMatchedMissions>) {
         for (mission in missions) {
             if (mission.userId == userMetadataSource.getUserId()) {
