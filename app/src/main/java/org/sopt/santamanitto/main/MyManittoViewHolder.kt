@@ -21,8 +21,14 @@ class MyManittoViewHolder(
     private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null
 ) : BaseViewHolder<MyManitto, ItemMymanittoBinding>(R.layout.item_mymanitto, parent) {
 
+    private val contentText = binding.textviewMymanittoManittoinfo
+    private val stateText = binding.textviewMymanittoState
+    private val missionText = binding.textviewMymanittoMission
+    private val exitButton = binding.buttonMymanittoExit
+    private val loadingBar = binding.santaloadingJoinedroom
+
     override fun bind(data: MyManitto) {
-        binding.joinedRoom = data
+        binding.myManitto = data
 
         listener?.let {
             val isFinished = !TimeUtil.isLaterThanNow(data.expiration)
@@ -44,36 +50,54 @@ class MyManittoViewHolder(
 
                 userAuthController.getUserInfo(personalRoomInfo.manittoUserId, object: UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                        binding.textviewMymanittoManittoinfo.text = String.format(getString(R.string.joinedroom_manitto_info), userInfoResponse.userName)
+                        contentText.text = String.format(getString(R.string.joinedroom_manitto_info), userInfoResponse.userName)
                         clearLoading()
                     }
 
                     override fun onDataNotAvailable() {
-                        binding.santaloadingJoinedroom.setError(true)
+                        loadingBar.setError(true)
                     }
                 })
             }
 
             override fun onDataNotAvailable() {
-                binding.santaloadingJoinedroom.setError(true)
+                loadingBar.setError(true)
             }
         })
     }
 
     private fun clearLoading() {
-        binding.santaloadingJoinedroom.visibility = View.GONE
+        loadingBar.visibility = View.GONE
     }
 
     private fun setRoomState(data: MyManitto) {
-        binding.textviewMymanittoState.text = if (data.isMatchingDone) {
+        if (data.isMatchingDone) {
+            showExitButton(false)
             if (TimeUtil.isLaterThanNow(data.expiration)) {
-                String.format(getString(R.string.joinedroom_daydiff), TimeUtil.getDayDiffFromNow(data.createdAt) * -1 + 1)
+                //마니또 진행 중
+                stateText.text = String.format(getString(R.string.joinedroom_daydiff),
+                    TimeUtil.getDayDiffFromNow(data.createdAt) * -1 + 1)
+                stateText.setBackgroundTint(R.color.red)
             } else {
-                binding.textviewMymanittoState.setBackgroundTint(R.color.gray_3)
-                getString(R.string.joinedroom_state_done)
+                //결과 발표 완료 시
+                stateText.text = getString(R.string.joinedroom_state_done)
+                stateText.setBackgroundTint(R.color.gray_2)
             }
         } else {
-            getString(R.string.joinedroom_state_matching)
+            //마니또 매칭 전
+            stateText.text = getString(R.string.joinedroom_state_matching)
+            stateText.setBackgroundTint(R.color.gray_3)
+            showExitButton(true)
+        }
+    }
+
+    private fun showExitButton(isShow: Boolean) {
+        if (isShow) {
+            exitButton.visibility = View.VISIBLE
+            missionText.visibility = View.GONE
+        } else {
+            exitButton.visibility = View.GONE
+            missionText.visibility = View.VISIBLE
         }
     }
 
