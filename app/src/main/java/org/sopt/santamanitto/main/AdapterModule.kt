@@ -14,5 +14,5 @@ class AdapterModule {
     fun provideJoinedRoomAdapter(
         userAuthController: UserAuthController,
         roomRequest: RoomRequest
-    ): JoinedRoomsAdapter = JoinedRoomsAdapter(userAuthController, roomRequest)
+    ): MyManittoListAdapter = MyManittoListAdapter(userAuthController, roomRequest)
 }

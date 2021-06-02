@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="joinedRoom"
-            type="org.sopt.santamanitto.room.data.JoinedRoom" />
+            name="myManitto"
+            type="org.sopt.santamanitto.room.data.MyManitto" />
 
         <variable
             name="personalRoomInfo"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{joinedRoom.roomName}"
+                android:text="@{myManitto.roomName}"
                 android:textColor="@color/navy"
                 android:textFontWeight="700"
                 android:textSize="@dimen/size_mymanitto_title"

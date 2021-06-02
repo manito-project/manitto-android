@@ -103,7 +103,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
 
     fun match() {
         startLoading()
-        cachedMainUserDataSource.isJoinedRoomDirty = true
+        cachedMainUserDataSource.isMyManittoDirty = true
         roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
             override fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>) {
                 isMatched = true

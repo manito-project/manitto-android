@@ -20,7 +20,7 @@ class MainFragment: Fragment() {
     private lateinit var binding: FragmentMainBinding
 
     @Inject
-    lateinit var adapter: JoinedRoomsAdapter
+    lateinit var adapter: MyManittoListAdapter
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -77,7 +77,7 @@ class MainFragment: Fragment() {
     }
 
     private fun initJoinedRooms() {
-        viewModel.getJoinedRooms()
+        viewModel.getMyManittoList()
     }
 
     private fun navigateSettingFragment() {

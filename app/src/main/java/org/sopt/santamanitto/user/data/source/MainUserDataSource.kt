@@ -1,14 +1,14 @@
 package org.sopt.santamanitto.user.data.source
 
-import org.sopt.santamanitto.room.data.JoinedRoom
+import org.sopt.santamanitto.room.data.MyManitto
 
 interface MainUserDataSource {
 
     interface GetJoinedRoomsCallback {
-        fun onJoinedRoomsLoaded(joinedRooms: List<JoinedRoom>)
+        fun onMyManittoListLoaded(myManittos: List<MyManitto>)
 
         fun onDataNotAvailable()
     }
 
-    fun getJoinedRooms(callback: GetJoinedRoomsCallback)
+    fun getMyManittoList(callback: GetJoinedRoomsCallback)
 }
