@@ -2,6 +2,7 @@ package org.sopt.santamanitto.room.network
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import kotlinx.coroutines.*
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
@@ -16,6 +17,10 @@ import org.sopt.santamanitto.room.manittoroom.network.*
 import org.sopt.santamanitto.util.TimeUtil
 
 class FakeRoomRequest : RoomRequest {
+
+    companion object {
+        private const val TAG = "FakeRoomRequest"
+    }
 
     override fun createRoom(
         createRoomData: CreateRoomData,
@@ -215,6 +220,7 @@ class FakeRoomRequest : RoomRequest {
     }
 
     override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        Log.d(TAG, "exitRoom: room(id : $roomId) is exited")
         callback.invoke(true)
     }
 }

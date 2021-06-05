@@ -10,12 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentMainBinding
+import org.sopt.santamanitto.dialog.exit.ExitDialogCreator
 import org.sopt.santamanitto.room.create.CreateRoomActivity
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment: Fragment() {
+class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
 
@@ -24,7 +25,11 @@ class MainFragment: Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@MainFragment
@@ -65,15 +70,22 @@ class MainFragment: Fragment() {
             }
         }
 
-        adapter.setOnItemClickListener { roomId, isMatched, isFinished ->
-            requireActivity().run {
-                startActivity(Intent(this, ManittoRoomActivity::class.java).apply {
-                    putExtra(ManittoRoomActivity.EXTRA_ROOM_ID, roomId)
-                    putExtra(ManittoRoomActivity.EXTRA_IS_MATCHED, isMatched)
-                    putExtra(ManittoRoomActivity.EXTRA_IS_FINISHED, isFinished)
-                })
+        adapter.run {
+                setOnItemClickListener { roomId, isMatched, isFinished ->
+                    requireActivity().run {
+                        startActivity(Intent(this, ManittoRoomActivity::class.java).apply {
+                            putExtra(ManittoRoomActivity.EXTRA_ROOM_ID, roomId)
+                            putExtra(ManittoRoomActivity.EXTRA_IS_MATCHED, isMatched)
+                            putExtra(ManittoRoomActivity.EXTRA_IS_FINISHED, isFinished)
+                        })
+                    }
+                }
+                setOnExitClickListener { roomId, roomName, isHost ->
+                    ExitDialogCreator.create(requireContext(), roomName, isHost) {
+                        viewModel.exitRoom(roomId)
+                    }.show(childFragmentManager, "exit")
+                }
             }
-        }
     }
 
     private fun initJoinedRooms() {

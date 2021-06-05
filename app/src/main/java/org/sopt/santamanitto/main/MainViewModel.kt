@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.data.MyManitto
+import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.source.*
 
 class MainViewModel @ViewModelInject constructor(
-    private val cachedMainUserDataSource: CachedMainUserDataSource
+    private val cachedMainUserDataSource: CachedMainUserDataSource,
+    private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
     private var _myManittoList = MutableLiveData<List<MyManitto>?>(null)
@@ -32,6 +34,16 @@ class MainViewModel @ViewModelInject constructor(
                 _networkErrorOccur.value = true
             }
         })
+    }
+
+    fun exitRoom(roomId: Int) {
+        roomRequest.exitRoom(roomId) {
+            if (it) {
+                refresh()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
     }
 
     fun refresh() {

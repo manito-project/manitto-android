@@ -99,4 +99,7 @@
     <string name="santanameinput_alert">・이름은 최대 %d자까지 설정 가능해</string>
 
     <string name="editname_background">내 이름을\n변경할 수 있어!</string>
+
+    <string name="exit_dialog_host">방장이 나가면 팀원들도\n방을 이용할 수 없어!</string>
+    <string name="exit_dialog_guest">%s\n이 방을 나가는 거 맞지?</string>
 </resources>

@@ -10,6 +10,7 @@ import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.UserInfoResponse
 import org.sopt.santamanitto.user.data.controller.UserAuthController
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 import org.sopt.santamanitto.view.setBackgroundTint
@@ -18,22 +19,30 @@ class MyManittoViewHolder(
     parent: ViewGroup,
     private val userAuthController: UserAuthController,
     private val roomRequest: RoomRequest,
-    private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null
+    private val userMetadataSource: UserMetadataSource,
+    private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null,
+    private var exitListener: ((roomId: Int, roomName: String, isHost: Boolean) -> Unit)? = null
 ) : BaseViewHolder<MyManitto, ItemMymanittoBinding>(R.layout.item_mymanitto, parent) {
 
     private val contentText = binding.textviewMymanittoManittoinfo
     private val stateText = binding.textviewMymanittoState
     private val missionText = binding.textviewMymanittoMission
-    private val exitButton = binding.buttonMymanittoExit
     private val loadingBar = binding.santaloadingJoinedroom
+    private val exitButton = binding.buttonMymanittoExit
 
     override fun bind(data: MyManitto) {
         binding.myManitto = data
 
-        listener?.let {
+        listener?.let { listener ->
             val isFinished = !TimeUtil.isLaterThanNow(data.expiration)
             binding.root.setOnClickListener {
-                it(data.roomId, data.isMatchingDone, isFinished)
+                listener.invoke(data.roomId, data.isMatchingDone, isFinished)
+            }
+        }
+        exitListener?.let { listener ->
+            exitButton.setOnClickListener {
+                listener.invoke(data.roomId, data.roomName,
+                    data.creatorId == userMetadataSource.getUserId())
             }
         }
 
