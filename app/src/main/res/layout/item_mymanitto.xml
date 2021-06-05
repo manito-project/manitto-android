@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="myManitto"
+            type="org.sopt.santamanitto.room.data.MyManitto" />
+
+        <variable
+            name="personalRoomInfo"
+            type="org.sopt.santamanitto.room.data.PersonalRoomInfo" />
+
+    </data>
+
+    <org.sopt.santamanitto.view.SantaCardView
+        android:layout_width="@dimen/width_mymanitto_viewholder"
+        android:layout_height="@dimen/height_mymanitto_viewholder">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/padding_mymanitto_horizontal"
+            android:paddingVertical="@dimen/padding_mymanitto_veertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_mymanitto_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{myManitto.roomName}"
+                android:textColor="@color/navy"
+                android:textFontWeight="700"
+                android:textSize="@dimen/size_mymanitto_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tool:text="마니또 방 이름" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/framelayout_mymanitto_bottoms"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_mymanitto_title"
+                app:layout_constraintVertical_bias="0.444">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_mymanitto_manittoinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:letterSpacing="-0.04"
+                    android:lineHeight="21dp"
+                    android:text="@string/joinedroom_santa_info_before_matching"
+                    android:textColor="@color/gray_3"
+                    android:textSize="12dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_mymanitto_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_ractangle_background_30"
+                    android:backgroundTint="@color/red"
+                    android:paddingHorizontal="@dimen/padding_mymanitto_daydiff_textview_horizontal"
+                    android:paddingVertical="@dimen/padding_mymanitto_daydiff_textview_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_mymanitto_state_text"
+                    tool:text="1일째" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/framelayout_mymanitto_bottoms"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_mymanitto_mission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="-0.06"
+                    android:lineHeight="@dimen/lineheight_mymanitto_mission_text"
+                    android:text="@{personalRoomInfo.myMission.content}"
+                    android:textColor="@color/gray_2"
+                    android:textSize="@dimen/size_mymanitto_mission_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tool:text="여기는 미션을 알려주는 공간입니다아 최대 2줄임" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_mymanitto_exit"
+                    android:layout_width="65dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/round_ractangle_background_30"
+                    android:backgroundTint="@color/gray_1"
+                    android:text="@string/joinedroom_exit_room"
+                    android:textFontWeight="700"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tool:visibility="gone" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <org.sopt.santamanitto.view.SantaLoading
+                android:id="@+id/santaloading_joinedroom"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tool:visibility="gone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </org.sopt.santamanitto.view.SantaCardView>
+
+</layout>

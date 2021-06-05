@@ -39,7 +39,7 @@ class JoinRoomViewModel @ViewModelInject constructor(
                 object : RoomRequest.JoinRoomCallback {
 
                     override fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse) {
-                        cachedMainUserDataSource.isJoinedRoomDirty = true
+                        cachedMainUserDataSource.isMyManittoDirty = true
                         callback(joinedRoom)
                     }
 

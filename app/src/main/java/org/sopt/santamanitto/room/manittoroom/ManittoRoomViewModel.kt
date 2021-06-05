@@ -103,7 +103,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
 
     fun match() {
         startLoading()
-        cachedMainUserDataSource.isJoinedRoomDirty = true
+        cachedMainUserDataSource.isMyManittoDirty = true
         roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
             override fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>) {
                 isMatched = true
@@ -153,8 +153,14 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         })
     }
 
-    fun exitRoom(callback: (Boolean) -> Unit) {
-        roomRequest.exitRoom(roomId, callback)
+    fun exitRoom(callback: () -> Unit) {
+        roomRequest.exitRoom(roomId) {
+            if (it) {
+                callback.invoke()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
     }
 
     private fun findMyMission(missions: List<ManittoRoomMatchedMissions>) {

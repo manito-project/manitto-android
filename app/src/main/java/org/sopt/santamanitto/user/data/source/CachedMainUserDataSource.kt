@@ -1,6 +1,6 @@
 package org.sopt.santamanitto.user.data.source
 
-import org.sopt.santamanitto.room.data.JoinedRoom
+import org.sopt.santamanitto.room.data.MyManitto
 import org.sopt.santamanitto.user.data.UserInfoResponse
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 
@@ -9,19 +9,19 @@ class CachedMainUserDataSource(
     private val userAuthController: UserAuthController
 ) : MainUserDataSource {
 
-    var isJoinedRoomDirty = true
+    var isMyManittoDirty = true
 
-    private var joinedRooms: List<JoinedRoom>? = null
+    private var myManittos: List<MyManitto>? = null
 
-    override fun getJoinedRooms(callback: MainUserDataSource.GetJoinedRoomsCallback) {
-        if (isJoinedRoomDirty || joinedRooms == null) {
+    override fun getMyManittoList(callback: MainUserDataSource.GetJoinedRoomsCallback) {
+        if (isMyManittoDirty || myManittos == null) {
             userAuthController.getUserInfo(
                 userMetadataSource.getUserId(),
                 object : UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                        isJoinedRoomDirty = false
-                        joinedRooms = userInfoResponse.joinedRooms.reversed()
-                        callback.onJoinedRoomsLoaded(joinedRooms!!)
+                        isMyManittoDirty = false
+                        myManittos = userInfoResponse.myManittos.reversed()
+                        callback.onMyManittoListLoaded(myManittos!!)
                     }
 
                     override fun onDataNotAvailable() {
@@ -29,7 +29,7 @@ class CachedMainUserDataSource(
                     }
                 })
         } else {
-            callback.onJoinedRoomsLoaded(joinedRooms!!)
+            callback.onMyManittoListLoaded(myManittos!!)
         }
     }
 }

@@ -102,7 +102,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_main_history"
-            replaceAll="@{viewModel.joinedRooms}"
+            replaceAll="@{viewModel.myManittoList}"
             setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto"
-            tool:listitem="@layout/viewholder_joined_room"
+            tool:listitem="@layout/item_mymanitto"
             tool:orientation="horizontal" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -129,7 +129,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:visibility="@{viewModel.joinedRooms.empty ? View.VISIBLE : View.INVISIBLE}">
+            app:visibility="@{viewModel.myManittoList.empty ? View.VISIBLE : View.INVISIBLE}">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageview_main_nomanittosnowman"

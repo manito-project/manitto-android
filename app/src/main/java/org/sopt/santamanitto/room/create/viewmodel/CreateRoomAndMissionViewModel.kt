@@ -72,6 +72,6 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
             }
         })
 
-        cachedMainUserDataSource.isJoinedRoomDirty = true
+        cachedMainUserDataSource.isMyManittoDirty = true
     }
 }
