@@ -153,8 +153,14 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         })
     }
 
-    fun exitRoom(callback: (Boolean) -> Unit) {
-        roomRequest.exitRoom(roomId, callback)
+    fun exitRoom(callback: () -> Unit) {
+        roomRequest.exitRoom(roomId) {
+            if (it) {
+                callback.invoke()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
     }
 
     private fun findMyMission(missions: List<ManittoRoomMatchedMissions>) {

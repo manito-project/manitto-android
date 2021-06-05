@@ -1,6 +1,7 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -13,6 +14,7 @@ import org.sopt.santamanitto.databinding.FragmentManittoRoomFinishBinding
 import org.sopt.santamanitto.databinding.LayoutFinishBinding
 import org.sopt.santamanitto.databinding.LayoutResultBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.dialog.exit.ExitDialogCreator
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.ResultAdapter
 import org.sopt.santamanitto.view.setLayoutHeight
@@ -23,6 +25,7 @@ import android.view.View.OnLayoutChangeListener as OnLayoutChangeListener1
 class FinishFragment: Fragment() {
 
     companion object {
+        private const val TAG = "FinishFragment"
         private const val SCREEN_KEY = "isFinishScreen"
     }
 
@@ -143,20 +146,14 @@ class FinishFragment: Fragment() {
     }
 
     private fun showExitDialog() {
-        val message = String.format("%s\n이 방을 나가는 거 맞지?", manittoRoomViewModel.roomName.value)
-        RoundDialogBuilder()
-                .setContentText(message)
-                .addHorizontalButton(getString(R.string.dialog_cancel))
-                .addHorizontalButton(getString(R.string.dialog_confirm)) {
-                    manittoRoomViewModel.exitRoom {
-                        if (it) {
-                            requireActivity().finish()
-                        } else {
-                            //Todo: 에러 발생
-                        }
-                    }
-                }
-                .build()
-                .show(childFragmentManager, "exit")
+        if (manittoRoomViewModel.roomName.value == null) {
+            Log.e(TAG, "showExitDialog(): roomName is null")
+            return
+        }
+        ExitDialogCreator.create(requireContext(), manittoRoomViewModel.roomName.value!!, false) {
+            manittoRoomViewModel.exitRoom {
+                requireActivity().finish()
+            }
+        }.show(childFragmentManager, "exit")
     }
 }
