@@ -58,7 +58,7 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T, *>>() {
         notifyItemChanged(position)
     }
 
-    fun clear() {
+    open fun clear() {
         val size = items.size
         items.clear()
         notifyItemRangeRemoved(0, size)
