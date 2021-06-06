@@ -15,6 +15,9 @@ open class SantaCardView @JvmOverloads constructor(
         radius = getDimen(R.dimen.radius_cardview)
         setCardBackgroundColor(getColor(R.color.white))
         cardElevation = getDimen(R.dimen.elevation_shadow)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            outlineSpotShadowColor = getColor(R.color.shadow_gray)
+        }
         setRippleEffect(true)
 
         val typeArray = context.theme.obtainStyledAttributes(

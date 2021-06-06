@@ -11,6 +11,7 @@ class SantaBottomButton : AppCompatButton {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(attrs)
     }
+
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init(attrs)
     }
@@ -39,6 +40,19 @@ class SantaBottomButton : AppCompatButton {
 
         if (typeArray.hasValue(R.styleable.SantaBottomButton_isGrayButton)) {
             isGrayButton = typeArray.getBoolean(R.styleable.SantaBottomButton_isGrayButton, false)
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBottomButton_darkShadow)) {
+            val darkShadow = typeArray.getBoolean(R.styleable.SantaBottomButton_darkShadow, false)
+            if (!darkShadow) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                    outlineSpotShadowColor = getColor(R.color.shadow_gray)
+                }
+            }
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                outlineSpotShadowColor = getColor(R.color.shadow_gray)
+            }
         }
     }
 

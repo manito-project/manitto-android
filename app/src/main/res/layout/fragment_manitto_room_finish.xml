@@ -132,6 +132,7 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_matched_buttons"
             android:text="@string/finish_bottom_button"
+            app:darkShadow="true"
             app:layout_constraintBottom_toTopOf="@id/santabottombutton_finish_exit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -143,6 +144,7 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:text="@string/matched_bottom_button_delete"
+            app:darkShadow="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
