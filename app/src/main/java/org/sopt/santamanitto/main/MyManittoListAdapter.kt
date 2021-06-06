@@ -17,12 +17,16 @@ class MyManittoListAdapter(
     private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null
     private var exitListener: ((roomId: Int, roomName: String, isHost: Boolean) -> Unit)? = null
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): BaseViewHolder<MyManitto, *> {
+    private val cachedMyManittoInfo = HashMap<Int, MyManittoInfo>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<MyManitto, *> {
         return MyManittoViewHolder(
-            parent, userAuthController, roomRequest, userMetadataSource, listener, exitListener)
+            parent, userAuthController, roomRequest, userMetadataSource, cachedMyManittoInfo, listener, exitListener)
+    }
+
+    override fun clear() {
+        cachedMyManittoInfo.clear()
+        super.clear()
     }
 
     fun setOnItemClickListener(

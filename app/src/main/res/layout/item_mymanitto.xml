@@ -4,18 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="myManitto"
-            type="org.sopt.santamanitto.room.data.MyManitto" />
-
-        <variable
-            name="personalRoomInfo"
-            type="org.sopt.santamanitto.room.data.PersonalRoomInfo" />
-
-    </data>
-
     <org.sopt.santamanitto.view.SantaCardView
         android:layout_width="@dimen/width_mymanitto_viewholder"
         android:layout_height="@dimen/height_mymanitto_viewholder">
@@ -32,7 +20,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{myManitto.roomName}"
                 android:textColor="@color/navy"
                 android:textFontWeight="700"
                 android:textSize="@dimen/size_mymanitto_title"
@@ -88,7 +75,6 @@
                     android:layout_height="wrap_content"
                     android:letterSpacing="-0.06"
                     android:lineHeight="@dimen/lineheight_mymanitto_mission_text"
-                    android:text="@{personalRoomInfo.myMission.content}"
                     android:textColor="@color/gray_2"
                     android:textSize="@dimen/size_mymanitto_mission_text"
                     app:layout_constraintStart_toStartOf="parent"

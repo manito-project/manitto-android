@@ -20,6 +20,7 @@ class MyManittoViewHolder(
     private val userAuthController: UserAuthController,
     private val roomRequest: RoomRequest,
     private val userMetadataSource: UserMetadataSource,
+    private val cachedRoomInfo: HashMap<Int, MyManittoInfo>,
     private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null,
     private var exitListener: ((roomId: Int, roomName: String, isHost: Boolean) -> Unit)? = null
 ) : BaseViewHolder<MyManitto, ItemMymanittoBinding>(R.layout.item_mymanitto, parent) {
@@ -29,9 +30,10 @@ class MyManittoViewHolder(
     private val missionText = binding.textviewMymanittoMission
     private val loadingBar = binding.santaloadingJoinedroom
     private val exitButton = binding.buttonMymanittoExit
+    private val roomName = binding.textviewMymanittoTitle
 
     override fun bind(data: MyManitto) {
-        binding.myManitto = data
+        roomName.text = data.roomName
 
         listener?.let { listener ->
             val isFinished = !TimeUtil.isLaterThanNow(data.expiration)
@@ -53,13 +55,23 @@ class MyManittoViewHolder(
             return
         }
 
-        roomRequest.getPersonalRoomInfo(data.roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
-            override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
-                binding.personalRoomInfo = personalRoomInfo
+        if (cachedRoomInfo.containsKey(data.roomId)) {
+            val info = cachedRoomInfo[data.roomId]!!
+            setManittoInfo(info)
+            clearLoading()
+        } else {
+            requestAndCacheInfo(data.roomId)
+        }
+    }
 
+    private fun requestAndCacheInfo(roomId: Int) {
+        roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
+            override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
                 userAuthController.getUserInfo(personalRoomInfo.manittoUserId, object: UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                        contentText.text = String.format(getString(R.string.joinedroom_manitto_info), userInfoResponse.userName)
+                        val info = MyManittoInfo(userInfoResponse.userName, personalRoomInfo.myMission?.content)
+                        cachedRoomInfo[roomId] = info
+                        setManittoInfo(info)
                         clearLoading()
                     }
 
@@ -73,6 +85,11 @@ class MyManittoViewHolder(
                 loadingBar.setError(true)
             }
         })
+    }
+
+    private fun setManittoInfo(info: MyManittoInfo) {
+        missionText.text = info.mission
+        contentText.text = String.format(getString(R.string.joinedroom_manitto_info), info.manittoName)
     }
 
     private fun clearLoading() {
