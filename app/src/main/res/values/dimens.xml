@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="elevation_shadow">4dp</dimen>
+    <dimen name="elevation_shadow">6dp</dimen>
     <dimen name="radius_cardview">10dp</dimen>
     <dimen name="radius_cardview_more">20dp</dimen>
     <dimen name="padding_entire">16dp</dimen>
