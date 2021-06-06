@@ -148,7 +148,7 @@
             android:id="@+id/santabottombutton_waitingroom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.isAdmin()}"
+            android:enabled="@{viewModel.canStart}"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:text="@string/waitingroom_bottombutton"

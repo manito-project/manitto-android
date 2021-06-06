@@ -79,6 +79,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val myName: String
         get() = userMetadataSource.getUserName()
 
+    private val _canStart = MutableLiveData<Boolean>()
+    val canStart: LiveData<Boolean>
+        get() = _canStart
+
     fun refreshManittoRoomInfo() {
         startLoading()
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
@@ -89,6 +93,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                     _members.value = members
                     _invitationCode = invitationCode
                     _isAdmin.value = userMetadataSource.getUserId() == creator.userId
+                    _canStart.value = _isAdmin.value!! && members.size > 1
                     this@ManittoRoomViewModel.isMatched = isMatched
                     _period.value = getPeriod(createdAt, expiration)
                     stopLoading()
