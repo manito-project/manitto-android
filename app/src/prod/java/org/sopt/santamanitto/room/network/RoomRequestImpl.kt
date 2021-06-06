@@ -1,10 +1,7 @@
 package org.sopt.santamanitto.room.network
 
 import okhttp3.ResponseBody
-import org.sopt.santamanitto.network.AuthRetrofitClient
-import org.sopt.santamanitto.network.RequestCallback
-import org.sopt.santamanitto.network.Response
-import org.sopt.santamanitto.network.start
+import org.sopt.santamanitto.network.*
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
@@ -107,15 +104,7 @@ class RoomRequestImpl(
     }
 
     override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
-        roomService.exitRoom(ExitRoomRequest(roomId.toString())).start(object: RequestCallback<ExitRoomResponse> {
-            override fun onSuccess(data: ExitRoomResponse) {
-                callback.invoke(true)
-            }
-
-            override fun onFail() {
-                callback.invoke(false)
-            }
-        })
+        roomService.exitRoom(ExitRoomRequest(roomId.toString())).start(callback)
     }
 
     fun convert(errorBody: ResponseBody): JoinRoomErrorBody {

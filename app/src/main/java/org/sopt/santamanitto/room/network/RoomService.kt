@@ -1,6 +1,7 @@
 package org.sopt.santamanitto.room.network
 
 import org.sopt.santamanitto.network.Response
+import org.sopt.santamanitto.network.SimpleResponse
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
@@ -33,5 +34,5 @@ interface RoomService {
     fun matchManitto(@Body manittoMatchingData: ManittoMatchingData): Call<Response<List<ManittoRoomMatchedMissions>>>
 
     @POST("rooms/exit")
-    fun exitRoom(@Body exitRoomRequest: ExitRoomRequest): Call<Response<ExitRoomResponse>>
+    fun exitRoom(@Body exitRoomRequest: ExitRoomRequest): Call<SimpleResponse>
 }
