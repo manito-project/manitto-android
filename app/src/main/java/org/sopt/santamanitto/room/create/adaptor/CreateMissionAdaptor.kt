@@ -1,12 +1,8 @@
 package org.sopt.santamanitto.room.create.adaptor
 
-import android.content.Context
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.santamanitto.room.create.CreateMissionViewHolder
-import org.sopt.santamanitto.view.SantaEditText
 
 open class CreateMissionAdaptor(private val createMissionCallback: CreateMissionCallback)
     : RecyclerView.Adapter<CreateMissionViewHolder>() {
@@ -14,8 +10,7 @@ open class CreateMissionAdaptor(private val createMissionCallback: CreateMission
     protected val missions = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreateMissionViewHolder {
-        val editText = getEditText(parent.context)
-        return CreateMissionViewHolder(createMissionCallback, editText)
+        return CreateMissionViewHolder(createMissionCallback, parent)
     }
 
     override fun onBindViewHolder(holder: CreateMissionViewHolder, position: Int) {
@@ -33,13 +28,6 @@ open class CreateMissionAdaptor(private val createMissionCallback: CreateMission
     private fun addMission(mission: String) {
         missions.add(mission)
         notifyItemInserted(missions.size)
-    }
-
-    private fun getEditText(context: Context): SantaEditText {
-        return SantaEditText(context).apply {
-            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-            isEnabled
-        }
     }
 
     fun setList(data: List<String>) {
