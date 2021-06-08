@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.InverseBindingListener
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaEditTextBinding
 import java.util.*
@@ -149,6 +148,15 @@ constructor(
 
     fun setMaxLines(maxLines: Int) {
         editText.maxLines = maxLines
+    }
+
+    fun setContentWidth(width: Int) {
+        editText.layoutParams.width = width
+        preview.layoutParams.width = width
+    }
+
+    override fun setOnKeyListener(l: OnKeyListener) {
+        editText.setOnKeyListener(l)
     }
 
     override fun addTextChangeListener(textWatcher: TextWatcher) {
