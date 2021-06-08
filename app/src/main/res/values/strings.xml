@@ -53,7 +53,7 @@
 
     <string name="createmission_background_title">미션 만들기</string>
     <string name="createmission_background_description">흥미딘딘한 산타 마니또를 위해\n미션을 추가해볼까?</string>
-    <string name="createmission_description_in_cardview">미션을 추가하면 마니또와 미션을 함께 매칭할 수 있고, 스킵하면 미션 없이 마니또만 매칭될거야!</string>
+    <string name="createmission_description_in_cardview">미션 한 개에 마니또 한명이 매칭돼\n미션은 최대 36자까지 입력할 수 있어!</string>
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
     <string name="createmission_skip_bottom_button">SKIP</string>
     <string name="createmission_mission_hint">미션을 입력해줘!</string>
