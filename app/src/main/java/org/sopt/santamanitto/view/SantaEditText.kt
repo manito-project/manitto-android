@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.InverseBindingListener
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaEditTextBinding
 import java.util.*
@@ -37,13 +36,13 @@ constructor(
 
     private val editText = binding.edittextSantaedittext
 
+    private val preview = binding.textviewSantaedittextPreview
+
     private var rightButton = binding.santasmallbuttonSantaedittext
 
     private var buttonStyle = BUTTON_NONE
 
     private var addListener: ((String) -> Unit)? = null
-
-    private var deleteListener: ((String) -> Unit)? = null
 
     var hint: String?
         get() = editText.hint.toString()
@@ -119,24 +118,12 @@ constructor(
             if (text.isNullOrBlank()) {
                 return@setOnClickListener
             }
-            if (buttonStyle == BUTTON_ADD) {
-                addListener?.let { listener ->
-                    setDeleteImage()
-                    isEditable = false
-                    listener(text!!)
-                }
-            } else {
-                deleteListener?.let { listener -> listener(text!!) }
-            }
+            addListener?.invoke(text!!)
         }
     }
 
-    fun setAddClickListener(listener: (String) -> Unit) {
+    fun setButtonClickListener(listener: (String) -> Unit) {
         addListener = listener
-    }
-
-    fun setDeleteClickListener(listener: (String) -> Unit) {
-        deleteListener = listener
     }
 
     fun setAddImage() {
@@ -163,8 +150,27 @@ constructor(
         editText.maxLines = maxLines
     }
 
+    fun setContentWidth(width: Int) {
+        editText.layoutParams.width = width
+        preview.layoutParams.width = width
+    }
+
+    override fun setOnKeyListener(l: OnKeyListener) {
+        editText.setOnKeyListener(l)
+    }
+
     override fun addTextChangeListener(textWatcher: TextWatcher) {
         editText.addTextChangedListener(textWatcher)
+    }
+
+    fun compress(isCompress: Boolean) {
+        if (isCompress) {
+            preview.text = text
+            editText.visibility = View.GONE
+        } else {
+            preview.text = null
+            editText.visibility = View.VISIBLE
+        }
     }
 
 
