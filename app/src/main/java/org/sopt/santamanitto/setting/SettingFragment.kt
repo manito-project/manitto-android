@@ -9,10 +9,24 @@ import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentSettingBinding
 
 @AndroidEntryPoint
-class SettingFragment: BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting) {
+class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //Todo: 세팅 내용 구현
-        binding.buttonSettingBack.setOnClickListener { findNavController().navigateUp() }
+        binding.run {
+            buttonSettingBack.setOnClickListener { findNavController().navigateUp() }
+            settinglistviewSetting
+                    .addSetting(getString(R.string.setting_1_edit_name)) {
+                        findNavController().navigate(
+                                SettingFragmentDirections.actionSettingFragment2ToEditNameFragment()
+                        )
+                    }
+                    .addSetting(getString(R.string.setting_2_tos)) {
+                        //Todo: 웹뷰 이동
+                    }
+                    .addSetting(getString(R.string.setting_3_privacy_policy)) {
+                        //Todo: 웹뷰 이동
+                    }
+                    .commit()
+        }
     }
 }

@@ -41,6 +41,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <org.sopt.santamanitto.setting.SettingListView
+            android:id="@+id/settinglistview_setting"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
