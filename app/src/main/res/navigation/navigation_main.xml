@@ -14,8 +14,8 @@
             android:id="@+id/action_mainFragment_to_joinRoomFragment"
             app:destination="@id/joinRoomFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_editNameFragment"
-            app:destination="@id/editNameFragment" />
+            android:id="@+id/action_mainFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
 
     <fragment
@@ -23,9 +23,35 @@
         android:name="org.sopt.santamanitto.room.join.JoinRoomFragment"
         android:label="JoinRoomFragment"
         tools:layout="@layout/fragment_join_room" />
+
     <fragment
         android:id="@+id/editNameFragment"
         android:name="org.sopt.santamanitto.user.mypage.EditNameFragment"
-        android:label="EditNameFragment" />
+        android:label="EditNameFragment"
+        tools:layout="@layout/fragment_edit_name" />
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="org.sopt.santamanitto.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting">
+
+        <action
+            android:id="@+id/action_settingFragment_to_editNameFragment"
+            app:destination="@id/editNameFragment" />
+
+        <action
+            android:id="@+id/action_settingFragment_to_webViewFragmentFromSetting"
+            app:destination="@id/webViewFragmentFromSetting" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/webViewFragmentFromSetting"
+        android:name="org.sopt.santamanitto.user.signin.fragment.WebViewFragment"
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_webview">
+        <argument android:name="url" />
+    </fragment>
 
 </navigation>

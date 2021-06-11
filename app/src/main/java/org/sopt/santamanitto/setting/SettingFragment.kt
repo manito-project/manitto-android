@@ -1,0 +1,37 @@
+package org.sopt.santamanitto.setting
+
+import android.os.Bundle
+import android.view.View
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.BuildConfig
+import org.sopt.santamanitto.R
+import org.sopt.santamanitto.base.BaseFragment
+import org.sopt.santamanitto.databinding.FragmentSettingBinding
+
+@AndroidEntryPoint
+class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.run {
+            buttonSettingBack.setOnClickListener { findNavController().navigateUp() }
+            settinglistviewSetting
+                    .addSetting(getString(R.string.setting_1_edit_name)) {
+                        findNavController().navigate(
+                                SettingFragmentDirections.actionSettingFragmentToEditNameFragment()
+                        )
+                    }
+                    .addSetting(getString(R.string.setting_2_tos)) {
+                        goToWebViewFragment(BuildConfig.TOS_URL)
+                    }
+                    .addSetting(getString(R.string.setting_3_privacy_policy)) {
+                        goToWebViewFragment(BuildConfig.PRIVACY_POLICY_RUL)
+                    }
+                    .commit()
+        }
+    }
+
+    private fun goToWebViewFragment(url: String) {
+        findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToWebViewFragmentFromSetting(url))
+    }
+}
