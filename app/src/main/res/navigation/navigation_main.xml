@@ -37,9 +37,21 @@
         tools:layout="@layout/fragment_setting">
 
         <action
-            android:id="@+id/action_settingFragment2_to_editNameFragment"
+            android:id="@+id/action_settingFragment_to_editNameFragment"
             app:destination="@id/editNameFragment" />
 
+        <action
+            android:id="@+id/action_settingFragment_to_webViewFragmentFromSetting"
+            app:destination="@id/webViewFragmentFromSetting" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/webViewFragmentFromSetting"
+        android:name="org.sopt.santamanitto.user.signin.fragment.WebViewFragment"
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_webview">
+        <argument android:name="url" />
     </fragment>
 
 </navigation>
