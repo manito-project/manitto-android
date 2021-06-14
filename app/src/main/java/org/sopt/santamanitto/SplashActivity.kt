@@ -1,6 +1,7 @@
 package org.sopt.santamanitto
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -58,16 +59,26 @@ class SplashActivity : AppCompatActivity() {
 
     private fun showUpdateDialog() {
         RoundDialogBuilder()
-            .setContentText("원활한 산타마니또를 위해 업데이트를 해야해~!")
-            .addHorizontalButton("마니또 종료") {
+            .setContentText(getString(R.string.update_dialog_content))
+            .addHorizontalButton(getString(R.string.update_dialog_exit)) {
                 finish()
             }
-            .addHorizontalButton("업데이트") {
-                //Todo: 마켓으로 이동
+            .addHorizontalButton(getString(R.string.update_dialog_update)) {
+                goToStore()
             }
             .enableCancel(false)
             .build()
             .show(supportFragmentManager, "update")
+    }
+
+    private fun goToStore() {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(
+                    "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+            setPackage("com.android.vending")
+        }
+        startActivity(intent)
+        finish()
     }
 
     private fun tryLogin() {
