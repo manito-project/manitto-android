@@ -107,6 +107,10 @@ class RoomRequestImpl(
         roomService.exitRoom(ExitRoomRequest(roomId.toString())).start(callback)
     }
 
+    override fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        roomService.removeHistory(roomId).start(callback)
+    }
+
     fun convert(errorBody: ResponseBody): JoinRoomErrorBody {
         return retrofitClient.responseBodyConverter<JoinRoomErrorBody>(
             JoinRoomErrorBody::class.java,

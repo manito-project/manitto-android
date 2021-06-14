@@ -55,4 +55,6 @@ interface RoomRequest {
     fun getPersonalRoomInfo(roomId: Int, callback: GetPersonalRoomInfoCallback)
 
     fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit)
+
+    fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit)
 }

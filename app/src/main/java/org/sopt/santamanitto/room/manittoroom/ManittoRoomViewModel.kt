@@ -158,6 +158,17 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         })
     }
 
+    fun removeHistory(callback: () -> Unit) {
+        roomRequest.removeHistory(roomId) {
+            if (it) {
+                cachedMainUserDataSource.isMyManittoDirty = true
+                callback.invoke()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
+    }
+
     fun exitRoom(callback: () -> Unit) {
         roomRequest.exitRoom(roomId) {
             if (it) {

@@ -11,10 +11,7 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoMatchingData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface RoomService {
 
@@ -35,4 +32,7 @@ interface RoomService {
 
     @POST("rooms/exit")
     fun exitRoom(@Body exitRoomRequest: ExitRoomRequest): Call<SimpleResponse>
+
+    @DELETE("rooms/{roomId}/history")
+    fun removeHistory(@Path("roomId") roomId: Int): Call<SimpleResponse>
 }
