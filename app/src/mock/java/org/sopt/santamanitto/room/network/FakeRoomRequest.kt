@@ -223,4 +223,9 @@ class FakeRoomRequest : RoomRequest {
         Log.d(TAG, "exitRoom: room(id : $roomId) is exited")
         callback.invoke(true)
     }
+
+    override fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        Log.d(TAG, "removeHistory: room(id : $roomId) is removed from history")
+        callback.invoke(true)
+    }
 }

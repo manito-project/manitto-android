@@ -151,7 +151,7 @@ class FinishFragment: Fragment() {
             return
         }
         ExitDialogCreator.create(requireContext(), manittoRoomViewModel.roomName.value!!, false) {
-            manittoRoomViewModel.exitRoom {
+            manittoRoomViewModel.removeHistory {
                 requireActivity().finish()
             }
         }.show(childFragmentManager, "exit")
