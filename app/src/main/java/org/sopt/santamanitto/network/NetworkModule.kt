@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Provides
     fun provideBaseUrl(): String = BuildConfig.BASE_URL
@@ -59,11 +59,11 @@ class NetworkModule {
 
     private fun provideLogger(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.BODY
         }
     }
 
-    private fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
             Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(baseUrl)
