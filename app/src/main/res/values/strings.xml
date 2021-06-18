@@ -114,4 +114,8 @@
     <string name="update_dialog_content">원활한 산타마니또를 위해\n업데이트를 해야해!</string>
     <string name="update_dialog_exit">마니또 종료</string>
     <string name="update_dialog_update">업데이트</string>
+
+    <string name="mymanitto_removed">삭제된 방</string>
+    <string name="mymanitto_removed_content">해당 방은 방장에 의해\n삭제된 방이야</string>
+    <string name="mymanitto_remove">삭제하기</string>
 </resources>

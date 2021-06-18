@@ -7,27 +7,27 @@ class FakeUserAuthController: UserAuthController {
 
     private val fakeJoinedRooms = mutableListOf<MyManitto>().apply {
         add(
-            MyManitto(1, "fakeRoom1", 1, false,
+            MyManitto(1, "fakeRoom1", 1, false, false,
             "2021-02-15 12:33:44", "2021-01-25 12:33:44")
         )
 
         add(
-            MyManitto(2, "fakeRoom2", 2, false,
+            MyManitto(2, "fakeRoom2", 2, true, false,
             "2021-02-10 12:33:44", "2021-01-24 12:33:44")
         )
 
         add(
-            MyManitto(3, "fakeRoom3", 3, true,
+            MyManitto(3, "fakeRoom3", 3, false, true,
             "2021-01-30 12:33:44", "2021-01-20 12:33:44")
         )
 
         add(
-            MyManitto(4, "fakeRoom4", 1, true,
+            MyManitto(4, "fakeRoom4", 1, false, true,
             "2021-01-14 12:33:44", "2021-01-12 12:33:44")
         )
 
         add(
-            MyManitto(5, "fakeRoom5", 1, true,
+            MyManitto(5, "fakeRoom5", 1, false, true,
             "2021-01-11 12:33:44", "2021-01-09 12:33:44")
         )
     }
