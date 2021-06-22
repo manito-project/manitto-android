@@ -5,48 +5,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.setExpirationTime
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.setExpirationPeriod
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.view.SantaEditText
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 import org.sopt.santamanitto.view.setTextColorById
 
-class CreateRoomFragment : Fragment() {
+class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room) {
 
     companion object {
         private const val MAX_ROOM_NAME_LENGTH = 17
     }
 
-    private lateinit var binding: FragmentCreateRoomBinding
-
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCreateRoomBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@CreateRoomFragment
-            viewModel = this@CreateRoomFragment.viewModel
-        }
+    private val args: CreateRoomFragmentArgs by navArgs()
 
-        return binding.root
-    }
+    private var isNewRoom = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewModel = this@CreateRoomFragment.viewModel
+
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+        loadData()
 
         initView()
 
@@ -55,6 +50,11 @@ class CreateRoomFragment : Fragment() {
         subscribeUI()
 
         setOnClickListener()
+    }
+
+    private fun loadData() {
+        viewModel.start(args.roomId)
+        isNewRoom = args.roomId == -1
     }
 
     private fun initView() {
@@ -68,20 +68,37 @@ class CreateRoomFragment : Fragment() {
                     binding.textviewCreateroomAlert.setTextColorById(R.color.gray_3)
                 }
             })
+        }
 
+        if (!isNewRoom) {
+            binding.run {
+                santabackgroundCreateroom.hideDescription()
+                santabottombuttonCreateroom.text = getString(R.string.createroom_modify_done)
+                santabackgroundCreateroom.title = getString(R.string.createroom_modify_title)
+            }
         }
     }
 
     private fun setOnClickListener() {
         binding.run {
             santabottombuttonCreateroom.setOnClickListener {
-                findNavController().navigate(CreateRoomFragmentDirections.actionCreateRoomFragmentToCreateMissionsFragment())
+                if (isNewRoom) {
+                    findNavController().navigate(CreateRoomFragmentDirections.actionCreateRoomFragmentToCreateMissionsFragment())
+                } else {
+                    this@CreateRoomFragment.viewModel.modifyRoom {
+                        findNavController().navigateUp()
+                    }
+                }
             }
             santabackgroundCreateroom.setOnBackKeyClickListener {
-                requireActivity().finish()
+                if (isNewRoom) {
+                    requireActivity().finish()
+                } else {
+                    findNavController().navigateUp()
+                }
             }
             santaperiodpickerCreateroomExpiration.setOnPeriodChangedListener { period ->
-                this@CreateRoomFragment.viewModel.setDayDiff(period)
+                this@CreateRoomFragment.viewModel.setPeriod(period)
             }
             santaswitchCreateroomAmpm.setOnSwitchChangedListener { isAm ->
                 this@CreateRoomFragment.viewModel.setAmPm(!isAm)
@@ -101,6 +118,7 @@ class CreateRoomFragment : Fragment() {
             setExpirationDiff(textviewCreateroomPreviewstart, expiration)
             setExpirationPreview(textviewCreateroomPreviewdate, expiration)
             setExpirationTime(textviewCreateroomExpirationpreview, expiration)
+            setExpirationPeriod(santaperiodpickerCreateroomExpiration, expiration)
         }
     }
 

@@ -14,7 +14,8 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
         private const val INITIAL_AM_PM = Calendar.AM
     }
 
-    private val expirationDate = GregorianCalendar().apply {
+
+    private var expirationDate = GregorianCalendar().apply {
         add(Calendar.DAY_OF_MONTH, SantaPeriodPicker.DEFAULT_PERIOD)
         set(Calendar.HOUR, INITIAL_HOUR)
         set(Calendar.MINUTE, INITIAL_MINUTE)
@@ -46,11 +47,13 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
     val isAm: Boolean
         get() = expirationDate.get(Calendar.AM_PM) == Calendar.AM
 
-    var dayDiff = SantaPeriodPicker.DEFAULT_PERIOD
+    private var _period = SantaPeriodPicker.DEFAULT_PERIOD
+    var period: Int
+        get() = _period
         set(value) {
-            val diff = value - dayDiff
+            val diff = value - this._period
             expirationDate.add(Calendar.DAY_OF_MONTH, diff)
-            field = value
+            this._period = value
             postValue(this)
         }
 
@@ -73,6 +76,12 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
         } else {
             expirationDate.set(Calendar.AM_PM, Calendar.PM)
         }
+        postValue(this)
+    }
+
+    fun init(expiration: String) {
+        expirationDate = TimeUtil.getGregorianCalendarFromLocalFormat(expiration)
+        _period = TimeUtil.getDayDiffFromNow(expiration)
         postValue(this)
     }
 

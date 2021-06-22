@@ -30,9 +30,9 @@ class WaitingRoomFragment : Fragment() {
     private val memberAdapter = MemberAdapter()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         if (manittoRoomViewModel.isMatched) {
             if (manittoRoomViewModel.isFinished) {
@@ -60,20 +60,28 @@ class WaitingRoomFragment : Fragment() {
             }
             textviewWaitingroomInvitationcode.setOnClickListener {
                 ClipBoardUtil.copy(
-                    requireContext(),
-                    INVITATION_CODE_LABEL, manittoRoomViewModel.invitationCode
+                        requireContext(),
+                        INVITATION_CODE_LABEL, manittoRoomViewModel.invitationCode
                 )
                 Snackbar.make(
-                    binding.root,
-                    getString(org.sopt.santamanitto.R.string.waitingroom_snackbar_invitation_code),
-                    Snackbar.LENGTH_SHORT
+                        binding.root,
+                        getString(org.sopt.santamanitto.R.string.waitingroom_snackbar_invitation_code),
+                        Snackbar.LENGTH_SHORT
                 ).show()
             }
-            santabottombuttonWaitingroom.setOnClickListener {
+            santabottombuttonWaitingroomModify.setOnClickListener {
+                navigateModifyFragment()
+            }
+            santabottombuttonWaitingroomMatch.setOnClickListener {
                 manittoRoomViewModel.match()
                 navigateMatchingFragment()
             }
         }
+    }
+
+    private fun navigateModifyFragment() {
+        findNavController().navigate(WaitingRoomFragmentDirections
+                        .actionWaitingRoomFragmentToCreateRoomFragmentModify(manittoRoomViewModel.roomId))
     }
 
     override fun onResume() {
@@ -83,11 +91,11 @@ class WaitingRoomFragment : Fragment() {
 
     private fun navigateFinishFragment() {
         findNavController()
-            .navigate(WaitingRoomFragmentDirections.actionWaitingRoomFragmentToFinishFragment())
+                .navigate(WaitingRoomFragmentDirections.actionWaitingRoomFragmentToFinishFragment())
     }
 
     private fun navigateMatchingFragment() {
         findNavController()
-            .navigate(WaitingRoomFragmentDirections.actionWaitingRoomFragmentToMatchingFragment())
+                .navigate(WaitingRoomFragmentDirections.actionWaitingRoomFragmentToMatchingFragment())
     }
 }

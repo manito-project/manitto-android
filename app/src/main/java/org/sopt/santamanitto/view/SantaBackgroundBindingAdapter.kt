@@ -36,7 +36,7 @@ fun setExpirationDescription(view: SantaBackground, expiration: String?) {
             )
     )
 
-    view.setNoLogoDescription(description.toString())
+    view.description = description.toString()
 }
 
 @BindingAdapter("setFinishDescription")
@@ -44,7 +44,19 @@ fun setFinishDescription(view: SantaBackground, period: Int?) {
     if (period == null) {
         return
     }
-    view.setNoLogoDescription(
-            String.format(view.context.getString(R.string.finish_manitto_title), period)
-    )
+    view.description = String.format(view.context.getString(R.string.finish_manitto_title), period)
+}
+
+@BindingAdapter("app:santaTitle")
+fun setTitle(view: SantaBackground, title: String?) {
+    if (title != null) {
+        view.title = title
+    }
+}
+
+@BindingAdapter("app:santaDescription")
+fun setDescription(view: SantaBackground, description: String?) {
+    if (description != null) {
+        view.description = description
+    }
 }

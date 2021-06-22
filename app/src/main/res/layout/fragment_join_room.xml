@@ -15,17 +15,17 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_joinroom"
+            style="@style/SantaBackground.SubTask"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:backKey="true"
-            app:backgroundStyle="noLogo"
+            app:santaDescription="@string/joinroom_background_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:noLogoDescription="@string/joinroom_background_description"
-            app:noLogoTitle="@string/joinroom_background_title" />
+            app:santaTitle="@string/joinroom_background_title" />
 
         <View
             android:id="@+id/view_joinroom_guideline"
@@ -86,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
-            android:text="@string/button_next"
             android:enabled="@{!viewModel.isInvitationCodeEmpty()}"
+            android:text="@string/button_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

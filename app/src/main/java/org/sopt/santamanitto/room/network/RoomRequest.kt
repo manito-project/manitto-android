@@ -2,6 +2,7 @@ package org.sopt.santamanitto.room.network
 
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
@@ -46,6 +47,8 @@ interface RoomRequest {
 
     fun createRoom(createRoomData: CreateRoomData, callback: CreateRoomCallback)
 
+    fun modifyRoom(roomId: Int, modifyRoomData: ModifyRoomData, callback: (onSuccess: Boolean) -> Unit)
+
     fun joinRoom(joinRoomData: JoinRoomData, callback: JoinRoomCallback)
 
     fun getManittoRoomData(roomId: Int, callback: GetManittoRoomCallback)
@@ -57,4 +60,5 @@ interface RoomRequest {
     fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit)
 
     fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit)
+
 }

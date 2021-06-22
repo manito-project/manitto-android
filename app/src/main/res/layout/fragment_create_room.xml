@@ -18,17 +18,16 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_createroom"
+            style="@style/SantaBackground.SubTask"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:backKey="true"
-            app:backgroundStyle="noLogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:noLogoDescription="@string/createroom_background_description"
-            app:noLogoTitle="@string/createroom_background_title" />
+            app:santaDescription="@string/createroom_background_description"
+            app:santaTitle="@string/createroom_background_title" />
 
         <View
             android:id="@+id/view_createroom_guideline"

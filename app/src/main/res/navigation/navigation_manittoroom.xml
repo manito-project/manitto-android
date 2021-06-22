@@ -22,6 +22,9 @@
             app:destination="@id/finishFragment"
             app:popUpTo="@+id/navigation_manittoroom.xml"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_waitingRoomFragment_to_createRoomFragmentModify"
+            app:destination="@id/createRoomFragmentModify" />
 
     </fragment>
 
@@ -51,6 +54,16 @@
         android:label="FinishFragment"
         tool:layout="@layout/fragment_manitto_room_finish">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/createRoomFragmentModify"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateRoomFragment"
+        android:label="CreateRoomFragment"
+        tool:layout="@layout/fragment_create_room" >
+        <argument android:name="roomId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 
 </navigation>

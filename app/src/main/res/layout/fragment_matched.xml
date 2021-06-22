@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -19,19 +19,18 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_matched"
+            style="@style/SantaBackground.SubTask"
             setExpirationDescription="@{viewModel.expiration}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:backKey="true"
-            app:backgroundStyle="noLogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:noLogoTitle="@{viewModel.roomName}"
-            tool:noLogoDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
-            tool:noLogoTitle="마니또 방 이름" />
+            app:santaTitle="@{viewModel.roomName}"
+            tool:santaDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
+            tool:santaTitle="마니또 방 이름" />
 
         <View
             android:id="@+id/view_matched_guideline"
@@ -133,10 +132,10 @@
                     android:layout_height="match_parent"
                     android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
                     app:error="@{viewModel.networkErrorOccur}"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

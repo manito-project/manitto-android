@@ -60,7 +60,7 @@ class ConditionFragment: Fragment() {
 
     private fun initView() {
         context?.let {
-            binding.santabackgroundCondition.text =
+            binding.santabackgroundCondition.bigTitle =
                 String.format(it.resources.getString(R.string.condition_background_text), args.userName)
         }
 
