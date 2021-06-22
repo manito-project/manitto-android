@@ -47,9 +47,11 @@
     <string name="textview_createroom_expiration_time">산타 마니또 종료 시간</string>
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
     <string name="createroom_preview_start">%d일 후인</string>
-    <string name="createroom_preview">%d/%02d/%02d %s %02d : %02d 에</string>
-    <string name="createroom_expiration_time">%02d : %02d</string>
+    <string name="createroom_preview" formatted="false">%d/%02d/%02d %s %02d : %02d 에</string>
+    <string name="createroom_expiration_time" formatted="false">%02d : %02d</string>
     <string name="createroom_dialog_expiration_time_setting">종료 시간 설정</string>
+    <string name="createroom_modify_title">방 정보 수정</string>
+    <string name="createroom_modify_done">수정 완료</string>
 
     <string name="createmission_background_title">미션 만들기</string>
     <string name="createmission_background_description">흥미딘딘한 산타 마니또를 위해\n미션을 추가해볼까?</string>
@@ -77,16 +79,18 @@
     <string name="waitingroom_notice_admin">방장 산타는 참여자가 다 모이면 하단 버튼을 눌러줘:)</string>
     <string name="waitingroom_notice_participant">참여자 산타는 방장 산타가 매칭하기를 누를 때까지 기다려줘:)</string>
     <string name="waitingroom_bottombutton">마니또 랜덤 매칭하기</string>
+    <string name="waitingroom_snackbar_invitation_code">참여 코드가 복사되었습니다</string>
+    <string name="waitingroom_modify">방 정보 수정하기</string>
+
     <string name="manittoroom_description_today_prefix">바로 오늘, </string>
     <string name="manittoroom_description_not_today_prefix">오늘부터 %d일 후인,</string>
-    <string name="manittoroom_description_suffix">%d월 %d일\n%s %02d:%02d까지 진행되는 마니또</string>
-    <string name="waitingroom_snackbar_invitation_code">참여 코드가 복사되었습니다</string>
+    <string name="manittoroom_description_suffix" formatted="false">%d월 %d일\n%s %02d:%02d까지 진행되는 마니또</string>
 
     <string name="matching_text">산타 마니또 매칭중\n잠시만 기다려줘:)</string>
 
     <string name="matched_bottom_button">홈으로 가기</string>
     <string name="matched_mission_title">미션은</string>
-    <string name="matched_manitto_title">%s 산타의 마니또는</string>
+    <string name="matched_manitto_title" formatted="false">%s 산타의 마니또는</string>
     <string name="matched_no_mission">미션이 없습니다</string>
     <string name="matched_bottom_button_delete">나의 산타 마니또에서 삭제하기</string>
 

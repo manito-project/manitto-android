@@ -40,18 +40,17 @@
 
 
     <declare-styleable name="SantaBackground">
-        <attr name="backgroundStyle" format="enum">
-            <enum name="withLogoMode" value="0" />
-            <enum name="logoNoText" value="1" />
-            <enum name="noLogo" value="2" />
-            <enum name="onlyCharacter" value="3" />
-            <enum name="onlyText" value="4" />
-        </attr>
-        <attr name="backgroundText" format="string" />
         <attr name="backKey" format="boolean"/>
-        <attr name="noLogoTitle" format="string" />
-        <attr name="noLogoDescription" format="string"/>
 
+        <attr name="backgroundLogo" format="boolean"/>
+        <attr name="santa" format="boolean"/>
+        <attr name="santaHead" format="boolean" />
+        <attr name="rudolf" format="boolean" />
+        <attr name="snowMan" format="boolean" />
+        <attr name="snowflake" format="boolean" />
+        <attr name="bigTitle" format="string"/>
+        <attr name="santaTitle" format="string"/>
+        <attr name="santaDescription" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="SantaIndicator">

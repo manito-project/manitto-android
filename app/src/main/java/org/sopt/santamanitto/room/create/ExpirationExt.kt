@@ -4,10 +4,12 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
+import org.sopt.santamanitto.view.SantaPeriodPicker
+import kotlin.math.exp
 
 @BindingAdapter("expirationDiff")
 fun setExpirationDiff(view: AppCompatTextView, expiration: ExpirationLiveData) {
-    view.text = String.format(view.context.getText(R.string.createroom_preview_start).toString(), expiration.dayDiff)
+    view.text = String.format(view.context.getText(R.string.createroom_preview_start).toString(), expiration.period)
 }
 
 @BindingAdapter("expirationPreview")
@@ -28,4 +30,11 @@ fun setExpirationPreview(view: AppCompatTextView, expiration: ExpirationLiveData
 fun setExpirationTime(view: AppCompatTextView, expiration: ExpirationLiveData) {
     view.text = String.format(view.context.getText(R.string.createroom_expiration_time).toString(),
                     expiration.hour, expiration.minute)
+}
+
+@BindingAdapter("expirationPeriod")
+fun setExpirationPeriod(view: SantaPeriodPicker, expiration: ExpirationLiveData) {
+    if (view.period != expiration.period) {
+        view.period = expiration.period
+    }
 }

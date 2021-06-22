@@ -8,6 +8,8 @@ import org.sopt.santamanitto.room.create.data.CreateMissionLiveList
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 
@@ -16,7 +18,9 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
         private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
-    val expirationLiveData = ExpirationLiveData()
+    private var roomId = -1
+
+    var expirationLiveData = ExpirationLiveData()
 
     var roomName = MutableLiveData<String?>(null)
 
@@ -32,8 +36,25 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
         it.isNullOrBlank()
     }
 
-    fun setDayDiff(dayDIff: Int) {
-        expirationLiveData.dayDiff = dayDIff
+    fun start(roomId: Int) {
+        if (roomId == -1) {
+            return
+        }
+        this.roomId = roomId
+        roomRequest.getManittoRoomData(roomId, object : RoomRequest.GetManittoRoomCallback {
+            override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
+                roomName.value = manittoRoomData.roomName
+                expirationLiveData.init(manittoRoomData.expiration)
+            }
+
+            override fun onFailed() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
+
+    fun setPeriod(period: Int) {
+        expirationLiveData.period = period
     }
 
     fun setAmPm(isAm: Boolean) {
@@ -73,5 +94,15 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
         })
 
         cachedMainUserDataSource.isMyManittoDirty = true
+    }
+
+    fun modifyRoom(callback: () -> Unit) {
+        roomRequest.modifyRoom(roomId, ModifyRoomData(roomName.value!!, expirationLiveData.toString())) {
+            if (it) {
+                callback.invoke()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
     }
 }

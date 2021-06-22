@@ -4,6 +4,7 @@ import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.network.SimpleResponse
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
@@ -20,6 +21,9 @@ interface RoomService {
 
     @POST("rooms")
     fun createRoom(@Body createRoomData: CreateRoomData): Call<Response<CreateRoomResponse>>
+
+    @PUT("rooms/{roomId}")
+    fun modifyRoom(@Path("roomId") roomId: Int, @Body modifyRoomData: ModifyRoomData): Call<Response<SimpleResponse>>
 
     @POST("rooms/enter")
     fun joinRoom(@Body joinRoomData: JoinRoomData): Call<Response<JoinRoomResponse>>

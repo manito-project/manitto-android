@@ -20,9 +20,9 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_main"
+            style="@style/SantaBackground.Main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:backgroundStyle="logoNoText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_main_setting_top"
             android:background="@null"
-            android:src="@drawable/ic_setting"
             android:padding="@dimen/padding_entire"
+            android:src="@drawable/ic_setting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

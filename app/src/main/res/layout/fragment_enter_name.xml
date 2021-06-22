@@ -17,9 +17,10 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_entername"
+            style="@style/SantaBackground.BigTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:backgroundText="@string/entername_background_welcome"
+            app:bigTitle="@string/entername_background_welcome"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintStart_toStartOf="parent"

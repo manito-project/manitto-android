@@ -47,4 +47,26 @@
         <item name="android:scrollbars">vertical</item>
     </style>
 
+    <style name="SantaBackground"></style>
+
+    <style name="SantaBackground.SubTask">
+        <item name="santa">true</item>
+        <item name="backKey">true</item>
+    </style>
+
+    <style name="SantaBackground.BigTitle">
+        <item name="backgroundLogo">true</item>
+        <item name="santaHead">true</item>
+        <item name="snowflake">true</item>
+    </style>
+
+    <style name="SantaBackground.Main">
+        <item name="backgroundLogo">true</item>
+        <item name="snowflake">true</item>
+    </style>
+
+    <style name="SantaBackground.ResultTask">
+        <item name="backKey">true</item>
+    </style>
+
 </resources>
