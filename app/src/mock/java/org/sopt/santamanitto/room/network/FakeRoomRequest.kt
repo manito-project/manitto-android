@@ -6,6 +6,7 @@ import android.util.Log
 import kotlinx.coroutines.*
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
 import org.sopt.santamanitto.room.data.MissionContent
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.data.source.RoomDataSource
@@ -33,6 +34,14 @@ class FakeRoomRequest : RoomRequest {
                 TimeUtil.getCurrentTimeByServerFormat()
             )
         )
+    }
+
+    override fun modifyRoom(
+        roomId: Int,
+        modifyRoomData: ModifyRoomData,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
+        callback.invoke(true)
     }
 
     override fun joinRoom(joinRoomData: JoinRoomData, callback: RoomRequest.JoinRoomCallback) {
