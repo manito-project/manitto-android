@@ -10,7 +10,7 @@ import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentSettingBinding
 
 @AndroidEntryPoint
-class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting) {
+class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting, false) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.run {

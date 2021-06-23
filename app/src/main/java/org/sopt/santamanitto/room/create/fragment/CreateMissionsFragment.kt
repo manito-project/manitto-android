@@ -8,33 +8,29 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentCreateMissionBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 
-class CreateMissionsFragment : Fragment(), CreateMissionAdaptor.CreateMissionCallback {
-
-    private lateinit var binding: FragmentCreateMissionBinding
+class CreateMissionsFragment : BaseFragment<FragmentCreateMissionBinding>(
+        R.layout.fragment_create_mission, true
+), CreateMissionAdaptor.CreateMissionCallback {
 
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
     private val createMissionAdaptor = CreateMissionAdaptor(this)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentCreateMissionBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = this@CreateMissionsFragment.viewModel
-            recyclerviewCreatemission.adapter = createMissionAdaptor
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.viewModel = viewModel
+        binding.recyclerviewCreatemission.adapter = createMissionAdaptor
 
         subscribeUI()
 
         saveMeasuredHeightOfRecyclerView()
 
         setOnClickListener()
-
-        return binding.root
     }
 
     override fun onMissionInserted(mission: String) {

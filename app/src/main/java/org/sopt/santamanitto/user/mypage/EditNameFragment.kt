@@ -10,14 +10,12 @@ import org.sopt.santamanitto.databinding.FragmentEditNameBinding
 import org.sopt.santamanitto.databinding.FragmentEnterNameBinding
 
 @AndroidEntryPoint
-class EditNameFragment: BaseFragment<FragmentEditNameBinding>(R.layout.fragment_edit_name) {
+class EditNameFragment: BaseFragment<FragmentEditNameBinding>(R.layout.fragment_edit_name, true) {
 
     private val editNameViewModel: EditNameViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = editNameViewModel
-
-
     }
 }
