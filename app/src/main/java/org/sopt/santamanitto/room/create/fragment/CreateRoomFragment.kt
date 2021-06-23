@@ -22,7 +22,7 @@ import org.sopt.santamanitto.view.SantaEditText
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 import org.sopt.santamanitto.view.setTextColorById
 
-class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room) {
+class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
 
     companion object {
         private const val MAX_ROOM_NAME_LENGTH = 17
@@ -38,8 +38,6 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = this@CreateRoomFragment.viewModel
-
-        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         loadData()
 

@@ -11,37 +11,25 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 
 @AndroidEntryPoint
-class JoinRoomFragment: Fragment() {
+class JoinRoomFragment: BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment_join_room, false) {
 
     companion object {
         private const val TAG = "JoinRoomFragment"
     }
 
-    private lateinit var binding: FragmentJoinRoomBinding
-
     private val joinRoomViewModel: JoinRoomViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentJoinRoomBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = joinRoomViewModel
-        }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.viewModel = joinRoomViewModel
         subscribeUI()
-
         setOnClickListener()
-
-        return binding.root
     }
 
     private fun subscribeUI() {
