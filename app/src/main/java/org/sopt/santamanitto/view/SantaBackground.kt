@@ -59,6 +59,7 @@ class SantaBackground @JvmOverloads constructor(
     var bigTitle: String
         get() = bigTitleTextView.text.toString()
         set(value) {
+            setVisible(bigTitleTextView)
             bigTitleTextView.text = value
         }
 
@@ -131,7 +132,7 @@ class SantaBackground @JvmOverloads constructor(
         }
 
         if (typeArray.hasValue(R.styleable.SantaBackground_bigTitle)) {
-            val str = typeArray.getString(R.styleable.SantaBackground_santa)
+            val str = typeArray.getString(R.styleable.SantaBackground_bigTitle)
             if (!str.isNullOrEmpty()) {
                 bigTitle = str
             }
@@ -147,7 +148,6 @@ class SantaBackground @JvmOverloads constructor(
         if (typeArray.hasValue(R.styleable.SantaBackground_santaDescription)) {
             val str = typeArray.getString(R.styleable.SantaBackground_santaDescription)
             if (!str.isNullOrEmpty()) {
-                setVisible(descriptionTextView)
                 description = str
             }
         }
