@@ -110,7 +110,15 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
     }
 
     private fun subscribeUI() {
-        viewModel.expirationLiveData.observe(viewLifecycleOwner, this::refreshUI)
+        viewModel.run {
+            expirationLiveData.observe(viewLifecycleOwner, this@CreateRoomFragment::refreshUI)
+
+            hint.observe(viewLifecycleOwner) { previousRoomName ->
+                if (!previousRoomName.isNullOrEmpty()) {
+                    binding.edittextCreateroomRoomname.hint = previousRoomName
+                }
+            }
+        }
     }
 
     private fun refreshUI(expiration: ExpirationLiveData) {
