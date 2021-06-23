@@ -1,6 +1,7 @@
 package org.sopt.santamanitto.room.create.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import org.sopt.santamanitto.NetworkViewModel
@@ -23,6 +24,9 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
     var expirationLiveData = ExpirationLiveData()
 
     var roomName = MutableLiveData<String?>(null)
+    private val _hint = MutableLiveData<String?>(null)
+    val hint: LiveData<String?>
+        get() = _hint
 
     val missions = CreateMissionLiveList()
 
@@ -44,6 +48,7 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
         roomRequest.getManittoRoomData(roomId, object : RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
                 roomName.value = manittoRoomData.roomName
+                _hint.value = manittoRoomData.roomName
                 expirationLiveData.init(manittoRoomData.expiration)
             }
 
