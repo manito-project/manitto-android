@@ -16,6 +16,10 @@ class SantaBackground @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
+    companion object {
+        private const val MAX_LENGTH_PER_A_LINE_TITLE = 10
+    }
+
     private val binding = DataBindingUtil.inflate<SantaBackgroundBinding>(
         LayoutInflater.from(context),
         R.layout.santa_background,
@@ -62,7 +66,11 @@ class SantaBackground @JvmOverloads constructor(
         get() = titleTextView.text.toString()
         set(value) {
             setVisible(titleTextView)
-            titleTextView.text = value
+            titleTextView.text = if (value.length > MAX_LENGTH_PER_A_LINE_TITLE) {
+                value.substring(0, MAX_LENGTH_PER_A_LINE_TITLE) + "\n" + value.substring(MAX_LENGTH_PER_A_LINE_TITLE)
+            } else {
+                value
+            }
         }
 
     var description: String
