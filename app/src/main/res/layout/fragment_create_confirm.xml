@@ -21,15 +21,14 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_createconfirm"
-            style="@style/SantaBackground.SubTask"
+            style="@style/SantaBackground.Confirm"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:santaTitle="@string/editname_background" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/view_createconfirm_guideline"

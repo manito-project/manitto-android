@@ -69,4 +69,11 @@
         <item name="backKey">true</item>
     </style>
 
+    <style name="SantaBackground.Confirm">
+        <item name="backKey">true</item>
+        <item name="santa">true</item>
+        <item name="rudolf">true</item>
+        <item name="snowMan">true</item>
+    </style>
+
 </resources>

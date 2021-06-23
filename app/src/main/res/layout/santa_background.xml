@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tool="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false">
@@ -145,15 +146,21 @@
             android:id="@+id/textview_santabackground_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_santabackground_description_bottom"
             android:elevation="@dimen/elevation_shadow"
             android:textColor="@color/white"
             android:textSize="@dimen/size_santabackground_description"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_santabackground_bottom"
             app:layout_constraintStart_toStartOf="@id/textview_santabackground_title"
             app:layout_constraintTop_toBottomOf="@id/textview_santabackground_title"
             tool:text="@string/createmission_background_description" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_santabackground_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/margin_santabackground_description_bottom" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
