@@ -48,6 +48,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     val period: LiveData<Int>
         get() = _period
 
+    private val _isExpired = MutableLiveData(false)
+    val isExpired: LiveData<Boolean>
+        get() = _isExpired
+
     private val _expiration = MutableLiveData<String>(null)
     val expiration: LiveData<String>
         get() = _expiration
@@ -90,6 +94,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                 manittoRoomData.run {
                     _roomName.value = roomName
                     _expiration.value = expiration
+                    _isExpired.value = TimeUtil.getDayDiffFromNow(expiration) < 0
                     _members.value = members
                     _invitationCode = invitationCode
                     _isAdmin.value = userMetadataSource.getUserId() == creator.userId
