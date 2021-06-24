@@ -1,6 +1,7 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.R
+import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentWaitingRoomBinding
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.MemberAdapter
@@ -16,14 +19,12 @@ import org.sopt.santamanitto.util.ClipBoardUtil
 
 
 @AndroidEntryPoint
-class WaitingRoomFragment : Fragment() {
+class WaitingRoomFragment : BaseFragment<FragmentWaitingRoomBinding>(R.layout.fragment_waiting_room, false){
 
     companion object {
         private const val TAG = "WaitingRoomFragment"
         const val INVITATION_CODE_LABEL = "InvitationCode"
     }
-
-    private lateinit var binding: FragmentWaitingRoomBinding
 
     private val manittoRoomViewModel: ManittoRoomViewModel by activityViewModels()
 
@@ -41,16 +42,23 @@ class WaitingRoomFragment : Fragment() {
                 navigateMatchingFragment()
             }
         }
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
-        binding = FragmentWaitingRoomBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.run {
             viewModel = manittoRoomViewModel
             recyclerviewWaitingroom.adapter = memberAdapter
         }
-
         setOnClickListener()
-
-        return binding.root
+        manittoRoomViewModel.isExpired.observe(viewLifecycleOwner) {
+            if (it) {
+                //Todo: 매칭 전에 기간이 만료된 경우 처리
+                Log.e(TAG, "Expired! ${manittoRoomViewModel.expiration.value}")
+                requireActivity().finish()
+            }
+        }
     }
 
     private fun setOnClickListener() {
