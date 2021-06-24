@@ -56,13 +56,17 @@ class SplashViewModel @ViewModelInject constructor(
                 _loginSuccess.value = LoginState.SUCCESS
             }
 
-            override fun onLoginFailed() {
-                _loginSuccess.value = LoginState.FAIL
+            override fun onLoginFailed(isError: Boolean) {
+                _loginSuccess.value = if (isError) {
+                    LoginState.ERROR
+                } else {
+                    LoginState.FAIL
+                }
             }
         })
     }
 
     enum class LoginState {
-        SUCCESS, FAIL, WAITING
+        SUCCESS, FAIL, WAITING, ERROR
     }
 }
