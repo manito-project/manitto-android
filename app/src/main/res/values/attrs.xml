@@ -7,9 +7,9 @@
             <enum name="delete" value="2" />
         </attr>
         <attr name="hint" format="string" />
-        <attr name="isSingleLine" format="boolean"/>
-        <attr name="isEditable" format="boolean"/>
-        <attr name="isSlim" format="boolean"/>
+        <attr name="isSingleLine" format="boolean" />
+        <attr name="isEditable" format="boolean" />
+        <attr name="isSlim" format="boolean" />
         <attr name="maxLength" format="integer" />
         <attr name="maxLines" format="integer" />
     </declare-styleable>
@@ -41,7 +41,7 @@
 
     <declare-styleable name="SantaBackground">
         <attr name="backKey" format="boolean"/>
-
+        
         <attr name="backgroundLogo" format="boolean"/>
         <attr name="santa" format="boolean"/>
         <attr name="santaHead" format="boolean" />
@@ -54,21 +54,22 @@
     </declare-styleable>
 
     <declare-styleable name="SantaIndicator">
-        <attr name="isSelected" format="boolean"/>
-        <attr name="number" format="integer"/>
+        <attr name="isSelected" format="boolean" />
+        <attr name="number" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="SantaCardView">
-        <attr name="moreRound" format="boolean"/>
+        <attr name="moreRound" format="boolean" />
+        <attr name="cardBackgroundColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="SantaNumberPicker">
-        <attr name="minValue" format="integer"/>
-        <attr name="maxValue" format="integer"/>
+        <attr name="minValue" format="integer" />
+        <attr name="maxValue" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="SantaBottomButton">
-        <attr name="isGrayButton" format="boolean"/>
+        <attr name="isGrayButton" format="boolean" />
         <attr name="darkShadow" format="boolean" />
     </declare-styleable>
 

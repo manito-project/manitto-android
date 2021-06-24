@@ -20,8 +20,16 @@ class MyManittoListAdapter(
     private val cachedMyManittoInfo = HashMap<Int, MyManittoInfo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<MyManitto, *> {
-        return MyManittoViewHolder(
-            parent, userAuthController, roomRequest, userMetadataSource, cachedMyManittoInfo, listener, exitListener)
+        return if (viewType == 0) {
+            MyManittoViewHolder(
+                    parent, userAuthController, roomRequest, userMetadataSource, cachedMyManittoInfo, listener, exitListener)
+        } else {
+            RemovedMyManttioViewHolder(parent)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (items[position].isRemoved) { 1 } else { 0 }
     }
 
     override fun clear() {

@@ -13,7 +13,6 @@ open class SantaCardView @JvmOverloads constructor(
 
     init {
         radius = getDimen(R.dimen.radius_cardview)
-        setCardBackgroundColor(getColor(R.color.white))
         cardElevation = getDimen(R.dimen.elevation_shadow)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
             outlineSpotShadowColor = getColor(R.color.shadow_gray)
@@ -26,12 +25,18 @@ open class SantaCardView @JvmOverloads constructor(
             0, 0
         )
 
-        //버튼 문구
         if (typeArray.hasValue(R.styleable.SantaCardView_moreRound)) {
             val moreRound = typeArray.getBoolean(R.styleable.SantaCardView_moreRound, false)
             if (moreRound) {
                 radius = getDimen(R.dimen.radius_cardview_more)
             }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaCardView_cardBackgroundColor)) {
+            val color = typeArray.getColor(R.styleable.SantaCardView_cardBackgroundColor, getColor(R.color.white))
+            setCardBackgroundColor(color)
+        } else {
+            setCardBackgroundColor(getColor(R.color.white))
         }
     }
 }
