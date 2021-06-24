@@ -23,18 +23,18 @@ class RetrofitUserController(private val userService: UserService): UserControll
                             val accessToken = response.body()!!.data.accessToken
                             callback.onLoginSuccess(LoginUserResponse(result.userName, result.serialNumber, result.id, accessToken))
                         } else {
-                            callback.onLoginFailed()
+                            callback.onLoginFailed(false)
                         }
                     } else {
-                        callback.onLoginFailed()
+                        callback.onLoginFailed(false)
                     }
                 } else {
-                    callback.onLoginFailed()
+                    callback.onLoginFailed(true)
                 }
             }
 
             override fun onFailure(call: Call<Response<UserCheckResponse>>, t: Throwable) {
-                callback.onLoginFailed()
+                callback.onLoginFailed(true)
             }
         })
     }

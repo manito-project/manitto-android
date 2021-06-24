@@ -59,16 +59,16 @@ class SplashActivity : AppCompatActivity() {
 
     private fun showUpdateDialog() {
         RoundDialogBuilder()
-            .setContentText(getString(R.string.update_dialog_content))
-            .addHorizontalButton(getString(R.string.update_dialog_exit)) {
-                finish()
-            }
-            .addHorizontalButton(getString(R.string.update_dialog_update)) {
-                goToStore()
-            }
-            .enableCancel(false)
-            .build()
-            .show(supportFragmentManager, "update")
+                .setContentText(getString(R.string.update_dialog_content))
+                .addHorizontalButton(getString(R.string.update_dialog_exit)) {
+                    finish()
+                }
+                .addHorizontalButton(getString(R.string.update_dialog_update)) {
+                    goToStore()
+                }
+                .enableCancel(false)
+                .build()
+                .show(supportFragmentManager, "update")
     }
 
     private fun goToStore() {
@@ -93,12 +93,24 @@ class SplashActivity : AppCompatActivity() {
     private fun startNextActivity() {
         val loginState = splashViewModel.loginSuccess.value
         if (isDelayDone && loginState != SplashViewModel.LoginState.WAITING) {
-            if (loginState == SplashViewModel.LoginState.SUCCESS) {
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                finish()
-            } else if (loginState == SplashViewModel.LoginState.FAIL) {
-                startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
-                finish()
+            when (loginState) {
+                SplashViewModel.LoginState.SUCCESS -> {
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                    finish()
+                }
+                SplashViewModel.LoginState.FAIL -> {
+                    startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
+                    finish()
+                }
+                else -> {
+                    RoundDialogBuilder()
+                            .setContentText("네트워크 연결 상태가 좋지 않아!\n확인 후 다시 시도해줘!", false)
+                            .addHorizontalButton("확인") {
+                                finish()
+                            }
+                            .build()
+                            .show(supportFragmentManager, "error")
+                }
             }
         }
     }

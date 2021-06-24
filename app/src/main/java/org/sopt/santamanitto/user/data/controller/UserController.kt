@@ -12,7 +12,7 @@ interface UserController {
     interface LoginCallback {
         fun onLoginSuccess(loginUserResponse: LoginUserResponse)
 
-        fun onLoginFailed()
+        fun onLoginFailed(isError: Boolean)
     }
 
     fun login(serialNumber: String, callback: LoginCallback)
