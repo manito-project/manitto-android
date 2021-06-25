@@ -5,7 +5,6 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel" />
@@ -125,7 +124,7 @@
                         android:id="@+id/textview_createroom_expirationdescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/createroom_expiration_description"
+                        tool:text="@string/createroom_expiration_description"
                         android:textColor="@color/gray_3"
                         android:textSize="@dimen/size_createroom_expiration_description" />
 
