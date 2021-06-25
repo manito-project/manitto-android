@@ -16,8 +16,8 @@ class SantaPeriodPicker @JvmOverloads constructor(
 
     companion object {
         const val DEFAULT_PERIOD = 7
-        private const val MINIMUM_PERIOD = 3
-        private const val MAXIMUM_PERIOD = 30
+        const val MINIMUM_PERIOD = 3
+        const val MAXIMUM_PERIOD = 30
     }
 
     private val binding = DataBindingUtil.inflate<SantaPeriodPickerBinding>(
