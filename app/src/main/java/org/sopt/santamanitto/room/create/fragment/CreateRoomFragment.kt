@@ -19,6 +19,7 @@ import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.setExpirationPeriod
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.view.SantaEditText
+import org.sopt.santamanitto.view.SantaPeriodPicker
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 import org.sopt.santamanitto.view.setTextColorById
 
@@ -56,6 +57,12 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
     }
 
     private fun initView() {
+        binding.textviewCreateroomExpirationdescription.text = String.format(
+            getString(R.string.createroom_expiration_description),
+            SantaPeriodPicker.MINIMUM_PERIOD,
+            SantaPeriodPicker.MAXIMUM_PERIOD
+        )
+
         binding.textviewCreateroomAlert.text = String.format(getString(R.string.santanameinput_alert), MAX_ROOM_NAME_LENGTH)
 
         binding.edittextCreateroomRoomname.run {
