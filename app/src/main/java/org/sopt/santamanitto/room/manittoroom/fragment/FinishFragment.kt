@@ -22,7 +22,7 @@ import javax.inject.Inject
 import android.view.View.OnLayoutChangeListener as OnLayoutChangeListener1
 
 @AndroidEntryPoint
-class FinishFragment: Fragment() {
+class FinishFragment : Fragment() {
 
     companion object {
         private const val TAG = "FinishFragment"
@@ -55,8 +55,10 @@ class FinishFragment: Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = manittoRoomViewModel
             root.addOnLayoutChangeListener(object : OnLayoutChangeListener1 {
-                override fun onLayoutChange(v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int,
-                                            oldTop: Int, oldRight: Int, oldBottom: Int) {
+                override fun onLayoutChange(
+                    v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int,
+                    oldTop: Int, oldRight: Int, oldBottom: Int
+                ) {
                     binding.root.removeOnLayoutChangeListener(this)
 
                     initMissionText()
@@ -81,7 +83,7 @@ class FinishFragment: Fragment() {
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        val value = savedInstanceState?.getBoolean(SCREEN_KEY, true)?: true
+        val value = savedInstanceState?.getBoolean(SCREEN_KEY, true) ?: true
         if (!value) {
             showResultView()
         }
@@ -119,7 +121,8 @@ class FinishFragment: Fragment() {
 
         //총 인원 설정
         manittoRoomViewModel.members.observe(viewLifecycleOwner) {
-            resultBinding.textviewResultTitle.text = String.format(getString(R.string.result_title), it.size)
+            resultBinding.textviewResultTitle.text =
+                String.format(getString(R.string.result_title), it.size)
         }
 
         //버튼 동작 변경
@@ -150,10 +153,15 @@ class FinishFragment: Fragment() {
             Log.e(TAG, "showExitDialog(): roomName is null")
             return
         }
-        ExitDialogCreator.create(requireContext(), manittoRoomViewModel.roomName.value!!, false) {
-            manittoRoomViewModel.removeHistory {
-                requireActivity().finish()
+        RoundDialogBuilder()
+            .setContentText(requireContext().getString(R.string.exit_dialog_history))
+            .addHorizontalButton(requireContext().getString(R.string.dialog_cancel))
+            .addHorizontalButton(requireContext().getString(R.string.dialog_confirm)) {
+                manittoRoomViewModel.removeHistory {
+                    requireActivity().finish()
+                }
             }
-        }.show(childFragmentManager, "exit")
+            .build()
+            .show(childFragmentManager, "exit")
     }
 }
