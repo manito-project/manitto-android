@@ -106,6 +106,7 @@
 
     <string name="exit_dialog_host">방장이 나가면 팀원들도\n방을 이용할 수 없어!</string>
     <string name="exit_dialog_guest">%s\n이 방을 나가는 거 맞지?</string>
+    <string name="exit_dialog_history">나의 산타 마니또에서\n삭제하는거 맞지?</string>
 
     <string name="setting_1_edit_name">닉네임 수정</string>
     <string name="setting_2_tos">이용약관 동의</string>
