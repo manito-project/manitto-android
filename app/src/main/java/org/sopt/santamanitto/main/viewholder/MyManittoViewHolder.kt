@@ -1,10 +1,11 @@
-package org.sopt.santamanitto.main
+package org.sopt.santamanitto.main.viewholder
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemMymanittoBinding
+import org.sopt.santamanitto.main.MyManittoInfo
 import org.sopt.santamanitto.room.data.MyManitto
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.network.RoomRequest
