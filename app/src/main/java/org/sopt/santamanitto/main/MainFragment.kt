@@ -85,6 +85,9 @@ class MainFragment : Fragment() {
                         viewModel.exitRoom(roomId)
                     }.show(childFragmentManager, "exit")
                 }
+                setOnRemoveClickListener { roomId ->
+                    viewModel.exitRoom(roomId)
+                }
             }
     }
 

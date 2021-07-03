@@ -6,7 +6,7 @@ data class MyManitto(
     @SerializedName("id") val roomId: Int,
     val roomName: String,
     val creatorId: Int,
-    val isRemoved: Boolean,
+    val isDeletedByCreator: Boolean,
     val isMatchingDone: Boolean,
     val expiration: String,
     val createdAt: String
