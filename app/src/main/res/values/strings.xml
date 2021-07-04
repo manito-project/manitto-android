@@ -119,4 +119,9 @@
     <string name="mymanitto_removed">삭제된 방</string>
     <string name="mymanitto_removed_content">해당 방은 방장에 의해\n삭제된 방이야</string>
     <string name="mymanitto_remove">삭제하기</string>
+    <string name="mymanitto_epired_content">매칭 기간이 지났어!</string>
+    <string name="mymanitto_epired_dialog">매칭 기간이 지나버렸어\n우리 새로운 방을 만들어볼래?</string>
+    <string name="mymanitto_epired_dialog_button">홈으로 가기</string>
+
+
 </resources>
