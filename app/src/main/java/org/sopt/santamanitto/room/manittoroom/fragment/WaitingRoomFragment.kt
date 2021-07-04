@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentWaitingRoomBinding
+import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.MemberAdapter
 import org.sopt.santamanitto.util.ClipBoardUtil
@@ -54,9 +55,14 @@ class WaitingRoomFragment : BaseFragment<FragmentWaitingRoomBinding>(R.layout.fr
         setOnClickListener()
         manittoRoomViewModel.isExpired.observe(viewLifecycleOwner) {
             if (it) {
-                //Todo: 매칭 전에 기간이 만료된 경우 처리
-                Log.e(TAG, "Expired! ${manittoRoomViewModel.expiration.value}")
-                requireActivity().finish()
+                RoundDialogBuilder()
+                    .setContentText(getString(R.string.mymanitto_epired_dialog))
+                    .addHorizontalButton(getString(R.string.mymanitto_epired_dialog_button)) {
+                        requireActivity().finish()
+                    }
+                    .enableCancel(false)
+                    .build()
+                    .show(childFragmentManager, "expired")
             }
         }
     }
