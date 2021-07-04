@@ -2,9 +2,11 @@ package org.sopt.santamanitto.room.network
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import kotlinx.coroutines.*
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
 import org.sopt.santamanitto.room.data.MissionContent
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.data.source.RoomDataSource
@@ -17,6 +19,10 @@ import org.sopt.santamanitto.util.TimeUtil
 
 class FakeRoomRequest : RoomRequest {
 
+    companion object {
+        private const val TAG = "FakeRoomRequest"
+    }
+
     override fun createRoom(
         createRoomData: CreateRoomData,
         callback: RoomRequest.CreateRoomCallback
@@ -28,6 +34,14 @@ class FakeRoomRequest : RoomRequest {
                 TimeUtil.getCurrentTimeByServerFormat()
             )
         )
+    }
+
+    override fun modifyRoom(
+        roomId: Int,
+        modifyRoomData: ModifyRoomData,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
+        callback.invoke(true)
     }
 
     override fun joinRoom(joinRoomData: JoinRoomData, callback: RoomRequest.JoinRoomCallback) {
@@ -212,5 +226,15 @@ class FakeRoomRequest : RoomRequest {
         } else {
             callback.onDataNotAvailable()
         }
+    }
+
+    override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        Log.d(TAG, "exitRoom: room(id : $roomId) is exited")
+        callback.invoke(true)
+    }
+
+    override fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        Log.d(TAG, "removeHistory: room(id : $roomId) is removed from history")
+        callback.invoke(true)
     }
 }

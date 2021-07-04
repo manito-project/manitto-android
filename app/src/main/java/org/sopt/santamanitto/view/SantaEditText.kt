@@ -1,7 +1,9 @@
 package org.sopt.santamanitto.view
 
 import android.content.Context
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +19,7 @@ constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : LinearLayout(context, attrs, defStyleAttr), TextObservable {
 
     companion object {
         private const val BUTTON_NONE = 0
@@ -34,18 +36,22 @@ constructor(
 
     private val editText = binding.edittextSantaedittext
 
+    private val preview = binding.textviewSantaedittextPreview
+
     private var rightButton = binding.santasmallbuttonSantaedittext
 
     private var buttonStyle = BUTTON_NONE
 
-    private var hint: String? = null
-
     private var addListener: ((String) -> Unit)? = null
 
-    private var deleteListener: ((String) -> Unit)? = null
+    var hint: String?
+        get() = editText.hint.toString()
+        set(value) {
+            editText.hint = value
+        }
 
 
-    var text: String?
+    override var text: String?
         get() = editText.text.toString()
         set(value) {
             editText.setText(value)
@@ -102,8 +108,6 @@ constructor(
 
         typeArray.recycle()
 
-        hint?.let { editText.hint = it }
-
         when (buttonStyle) {
             BUTTON_NONE -> rightButton.visibility = View.INVISIBLE
             BUTTON_ADD -> setAddImage()
@@ -114,24 +118,12 @@ constructor(
             if (text.isNullOrBlank()) {
                 return@setOnClickListener
             }
-            if (buttonStyle == BUTTON_ADD) {
-                addListener?.let { listener ->
-                    setDeleteImage()
-                    isEditable = false
-                    listener(text!!)
-                }
-            } else {
-                deleteListener?.let { listener -> listener(text!!) }
-            }
+            addListener?.invoke(text!!)
         }
     }
 
-    fun setAddClickListener(listener: (String) -> Unit) {
+    fun setButtonClickListener(listener: (String) -> Unit) {
         addListener = listener
-    }
-
-    fun setDeleteClickListener(listener: (String) -> Unit) {
-        deleteListener = listener
     }
 
     fun setAddImage() {
@@ -156,5 +148,69 @@ constructor(
 
     fun setMaxLines(maxLines: Int) {
         editText.maxLines = maxLines
+    }
+
+    fun setContentWidth(width: Int) {
+        editText.layoutParams.width = width
+        preview.layoutParams.width = width
+    }
+
+    override fun setOnKeyListener(l: OnKeyListener) {
+        editText.setOnKeyListener(l)
+    }
+
+    override fun addTextChangeListener(textWatcher: TextWatcher) {
+        editText.addTextChangedListener(textWatcher)
+    }
+
+    fun compress(isCompress: Boolean) {
+        if (isCompress) {
+            preview.text = text
+            editText.visibility = View.GONE
+        } else {
+            preview.text = null
+            editText.visibility = View.VISIBLE
+        }
+    }
+
+
+    fun setSelection(index: Int) {
+        editText.setSelection(index)
+    }
+
+    class SantaEditLimitLengthWatcher(
+            private val nameInput: SantaEditText,
+            private val maxLength: Int,
+            private val onWarning: (isWarning: Boolean) -> Unit
+    ) : TextWatcher {
+
+        private var isWarning = false
+        private var preText = ""
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            preText = s.toString()
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s.isNullOrEmpty() || s == preText) {
+                return
+            }
+            if (s.length > maxLength) {
+                nameInput.run {
+                    text = s.substring(0, maxLength)
+                    setSelection(maxLength)
+                }
+                if (!isWarning) {
+                    isWarning = true
+                    onWarning.invoke(isWarning)
+                }
+            } else {
+                if (isWarning) {
+                    isWarning = false
+                    onWarning.invoke(isWarning)
+                }
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
     }
 }

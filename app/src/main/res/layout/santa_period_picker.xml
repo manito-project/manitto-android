@@ -48,20 +48,21 @@
 
     <View
         android:id="@+id/view_santaperiodpicker_minusarea"
-        android:layout_width="0dp"
+        android:layout_width="37dp"
         android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/margin_santaperiodpicker_text_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/view_santaperiodpicker_plusarea"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_santaperiodpicker_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_santaperiodpicker_minus"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view_santaperiodpicker_plusarea"
-        android:layout_width="0dp"
+        android:layout_width="37dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/view_santaperiodpicker_minusarea"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_santaperiodpicker_plus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_santaperiodpicker_plus"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

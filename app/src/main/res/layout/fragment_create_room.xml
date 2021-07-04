@@ -5,7 +5,6 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel" />
@@ -18,17 +17,16 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_createroom"
+            style="@style/SantaBackground.SubTask"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:backKey="true"
-            app:backgroundStyle="noLogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:noLogoDescription="@string/createroom_background_description"
-            app:noLogoTitle="@string/createroom_background_title" />
+            app:santaDescription="@string/createroom_background_description"
+            app:santaTitle="@string/createroom_background_title" />
 
         <View
             android:id="@+id/view_createroom_guideline"
@@ -57,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:paddingHorizontal="@dimen/padding_cardview_horizontal">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearlayout_createroom_roomname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,18 +70,32 @@
                         style="@style/TitleOfCardView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_createroom_roomname_title_bottom"
-                        android:text="@string/createroom_room_name" />
+                        android:text="@string/createroom_room_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_alert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/size_santainputname_alert"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_createroom_roomname"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/textview_createroom_roomname"
+                        tool:text="@string/santanameinput_alert" />
+
 
                     <org.sopt.santamanitto.view.SantaEditText
                         android:id="@+id/edittext_createroom_roomname"
                         setText="@={viewModel.roomName}"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_santaedittext_big"
+                        android:layout_marginTop="@dimen/margin_createroom_roomname_title_bottom"
                         app:hint="@string/createroom_roomname_hint"
-                        app:maxLength="15" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textview_createroom_roomname" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/linearlayout_createroom_expiration"
@@ -112,7 +124,7 @@
                         android:id="@+id/textview_createroom_expirationdescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/createroom_expiration_description"
+                        tool:text="@string/createroom_expiration_description"
                         android:textColor="@color/gray_3"
                         android:textSize="@dimen/size_createroom_expiration_description" />
 

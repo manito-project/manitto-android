@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="elevation_shadow">4dp</dimen>
+    <dimen name="elevation_shadow">6dp</dimen>
     <dimen name="radius_cardview">10dp</dimen>
     <dimen name="radius_cardview_more">20dp</dimen>
     <dimen name="padding_entire">16dp</dimen>
@@ -89,21 +89,21 @@
     <dimen name="margin_main_recyclerview_bottom">40dp</dimen>
     <dimen name="size_main_no_manitto_notice">14sp</dimen>
     <dimen name="margin_main_nomanitto_snowman_bottom">16dp</dimen>
+    <dimen name="margin_main_setting_top">32dp</dimen>
 
     <dimen name="height_mymanitto_viewholder">184dp</dimen>
     <dimen name="width_mymanitto_viewholder">145dp</dimen>
     <dimen name="size_mymanitto_title">17sp</dimen>
     <dimen name="padding_mymanitto_horizontal">14dp</dimen>
     <dimen name="padding_mymanitto_veertical">17dp</dimen>
-    <dimen name="size_mymanitto_mission_text">12sp</dimen>
-    <dimen name="size_mymanitto_state_text">12sp</dimen>
+    <dimen name="size_mymanitto_mission_text">12dp</dimen>
+    <dimen name="size_mymanitto_state_text">12dp</dimen>
     <dimen name="lineheight_mymanitto_mission_text">18sp</dimen>
     <dimen name="margin_mymanitto_temp_top">16dp</dimen>
     <dimen name="margin_mymanitto_state_top">7dp</dimen>
     <dimen name="margin_mymanitto_mission_top">25dp</dimen>
     <dimen name="size_main_mymanitto">20sp</dimen>
     <dimen name="margin_mymanitto_item_decoration">16dp</dimen>
-    <dimen name="margin_mymanitto_mittion_top">25dp</dimen>
     <dimen name="padding_mymanitto_daydiff_textview_horizontal">10dp</dimen>
     <dimen name="padding_mymanitto_daydiff_textview_vertical">5dp</dimen>
 
@@ -178,6 +178,7 @@
     <dimen name="margin_matched_mission_title_bottom">20dp</dimen>
     <dimen name="padding_matched_mission">12dp</dimen>
     <dimen name="size_matched_mission">15sp</dimen>
+    <dimen name="margin_matched_buttons">16dp</dimen>
 
     <dimen name="margin_finish_redsocks_end">30dp</dimen>
     <dimen name="margin_finish_greensocks_end">28dp</dimen>
@@ -190,6 +191,9 @@
     <dimen name="padding_itemresult_text_horizontal">14dp</dimen>
     <dimen name="padding_itemresult_text_vertical">6dp</dimen>
     <dimen name="margin_result_recyclerview_item">15dp</dimen>
+
+    <dimen name="size_santainputname_alert">10dp</dimen>
+    <dimen name="margin_editname_cardview_top">40dp</dimen>
 
 
 </resources>

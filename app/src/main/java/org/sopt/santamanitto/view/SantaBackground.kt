@@ -17,11 +17,7 @@ class SantaBackground @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val WITH_LOGO_MODE = 0
-        private const val LOGO_NO_TEXT = 1
-        private const val NO_LOGO = 2
-        private const val ONLY_CHARACTER = 3
-        private const val ONLY_TEXT = 4
+        private const val MAX_LENGTH_PER_A_LINE_TITLE = 10
     }
 
     private val binding = DataBindingUtil.inflate<SantaBackgroundBinding>(
@@ -32,25 +28,23 @@ class SantaBackground @JvmOverloads constructor(
 
     private val logo = binding.imageviewSantabackgroundLogo
 
-    private val textView = binding.textviewSantabackground
+    private val bigTitleTextView = binding.textviewSantabackground
 
-    private val snowImage = binding.imageviewSantabackgroundSnow
+    private val snowflake = binding.imageviewSantabackgroundSnow
 
     private val santaHead = binding.imageviewSantabackgroundSantahead
 
     private val santa = binding.imageviewSantabackgroundSanta
 
-    private val rudolfAndSnowMan = binding.groupSantabackgroundRudolfnsnowman
+    private val rudolf = binding.imageviewSantabackgroundRudolf
+
+    private val snowMan = binding.imageviewSantabackgroundSnowman
 
     private val backButton = binding.imagebuttonSantabackgroundBack
-
-    private val titleAndDescription = binding.groupSantabackgroundTitledescription
 
     private val titleTextView = binding.textviewSantabackgroundTitle
 
     private val descriptionTextView = binding.textviewSantabackgroundDescription
-
-    private var backgroundStyle = 0
 
     var isBackKeyEnabled: Boolean
         get() = backButton.visibility == View.VISIBLE
@@ -62,21 +56,28 @@ class SantaBackground @JvmOverloads constructor(
             }
         }
 
-    var text: String
-        get() = textView.text.toString()
+    var bigTitle: String
+        get() = bigTitleTextView.text.toString()
         set(value) {
-            textView.text = value
+            setVisible(bigTitleTextView)
+            bigTitleTextView.text = value
         }
 
     var title: String
         get() = titleTextView.text.toString()
         set(value) {
-            titleTextView.text = value
+            setVisible(titleTextView)
+            titleTextView.text = if (value.length > MAX_LENGTH_PER_A_LINE_TITLE) {
+                value.substring(0, MAX_LENGTH_PER_A_LINE_TITLE) + "\n" + value.substring(MAX_LENGTH_PER_A_LINE_TITLE)
+            } else {
+                value
+            }
         }
 
     var description: String
         get() = descriptionTextView.text.toString()
         set(value) {
+            setVisible(descriptionTextView)
             descriptionTextView.text = value
         }
 
@@ -88,78 +89,80 @@ class SantaBackground @JvmOverloads constructor(
             0, 0
         )
 
-        if (typeArray.hasValue(R.styleable.SantaBackground_backgroundStyle)) {
-            backgroundStyle =
-                typeArray.getInt(R.styleable.SantaBackground_backgroundStyle, WITH_LOGO_MODE)
-        }
-
-        if (typeArray.hasValue(R.styleable.SantaBackground_backgroundText)) {
-            text = typeArray.getString(R.styleable.SantaBackground_backgroundText) ?: ""
-        }
-
         if (typeArray.hasValue(R.styleable.SantaBackground_backKey)) {
-            isBackKeyEnabled = typeArray.getBoolean(R.styleable.SantaBackground_backKey, false)
+            if (typeArray.getBoolean(R.styleable.SantaBackground_backKey, false)) {
+                setVisible(backButton)
+            }
         }
 
-        if (typeArray.hasValue(R.styleable.SantaBackground_noLogoTitle)) {
-            title = typeArray.getString(R.styleable.SantaBackground_noLogoTitle) ?: ""
+        if (typeArray.hasValue(R.styleable.SantaBackground_backgroundLogo)) {
+            if (typeArray.getBoolean(R.styleable.SantaBackground_backgroundLogo, false)) {
+                setVisible(logo)
+            }
         }
 
-        if (typeArray.hasValue(R.styleable.SantaBackground_noLogoDescription)) {
-            description = typeArray.getString(R.styleable.SantaBackground_noLogoDescription) ?: ""
+        if (typeArray.hasValue(R.styleable.SantaBackground_snowflake)) {
+            if (typeArray.getBoolean(R.styleable.SantaBackground_snowflake, false)) {
+                setVisible(snowflake)
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_santa)) {
+            if (typeArray.getBoolean(R.styleable.SantaBackground_santa, false)) {
+                setVisible(santa)
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_santaHead)) {
+            if (typeArray.getBoolean(R.styleable.SantaBackground_santaHead, false)) {
+                setVisible(santaHead)
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_rudolf)) {
+            if (typeArray.getBoolean(R.styleable.SantaBackground_rudolf, false)) {
+                setVisible(rudolf)
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_snowMan)) {
+            if (typeArray.getBoolean(R.styleable.SantaBackground_snowMan, false)) {
+                setVisible(snowMan)
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_bigTitle)) {
+            val str = typeArray.getString(R.styleable.SantaBackground_bigTitle)
+            if (!str.isNullOrEmpty()) {
+                bigTitle = str
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_santaTitle)) {
+            val str = typeArray.getString(R.styleable.SantaBackground_santaTitle)
+            if (!str.isNullOrEmpty()) {
+                title = str
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_santaDescription)) {
+            val str = typeArray.getString(R.styleable.SantaBackground_santaDescription)
+            if (!str.isNullOrEmpty()) {
+                description = str
+            }
         }
 
         typeArray.recycle()
+    }
 
-        updateView()
+    private fun setVisible(view: View) {
+        view.visibility = View.VISIBLE
     }
 
     fun setOnBackKeyClickListener(listener: () -> Unit) {
+        setVisible(backButton)
         backButton.setOnClickListener {
             listener()
-        }
-    }
-
-    private fun updateView() {
-        when (backgroundStyle) {
-            LOGO_NO_TEXT -> {
-                textView.visibility = View.GONE
-                santa.visibility = View.GONE
-                santaHead.visibility = View.GONE
-                rudolfAndSnowMan.visibility = View.GONE
-                titleAndDescription.visibility = View.GONE
-            }
-
-            NO_LOGO -> {
-                textView.visibility = View.GONE
-                logo.visibility = View.GONE
-                snowImage.visibility = View.GONE
-                santaHead.visibility = View.GONE
-                rudolfAndSnowMan.visibility = View.GONE
-            }
-
-            ONLY_CHARACTER -> {
-                logo.visibility = View.GONE
-                textView.visibility = View.GONE
-                santaHead.visibility = View.GONE
-                snowImage.visibility = View.GONE
-                titleAndDescription.visibility = View.GONE
-            }
-
-            ONLY_TEXT -> {
-                textView.visibility = View.GONE
-                logo.visibility = View.GONE
-                snowImage.visibility = View.GONE
-                santaHead.visibility = View.GONE
-                rudolfAndSnowMan.visibility = View.GONE
-                santa.visibility = View.GONE
-            }
-
-            else -> {
-                santa.visibility = View.GONE
-                rudolfAndSnowMan.visibility = View.GONE
-                titleAndDescription.visibility = View.GONE
-            }
         }
     }
 
@@ -172,11 +175,7 @@ class SantaBackground @JvmOverloads constructor(
         }
     }
 
-    fun setNoLogoDescription(description: String?) {
-        descriptionTextView.text = description
-    }
-
-    fun setNoLogoTitle(title: String?) {
-        titleTextView.text = title
+    fun hideDescription() {
+        descriptionTextView.visibility = View.GONE
     }
 }

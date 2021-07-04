@@ -22,6 +22,9 @@
             app:destination="@id/finishFragment"
             app:popUpTo="@+id/navigation_manittoroom.xml"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_waitingRoomFragment_to_createRoomFragmentModify"
+            app:destination="@id/createRoomFragmentModify" />
 
     </fragment>
 
@@ -51,18 +54,16 @@
         android:label="FinishFragment"
         tool:layout="@layout/fragment_manitto_room_finish">
 
-        <action
-            android:id="@+id/action_finishFragment_to_resultFragment"
-            app:destination="@id/resultFragment"
-            app:popUpTo="@+id/navigation_manittoroom.xml"
-            app:popUpToInclusive="true" />
-
     </fragment>
 
     <fragment
-        android:id="@+id/resultFragment"
-        android:name="org.sopt.santamanitto.room.manittoroom.fragment.ResultFragment"
-        android:label="ResultFragment"
-        tool:layout="@layout/fragment_result" />
+        android:id="@+id/createRoomFragmentModify"
+        android:name="org.sopt.santamanitto.room.create.fragment.CreateRoomFragment"
+        android:label="CreateRoomFragment"
+        tool:layout="@layout/fragment_create_room" >
+        <argument android:name="roomId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 
 </navigation>

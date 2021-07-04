@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <org.sopt.santamanitto.view.SantaCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="@dimen/width_mymanitto_viewholder"
+        android:layout_height="@dimen/height_mymanitto_viewholder"
+        app:cardBackgroundColor="@color/gray_4">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/padding_mymanitto_horizontal"
+            android:paddingVertical="@dimen/padding_mymanitto_veertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_mymanittoremoved_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/mymanitto_removed"
+                android:textColor="@color/gray_2"
+                android:textFontWeight="700"
+                android:textSize="@dimen/size_mymanitto_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_mymanittoremoved_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mymanitto_removed_content"
+                android:textSize="12dp"
+                android:textColor="@color/gray_2"
+                app:layout_constraintBottom_toTopOf="@id/textview_mymanittoremoved_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_mymanittoremoved_title"
+                app:layout_constraintVertical_bias="0.274" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/textview_mymanittoremoved_button"
+                android:layout_width="63dp"
+                android:layout_height="34dp"
+                android:background="@drawable/round_ractangle_background_30"
+                android:backgroundTint="@color/gray_1"
+                android:text="@string/mymanitto_remove"
+                android:textColor="@color/gray_3"
+                android:textSize="12dp"
+                android:textFontWeight="700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </org.sopt.santamanitto.view.SantaCardView>
+
+</layout>

@@ -10,6 +10,7 @@
         app:hint="@string/createmission_mission_hint"
         app:isEditable="false"
         app:isSingleLine="false"
+        app:maxLength="36"
         app:maxLines="3" />
 
 </layout>

@@ -5,67 +5,125 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
 import org.sopt.santamanitto.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.setExpirationTime
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.setExpirationPeriod
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
+import org.sopt.santamanitto.view.SantaEditText
+import org.sopt.santamanitto.view.SantaPeriodPicker
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
+import org.sopt.santamanitto.view.setTextColorById
 
-class CreateRoomFragment : Fragment() {
+class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
 
-    private lateinit var binding: FragmentCreateRoomBinding
+    companion object {
+        private const val MAX_ROOM_NAME_LENGTH = 17
+    }
 
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCreateRoomBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@CreateRoomFragment
-            viewModel = this@CreateRoomFragment.viewModel
-        }
+    private val args: CreateRoomFragmentArgs by navArgs()
 
-        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+    private var isNewRoom = true
 
-        binding.santabackgroundCreateroom.setOnBackKeyClickListener {
-            requireActivity().finish()
-        }
-        binding.santaperiodpickerCreateroomExpiration.setOnPeriodChangedListener { period ->
-            viewModel.setDayDiff(period)
-        }
-        binding.santaswitchCreateroomAmpm.setOnSwitchChangedListener { isAm ->
-            viewModel.setAmPm(!isAm)
-        }
-        binding.textviewCreateroomExpirationpreview.setOnClickListener {
-            showTimePicker()
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = this@CreateRoomFragment.viewModel
+
+        loadData()
+
+        initView()
 
         refreshUI(viewModel.expirationLiveData)
 
         subscribeUI()
 
         setOnClickListener()
+    }
 
-        return binding.root
+    private fun loadData() {
+        viewModel.start(args.roomId)
+        isNewRoom = args.roomId == -1
+    }
+
+    private fun initView() {
+        binding.textviewCreateroomExpirationdescription.text = String.format(
+            getString(R.string.createroom_expiration_description),
+            SantaPeriodPicker.MINIMUM_PERIOD,
+            SantaPeriodPicker.MAXIMUM_PERIOD
+        )
+
+        binding.textviewCreateroomAlert.text = String.format(getString(R.string.santanameinput_alert), MAX_ROOM_NAME_LENGTH)
+
+        binding.edittextCreateroomRoomname.run {
+            addTextChangeListener(SantaEditText.SantaEditLimitLengthWatcher(this, MAX_ROOM_NAME_LENGTH) {
+                if (it) {
+                    binding.textviewCreateroomAlert.setTextColorById(R.color.red)
+                } else {
+                    binding.textviewCreateroomAlert.setTextColorById(R.color.gray_3)
+                }
+            })
+        }
+
+        if (!isNewRoom) {
+            binding.run {
+                santabackgroundCreateroom.hideDescription()
+                santabottombuttonCreateroom.text = getString(R.string.createroom_modify_done)
+                santabackgroundCreateroom.title = getString(R.string.createroom_modify_title)
+            }
+        }
     }
 
     private fun setOnClickListener() {
-        binding.santabottombuttonCreateroom.setOnClickListener {
-            findNavController().navigate(CreateRoomFragmentDirections.actionCreateRoomFragmentToCreateMissionsFragment())
+        binding.run {
+            santabottombuttonCreateroom.setOnClickListener {
+                if (isNewRoom) {
+                    findNavController().navigate(CreateRoomFragmentDirections.actionCreateRoomFragmentToCreateMissionsFragment())
+                } else {
+                    this@CreateRoomFragment.viewModel.modifyRoom {
+                        findNavController().navigateUp()
+                    }
+                }
+            }
+            santabackgroundCreateroom.setOnBackKeyClickListener {
+                if (isNewRoom) {
+                    requireActivity().finish()
+                } else {
+                    findNavController().navigateUp()
+                }
+            }
+            santaperiodpickerCreateroomExpiration.setOnPeriodChangedListener { period ->
+                this@CreateRoomFragment.viewModel.setPeriod(period)
+            }
+            santaswitchCreateroomAmpm.setOnSwitchChangedListener { isAm ->
+                this@CreateRoomFragment.viewModel.setAmPm(!isAm)
+            }
+            textviewCreateroomExpirationpreview.setOnClickListener {
+                showTimePicker()
+            }
         }
     }
 
     private fun subscribeUI() {
-        viewModel.expirationLiveData.observe(viewLifecycleOwner, this::refreshUI)
+        viewModel.run {
+            expirationLiveData.observe(viewLifecycleOwner, this@CreateRoomFragment::refreshUI)
+
+            hint.observe(viewLifecycleOwner) { previousRoomName ->
+                if (!previousRoomName.isNullOrEmpty()) {
+                    binding.edittextCreateroomRoomname.hint = previousRoomName
+                }
+            }
+        }
     }
 
     private fun refreshUI(expiration: ExpirationLiveData) {
@@ -73,6 +131,7 @@ class CreateRoomFragment : Fragment() {
             setExpirationDiff(textviewCreateroomPreviewstart, expiration)
             setExpirationPreview(textviewCreateroomPreviewdate, expiration)
             setExpirationTime(textviewCreateroomExpirationpreview, expiration)
+            setExpirationPeriod(santaperiodpickerCreateroomExpiration, expiration)
         }
     }
 

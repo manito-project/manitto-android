@@ -1,28 +1,32 @@
 package org.sopt.santamanitto.room.create.viewmodel
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.create.data.CreateMissionLiveList
-import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
-import org.sopt.santamanitto.room.network.RoomRequest
+import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
-import org.sopt.santamanitto.room.data.source.CachedRoomDataSource
-import org.sopt.santamanitto.user.data.source.UserCachedDataSource
-import org.sopt.santamanitto.user.data.source.UserDataSource
-import javax.inject.Named
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
+import org.sopt.santamanitto.room.network.RoomRequest
+import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 
 class CreateRoomAndMissionViewModel @ViewModelInject constructor(
-        @Named("cached") private val userDataSource: UserDataSource,
+        private val cachedMainUserDataSource: CachedMainUserDataSource,
         private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
-    val expirationLiveData = ExpirationLiveData()
+    private var roomId = -1
+
+    var expirationLiveData = ExpirationLiveData()
 
     var roomName = MutableLiveData<String?>(null)
+    private val _hint = MutableLiveData<String?>(null)
+    val hint: LiveData<String?>
+        get() = _hint
 
     val missions = CreateMissionLiveList()
 
@@ -36,8 +40,26 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
         it.isNullOrBlank()
     }
 
-    fun setDayDiff(dayDIff: Int) {
-        expirationLiveData.dayDiff = dayDIff
+    fun start(roomId: Int) {
+        if (roomId == -1) {
+            return
+        }
+        this.roomId = roomId
+        roomRequest.getManittoRoomData(roomId, object : RoomRequest.GetManittoRoomCallback {
+            override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
+                roomName.value = manittoRoomData.roomName
+                _hint.value = manittoRoomData.roomName
+                expirationLiveData.init(manittoRoomData.expiration)
+            }
+
+            override fun onFailed() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
+
+    fun setPeriod(period: Int) {
+        expirationLiveData.period = period
     }
 
     fun setAmPm(isAm: Boolean) {
@@ -76,6 +98,16 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
             }
         })
 
-        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
+        cachedMainUserDataSource.isMyManittoDirty = true
+    }
+
+    fun modifyRoom(callback: () -> Unit) {
+        roomRequest.modifyRoom(roomId, ModifyRoomData(roomName.value!!, expirationLiveData.toString())) {
+            if (it) {
+                callback.invoke()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
     }
 }

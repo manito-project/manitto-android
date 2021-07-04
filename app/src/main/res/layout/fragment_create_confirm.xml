@@ -21,10 +21,9 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_createconfirm"
+            style="@style/SantaBackground.Confirm"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:backKey="true"
-            app:backgroundStyle="onlyCharacter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"

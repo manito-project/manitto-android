@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T, *>>() {
 
-    private var items: MutableList<T> = mutableListOf()
+    protected var items: MutableList<T> = mutableListOf()
 
     override fun onBindViewHolder(holder: BaseViewHolder<T, *>, position: Int) {
         holder.bind(items[position])
@@ -58,7 +58,7 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T, *>>() {
         notifyItemChanged(position)
     }
 
-    fun clear() {
+    open fun clear() {
         val size = items.size
         items.clear()
         notifyItemRangeRemoved(0, size)

@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -20,19 +20,18 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_waitingroom"
+            style="@style/SantaBackground.SubTask"
+            setExpirationDescription="@{viewModel.expiration}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:backKey="true"
-            app:backgroundStyle="noLogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            setExpirationDescription="@{viewModel.expiration}"
-            app:noLogoTitle="@{viewModel.roomName}"
-            tool:noLogoDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
-            tool:noLogoTitle="마니또 방 이름" />
+            app:santaTitle="@{viewModel.roomName}"
+            tool:santaDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
+            tool:santaTitle="마니또 방 이름" />
 
         <View
             android:id="@+id/view_waitingroom_guideline"
@@ -50,7 +49,7 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginTop="@dimen/margin_cardview_to_guidline_top"
             android:layout_marginBottom="@dimen/margin_waitingroom_cardview_bottom"
-            app:layout_constraintBottom_toTopOf="@id/santabottombutton_waitingroom"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_waitingroom_buttons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_waitingroom_guideline"
@@ -122,10 +121,10 @@
                     android:layout_height="match_parent"
                     android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
                     app:error="@{viewModel.networkErrorOccur}"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_waitingroom_notice"
@@ -144,17 +143,33 @@
 
         </org.sopt.santamanitto.view.SantaCardView>
 
-        <org.sopt.santamanitto.view.SantaBottomButton
-            android:id="@+id/santabottombutton_waitingroom"
+        <LinearLayout
+            android:id="@+id/linearlayout_waitingroom_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.isAdmin()}"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
-            android:text="@string/waitingroom_bottombutton"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <org.sopt.santamanitto.view.SantaBottomButton
+                android:id="@+id/santabottombutton_waitingroom_modify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_matched_buttons"
+                android:text="@string/waitingroom_modify"
+                android:visibility="@{viewModel.isAdmin() ? View.VISIBLE : View.GONE}" />
+
+            <org.sopt.santamanitto.view.SantaBottomButton
+                android:id="@+id/santabottombutton_waitingroom_match"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="@{viewModel.canStart}"
+                android:text="@string/waitingroom_bottombutton" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

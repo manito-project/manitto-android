@@ -1,12 +1,10 @@
 package org.sopt.santamanitto.room.network
 
 import okhttp3.ResponseBody
-import org.sopt.santamanitto.network.AuthRetrofitClient
-import org.sopt.santamanitto.network.RequestCallback
-import org.sopt.santamanitto.network.Response
-import org.sopt.santamanitto.network.start
+import org.sopt.santamanitto.network.*
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.data.source.RoomDataSource
 import org.sopt.santamanitto.room.join.network.JoinRoomData
@@ -41,6 +39,18 @@ class RoomRequestImpl(
 
             override fun onFail() {
                 callback.onFailed()
+            }
+        })
+    }
+
+    override fun modifyRoom(roomId: Int, modifyRoomData: ModifyRoomData, callback: (onSuccess: Boolean) -> Unit) {
+        roomService.modifyRoom(roomId, modifyRoomData).start(object: RequestCallback<SimpleResponse> {
+            override fun onSuccess(data: SimpleResponse) {
+                callback.invoke(true)
+            }
+
+            override fun onFail() {
+                callback.invoke(false)
             }
         })
     }
@@ -104,6 +114,14 @@ class RoomRequestImpl(
                 callback.onDataNotAvailable()
             }
         })
+    }
+
+    override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        roomService.exitRoom(ExitRoomRequest(roomId.toString())).start(callback)
+    }
+
+    override fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+        roomService.removeHistory(roomId).start(callback)
     }
 
     fun convert(errorBody: ResponseBody): JoinRoomErrorBody {

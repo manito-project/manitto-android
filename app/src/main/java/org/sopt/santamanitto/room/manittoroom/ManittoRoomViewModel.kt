@@ -9,14 +9,16 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.user.data.User
-import org.sopt.santamanitto.user.data.source.UserCachedDataSource
-import org.sopt.santamanitto.user.data.source.UserDataSource
+import org.sopt.santamanitto.user.data.UserInfoResponse
+import org.sopt.santamanitto.user.data.controller.UserAuthController
+import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
-import javax.inject.Named
 
 class ManittoRoomViewModel @ViewModelInject constructor(
-    @Named("cached") private val userDataSource: UserDataSource,
+    private val userMetadataSource: UserMetadataSource,
+    private val userDataSource: UserAuthController,
+    private val cachedMainUserDataSource: CachedMainUserDataSource,
     private val roomRequest: RoomRequest
 ): NetworkViewModel() {
 
@@ -45,6 +47,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
     private val _period = MutableLiveData<Int>()
     val period: LiveData<Int>
         get() = _period
+
+    private val _isExpired = MutableLiveData(false)
+    val isExpired: LiveData<Boolean>
+        get() = _isExpired
 
     private val _expiration = MutableLiveData<String>(null)
     val expiration: LiveData<String>
@@ -75,7 +81,11 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         get() = _missionToMe
 
     val myName: String
-        get() = userDataSource.getUserName()
+        get() = userMetadataSource.getUserName()
+
+    private val _canStart = MutableLiveData<Boolean>()
+    val canStart: LiveData<Boolean>
+        get() = _canStart
 
     fun refreshManittoRoomInfo() {
         startLoading()
@@ -84,9 +94,11 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                 manittoRoomData.run {
                     _roomName.value = roomName
                     _expiration.value = expiration
+                    _isExpired.value = TimeUtil.getDayDiffFromNow(expiration) < 0
                     _members.value = members
                     _invitationCode = invitationCode
-                    _isAdmin.value = userDataSource.getUserId() == creator.userId
+                    _isAdmin.value = userMetadataSource.getUserId() == creator.userId
+                    _canStart.value = _isAdmin.value!! && members.size > 1
                     this@ManittoRoomViewModel.isMatched = isMatched
                     _period.value = getPeriod(createdAt, expiration)
                     stopLoading()
@@ -101,7 +113,7 @@ class ManittoRoomViewModel @ViewModelInject constructor(
 
     fun match() {
         startLoading()
-        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
+        cachedMainUserDataSource.isMyManittoDirty = true
         roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
             override fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>) {
                 isMatched = true
@@ -119,9 +131,9 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
             override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
                 startLoading()
-                userDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserDataSource.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(user: User) {
-                        _myManittoName.value = user.userName
+                userDataSource.getUserInfo(personalRoomInfo.manittoUserId, object: UserAuthController.GetUserInfoCallback {
+                    override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
+                        _myManittoName.value = userInfoResponse.userName
                         stopLoading()
                     }
 
@@ -130,9 +142,9 @@ class ManittoRoomViewModel @ViewModelInject constructor(
                     }
                 })
 
-                userDataSource.getUserInfo(personalRoomInfo.santaUserId, object : UserDataSource.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(user: User) {
-                        _mySantaName.value = user.userName
+                userDataSource.getUserInfo(personalRoomInfo.santaUserId, object : UserAuthController.GetUserInfoCallback {
+                    override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
+                        _mySantaName.value = userInfoResponse.userName
                         stopLoading()
                     }
 
@@ -151,9 +163,30 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         })
     }
 
+    fun removeHistory(callback: () -> Unit) {
+        roomRequest.removeHistory(roomId) {
+            if (it) {
+                cachedMainUserDataSource.isMyManittoDirty = true
+                callback.invoke()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
+    }
+
+    fun exitRoom(callback: () -> Unit) {
+        roomRequest.exitRoom(roomId) {
+            if (it) {
+                callback.invoke()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
+    }
+
     private fun findMyMission(missions: List<ManittoRoomMatchedMissions>) {
         for (mission in missions) {
-            if (mission.userId == userDataSource.getUserId()) {
+            if (mission.userId == userMetadataSource.getUserId()) {
                 setMyMissionInfo(mission)
                 return
             }
@@ -163,9 +196,9 @@ class ManittoRoomViewModel @ViewModelInject constructor(
 
     private fun setMyMissionInfo(mission: ManittoRoomMatchedMissions) {
         _myMission.value = mission.myMission?.content
-        userDataSource.getUserInfo(mission.manittoUserId, object: UserDataSource.GetUserInfoCallback {
-            override fun onUserInfoLoaded(user: User) {
-                _myManittoName.value = user.userName
+        userDataSource.getUserInfo(mission.manittoUserId, object: UserAuthController.GetUserInfoCallback {
+            override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
+                _myManittoName.value = userInfoResponse.userName
                 stopLoading()
             }
 

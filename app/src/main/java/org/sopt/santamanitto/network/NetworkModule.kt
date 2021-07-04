@@ -6,8 +6,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.sopt.santamanitto.SecretString
+import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.preference.UserPreferenceManager
+import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
@@ -15,10 +16,10 @@ import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Provides
-    fun provideBaseUrl(): String = SecretString.BASE_URL
+    fun provideBaseUrl(): String = BuildConfig.BASE_URL
 
     @Provides
     @Singleton
@@ -32,11 +33,11 @@ class NetworkModule {
     @Provides
     @Singleton
     @AuthInterceptorOkHttpClient
-    fun provideAuthInterceptorOkHttpClient(userPreferenceManager: UserPreferenceManager): OkHttpClient {
+    fun provideAuthInterceptorOkHttpClient(userMetadataSource: UserMetadataSource): OkHttpClient {
         return OkHttpClient.Builder()
                 .addInterceptor {
                     val request = it.request().newBuilder()
-                            .addHeader("jwt", userPreferenceManager.getAccessToken()!!)
+                            .addHeader("jwt", userMetadataSource.getAccessToken())
                             .build()
                     it.proceed(request)
                 }
@@ -58,11 +59,11 @@ class NetworkModule {
 
     private fun provideLogger(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.BODY
         }
     }
 
-    private fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
             Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(baseUrl)

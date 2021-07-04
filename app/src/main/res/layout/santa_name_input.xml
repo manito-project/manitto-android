@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="org.sopt.santamanitto.view.SantaCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/textview_entername_title">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_signin_cardview_horizontal"
+        android:paddingVertical="@dimen/padding_signin_cardview_vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_nameinput_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entername_title_name"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_signin_myname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_nameinput_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_santainputname_alert"
+            android:text="@string/santanameinput_alert"
+            app:layout_constraintTop_toTopOf="@id/textview_nameinput_title"
+            app:layout_constraintBottom_toBottomOf="@id/textview_nameinput_title"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <org.sopt.santamanitto.view.SantaEditText
+            android:id="@+id/edittext_nameinput_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_santaedittext_big"
+            android:layout_marginTop="@dimen/margin_signin_edittext_top"
+            android:layout_marginBottom="@dimen/padding_signin_cardview_bottom_additional"
+            app:hint="@string/entername_edittext_hint"
+            app:isSingleLine="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_nameinput_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>

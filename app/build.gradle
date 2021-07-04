@@ -16,10 +16,16 @@ android {
         applicationId "org.sopt.santamanitto"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.1.2"
+        versionCode 7
+        versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(rootProject.file('./local.properties').newDataInputStream())
+        buildConfigField("String", "BASE_URL", properties['baseUrl'])
+        buildConfigField("String", "TOS_URL", properties['tosUrl'])
+        buildConfigField("String", "PRIVACY_POLICY_RUL", properties['privacyPolicyUrl'])
     }
 
     android {
@@ -68,6 +74,10 @@ android {
     }
 
     dataBinding { enabled = true }
+
+    viewBinding {
+        enabled = true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

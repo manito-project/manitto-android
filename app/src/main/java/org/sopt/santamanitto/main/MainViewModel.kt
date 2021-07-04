@@ -4,43 +4,50 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.sopt.santamanitto.NetworkViewModel
-import org.sopt.santamanitto.room.data.JoinedRoom
-import org.sopt.santamanitto.user.data.source.UserCachedDataSource
-import org.sopt.santamanitto.user.data.source.UserDataSource
-import javax.inject.Named
+import org.sopt.santamanitto.room.data.MyManitto
+import org.sopt.santamanitto.room.network.RoomRequest
+import org.sopt.santamanitto.user.data.source.*
 
 class MainViewModel @ViewModelInject constructor(
-    @Named("cached") private val userDataSource: UserDataSource
+    private val cachedMainUserDataSource: CachedMainUserDataSource,
+    private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
-    private var _joinedRooms = MutableLiveData<List<JoinedRoom>?>(null)
-    val joinedRooms: LiveData<List<JoinedRoom>?>
-        get() = _joinedRooms
+    private var _myManittoList = MutableLiveData<List<MyManitto>?>(null)
+    val myManittoList: LiveData<List<MyManitto>?>
+        get() = _myManittoList
 
     private var _isRefreshing = MutableLiveData(false)
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
-    fun getJoinedRooms() {
-        _isRefreshing.value = (userDataSource as UserCachedDataSource).isJoinedRoomDirty
+    fun getMyManittoList() {
+        _isRefreshing.value = cachedMainUserDataSource.isMyManittoDirty
         _isLoading.value = true
-        userDataSource.getJoinedRoom(
-            userDataSource.getUserId(),
-            object : UserDataSource.GetJoinedRoomsCallback {
-                override fun onJoinedRoomsLoaded(rooms: List<JoinedRoom>) {
-                    _isLoading.value = false
-                    _joinedRooms.value = rooms
-                }
+        cachedMainUserDataSource.getMyManittoList(object : MainUserDataSource.GetJoinedRoomsCallback {
+            override fun onMyManittoListLoaded(myManittos: List<MyManitto>) {
+                _isLoading.value = false
+                _myManittoList.value = myManittos
+            }
 
-                override fun onDataNotAvailable() {
-                    _networkErrorOccur.value = true
-                }
-            })
-        _isRefreshing.value = false
+            override fun onDataNotAvailable() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
+
+    fun exitRoom(roomId: Int) {
+        roomRequest.exitRoom(roomId) {
+            if (it) {
+                refresh()
+            } else {
+                _networkErrorOccur.value = true
+            }
+        }
     }
 
     fun refresh() {
-        (userDataSource as UserCachedDataSource).isJoinedRoomDirty = true
-        getJoinedRooms()
+        cachedMainUserDataSource.isMyManittoDirty = true
+        getMyManittoList()
     }
 }

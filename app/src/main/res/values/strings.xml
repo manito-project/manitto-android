@@ -5,6 +5,7 @@
     <string name="dialog_cancel">취소</string>
 
     <string name="button_next">다음</string>
+    <string name="button_change">변경</string>
 
     <string name="pm">오후</string>
     <string name="am">오전</string>
@@ -28,6 +29,7 @@
     <string name="main_my_manitto_history">나의 산타 마니또</string>
     <string name="main_no_manitto_notice">아직 진행중인 마니또가 없어요!</string>
 
+    <string name="joinedroom_exit_room">방 나가기</string>
     <string name="joinedroom_manitto_info">%s의 산타</string>
     <string name="joinedroom_daydiff">%d일째</string>
     <string name="joinedroom_state_done">결과 발표 완료</string>
@@ -40,18 +42,20 @@
     <string name="createroom_background_description">친구들이 방을 잘 찾아올 수 있도록\n방 이름과 종료일을 지정해보자!</string>
     <string name="createroom_room_name">방 이름</string>
     <string name="createroom_roomname_hint">방 이름을 지어줘!</string>
-    <string name="createroom_room_expiration">산타 마니또 공개일 설정</string>
-    <string name="createroom_expiration_description">최소 3일 부터 최대 14일까지 기간을 설정할 수 있어~</string>
-    <string name="textview_createroom_expiration_time">산타 마니또 공개 시간</string>
+    <string name="createroom_room_expiration">산타 마니또 종료일 설정</string>
+    <string name="createroom_expiration_description" formatted="false">최소 %d일 부터 최대 %d일까지 기간을 설정할 수 있어~</string>
+    <string name="textview_createroom_expiration_time">산타 마니또 종료 시간</string>
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
     <string name="createroom_preview_start">%d일 후인</string>
-    <string name="createroom_preview">%d/%02d/%02d %s %02d : %02d 에</string>
-    <string name="createroom_expiration_time">%02d : %02d</string>
-    <string name="createroom_dialog_expiration_time_setting">공개 시간 설정</string>
+    <string name="createroom_preview" formatted="false">%d/%02d/%02d %s %02d : %02d 에</string>
+    <string name="createroom_expiration_time" formatted="false">%02d : %02d</string>
+    <string name="createroom_dialog_expiration_time_setting">종료 시간 설정</string>
+    <string name="createroom_modify_title">방 정보 수정</string>
+    <string name="createroom_modify_done">수정 완료</string>
 
     <string name="createmission_background_title">미션 만들기</string>
     <string name="createmission_background_description">흥미딘딘한 산타 마니또를 위해\n미션을 추가해볼까?</string>
-    <string name="createmission_description_in_cardview">미션을 추가하면 마니또와 미션을 함께 매칭할 수 있고, 스킵하면 미션 없이 마니또만 매칭될거야!</string>
+    <string name="createmission_description_in_cardview">미션 한 개에 마니또 한명이 매칭돼\n미션은 최대 36자까지 입력할 수 있어!</string>
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
     <string name="createmission_skip_bottom_button">SKIP</string>
     <string name="createmission_mission_hint">미션을 입력해줘!</string>
@@ -75,21 +79,49 @@
     <string name="waitingroom_notice_admin">방장 산타는 참여자가 다 모이면 하단 버튼을 눌러줘:)</string>
     <string name="waitingroom_notice_participant">참여자 산타는 방장 산타가 매칭하기를 누를 때까지 기다려줘:)</string>
     <string name="waitingroom_bottombutton">마니또 랜덤 매칭하기</string>
+    <string name="waitingroom_snackbar_invitation_code">참여 코드가 복사되었습니다</string>
+    <string name="waitingroom_modify">방 정보 수정하기</string>
+
     <string name="manittoroom_description_today_prefix">바로 오늘, </string>
     <string name="manittoroom_description_not_today_prefix">오늘부터 %d일 후인,</string>
-    <string name="manittoroom_description_suffix">%d월 %d일\n%s %02d:%02d까지 진행되는 마니또</string>
-    <string name="waitingroom_snackbar_invitation_code">참여 코드가 복사되었습니다</string>
+    <string name="manittoroom_description_suffix" formatted="false">%d월 %d일\n%s %02d:%02d까지 진행되는 마니또</string>
 
     <string name="matching_text">산타 마니또 매칭중\n잠시만 기다려줘:)</string>
 
     <string name="matched_bottom_button">홈으로 가기</string>
     <string name="matched_mission_title">미션은</string>
-    <string name="matched_manitto_title">%s 산타의 마니또는</string>
+    <string name="matched_manitto_title" formatted="false">%s 산타의 마니또는</string>
     <string name="matched_no_mission">미션이 없습니다</string>
+    <string name="matched_bottom_button_delete">나의 산타 마니또에서 삭제하기</string>
 
     <string name="finish_bottom_button">전체 결과 보기</string>
     <string name="finish_manitto_title">%d일동안의 산타 마니또 종료!\n나의 산타 마니또는 누구일까?</string>
     <string name="finish_title">나를 챙겨준 산타는?</string>
     <string name="result_bottom">홈으로 가기</string>
     <string name="result_title">총 %d명</string>
+
+    <string name="santanameinput_alert">・이름은 최대 %d자까지 설정 가능해</string>
+
+    <string name="editname_background">내 이름을\n변경할 수 있어!</string>
+
+    <string name="exit_dialog_host">방장이 나가면 팀원들도\n방을 이용할 수 없어!</string>
+    <string name="exit_dialog_guest">%s\n이 방을 나가는 거 맞지?</string>
+    <string name="exit_dialog_history">나의 산타 마니또에서\n삭제하는거 맞지?</string>
+
+    <string name="setting_1_edit_name">닉네임 수정</string>
+    <string name="setting_2_tos">이용약관 동의</string>
+    <string name="setting_3_privacy_policy">개인정보 수집 및 이용 동의</string>
+
+    <string name="update_dialog_content">원활한 산타마니또를 위해\n업데이트를 해야해!</string>
+    <string name="update_dialog_exit">마니또 종료</string>
+    <string name="update_dialog_update">업데이트</string>
+
+    <string name="mymanitto_removed">삭제된 방</string>
+    <string name="mymanitto_removed_content">해당 방은 방장에 의해\n삭제된 방이야</string>
+    <string name="mymanitto_remove">삭제하기</string>
+    <string name="mymanitto_epired_content">매칭 기간이 지났어!</string>
+    <string name="mymanitto_epired_dialog">매칭 기간이 지나버렸어\n우리 새로운 방을 만들어볼래?</string>
+    <string name="mymanitto_epired_dialog_button">홈으로 가기</string>
+
+
 </resources>

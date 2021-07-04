@@ -1,8 +1,10 @@
 package org.sopt.santamanitto.room.network
 
 import org.sopt.santamanitto.network.Response
+import org.sopt.santamanitto.network.SimpleResponse
 import org.sopt.santamanitto.room.create.network.CreateRoomData
 import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.ModifyRoomData
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.join.network.JoinRoomData
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
@@ -10,10 +12,7 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoMatchingData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface RoomService {
 
@@ -23,6 +22,9 @@ interface RoomService {
     @POST("rooms")
     fun createRoom(@Body createRoomData: CreateRoomData): Call<Response<CreateRoomResponse>>
 
+    @PUT("rooms/{roomId}")
+    fun modifyRoom(@Path("roomId") roomId: Int, @Body modifyRoomData: ModifyRoomData): Call<Response<SimpleResponse>>
+
     @POST("rooms/enter")
     fun joinRoom(@Body joinRoomData: JoinRoomData): Call<Response<JoinRoomResponse>>
 
@@ -31,4 +33,10 @@ interface RoomService {
 
     @POST("rooms/match")
     fun matchManitto(@Body manittoMatchingData: ManittoMatchingData): Call<Response<List<ManittoRoomMatchedMissions>>>
+
+    @POST("rooms/exit")
+    fun exitRoom(@Body exitRoomRequest: ExitRoomRequest): Call<SimpleResponse>
+
+    @DELETE("rooms/{roomId}/history")
+    fun removeHistory(@Path("roomId") roomId: Int): Call<SimpleResponse>
 }
