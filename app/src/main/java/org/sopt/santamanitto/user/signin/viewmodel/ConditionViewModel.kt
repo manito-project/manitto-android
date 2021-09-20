@@ -20,7 +20,15 @@ class ConditionViewModel @ViewModelInject constructor(
 
     val userSaveFail = MutableLiveData(false)
 
+    private var _isWaitingForResponse = false
+    val isWaitingForResponse: Boolean
+        get() = _isWaitingForResponse
+
     fun signIn(userName: String) {
+        if (_isWaitingForResponse) {
+            return
+        }
+        _isWaitingForResponse = true
         userController.createAccount(userName, serialNumber, object : UserController.CreateAccountCallback {
 
             override fun onCreateAccountSuccess(loginUserResponse: LoginUserResponse) {
@@ -32,10 +40,12 @@ class ConditionViewModel @ViewModelInject constructor(
                     }
                 }
                 userSaveSuccess.value = true
+                _isWaitingForResponse = false
             }
 
             override fun onCreateAccountFailed() {
                 userSaveFail.value = true
+                _isWaitingForResponse = false
             }
         })
     }
