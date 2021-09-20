@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="userName"
+            type="String" />
+
+        <variable
             name="viewModel"
             type="org.sopt.santamanitto.user.signin.viewmodel.ConditionViewModel" />
     </data>
@@ -133,6 +137,7 @@
             android:layout_marginBottom="@dimen/margin_signin_button_bottom"
             android:enabled="@{viewModel.isReady()}"
             android:text="@string/button_next"
+            android:onClick="@{() -> viewModel.signIn(userName)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
