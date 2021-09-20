@@ -16,9 +16,11 @@ import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
 import org.sopt.santamanitto.user.signin.viewmodel.ConditionViewModel
+import androidx.activity.OnBackPressedCallback
+
 
 @AndroidEntryPoint
-class ConditionFragment: Fragment() {
+class ConditionFragment : Fragment() {
 
     private lateinit var binding: FragmentConditionBinding
 
@@ -26,18 +28,31 @@ class ConditionFragment: Fragment() {
 
     private val viewModel: ConditionViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // 요청 대기 중에 뒤로 가기 버튼을 눌러 화면을 벗어나는 것을 방지
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+
+            override fun handleOnBackPressed() {
+                if (!viewModel.isWaitingForResponse) {
+                    findNavController().navigateUp()
+                }
+            }
+        })
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentConditionBinding.inflate(inflater, container, false).apply {
             viewModel = this@ConditionFragment.viewModel
             lifecycleOwner = this@ConditionFragment
         }
-
-        initView()
-
-        subscribeUi()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.userName = args.userName
+        initView()
+        subscribeUi()
     }
 
     private fun subscribeUi() {
@@ -51,7 +66,7 @@ class ConditionFragment: Fragment() {
         }
 
         viewModel.userSaveFail.observe(viewLifecycleOwner) {
-            if(it) {
+            if (it) {
                 //Todo: 계정 생성에 실패했다는 다이얼로그 띄우기
                 Log.e("ConditionFragment", "Fail to create new account")
             }
@@ -70,19 +85,21 @@ class ConditionFragment: Fragment() {
         }
 
         binding.santacheckboxCondition1.setOnClickListener {
+            if (viewModel.isWaitingForResponse) {
+                return@setOnClickListener
+            }
             val directions = ConditionFragmentDirections
-                    .actionConditionFragmentToWebViewFragment(BuildConfig.TOS_URL)
+                .actionConditionFragmentToWebViewFragment(BuildConfig.TOS_URL)
             findNavController().navigate(directions)
         }
 
         binding.santacheckboxCondition2.setOnClickListener {
+            if (viewModel.isWaitingForResponse) {
+                return@setOnClickListener
+            }
             val directions = ConditionFragmentDirections
-                    .actionConditionFragmentToWebViewFragment(BuildConfig.PRIVACY_POLICY_RUL)
+                .actionConditionFragmentToWebViewFragment(BuildConfig.PRIVACY_POLICY_RUL)
             findNavController().navigate(directions)
-        }
-
-        binding.santabottombuttonCondition.setOnClickListener {
-            viewModel.signIn(args.userName)
         }
     }
 }
