@@ -62,5 +62,12 @@ object TimeUtil {
     fun getCurrentTimeByServerFormat(): String =
         SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).format(Date())
 
-
+    fun convertUtcToKst(expiration: String): String {
+        val kstFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA)
+        val utcFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.US).apply {
+            timeZone = TimeZone.getTimeZone("Etc/UTC")
+        }
+        val date = kstFormat.parse(expiration) ?: ""
+        return utcFormat.format(date).toString()
+    }
 }

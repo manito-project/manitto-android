@@ -92,7 +92,7 @@ class MainFragment : Fragment() {
     }
 
     private fun initJoinedRooms() {
-        viewModel.getMyManittoList()
+        viewModel.fetchMyManittoList()
     }
 
     private fun navigateSettingFragment() {

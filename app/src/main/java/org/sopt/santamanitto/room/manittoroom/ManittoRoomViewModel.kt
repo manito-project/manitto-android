@@ -92,9 +92,10 @@ class ManittoRoomViewModel @ViewModelInject constructor(
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
             override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
                 manittoRoomData.run {
+                    val convertedTime = TimeUtil.convertUtcToKst(manittoRoomData.expiration)
                     _roomName.value = roomName
-                    _expiration.value = expiration
-                    _isExpired.value = TimeUtil.getDayDiffFromNow(expiration) < 0
+                    _expiration.value = convertedTime
+                    _isExpired.value = TimeUtil.getDayDiffFromNow(convertedTime) < 0
                     _members.value = members
                     _invitationCode = invitationCode
                     _isAdmin.value = userMetadataSource.getUserId() == creator.userId

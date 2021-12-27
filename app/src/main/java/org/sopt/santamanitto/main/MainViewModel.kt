@@ -21,7 +21,7 @@ class MainViewModel @ViewModelInject constructor(
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
-    fun getMyManittoList() {
+    fun fetchMyManittoList() {
         _isRefreshing.value = cachedMainUserDataSource.isMyManittoDirty
         _isLoading.value = true
         cachedMainUserDataSource.getMyManittoList(object : MainUserDataSource.GetJoinedRoomsCallback {
@@ -48,6 +48,6 @@ class MainViewModel @ViewModelInject constructor(
 
     fun refresh() {
         cachedMainUserDataSource.isMyManittoDirty = true
-        getMyManittoList()
+        fetchMyManittoList()
     }
 }
