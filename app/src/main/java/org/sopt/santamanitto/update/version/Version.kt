@@ -11,7 +11,7 @@ class Version private constructor(private val version: String) : Comparable<Vers
 
         fun create(version: String): Version {
             if (!version.matches(versionRegex)) {
-                throw IllegalArgumentException("Version must be $versionRegex")
+                throw IllegalArgumentException("Version must be $versionRegex. Received version is \"$version\"")
             }
             return Version(version)
         }
