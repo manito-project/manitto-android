@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="org.sopt.santamanitto.user.signin.fragment.WebViewFragment"
+        android:name="org.sopt.santamanitto.user.signin.fragment.WebLinkFragment"
         tools:layout="@layout/fragment_webview"
         android:label="WebViewFragment" >
         <argument

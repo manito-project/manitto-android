@@ -1,9 +1,12 @@
 package org.sopt.santamanitto
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.update.version.VersionChecker
 import org.sopt.santamanitto.user.data.LoginUserResponse
@@ -32,15 +35,14 @@ class SplashViewModel @ViewModelInject constructor(
         get() = _loginSuccess
 
     fun checkUpdate() {
-        versionChecker.getLatestVersion(object: VersionChecker.GetLatestVersionCallback {
-            override fun onLoadLatestVersion(version: String) {
-                _latestVersion.value = Version.create(version)
-            }
-
-            override fun onFailure(networkError: Boolean) {
+        viewModelScope.launch {
+            try {
+                _latestVersion.value = versionChecker.getLatestVersion()
+            } catch (e: Exception) {
+                Log.e(this.javaClass.simpleName, e.stackTraceToString())
                 _versionCheckFail.value = true
             }
-        })
+        }
     }
 
     fun login() {

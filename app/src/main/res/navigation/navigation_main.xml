@@ -48,7 +48,7 @@
 
     <fragment
         android:id="@+id/webViewFragmentFromSetting"
-        android:name="org.sopt.santamanitto.user.signin.fragment.WebViewFragment"
+        android:name="org.sopt.santamanitto.user.signin.fragment.WebLinkFragment"
         android:label="WebViewFragment"
         tools:layout="@layout/fragment_webview">
         <argument android:name="url" />

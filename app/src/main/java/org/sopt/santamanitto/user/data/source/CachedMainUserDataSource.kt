@@ -3,8 +3,9 @@ package org.sopt.santamanitto.user.data.source
 import org.sopt.santamanitto.room.data.MyManitto
 import org.sopt.santamanitto.user.data.UserInfoResponse
 import org.sopt.santamanitto.user.data.controller.UserAuthController
+import javax.inject.Inject
 
-class CachedMainUserDataSource(
+class CachedMainUserDataSource @Inject constructor(
     private val userMetadataSource: UserMetadataSource,
     private val userAuthController: UserAuthController
 ) : MainUserDataSource {
