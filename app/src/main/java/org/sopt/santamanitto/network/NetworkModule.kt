@@ -10,7 +10,6 @@ import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -25,8 +24,8 @@ object NetworkModule {
     @OtherInterceptorOkHttpClient
     fun provideOtherInterceptorOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(provideLogger())
-                .build()
+            .addInterceptor(provideLogger())
+            .build()
     }
 
     @Provides
@@ -34,27 +33,33 @@ object NetworkModule {
     @AuthInterceptorOkHttpClient
     fun provideAuthInterceptorOkHttpClient(userMetadataSource: UserMetadataSource): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor {
-                    val request = it.request().newBuilder()
-                            .addHeader("jwt", userMetadataSource.getAccessToken())
-                            .build()
-                    it.proceed(request)
-                }
-                .addInterceptor(provideLogger())
-                .build()
+            .addInterceptor {
+                val request = it.request().newBuilder()
+                    .addHeader("jwt", userMetadataSource.getAccessToken())
+                    .build()
+                it.proceed(request)
+            }
+            .addInterceptor(provideLogger())
+            .build()
     }
 
     @Provides
     @Singleton
     @OtherRetrofitClient
-    fun provideOtherRetrofitClient(@OtherInterceptorOkHttpClient okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
-            provideRetrofit(okHttpClient, baseUrl)
+    fun provideOtherRetrofitClient(
+        @OtherInterceptorOkHttpClient okHttpClient: OkHttpClient,
+        baseUrl: String
+    ): Retrofit =
+        provideRetrofit(okHttpClient, baseUrl)
 
     @Provides
     @Singleton
     @AuthRetrofitClient
-    fun provideAuthRetrofitClient(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
-            provideRetrofit(okHttpClient, baseUrl)
+    fun provideAuthRetrofitClient(
+        @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient,
+        baseUrl: String
+    ): Retrofit =
+        provideRetrofit(okHttpClient, baseUrl)
 
     private fun provideLogger(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
@@ -62,26 +67,10 @@ object NetworkModule {
         }
     }
 
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
-            Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(baseUrl)
-                    .client(okHttpClient)
-                    .build()
+    private fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(baseUrl)
+            .client(okHttpClient)
+            .build()
 }
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class AuthInterceptorOkHttpClient
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class OtherInterceptorOkHttpClient
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class AuthRetrofitClient
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class OtherRetrofitClient
