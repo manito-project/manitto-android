@@ -1,14 +1,17 @@
 package org.sopt.santamanitto.main
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.data.MyManitto
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.user.data.source.*
+import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
+import org.sopt.santamanitto.user.data.source.MainUserDataSource
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val cachedMainUserDataSource: CachedMainUserDataSource,
     private val roomRequest: RoomRequest
 ) : NetworkViewModel() {

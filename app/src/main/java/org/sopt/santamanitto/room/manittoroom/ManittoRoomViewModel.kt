@@ -1,8 +1,8 @@
 package org.sopt.santamanitto.room.manittoroom
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
@@ -14,8 +14,10 @@ import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
+import javax.inject.Inject
 
-class ManittoRoomViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ManittoRoomViewModel @Inject constructor(
     private val userMetadataSource: UserMetadataSource,
     private val userDataSource: UserAuthController,
     private val cachedMainUserDataSource: CachedMainUserDataSource,
