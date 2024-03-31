@@ -5,12 +5,12 @@ import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import org.sopt.santamanitto.preference.SharedPreferenceManagerImpl.Companion.SHARED_PREFERENCES_FILE_NAME
 import javax.inject.Singleton
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 class SharedPreferenceModule {
 
