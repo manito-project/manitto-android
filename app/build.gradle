@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdk 34
 
     defaultConfig {
         applicationId "org.sopt.santamanitto"
-        minSdkVersion 23
-        targetSdkVersion 33
+        minSdk 23
+        targetSdk 33
         versionCode 11
         versionName "1.2.3"
 
