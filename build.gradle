@@ -1,9 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.4.21"
-    ext.hilt_version = "2.29.1-alpha"
+    ext.kotlin_version = '1.6.21'
+    ext.hilt_version = '2.40.1'
     ext.hiltViewModelVersion = '1.0.0-alpha02'
-    ext.nav_version = "2.3.2"
+    ext.nav_version = '2.4.1'
     ext.okhttpLoggingVersion = '4.7.2'
     ext.retrofitVersion = '2.9.0'
 
@@ -12,10 +12,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath 'com.android.tools.build:gradle:8.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.3.5'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.1'
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
 
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
 
