@@ -9,7 +9,7 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.user.data.UserInfoResponse
+import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
@@ -134,8 +134,8 @@ class ManittoRoomViewModel @Inject constructor(
             override fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel) {
                 startLoading()
                 userDataSource.getUserInfo(personalRoomModel.manittoUserId, object: UserAuthController.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                        _myManittoName.value = userInfoResponse.userName
+                    override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                        _myManittoName.value = userInfoModel.userName
                         stopLoading()
                     }
 
@@ -145,8 +145,8 @@ class ManittoRoomViewModel @Inject constructor(
                 })
 
                 userDataSource.getUserInfo(personalRoomModel.santaUserId, object : UserAuthController.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                        _mySantaName.value = userInfoResponse.userName
+                    override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                        _mySantaName.value = userInfoModel.userName
                         stopLoading()
                     }
 
@@ -199,8 +199,8 @@ class ManittoRoomViewModel @Inject constructor(
     private fun setMyMissionInfo(mission: MatchedMissionsModel) {
         _myMission.value = mission.myMission?.content
         userDataSource.getUserInfo(mission.manittoUserId, object: UserAuthController.GetUserInfoCallback {
-            override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                _myManittoName.value = userInfoResponse.userName
+            override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                _myManittoName.value = userInfoModel.userName
                 stopLoading()
             }
 

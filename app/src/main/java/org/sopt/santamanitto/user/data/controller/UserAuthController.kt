@@ -1,11 +1,11 @@
 package org.sopt.santamanitto.user.data.controller
 
-import org.sopt.santamanitto.user.data.UserInfoResponse
+import org.sopt.santamanitto.user.data.UserInfoModel
 
 interface UserAuthController {
 
     interface GetUserInfoCallback {
-        fun onUserInfoLoaded(userInfoResponse: UserInfoResponse)
+        fun onUserInfoLoaded(userInfoModel: UserInfoModel)
 
         fun onDataNotAvailable()
     }

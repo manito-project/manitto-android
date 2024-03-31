@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
-import org.sopt.santamanitto.room.data.MyManitto
+import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import org.sopt.santamanitto.user.data.source.MainUserDataSource
@@ -16,9 +16,9 @@ class MainViewModel @Inject constructor(
     private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
-    private var _myManittoList = MutableLiveData<List<MyManitto>?>(null)
-    val myManittoList: LiveData<List<MyManitto>?>
-        get() = _myManittoList
+    private var _myManittoModelList = MutableLiveData<List<MyManittoModel>?>(null)
+    val myManittoModelList: LiveData<List<MyManittoModel>?>
+        get() = _myManittoModelList
 
     private var _isRefreshing = MutableLiveData(false)
     val isRefreshing: LiveData<Boolean>
@@ -28,9 +28,9 @@ class MainViewModel @Inject constructor(
         _isRefreshing.value = cachedMainUserDataSource.isMyManittoDirty
         _isLoading.value = true
         cachedMainUserDataSource.getMyManittoList(object : MainUserDataSource.GetJoinedRoomsCallback {
-            override fun onMyManittoListLoaded(myManittos: List<MyManitto>) {
+            override fun onMyManittoListLoaded(myManittoModels: List<MyManittoModel>) {
                 _isLoading.value = false
-                _myManittoList.value = myManittos
+                _myManittoModelList.value = myManittoModels
             }
 
             override fun onDataNotAvailable() {

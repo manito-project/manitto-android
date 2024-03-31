@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.update.version.VersionChecker
-import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserLoginModel
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Inject
@@ -49,9 +49,9 @@ class SplashViewModel @Inject constructor(
 
     fun login() {
         userController.login(serialNumber, object : UserController.LoginCallback {
-            override fun onLoginSuccess(loginUserResponse: LoginUserResponse) {
+            override fun onLoginSuccess(userLoginModel: UserLoginModel) {
                 userMetadataSource.run {
-                    loginUserResponse.let {
+                    userLoginModel.let {
                         setUserName(it.userName)
                         setAccessToken(it.accessToken)
                         setUserId(it.id)

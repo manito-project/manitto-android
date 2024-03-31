@@ -2,11 +2,11 @@ package org.sopt.santamanitto.user.data.controller
 
 import android.util.Log
 import kotlinx.coroutines.*
-import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserLoginModel
 
 class FakeUserController : UserController {
 
-    private val fakeLoginUser = LoginUserResponse(
+    private val fakeLoginUser = UserLoginModel(
         "fakeUser",
         "f0a1k2e3u4e5s6e7r8",
         1,

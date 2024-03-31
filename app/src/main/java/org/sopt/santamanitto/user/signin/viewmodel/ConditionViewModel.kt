@@ -3,7 +3,7 @@ package org.sopt.santamanitto.user.signin.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserLoginModel
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Inject
@@ -33,9 +33,9 @@ class ConditionViewModel @Inject constructor(
         _isWaitingForResponse = true
         userController.createAccount(userName, serialNumber, object : UserController.CreateAccountCallback {
 
-            override fun onCreateAccountSuccess(loginUserResponse: LoginUserResponse) {
+            override fun onCreateAccountSuccess(userLoginModel: UserLoginModel) {
                 userMetadataSource.run {
-                    loginUserResponse.let {
+                    userLoginModel.let {
                         setUserName(it.userName)
                         setAccessToken(it.accessToken)
                         setUserId(it.id)

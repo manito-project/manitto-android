@@ -1,10 +1,10 @@
 package org.sopt.santamanitto.user.data
 
 import com.google.gson.annotations.SerializedName
-import org.sopt.santamanitto.room.data.MyManitto
+import org.sopt.santamanitto.room.data.MyManittoModel
 
-data class UserInfoResponse(
+data class UserInfoModel(
         @SerializedName("id") val userId: Int,
         @SerializedName("username") val userName: String,
-        @SerializedName("JoinedRooms") val myManittos: List<MyManitto>
+        @SerializedName("JoinedRooms") val myManittoModels: List<MyManittoModel>
 )

@@ -3,14 +3,14 @@ package org.sopt.santamanitto.main.list
 import android.view.ViewGroup
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemMymanittoRemovedBinding
-import org.sopt.santamanitto.room.data.MyManitto
+import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 
 class RemovedMyManttioViewHolder(
     parent: ViewGroup,
     removeListener: ((roomId: Int) -> Unit)?
 )
-    : BaseViewHolder<MyManitto, ItemMymanittoRemovedBinding>(R.layout.item_mymanitto_removed, parent) {
+    : BaseViewHolder<MyManittoModel, ItemMymanittoRemovedBinding>(R.layout.item_mymanitto_removed, parent) {
 
     private val removeButton = binding.textviewMymanittoremovedButton
 
@@ -24,7 +24,7 @@ class RemovedMyManttioViewHolder(
         }
     }
 
-    override fun bind(data: MyManitto) {
+    override fun bind(data: MyManittoModel) {
         roomId = data.roomId
     }
 }

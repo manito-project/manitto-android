@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemResultBinding
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
-import org.sopt.santamanitto.user.data.UserInfoResponse
+import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 
@@ -18,9 +18,9 @@ class ResultViewHolder(
         binding.textviewItemresultSanta.text = data.userName
 
         userAuthController.getUserInfo(data.relations.manittoUserId, object : UserAuthController.GetUserInfoCallback {
-            override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
+            override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
                 binding.run {
-                    textviewItemresultMinitto.text = userInfoResponse.userName
+                    textviewItemresultMinitto.text = userInfoModel.userName
                     santaloadingItemresult.visibility = View.GONE
                 }
             }

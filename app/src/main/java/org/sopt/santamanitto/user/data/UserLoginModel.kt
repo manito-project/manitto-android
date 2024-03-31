@@ -2,7 +2,7 @@ package org.sopt.santamanitto.user.data
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginUserResponse(
+data class UserLoginModel(
         @SerializedName("username")
         val userName: String,
         val serialNumber: String,

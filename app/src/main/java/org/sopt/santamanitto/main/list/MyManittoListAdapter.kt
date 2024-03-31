@@ -1,7 +1,7 @@
 package org.sopt.santamanitto.main.list
 
 import android.view.ViewGroup
-import org.sopt.santamanitto.room.data.MyManitto
+import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
@@ -12,15 +12,15 @@ class MyManittoListAdapter(
     private val userAuthController: UserAuthController,
     private val userMetadataSource: UserMetadataSource,
     private val roomRequest: RoomRequest
-) : BaseAdapter<MyManitto>() {
+) : BaseAdapter<MyManittoModel>() {
 
     private var enterListener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null
     private var exitListener: ((roomId: Int, roomName: String, isHost: Boolean) -> Unit)? = null
     private var removeListener: ((roomId: Int) -> Unit)? = null
 
-    private val cachedMyManittoModel = HashMap<Int, MyManittoModel>()
+    private val cachedMyManittoInfoModel = HashMap<Int, MyManittoInfoModel>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<MyManitto, *> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<MyManittoModel, *> {
         return when (viewType) {
             1 -> RemovedMyManttioViewHolder(parent, removeListener)
             2 -> ExpiredMyManittoViewHolder(parent, enterListener, removeListener)
@@ -29,7 +29,7 @@ class MyManittoListAdapter(
                 userAuthController,
                 roomRequest,
                 userMetadataSource,
-                cachedMyManittoModel,
+                cachedMyManittoInfoModel,
                 enterListener,
                 exitListener
             )
@@ -45,7 +45,7 @@ class MyManittoListAdapter(
     }
 
     override fun clear() {
-        cachedMyManittoModel.clear()
+        cachedMyManittoInfoModel.clear()
         super.clear()
     }
 
