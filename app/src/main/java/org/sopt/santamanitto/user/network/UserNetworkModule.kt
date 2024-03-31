@@ -3,12 +3,12 @@ package org.sopt.santamanitto.user.network
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import org.sopt.santamanitto.network.AuthRetrofitClient
 import org.sopt.santamanitto.network.OtherRetrofitClient
 import retrofit2.Retrofit
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 class UserNetworkModule {
 

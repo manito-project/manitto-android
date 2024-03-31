@@ -1,20 +1,22 @@
 package org.sopt.santamanitto
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.update.version.VersionChecker
 import org.sopt.santamanitto.user.data.LoginUserResponse
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
+import javax.inject.Inject
 import javax.inject.Named
 
-class SplashViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SplashViewModel @Inject constructor(
     private val userController: UserController,
     private val userMetadataSource: UserMetadataSource,
     private val versionChecker: VersionChecker,

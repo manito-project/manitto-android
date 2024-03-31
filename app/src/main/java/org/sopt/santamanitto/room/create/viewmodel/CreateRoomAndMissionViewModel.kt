@@ -1,9 +1,9 @@
 package org.sopt.santamanitto.room.create.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.create.data.CreateMissionLiveList
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
@@ -13,8 +13,11 @@ import org.sopt.santamanitto.room.create.network.ModifyRoomData
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
+import javax.inject.Inject
 
-class CreateRoomAndMissionViewModel @ViewModelInject constructor(
+
+@HiltViewModel
+class CreateRoomAndMissionViewModel @Inject constructor(
         private val cachedMainUserDataSource: CachedMainUserDataSource,
         private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
@@ -30,15 +33,10 @@ class CreateRoomAndMissionViewModel @ViewModelInject constructor(
 
     val missions = CreateMissionLiveList()
 
-    val missionIsEmpty = Transformations.map(missions) {
-        it.isEmpty()
-    }
-
+    val missionIsEmpty = missions.map { it.isEmpty() }
     var heightOfRecyclerView: Int = 0
 
-    var nameIsNullOrEmpty = Transformations.map(roomName) {
-        it.isNullOrBlank()
-    }
+    var nameIsNullOrEmpty = roomName.map { it.isNullOrBlank() }
 
     fun start(roomId: Int) {
         if (roomId == -1) {

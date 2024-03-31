@@ -74,6 +74,7 @@ class SantaImageRoundButton @JvmOverloads constructor(
     }
 
     //백그라운드 지정 시 root에 넘겨주지 않고 따로 저장
+    @Deprecated("Deprecated in Java")
     override fun setBackgroundDrawable(background: Drawable?) {
         imageDrawable = background
     }

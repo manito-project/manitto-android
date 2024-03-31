@@ -1,14 +1,16 @@
 package org.sopt.santamanitto.user.signin.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.user.data.LoginUserResponse
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
+import javax.inject.Inject
 import javax.inject.Named
 
-class ConditionViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ConditionViewModel @Inject constructor(
     private val userController: UserController,
     private val userMetadataSource: UserMetadataSource,
     @Named("serialNumber") private val serialNumber: String
