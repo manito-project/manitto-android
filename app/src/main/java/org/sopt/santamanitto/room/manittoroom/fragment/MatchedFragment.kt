@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentMatchedBinding
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
-import org.sopt.santamanitto.view.setLayoutHeight
+import org.sopt.santamanitto.util.BindingAdapters.setLayoutHeight
 
 @AndroidEntryPoint
 class MatchedFragment : Fragment() {

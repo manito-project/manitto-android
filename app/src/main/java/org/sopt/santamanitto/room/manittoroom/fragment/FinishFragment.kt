@@ -13,11 +13,10 @@ import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentManittoRoomFinishBinding
 import org.sopt.santamanitto.databinding.LayoutFinishBinding
 import org.sopt.santamanitto.databinding.LayoutResultBinding
-import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
-import org.sopt.santamanitto.view.dialog.exit.ExitDialogCreator
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.ResultAdapter
-import org.sopt.santamanitto.view.setLayoutHeight
+import org.sopt.santamanitto.util.BindingAdapters.setLayoutHeight
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import javax.inject.Inject
 import android.view.View.OnLayoutChangeListener as OnLayoutChangeListener1
 

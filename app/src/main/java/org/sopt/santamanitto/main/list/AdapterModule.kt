@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.main
+package org.sopt.santamanitto.main.list
 
 import dagger.Module
 import dagger.Provides

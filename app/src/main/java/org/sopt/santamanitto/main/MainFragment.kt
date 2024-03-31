@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.FragmentMainBinding
+import org.sopt.santamanitto.main.list.MyManittoListAdapter
 import org.sopt.santamanitto.view.dialog.exit.ExitDialogCreator
 import org.sopt.santamanitto.room.create.CreateRoomActivity
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity

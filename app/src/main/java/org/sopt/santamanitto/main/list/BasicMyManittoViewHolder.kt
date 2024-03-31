@@ -1,11 +1,10 @@
-package org.sopt.santamanitto.main.viewholder
+package org.sopt.santamanitto.main.list
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemMymanittoBinding
-import org.sopt.santamanitto.main.MyManittoInfo
 import org.sopt.santamanitto.room.data.MyManitto
 import org.sopt.santamanitto.room.data.PersonalRoomInfo
 import org.sopt.santamanitto.room.network.RoomRequest
@@ -16,12 +15,12 @@ import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 import org.sopt.santamanitto.view.setBackgroundTint
 
-class MyManittoViewHolder(
+class BasicMyManittoViewHolder(
     parent: ViewGroup,
     private val userAuthController: UserAuthController,
     private val roomRequest: RoomRequest,
     private val userMetadataSource: UserMetadataSource,
-    private val cachedRoomInfo: HashMap<Int, MyManittoInfo>,
+    private val cachedRoomInfo: HashMap<Int, MyManittoModel>,
     private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null,
     private var exitListener: ((roomId: Int, roomName: String, isHost: Boolean) -> Unit)? = null
 ) : BaseViewHolder<MyManitto, ItemMymanittoBinding>(R.layout.item_mymanitto, parent) {
@@ -70,7 +69,7 @@ class MyManittoViewHolder(
             override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
                 userAuthController.getUserInfo(personalRoomInfo.manittoUserId, object: UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                        val info = MyManittoInfo(userInfoResponse.userName, personalRoomInfo.myMission?.content)
+                        val info = MyManittoModel(userInfoResponse.userName, personalRoomInfo.myMission?.content)
                         cachedRoomInfo[roomId] = info
                         setManittoInfo(info)
                         clearLoading()
@@ -88,7 +87,7 @@ class MyManittoViewHolder(
         })
     }
 
-    private fun setManittoInfo(info: MyManittoInfo) {
+    private fun setManittoInfo(info: MyManittoModel) {
         missionText.text = info.mission
         contentText.text = String.format(getString(R.string.joinedroom_manitto_info), info.manittoName)
     }
