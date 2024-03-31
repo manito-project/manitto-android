@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.base
+package org.sopt.santamanitto.util.base
 
 import android.os.Bundle
 import android.view.*

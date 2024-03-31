@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.base.BaseFragment
+import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentEditNameBinding
 import org.sopt.santamanitto.databinding.FragmentEnterNameBinding
 

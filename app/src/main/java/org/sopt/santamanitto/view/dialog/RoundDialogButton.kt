@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.dialog
+package org.sopt.santamanitto.view.dialog
 
 import android.view.View
 

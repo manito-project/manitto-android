@@ -1,9 +1,9 @@
-package org.sopt.santamanitto.dialog.exit
+package org.sopt.santamanitto.view.dialog.exit
 
 import android.content.Context
 import androidx.fragment.app.DialogFragment
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
 object ExitDialogCreator {
     fun create(

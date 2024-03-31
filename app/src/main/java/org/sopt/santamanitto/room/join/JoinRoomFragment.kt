@@ -11,9 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.base.BaseFragment
+import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
-import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.join.network.JoinRoomResponse
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 

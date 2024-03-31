@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateConfirmBinding
-import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.create.adaptor.CreateConfirmAdaptor
 import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
 import org.sopt.santamanitto.room.create.setExpirationDiff

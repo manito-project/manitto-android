@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.dialog
+package org.sopt.santamanitto.view.dialog
 
 import android.view.View
 import androidx.annotation.ColorRes
@@ -185,7 +185,7 @@ class RoundDialogBuilder {
      * It will be placed to between title and buttons
      * @param contentText Text to be content.
      */
-    fun setContentText(contentText: String): RoundDialogBuilder  {
+    fun setContentText(contentText: String): RoundDialogBuilder {
         return setContentText(contentText, false)
     }
 
@@ -195,7 +195,7 @@ class RoundDialogBuilder {
      * @param contentText Text to be content.
      * @param isBold If you set this true, Text will be bold.
      */
-    fun setContentText(contentText: String, isBold: Boolean): RoundDialogBuilder  {
+    fun setContentText(contentText: String, isBold: Boolean): RoundDialogBuilder {
         this.contentText = contentText
         this.contentIsBold = isBold
         return this

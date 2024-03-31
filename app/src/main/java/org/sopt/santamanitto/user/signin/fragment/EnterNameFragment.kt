@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.base.BaseFragment
+import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentEnterNameBinding
 import org.sopt.santamanitto.user.signin.viewmodel.EnterNameViewModel
 

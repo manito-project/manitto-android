@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.dialog
+package org.sopt.santamanitto.view.dialog
 
 import android.content.Context
 import android.graphics.Color
@@ -24,19 +24,19 @@ import org.sopt.santamanitto.util.toPixel
 import org.sopt.santamanitto.view.setTextSize
 
 internal class RoundDialog(
-        private val title: String?,
-        private val contentLayout: View?,
-        private val contentText: String?,
-        private val contentTextBold: Boolean,
-        private val invitationCode: String?,
-        private val invitationCodeCallback: (() -> Unit)? = null,
-        private val horizontalButtons: List<RoundDialogButton>?,
-        private val verticalButtons: List<RoundDialogButton>?,
-        private var fontSize: Float?,
-        @ColorRes private val pointColor: Int?,
-        @ColorRes private val dividerColor: Int?,
-        private val enableCancel: Boolean,
-        private val enableDivider: Boolean
+    private val title: String?,
+    private val contentLayout: View?,
+    private val contentText: String?,
+    private val contentTextBold: Boolean,
+    private val invitationCode: String?,
+    private val invitationCodeCallback: (() -> Unit)? = null,
+    private val horizontalButtons: List<RoundDialogButton>?,
+    private val verticalButtons: List<RoundDialogButton>?,
+    private var fontSize: Float?,
+    @ColorRes private val pointColor: Int?,
+    @ColorRes private val dividerColor: Int?,
+    private val enableCancel: Boolean,
+    private val enableDivider: Boolean
 
 ) : DialogFragment() {
 
