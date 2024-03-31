@@ -1,8 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = '1.8.20'
+    ext.kotlin_version = '1.9.22'
     ext.hilt_version = '2.46'
-    ext.hiltViewModelVersion = '1.0.0-alpha03'
     ext.nav_version = '2.7.7'
     ext.okhttpLoggingVersion = '4.12.0'
     ext.retrofitVersion = '2.11.0'
@@ -34,6 +33,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
