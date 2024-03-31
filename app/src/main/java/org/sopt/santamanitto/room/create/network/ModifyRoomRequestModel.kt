@@ -1,6 +1,6 @@
 package org.sopt.santamanitto.room.create.network
 
-data class ModifyRoomData(
+data class ModifyRoomRequestModel(
         val roomName: String,
         val expiration: String
 )

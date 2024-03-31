@@ -1,10 +1,10 @@
 package org.sopt.santamanitto.room.data.source
 
-import org.sopt.santamanitto.room.data.PersonalRoomInfo
+import org.sopt.santamanitto.room.data.PersonalRoomModel
 
 interface RoomDataSource {
     interface GetPersonalRoomInfoCallback {
-        fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo)
+        fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel)
 
         fun onDataNotAvailable()
     }

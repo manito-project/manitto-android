@@ -17,7 +17,7 @@ import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
-import org.sopt.santamanitto.room.create.network.CreateRoomResponse
+import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 import org.sopt.santamanitto.room.manittoroom.fragment.WaitingRoomFragment
 import org.sopt.santamanitto.util.ClipBoardUtil
@@ -59,13 +59,13 @@ class CreateConfirmFragment: Fragment(), CreateMissionAdaptor.CreateMissionCallb
         }
     }
 
-    private fun showInvitationCodeDialog(createRoomResponse: CreateRoomResponse) {
+    private fun showInvitationCodeDialog(createRoomModel: CreateRoomModel) {
         RoundDialogBuilder()
                 .setContentText(getString(R.string.createconfirm_done_dialog))
-                .setInvitationCode(createRoomResponse.invitationCode) {
+                .setInvitationCode(createRoomModel.invitationCode) {
                     ClipBoardUtil.copy(requireContext(),
-                            WaitingRoomFragment.INVITATION_CODE_LABEL, createRoomResponse.invitationCode)
-                    startMatchingRoomActivity(createRoomResponse.id)
+                            WaitingRoomFragment.INVITATION_CODE_LABEL, createRoomModel.invitationCode)
+                    startMatchingRoomActivity(createRoomModel.id)
                 }
                 .enableCancel(false)
                 .build()

@@ -1,5 +1,5 @@
 package org.sopt.santamanitto.room.network
 
-data class ExitRoomRequest(
+data class ExitRoomRequestModel(
     val roomId: String
 )

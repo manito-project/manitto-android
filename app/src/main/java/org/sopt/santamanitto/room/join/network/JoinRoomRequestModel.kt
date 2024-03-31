@@ -1,5 +1,5 @@
 package org.sopt.santamanitto.room.join.network
 
-data class JoinRoomData(
+data class JoinRoomRequestModel(
     val invitationCode: String
 )

@@ -7,10 +7,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.create.data.CreateMissionLiveList
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
-import org.sopt.santamanitto.room.create.network.CreateRoomData
-import org.sopt.santamanitto.room.create.network.CreateRoomResponse
-import org.sopt.santamanitto.room.create.network.ModifyRoomData
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
+import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
+import org.sopt.santamanitto.room.create.network.CreateRoomModel
+import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import javax.inject.Inject
@@ -44,10 +44,10 @@ class CreateRoomAndMissionViewModel @Inject constructor(
         }
         this.roomId = roomId
         roomRequest.getManittoRoomData(roomId, object : RoomRequest.GetManittoRoomCallback {
-            override fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData) {
-                roomName.value = manittoRoomData.roomName
-                _hint.value = manittoRoomData.roomName
-                expirationLiveData.init(manittoRoomData.expiration)
+            override fun onLoadManittoRoomData(manittoRoomModel: ManittoRoomModel) {
+                roomName.value = manittoRoomModel.roomName
+                _hint.value = manittoRoomModel.roomName
+                expirationLiveData.init(manittoRoomModel.expiration)
             }
 
             override fun onFailed() {
@@ -84,10 +84,10 @@ class CreateRoomAndMissionViewModel @Inject constructor(
         missions.clear()
     }
 
-    fun createRoom(callback: (CreateRoomResponse) -> Unit) {
-        val createRoomData = CreateRoomData(roomName.value!!, expirationLiveData.toString(), missions.getMissions())
-        roomRequest.createRoom(createRoomData, object : RoomRequest.CreateRoomCallback {
-            override fun onRoomCreated(createdRoom: CreateRoomResponse) {
+    fun createRoom(callback: (CreateRoomModel) -> Unit) {
+        val request = CreateRoomRequestModel(roomName.value!!, expirationLiveData.toString(), missions.getMissions())
+        roomRequest.createRoom(request, object : RoomRequest.CreateRoomCallback {
+            override fun onRoomCreated(createdRoom: CreateRoomModel) {
                 callback(createdRoom)
             }
 
@@ -100,7 +100,7 @@ class CreateRoomAndMissionViewModel @Inject constructor(
     }
 
     fun modifyRoom(callback: () -> Unit) {
-        roomRequest.modifyRoom(roomId, ModifyRoomData(roomName.value!!, expirationLiveData.toString())) {
+        roomRequest.modifyRoom(roomId, ModifyRoomRequestModel(roomName.value!!, expirationLiveData.toString())) {
             if (it) {
                 callback.invoke()
             } else {

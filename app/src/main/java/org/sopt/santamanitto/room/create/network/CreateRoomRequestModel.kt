@@ -1,6 +1,6 @@
 package org.sopt.santamanitto.room.create.network
 
-data class CreateRoomData(
+data class CreateRoomRequestModel(
     val roomName: String,
     val expiration: String,
     val missionContents: List<String> = mutableListOf()

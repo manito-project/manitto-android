@@ -1,6 +1,6 @@
 package org.sopt.santamanitto.room.create.network
 
-data class CreateRoomResponse(
+data class CreateRoomModel(
     val isMatchingDone: Boolean,
     val id: Int,
     val roomName: String,

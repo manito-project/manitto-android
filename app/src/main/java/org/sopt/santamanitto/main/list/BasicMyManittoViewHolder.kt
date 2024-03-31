@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemMymanittoBinding
 import org.sopt.santamanitto.room.data.MyManitto
-import org.sopt.santamanitto.room.data.PersonalRoomInfo
+import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.UserInfoResponse
 import org.sopt.santamanitto.user.data.controller.UserAuthController
@@ -66,10 +66,10 @@ class BasicMyManittoViewHolder(
 
     private fun requestAndCacheInfo(roomId: Int) {
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
-            override fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo) {
-                userAuthController.getUserInfo(personalRoomInfo.manittoUserId, object: UserAuthController.GetUserInfoCallback {
+            override fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel) {
+                userAuthController.getUserInfo(personalRoomModel.manittoUserId, object: UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
-                        val info = MyManittoModel(userInfoResponse.userName, personalRoomInfo.myMission?.content)
+                        val info = MyManittoModel(userInfoResponse.userName, personalRoomModel.myMission?.content)
                         cachedRoomInfo[roomId] = info
                         setManittoInfo(info)
                         clearLoading()

@@ -1,44 +1,44 @@
 package org.sopt.santamanitto.room.data.source
 
-import org.sopt.santamanitto.room.data.MissionContent
-import org.sopt.santamanitto.room.data.PersonalRoomInfo
+import org.sopt.santamanitto.room.data.MissionContentModel
+import org.sopt.santamanitto.room.data.PersonalRoomModel
 
 class FakeRoomRemoteDataSource: RoomDataSource {
 
-    private val fakePersonalRoomInfos = HashMap<Int, PersonalRoomInfo>().apply {
-        put(1, PersonalRoomInfo(
+    private val fakePersonalRoomInfos = HashMap<Int, PersonalRoomModel>().apply {
+        put(1, PersonalRoomModel(
                 1,
                 2,
-                MissionContent("fake my mission"),
-                MissionContent("fake mission to me")
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
         )
         )
-        put(2, PersonalRoomInfo(
+        put(2, PersonalRoomModel(
                 1,
                 3,
-                MissionContent("fake my mission"),
-                MissionContent("fake mission to me")
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
         )
         )
-        put(3, PersonalRoomInfo(
+        put(3, PersonalRoomModel(
                 1,
                 4,
-                MissionContent("fake my mission"),
-                MissionContent("fake mission to me")
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
         )
         )
-        put(4, PersonalRoomInfo(
+        put(4, PersonalRoomModel(
                 1,
                 5,
-                MissionContent("fake my mission"),
-                MissionContent("fake mission to me")
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
         )
         )
-        put(5, PersonalRoomInfo(
+        put(5, PersonalRoomModel(
                 1,
                 6,
-                MissionContent("fake my mission"),
-                MissionContent("fake mission to me")
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
         )
         )
     }
