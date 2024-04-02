@@ -11,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.base.BaseFragment
+import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentWaitingRoomBinding
-import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.MemberAdapter
 import org.sopt.santamanitto.util.ClipBoardUtil

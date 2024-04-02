@@ -1,42 +1,42 @@
 package org.sopt.santamanitto.room.network
 
-import org.sopt.santamanitto.room.create.network.CreateRoomData
-import org.sopt.santamanitto.room.create.network.CreateRoomResponse
-import org.sopt.santamanitto.room.create.network.ModifyRoomData
-import org.sopt.santamanitto.room.data.PersonalRoomInfo
-import org.sopt.santamanitto.room.join.network.JoinRoomData
-import org.sopt.santamanitto.room.join.network.JoinRoomResponse
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
+import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
+import org.sopt.santamanitto.room.create.network.CreateRoomModel
+import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
+import org.sopt.santamanitto.room.data.PersonalRoomModel
+import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
+import org.sopt.santamanitto.room.join.network.JoinRoomModel
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
+import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
 
 interface RoomRequest {
 
     interface CreateRoomCallback {
-        fun onRoomCreated(createdRoom: CreateRoomResponse)
+        fun onRoomCreated(createdRoom: CreateRoomModel)
 
         fun onFailed()
     }
 
     interface JoinRoomCallback {
-        fun onSuccessJoinRoom(joinedRoom: JoinRoomResponse)
+        fun onSuccessJoinRoom(joinedRoom: JoinRoomModel)
 
         fun onFailed(joinRoomError: JoinRoomError)
     }
 
     interface GetManittoRoomCallback {
-        fun onLoadManittoRoomData(manittoRoomData: ManittoRoomData)
+        fun onLoadManittoRoomData(manittoRoomModel: ManittoRoomModel)
 
         fun onFailed()
     }
 
     interface MatchManittoCallback {
-        fun onSuccessMatching(missions: List<ManittoRoomMatchedMissions>)
+        fun onSuccessMatching(missions: List<MatchedMissionsModel>)
 
         fun onFailed()
     }
 
     interface GetPersonalRoomInfoCallback {
-        fun onLoadPersonalRoomInfo(personalRoomInfo: PersonalRoomInfo)
+        fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel)
 
         fun onDataNotAvailable()
     }
@@ -45,11 +45,11 @@ interface RoomRequest {
         WrongInvitationCode, DuplicatedMember, AlreadyMatched, Els
     }
 
-    fun createRoom(createRoomData: CreateRoomData, callback: CreateRoomCallback)
+    fun createRoom(request: CreateRoomRequestModel, callback: CreateRoomCallback)
 
-    fun modifyRoom(roomId: Int, modifyRoomData: ModifyRoomData, callback: (onSuccess: Boolean) -> Unit)
+    fun modifyRoom(roomId: Int, request: ModifyRoomRequestModel, callback: (onSuccess: Boolean) -> Unit)
 
-    fun joinRoom(joinRoomData: JoinRoomData, callback: JoinRoomCallback)
+    fun joinRoom(request: JoinRoomRequestModel, callback: JoinRoomCallback)
 
     fun getManittoRoomData(roomId: Int, callback: GetManittoRoomCallback)
 

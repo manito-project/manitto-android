@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.*
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
-import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.user.signin.SignInActivity

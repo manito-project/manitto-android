@@ -3,18 +3,21 @@ package org.sopt.santamanitto.room.network
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import kotlinx.coroutines.*
-import org.sopt.santamanitto.room.create.network.CreateRoomData
-import org.sopt.santamanitto.room.create.network.CreateRoomResponse
-import org.sopt.santamanitto.room.create.network.ModifyRoomData
-import org.sopt.santamanitto.room.data.MissionContent
-import org.sopt.santamanitto.room.data.PersonalRoomInfo
-import org.sopt.santamanitto.room.data.source.RoomDataSource
-import org.sopt.santamanitto.room.join.network.JoinRoomData
-import org.sopt.santamanitto.room.join.network.JoinRoomInfo
-import org.sopt.santamanitto.room.join.network.JoinRoomResponse
-import org.sopt.santamanitto.room.join.network.JoinRoomUserInfo
-import org.sopt.santamanitto.room.manittoroom.network.*
+import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
+import org.sopt.santamanitto.room.create.network.CreateRoomModel
+import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
+import org.sopt.santamanitto.room.data.MissionContentModel
+import org.sopt.santamanitto.room.data.PersonalRoomModel
+import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
+import org.sopt.santamanitto.room.join.network.JoinRoomModel
+import org.sopt.santamanitto.room.join.network.JoinRoomModel.JoinRoomInfo
+import org.sopt.santamanitto.room.join.network.JoinRoomModel.JoinRoomUserInfo
+import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomCreator
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomMission
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomRelations
 import org.sopt.santamanitto.util.TimeUtil
 
 class FakeRoomRequest : RoomRequest {
@@ -24,12 +27,12 @@ class FakeRoomRequest : RoomRequest {
     }
 
     override fun createRoom(
-        createRoomData: CreateRoomData,
+        request: CreateRoomRequestModel,
         callback: RoomRequest.CreateRoomCallback
     ) {
         callback.onRoomCreated(
-            CreateRoomResponse(
-                false, 1, createRoomData.roomName, createRoomData.expiration,
+            CreateRoomModel(
+                false, 1, request.roomName, request.expiration,
                 "oU3lsEo", TimeUtil.getCurrentTimeByServerFormat(),
                 TimeUtil.getCurrentTimeByServerFormat()
             )
@@ -38,17 +41,17 @@ class FakeRoomRequest : RoomRequest {
 
     override fun modifyRoom(
         roomId: Int,
-        modifyRoomData: ModifyRoomData,
+        request: ModifyRoomRequestModel,
         callback: (onSuccess: Boolean) -> Unit
     ) {
         callback.invoke(true)
     }
 
-    override fun joinRoom(joinRoomData: JoinRoomData, callback: RoomRequest.JoinRoomCallback) {
-        when (joinRoomData.invitationCode) {
+    override fun joinRoom(request: JoinRoomRequestModel, callback: RoomRequest.JoinRoomCallback) {
+        when (request.invitationCode) {
             "success" ->
                 callback.onSuccessJoinRoom(
-                    JoinRoomResponse(
+                    JoinRoomModel(
                         JoinRoomInfo(
                             1, "TEST ROOM",
                             TimeUtil.getCurrentTimeByServerFormat(), "oU3lsEo"
@@ -73,7 +76,7 @@ class FakeRoomRequest : RoomRequest {
         callback: RoomRequest.GetManittoRoomCallback
     ) {
         callback.onLoadManittoRoomData(
-            ManittoRoomData(
+            ManittoRoomModel(
                 roomId,
                 "FakeRoom",
                 "oU3lsEo-",
@@ -150,69 +153,69 @@ class FakeRoomRequest : RoomRequest {
     override fun matchManitto(roomId: Int, callback: RoomRequest.MatchManittoCallback) {
         Handler(Looper.getMainLooper()).postDelayed({
 
-            callback.onSuccessMatching(mutableListOf<ManittoRoomMatchedMissions>().apply {
+            callback.onSuccessMatching(mutableListOf<MatchedMissionsModel>().apply {
                 add(
-                    ManittoRoomMatchedMissions(
+                    MatchedMissionsModel(
                         1,
                         2,
                         3,
-                        MissionContent("FakeMission1")
+                        MissionContentModel("FakeMission1")
                     )
                 )
                 add(
-                    ManittoRoomMatchedMissions(
+                    MatchedMissionsModel(
                         2,
                         3,
                         1,
-                        MissionContent("FakeMission2")
+                        MissionContentModel("FakeMission2")
                     )
                 )
                 add(
-                    ManittoRoomMatchedMissions(
+                    MatchedMissionsModel(
                         3,
                         1,
                         2,
-                        MissionContent("FakeMission3")
+                        MissionContentModel("FakeMission3")
                     )
                 )
             })
         }, 5000L)
     }
 
-    private val fakePersonalRoomInfos = HashMap<Int, PersonalRoomInfo>().apply {
-        put(1, PersonalRoomInfo(
+    private val fakePersonalRoomInfos = HashMap<Int, PersonalRoomModel>().apply {
+        put(1, PersonalRoomModel(
             1,
             2,
-            MissionContent("fake my mission"),
-            MissionContent("fake mission to me")
+            MissionContentModel("fake my mission"),
+            MissionContentModel("fake mission to me")
         )
         )
-        put(2, PersonalRoomInfo(
+        put(2, PersonalRoomModel(
             1,
             3,
-            MissionContent("fake my mission"),
-            MissionContent("fake mission to me")
+            MissionContentModel("fake my mission"),
+            MissionContentModel("fake mission to me")
         )
         )
-        put(3, PersonalRoomInfo(
+        put(3, PersonalRoomModel(
             1,
             4,
-            MissionContent("fake my mission"),
-            MissionContent("fake mission to me")
+            MissionContentModel("fake my mission"),
+            MissionContentModel("fake mission to me")
         )
         )
-        put(4, PersonalRoomInfo(
+        put(4, PersonalRoomModel(
             1,
             5,
-            MissionContent("fake my mission"),
-            MissionContent("fake mission to me")
+            MissionContentModel("fake my mission"),
+            MissionContentModel("fake mission to me")
         )
         )
-        put(5, PersonalRoomInfo(
+        put(5, PersonalRoomModel(
             1,
             6,
-            MissionContent("fake my mission"),
-            MissionContent("fake mission to me")
+            MissionContentModel("fake my mission"),
+            MissionContentModel("fake mission to me")
         )
         )
     }

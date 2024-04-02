@@ -9,9 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.base.BaseFragment
+import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
-import org.sopt.santamanitto.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.setExpirationTime

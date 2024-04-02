@@ -1,16 +1,16 @@
 package org.sopt.santamanitto.user.data.controller
 
-import org.sopt.santamanitto.user.data.LoginUserResponse
+import org.sopt.santamanitto.user.data.UserLoginModel
 
 interface UserController {
     interface CreateAccountCallback {
-        fun onCreateAccountSuccess(loginUserResponse: LoginUserResponse)
+        fun onCreateAccountSuccess(userLoginModel: UserLoginModel)
 
         fun onCreateAccountFailed()
     }
 
     interface LoginCallback {
-        fun onLoginSuccess(loginUserResponse: LoginUserResponse)
+        fun onLoginSuccess(userLoginModel: UserLoginModel)
 
         fun onLoginFailed(isError: Boolean)
     }

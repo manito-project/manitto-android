@@ -1,7 +1,7 @@
 package org.sopt.santamanitto.user.data.source
 
-import org.sopt.santamanitto.room.data.MyManitto
-import org.sopt.santamanitto.user.data.UserInfoResponse
+import org.sopt.santamanitto.room.data.MyManittoModel
+import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import javax.inject.Inject
 
@@ -12,17 +12,17 @@ class CachedMainUserDataSource @Inject constructor(
 
     var isMyManittoDirty = true
 
-    private var myManittos: List<MyManitto>? = null
+    private var myManittoModels: List<MyManittoModel>? = null
 
     override fun getMyManittoList(callback: MainUserDataSource.GetJoinedRoomsCallback) {
-        if (isMyManittoDirty || myManittos == null) {
+        if (isMyManittoDirty || myManittoModels == null) {
             userAuthController.getUserInfo(
                 userMetadataSource.getUserId(),
                 object : UserAuthController.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(userInfoResponse: UserInfoResponse) {
+                    override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
                         isMyManittoDirty = false
-                        myManittos = userInfoResponse.myManittos.reversed()
-                        callback.onMyManittoListLoaded(myManittos!!)
+                        myManittoModels = userInfoModel.myManittoModels.reversed()
+                        callback.onMyManittoListLoaded(myManittoModels!!)
                     }
 
                     override fun onDataNotAvailable() {
@@ -30,7 +30,7 @@ class CachedMainUserDataSource @Inject constructor(
                     }
                 })
         } else {
-            callback.onMyManittoListLoaded(myManittos!!)
+            callback.onMyManittoListLoaded(myManittoModels!!)
         }
     }
 }
