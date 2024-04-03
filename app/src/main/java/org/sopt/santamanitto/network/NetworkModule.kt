@@ -67,7 +67,7 @@ object NetworkModule {
         }
     }
 
-    private fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(baseUrl)

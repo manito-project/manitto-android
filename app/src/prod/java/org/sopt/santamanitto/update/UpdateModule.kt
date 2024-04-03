@@ -3,7 +3,7 @@ package org.sopt.santamanitto.update
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import org.sopt.santamanitto.network.NetworkModule
 import org.sopt.santamanitto.network.OtherInterceptorOkHttpClient
@@ -11,7 +11,7 @@ import org.sopt.santamanitto.update.store.StoreMetadataService
 import org.sopt.santamanitto.update.version.RetrofitVersionChecker
 import org.sopt.santamanitto.update.version.VersionChecker
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 object UpdateModule {
 
