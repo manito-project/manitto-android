@@ -4,26 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
-import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
+import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.setExpirationDiff
+import org.sopt.santamanitto.room.create.setExpirationPeriod
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.setExpirationTime
-import org.sopt.santamanitto.room.create.data.ExpirationLiveData
-import org.sopt.santamanitto.room.create.setExpirationPeriod
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
+import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
+import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.view.SantaEditText
 import org.sopt.santamanitto.view.SantaPeriodPicker
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 import org.sopt.santamanitto.view.setTextColorById
 
-class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
+class CreateRoomFragment :
+    BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
 
     companion object {
         private const val MAX_ROOM_NAME_LENGTH = 17
@@ -49,6 +50,8 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
         subscribeUI()
 
         setOnClickListener()
+
+        hideKeyboardOnOutsideEditText()
     }
 
     private fun loadData() {
@@ -63,16 +66,21 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
             SantaPeriodPicker.MAXIMUM_PERIOD
         )
 
-        binding.textviewCreateroomAlert.text = String.format(getString(R.string.santanameinput_alert), MAX_ROOM_NAME_LENGTH)
+        binding.textviewCreateroomAlert.text =
+            String.format(getString(R.string.santanameinput_alert), MAX_ROOM_NAME_LENGTH)
 
         binding.edittextCreateroomRoomname.run {
-            addTextChangeListener(SantaEditText.SantaEditLimitLengthWatcher(this, MAX_ROOM_NAME_LENGTH) {
-                if (it) {
-                    binding.textviewCreateroomAlert.setTextColorById(R.color.red)
-                } else {
-                    binding.textviewCreateroomAlert.setTextColorById(R.color.gray_3)
-                }
-            })
+            addTextChangeListener(
+                SantaEditText.SantaEditLimitLengthWatcher(
+                    this,
+                    MAX_ROOM_NAME_LENGTH
+                ) { isOver ->
+                    if (isOver) {
+                        binding.textviewCreateroomAlert.setTextColorById(R.color.red)
+                    } else {
+                        binding.textviewCreateroomAlert.setTextColorById(R.color.gray_3)
+                    }
+                })
         }
 
         if (!isNewRoom) {

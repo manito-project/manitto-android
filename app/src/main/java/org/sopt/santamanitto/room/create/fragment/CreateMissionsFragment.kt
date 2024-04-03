@@ -1,18 +1,16 @@
 package org.sopt.santamanitto.room.create.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
-import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.databinding.FragmentCreateMissionBinding
-import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
+import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
+import org.sopt.santamanitto.util.base.BaseFragment
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
 class CreateMissionsFragment : BaseFragment<FragmentCreateMissionBinding>(
         R.layout.fragment_create_mission, true
@@ -31,6 +29,8 @@ class CreateMissionsFragment : BaseFragment<FragmentCreateMissionBinding>(
         saveMeasuredHeightOfRecyclerView()
 
         setOnClickListener()
+
+        hideKeyboardOnOutsideEditText()
     }
 
     override fun onMissionInserted(mission: String) {
