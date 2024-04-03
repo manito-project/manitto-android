@@ -2,17 +2,16 @@ package org.sopt.santamanitto.room.network
 
 import okhttp3.ResponseBody
 import org.sopt.santamanitto.network.*
-import org.sopt.santamanitto.room.create.network.CreateRoomData
-import org.sopt.santamanitto.room.create.network.CreateRoomResponse
-import org.sopt.santamanitto.room.create.network.ModifyRoomData
-import org.sopt.santamanitto.room.data.PersonalRoomInfo
-import org.sopt.santamanitto.room.data.source.RoomDataSource
-import org.sopt.santamanitto.room.join.network.JoinRoomData
-import org.sopt.santamanitto.room.join.network.JoinRoomErrorBody
-import org.sopt.santamanitto.room.join.network.JoinRoomResponse
-import org.sopt.santamanitto.room.manittoroom.network.ManittoMatchingData
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomData
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMatchedMissions
+import org.sopt.santamanitto.room.create.network.CreateRoomModel
+import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
+import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
+import org.sopt.santamanitto.room.data.PersonalRoomModel
+import org.sopt.santamanitto.room.join.network.JoinRoomErrorModel
+import org.sopt.santamanitto.room.join.network.JoinRoomModel
+import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
+import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
+import org.sopt.santamanitto.room.manittoroom.network.MatchingRequestModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -29,11 +28,11 @@ class RoomRequestImpl(
     }
 
     override fun createRoom(
-        createRoomData: CreateRoomData,
+        request: CreateRoomRequestModel,
         callback: RoomRequest.CreateRoomCallback
     ) {
-        roomService.createRoom(createRoomData).start(object : RequestCallback<CreateRoomResponse> {
-            override fun onSuccess(data: CreateRoomResponse) {
+        roomService.createRoom(request).start(object : RequestCallback<CreateRoomModel> {
+            override fun onSuccess(data: CreateRoomModel) {
                 callback.onRoomCreated(data)
             }
 
@@ -43,23 +42,28 @@ class RoomRequestImpl(
         })
     }
 
-    override fun modifyRoom(roomId: Int, modifyRoomData: ModifyRoomData, callback: (onSuccess: Boolean) -> Unit) {
-        roomService.modifyRoom(roomId, modifyRoomData).start(object: RequestCallback<SimpleResponse> {
-            override fun onSuccess(data: SimpleResponse) {
-                callback.invoke(true)
-            }
+    override fun modifyRoom(
+        roomId: Int,
+        request: ModifyRoomRequestModel,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
+        roomService.modifyRoom(roomId, request)
+            .start(object : RequestCallback<SimpleResponse> {
+                override fun onSuccess(data: SimpleResponse) {
+                    callback.invoke(true)
+                }
 
-            override fun onFail() {
-                callback.invoke(false)
-            }
-        })
+                override fun onFail() {
+                    callback.invoke(false)
+                }
+            })
     }
 
-    override fun joinRoom(joinRoomData: JoinRoomData, callback: RoomRequest.JoinRoomCallback) {
-        roomService.joinRoom(joinRoomData).enqueue(object : Callback<Response<JoinRoomResponse>> {
+    override fun joinRoom(request: JoinRoomRequestModel, callback: RoomRequest.JoinRoomCallback) {
+        roomService.joinRoom(request).enqueue(object : Callback<Response<JoinRoomModel>> {
             override fun onResponse(
-                call: Call<Response<JoinRoomResponse>>,
-                response: retrofit2.Response<Response<JoinRoomResponse>>
+                call: Call<Response<JoinRoomModel>>,
+                response: retrofit2.Response<Response<JoinRoomModel>>
             ) {
                 if (response.isSuccessful) {
                     callback.onSuccessJoinRoom(response.body()!!.data)
@@ -74,15 +78,15 @@ class RoomRequestImpl(
                 }
             }
 
-            override fun onFailure(call: Call<Response<JoinRoomResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<Response<JoinRoomModel>>, t: Throwable) {
                 callback.onFailed(RoomRequest.JoinRoomError.Els)
             }
         })
     }
 
     override fun getManittoRoomData(roomId: Int, callback: RoomRequest.GetManittoRoomCallback) {
-        roomService.getManittoRoomData(roomId).start(object: RequestCallback<ManittoRoomData> {
-            override fun onSuccess(data: ManittoRoomData) {
+        roomService.getManittoRoomData(roomId).start(object : RequestCallback<ManittoRoomModel> {
+            override fun onSuccess(data: ManittoRoomModel) {
                 callback.onLoadManittoRoomData(data)
             }
 
@@ -93,20 +97,24 @@ class RoomRequestImpl(
     }
 
     override fun matchManitto(roomId: Int, callback: RoomRequest.MatchManittoCallback) {
-        roomService.matchManitto(ManittoMatchingData(roomId)).start(object: RequestCallback<List<ManittoRoomMatchedMissions>> {
-            override fun onSuccess(data: List<ManittoRoomMatchedMissions>) {
-                callback.onSuccessMatching(data)
-            }
+        roomService.matchManitto(MatchingRequestModel(roomId))
+            .start(object : RequestCallback<List<MatchedMissionsModel>> {
+                override fun onSuccess(data: List<MatchedMissionsModel>) {
+                    callback.onSuccessMatching(data)
+                }
 
-            override fun onFail() {
-                callback.onFailed()
-            }
-        })
+                override fun onFail() {
+                    callback.onFailed()
+                }
+            })
     }
 
-    override fun getPersonalRoomInfo(roomId: Int, callback: RoomRequest.GetPersonalRoomInfoCallback) {
-        roomService.getRoomPersonalInfo(roomId).start(object: RequestCallback<PersonalRoomInfo> {
-            override fun onSuccess(data: PersonalRoomInfo) {
+    override fun getPersonalRoomInfo(
+        roomId: Int,
+        callback: RoomRequest.GetPersonalRoomInfoCallback
+    ) {
+        roomService.getRoomPersonalInfo(roomId).start(object : RequestCallback<PersonalRoomModel> {
+            override fun onSuccess(data: PersonalRoomModel) {
                 callback.onLoadPersonalRoomInfo(data)
             }
 
@@ -117,17 +125,17 @@ class RoomRequestImpl(
     }
 
     override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
-        roomService.exitRoom(ExitRoomRequest(roomId.toString())).start(callback)
+        roomService.exitRoom(ExitRoomRequestModel(roomId.toString())).start(callback)
     }
 
     override fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
         roomService.removeHistory(roomId).start(callback)
     }
 
-    fun convert(errorBody: ResponseBody): JoinRoomErrorBody {
-        return retrofitClient.responseBodyConverter<JoinRoomErrorBody>(
-            JoinRoomErrorBody::class.java,
-            JoinRoomErrorBody::class.java.annotations
+    fun convert(errorBody: ResponseBody): JoinRoomErrorModel {
+        return retrofitClient.responseBodyConverter<JoinRoomErrorModel>(
+            JoinRoomErrorModel::class.java,
+            JoinRoomErrorModel::class.java.annotations
         ).convert(errorBody)!!
     }
 }
