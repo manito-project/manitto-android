@@ -92,8 +92,8 @@ class ManittoRoomViewModel @Inject constructor(
     fun refreshManittoRoomInfo() {
         startLoading()
         roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
-            override fun onLoadManittoRoomData(manittoRoomModel: ManittoRoomModel) {
-                manittoRoomModel.run {
+            override fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel) {
+                manittoRoom.run {
                     _roomName.value = roomName
                     _expiration.value = expiration
                     _isExpired.value = TimeUtil.getDayDiffFromNow(expiration) < 0
@@ -131,9 +131,9 @@ class ManittoRoomViewModel @Inject constructor(
     fun getPersonalRelationInfo() {
         startLoading()
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
-            override fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel) {
+            override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
                 startLoading()
-                userDataSource.getUserInfo(personalRoomModel.manittoUserId, object: UserAuthController.GetUserInfoCallback {
+                userDataSource.getUserInfo(personalRoom.manittoUserId, object: UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
                         _myManittoName.value = userInfoModel.userName
                         stopLoading()
@@ -144,7 +144,7 @@ class ManittoRoomViewModel @Inject constructor(
                     }
                 })
 
-                userDataSource.getUserInfo(personalRoomModel.santaUserId, object : UserAuthController.GetUserInfoCallback {
+                userDataSource.getUserInfo(personalRoom.santaUserId, object : UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
                         _mySantaName.value = userInfoModel.userName
                         stopLoading()
@@ -155,8 +155,8 @@ class ManittoRoomViewModel @Inject constructor(
                     }
                 })
 
-                _myMission.value = personalRoomModel.myMission?.content
-                _missionToMe.value = personalRoomModel.missionToMe?.content
+                _myMission.value = personalRoom.myMission?.content
+                _missionToMe.value = personalRoom.missionToMe?.content
             }
 
             override fun onDataNotAvailable() {

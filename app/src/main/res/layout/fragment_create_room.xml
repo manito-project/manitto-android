@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="viewModel"
+            name="vm"
             type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel" />
     </data>
 
@@ -22,7 +22,6 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:santaDescription="@string/createroom_background_description"
@@ -87,7 +86,7 @@
 
                     <org.sopt.santamanitto.view.SantaEditText
                         android:id="@+id/edittext_createroom_roomname"
-                        setText="@={viewModel.roomName}"
+                        setText="@={vm.roomName}"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_santaedittext_big"
                         android:layout_marginTop="@dimen/margin_createroom_roomname_title_bottom"
@@ -253,7 +252,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
-            android:enabled="@{!viewModel.nameIsNullOrEmpty}"
+            android:enabled="@{!vm.nameIsNullOrEmpty}"
             android:text="@string/button_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
