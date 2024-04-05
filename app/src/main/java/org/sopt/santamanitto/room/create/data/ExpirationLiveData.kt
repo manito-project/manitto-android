@@ -3,7 +3,8 @@ package org.sopt.santamanitto.room.create.data
 import androidx.lifecycle.LiveData
 import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.SantaPeriodPicker
-import java.util.*
+import java.util.Calendar
+import java.util.GregorianCalendar
 
 class ExpirationLiveData : LiveData<ExpirationLiveData>() {
 
@@ -58,11 +59,7 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
 
     fun setTime(hour: Int, minute: Int) {
         expirationDate.run {
-            val convertedHour = if (hour == 12) {
-                0
-            } else {
-                hour
-            }
+            val convertedHour = if (hour == 12) 0 else hour
             set(Calendar.HOUR, convertedHour)
             set(Calendar.MINUTE, minute)
             postValue(this@ExpirationLiveData)

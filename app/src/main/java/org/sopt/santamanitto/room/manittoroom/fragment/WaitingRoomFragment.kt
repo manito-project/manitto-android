@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -79,11 +80,13 @@ class WaitingRoomFragment :
                     requireContext(),
                     INVITATION_CODE_LABEL, viewModel.invitationCode
                 )
-                Snackbar.make(
-                    binding.root,
-                    getString(org.sopt.santamanitto.R.string.waitingroom_snackbar_invitation_code),
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                    Snackbar.make(
+                        binding.root,
+                        getString(org.sopt.santamanitto.R.string.waitingroom_snackbar_invitation_code),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
             santabottombuttonWaitingroomModify.setOnClickListener {
                 navigateModifyFragment()

@@ -28,7 +28,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:santaTitle="@{vml.roomName}"
+            app:santaTitle="@{vm.roomName}"
             tool:santaDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
             tool:santaTitle="마니또 방 이름" />
 
