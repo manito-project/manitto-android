@@ -5,6 +5,7 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel" />
@@ -22,6 +23,7 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:santaDescription="@string/createroom_background_description"
@@ -123,9 +125,9 @@
                         android:id="@+id/textview_createroom_expirationdescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tool:text="@string/createroom_expiration_description"
                         android:textColor="@color/gray_3"
-                        android:textSize="@dimen/size_createroom_expiration_description" />
+                        android:textSize="@dimen/size_createroom_expiration_description"
+                        tool:text="@string/createroom_expiration_description" />
 
                 </LinearLayout>
 
