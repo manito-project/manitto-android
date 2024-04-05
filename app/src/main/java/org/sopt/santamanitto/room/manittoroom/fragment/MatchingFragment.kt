@@ -5,7 +5,6 @@ import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,13 +23,12 @@ import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 class MatchingFragment: Fragment() {
 
     companion object {
-        private const val TAG = "MatchingFragment"
         private const val DELAY_MILLIS = 2000L
     }
 
     private lateinit var binding: FragmentMatchingBinding
 
-    private val manittoRoomViewModel: ManittoRoomViewModel by activityViewModels()
+    private val viewModel: ManittoRoomViewModel by activityViewModels()
 
     private var isDelayDone = false
 
@@ -75,8 +73,8 @@ class MatchingFragment: Fragment() {
     }
 
     private fun navigateMissionFragment() {
-        manittoRoomViewModel.viewModelScope.launch(Dispatchers.Default) {
-            while ((!manittoRoomViewModel.isMatched || !isDelayDone) && !isInBackground) { }
+        viewModel.viewModelScope.launch(Dispatchers.Default) {
+            while ((!viewModel.isMatched || !isDelayDone) && !isInBackground) { }
             if (isInBackground) {
                 return@launch
             }

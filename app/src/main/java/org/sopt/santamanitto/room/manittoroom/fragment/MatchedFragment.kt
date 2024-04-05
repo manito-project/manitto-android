@@ -17,16 +17,22 @@ class MatchedFragment : Fragment() {
 
     private lateinit var binding: FragmentMatchedBinding
 
-    private val manittoRoomViewModel: ManittoRoomViewModel by activityViewModels()
+    private val viewModel: ManittoRoomViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentMatchedBinding.inflate(inflater, container, false).apply {
-            viewModel = manittoRoomViewModel
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
 
             root.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
-                override fun onLayoutChange(v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int,
-                                            oldTop: Int, oldRight: Int, oldBottom: Int) {
+                override fun onLayoutChange(
+                    v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int,
+                    oldTop: Int, oldRight: Int, oldBottom: Int
+                ) {
                     binding.root.removeOnLayoutChangeListener(this)
 
                     initMissionText()
@@ -34,7 +40,7 @@ class MatchedFragment : Fragment() {
             })
         }
 
-        manittoRoomViewModel.run {
+        viewModel.run {
             refreshManittoRoomInfo()
             getPersonalRelationInfo()
         }
@@ -49,18 +55,16 @@ class MatchedFragment : Fragment() {
     private fun initMissionText() {
         binding.textviewMatchedMission.run {
             setLayoutHeight(this, this.height)
-            manittoRoomViewModel.myMission.observe(viewLifecycleOwner) {
-                text = if (it.isNullOrEmpty()) {
-                    getString(R.string.matched_no_mission)
-                } else {
-                    it
-                }
+            viewModel.myMission.observe(viewLifecycleOwner) { myMission ->
+                text =
+                    if (myMission.isNullOrEmpty()) getString(R.string.matched_no_mission) else myMission
             }
         }
     }
 
     private fun initManittoTitle() {
-        binding.textviewMatchedTitle.text = String.format(getString(R.string.matched_manitto_title), manittoRoomViewModel.myName)
+        binding.textviewMatchedTitle.text =
+            String.format(getString(R.string.matched_manitto_title), viewModel.myName)
     }
 
     private fun setOnClickListener() {

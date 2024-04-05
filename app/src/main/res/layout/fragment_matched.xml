@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewModel"
+            name="vm"
             type="org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel" />
     </data>
 
@@ -20,7 +20,7 @@
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_matched"
             style="@style/SantaBackground.SubTask"
-            setExpirationDescription="@{viewModel.expiration}"
+            setExpirationDescription="@{vm.expiration}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:santaTitle="@{viewModel.roomName}"
+            app:santaTitle="@{vml.roomName}"
             tool:santaDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
             tool:santaTitle="마니또 방 이름" />
 
@@ -78,7 +78,7 @@
                     android:backgroundTint="@color/navy"
                     android:paddingHorizontal="@dimen/padding_matched_manitto_horizontal"
                     android:paddingVertical="@dimen/padding_matched_manitto_vertical"
-                    android:text="@{viewModel.myManittoName}"
+                    android:text="@{vm.myManittoName}"
                     android:textColor="@color/white"
                     android:textFontWeight="700"
                     android:textSize="@dimen/size_matched_manitto"
@@ -130,8 +130,8 @@
                 <org.sopt.santamanitto.view.SantaLoading
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-                    app:error="@{viewModel.networkErrorOccur}"
+                    android:visibility="@{vm.isLoading ? View.VISIBLE : View.GONE}"
+                    app:error="@{vm.networkErrorOccur}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

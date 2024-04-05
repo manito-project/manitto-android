@@ -73,9 +73,9 @@
                     android:id="@+id/linearlayout_createconfirm_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
                     android:layout_marginTop="@dimen/margin_createconfirm_preview_top"
                     android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_createconfirm_roomname">
 
