@@ -68,20 +68,8 @@ class CreateRoomFragment :
                 SantaPeriodPicker.MAXIMUM_PERIOD
             )
 
-            textviewCreateroomAlert.text =
-                String.format(getString(R.string.santanameinput_alert), MAX_ROOM_NAME_LENGTH)
-
-            edittextCreateroomRoomname.addTextChangeListener(
-                SantaEditText.SantaEditLimitLengthWatcher(
-                    edittextCreateroomRoomname,
-                    MAX_ROOM_NAME_LENGTH
-                ) { isOver ->
-                    if (isOver) {
-                        binding.textviewCreateroomAlert.setTextColorById(R.color.red)
-                    } else {
-                        binding.textviewCreateroomAlert.setTextColorById(R.color.gray_3)
-                    }
-                })
+            edittextCreateroomRoomname.hint =
+                String.format(getString(R.string.createroom_roomname_hint), MAX_ROOM_NAME_LENGTH)
         }
 
         if (!isNewRoom) {

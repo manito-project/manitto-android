@@ -41,7 +41,7 @@
     <string name="createroom_background_title">방 만들기</string>
     <string name="createroom_background_description">친구들이 방을 잘 찾아올 수 있도록\n초대 코드 알려주는 것 잊지 말자~</string>
     <string name="createroom_room_name">방 이름</string>
-    <string name="createroom_roomname_hint">방 이름을 지어줘!</string>
+    <string name="createroom_roomname_hint">최대 %d자까지 설정할 수 있어! </string>
     <string name="createroom_room_expiration">마니또 공개 예정일</string>
     <string name="createroom_expiration_description" formatted="false">최소 %d일 부터 최대 %d일까지 기간을 설정할 수 있어~</string>
     <string name="textview_createroom_expiration_time">산타 마니또 종료 시간</string>
