@@ -41,7 +41,7 @@ class CreateRoomFragment :
 
         binding.viewModel = this@CreateRoomFragment.viewModel
 
-        loadData()
+        loadDataWhenModifying()
 
         initView()
 
@@ -54,8 +54,8 @@ class CreateRoomFragment :
         hideKeyboardOnOutsideEditText()
     }
 
-    private fun loadData() {
-        viewModel.start(args.roomId)
+    private fun loadDataWhenModifying() {
+        viewModel.getRoomData(args.roomId)
         isNewRoom = args.roomId == -1
     }
 

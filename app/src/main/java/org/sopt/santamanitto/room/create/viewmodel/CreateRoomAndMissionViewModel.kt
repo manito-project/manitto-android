@@ -38,7 +38,7 @@ class CreateRoomAndMissionViewModel @Inject constructor(
 
     var nameIsNullOrEmpty = roomName.map { it.isNullOrBlank() }
 
-    fun start(roomId: Int) {
+    fun getRoomData(roomId: Int) {
         if (roomId == -1) {
             return
         }
