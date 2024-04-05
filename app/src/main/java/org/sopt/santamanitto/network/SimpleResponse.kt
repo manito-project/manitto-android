@@ -4,6 +4,7 @@ import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 data class SimpleResponse(
     val status: Int,
@@ -20,21 +21,21 @@ fun Call<SimpleResponse>.start(callback: (Boolean) -> Unit) {
                     if (response.body()!!.success) {
                         callback.invoke(true)
                     } else {
-                        Log.e(TAG, "response body is not successful. ${response.body()!!.message}")
+                        Timber.tag(TAG).e("response body is not successful. ${response.body()!!.message}")
                         callback.invoke(false)
                     }
                 } else {
-                    Log.e(TAG, "response body is null. ${response.message()}")
+                    Timber.tag(TAG).e("response body is null. ${response.message()}")
                     callback.invoke(false)
                 }
             } else {
-                Log.e(TAG, "response is not successful. ${response.message()}")
+                Timber.tag(TAG).e("response is not successful. ${response.message()}")
                 callback.invoke(false)
             }
         }
 
         override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
-            Log.e(TAG, "request is fail. ${t.message}")
+            Timber.tag(TAG).e("request is fail. ${t.message}")
             callback.invoke(false)
         }
     })
