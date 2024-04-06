@@ -16,8 +16,10 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.sopt.santamanitto.databinding.FragmentMatchingBinding
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
+import org.sopt.santamanitto.room.manittoroom.fragment.MatchingFragmentDirections.Companion.actionMatchingFragmentToMatchedFragment
 
 @AndroidEntryPoint
 class MatchingFragment: Fragment() {
@@ -79,7 +81,9 @@ class MatchingFragment: Fragment() {
                 return@launch
             }
 
-            findNavController().navigate(MatchingFragmentDirections.actionMatchingFragmentToMatchedFragment())
+            withContext(Dispatchers.Main) {
+                findNavController().navigate(actionMatchingFragmentToMatchedFragment())
+            }
         }
     }
 }
