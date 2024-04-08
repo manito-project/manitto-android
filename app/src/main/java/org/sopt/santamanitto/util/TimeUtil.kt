@@ -1,8 +1,10 @@
 package org.sopt.santamanitto.util
 
-import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.GregorianCalendar
+import java.util.Locale
 import kotlin.math.roundToInt
 
 object TimeUtil {
@@ -26,7 +28,8 @@ object TimeUtil {
 
     private fun getDateInstanceFromLocalFormat(localFormatString: String): Date {
         val inputFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA)
-        return inputFormat.parse(localFormatString) ?: throw IllegalArgumentException("날짜 형식이 잘못되었습니다.")
+        return inputFormat.parse(localFormatString)
+            ?: throw IllegalArgumentException("날짜 형식이 잘못되었습니다.")
     }
 
     fun isLaterThanNow(target: String): Boolean {
@@ -34,10 +37,12 @@ object TimeUtil {
     }
 
     fun getLocalFormatFromGregorianCalendar(gregorianCalendar: GregorianCalendar): String {
-        return SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).format(Date(gregorianCalendar.timeInMillis))
+        return SimpleDateFormat(
+            LOCAL_DATE_FORMAT,
+            Locale.KOREA
+        ).format(Date(gregorianCalendar.timeInMillis))
     }
 
-    // Todo: 여기서 -9시간을 해준 Calendar 객체를 반환해야함
     fun getGregorianCalendarFromLocalFormat(localFormatString: String): GregorianCalendar {
         return GregorianCalendar(Locale.KOREA).apply {
             time = getDateInstanceFromLocalFormat(localFormatString)

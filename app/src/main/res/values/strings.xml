@@ -43,11 +43,11 @@
     <string name="createroom_room_name">방 이름</string>
     <string name="createroom_roomname_hint">최대 %d자까지 설정할 수 있어! </string>
     <string name="createroom_room_expiration">마니또 공개 예정일</string>
-    <string name="createroom_expiration_description" formatted="false">최소 %d일 부터 최대 %d일까지 기간을 설정할 수 있어~</string>
+    <string name="createroom_expiration_description" formatted="false">최소 %d일부터 최대 %d일까지 기간을 설정할 수 있어~</string>
     <string name="textview_createroom_expiration_time">산타 마니또 종료 시간</string>
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
     <string name="createroom_preview_start">%d일 후인</string>
-    <string name="createroom_preview" formatted="false">%d/%02d/%02d %s %02d : %02d 에</string>
+    <string name="createroom_preview" formatted="false">%d/%02d/%02d %s %02d : %02d</string>
     <string name="createroom_expiration_time" formatted="false">%02d : %02d</string>
     <string name="createroom_dialog_expiration_time_setting">종료 시간 설정</string>
     <string name="createroom_modify_title">방 정보 수정</string>
@@ -58,11 +58,11 @@
     <string name="createmission_description_in_cardview">미션 한 개에 마니또 한명이 매칭돼\n미션은 최대 36자까지 입력할 수 있어!</string>
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
     <string name="createmission_skip_bottom_button">SKIP</string>
-    <string name="createmission_mission_hint">미션을 입력하고 \'+\' 버튼을 눌러줘!</string>
+    <string name="createmission_mission_hint">미션 입력 후 \'+\' 버튼을 눌러줘!</string>
     <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션을 삭제하고 SKIP 하는 거 맞지?</string>
     <string name="createmission_dialog_no_mission">아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?</string>
 
-    <string name="createconfirm_expiration_suffix"> 결과 공개!</string>
+    <string name="createconfirm_expiration_suffix">에 결과 공개!</string>
     <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
     <string name="createconfirm_create_room">방 만들기</string>
     <string name="createconfirm_done_dialog">초대 코드를 복사해서 친구들에게 보내줘!</string>

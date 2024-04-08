@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateConfirmBinding
 import org.sopt.santamanitto.room.create.adaptor.CreateConfirmAdaptor
@@ -22,7 +21,6 @@ import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity.Companion.EXTRA_ROOM_ID
-import org.sopt.santamanitto.room.manittoroom.fragment.WaitingRoomFragment
 import org.sopt.santamanitto.room.manittoroom.fragment.WaitingRoomFragment.Companion.INVITATION_CODE_LABEL
 import org.sopt.santamanitto.util.ClipBoardUtil
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder

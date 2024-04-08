@@ -59,6 +59,7 @@
                     android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
                     android:layout_marginTop="@dimen/padding_createmission_cardview_top"
                     android:letterSpacing="-0.04"
+                    android:lineSpacingMultiplier="1.2"
                     android:text="@string/createmission_description_in_cardview"
                     android:textSize="@dimen/size_createmission_cardview_title"
                     app:layout_constraintEnd_toEndOf="parent"

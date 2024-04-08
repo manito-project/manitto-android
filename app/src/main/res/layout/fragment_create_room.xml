@@ -61,10 +61,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@id/linearlayout_createroom_expiration"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textview_createroom_roomname"
@@ -74,7 +75,6 @@
                         android:text="@string/createroom_room_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
 
                     <org.sopt.santamanitto.view.SantaEditText
                         android:id="@+id/edittext_createroom_roomname"
@@ -109,7 +109,8 @@
                         android:id="@+id/santaperiodpicker_createroom_expiration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/margin_createroom_crardview_titles_bottom" />
+                        android:layout_marginTop="@dimen/margin_createroom_crardview_titles_top"
+                        android:layout_marginBottom="@dimen/margin_createroom_crardview_titles_bottom" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textview_createroom_expirationdescription"
@@ -136,7 +137,7 @@
                         style="@style/TitleOfCardView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_createroom_crardview_titles_bottom"
+                        android:layout_marginBottom="@dimen/margin_createroom_crardview_titles_top"
                         android:text="@string/textview_createroom_expiration_time"
                         app:layout_constraintBottom_toTopOf="@id/santaswitch_createroom_ampm"
                         app:layout_constraintStart_toStartOf="parent"
