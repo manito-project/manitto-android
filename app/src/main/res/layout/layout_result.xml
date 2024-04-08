@@ -19,12 +19,14 @@
             android:id="@+id/textview_result_title"
             style="@style/TitleOfCardView"
             android:layout_width="wrap_content"
+            android:textSize="16sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_createmission_cardview_horizontal"
             android:layout_marginTop="@dimen/padding_matched_cardview_vertical"
             android:text="@string/finish_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="총 16명"/>
 
         <View
             android:id="@+id/view_result_divider"
