@@ -32,10 +32,10 @@ open class BaseFragment<B : ViewDataBinding>(
         } else {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
                 window.setDecorFitsSystemWindows(false)
-                binding.root.setOnApplyWindowInsetsListener { _, insets ->
-                    val imeHeight = insets.getInsets(WindowInsets.Type.ime()).bottom
-                    binding.root.setPadding(0, 0, 0, imeHeight)
-                    insets
+                binding.root.setOnApplyWindowInsetsListener { view, windowInsets ->
+                    val insets = windowInsets.getInsets(WindowInsets.Type.systemBars())
+                    view.setPadding(insets.left, insets.top, insets.right, insets.bottom)
+                    windowInsets
                 }
             } else {
                 window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
