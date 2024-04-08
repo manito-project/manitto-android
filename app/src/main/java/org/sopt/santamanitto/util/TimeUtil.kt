@@ -11,6 +11,7 @@ object TimeUtil {
 
     private const val LOCAL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     private const val SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    private const val WRONG_FORMAT = "날짜 형식이 잘못되었습니다."
 
     fun getDayDiff(later: String, early: String): Int {
         val laterCalendar = getGregorianCalendarFromLocalFormat(later)
@@ -29,7 +30,7 @@ object TimeUtil {
     private fun getDateInstanceFromLocalFormat(localFormatString: String): Date {
         val inputFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA)
         return inputFormat.parse(localFormatString)
-            ?: throw IllegalArgumentException("날짜 형식이 잘못되었습니다.")
+            ?: throw IllegalArgumentException(WRONG_FORMAT)
     }
 
     fun isLaterThanNow(target: String): Boolean {
