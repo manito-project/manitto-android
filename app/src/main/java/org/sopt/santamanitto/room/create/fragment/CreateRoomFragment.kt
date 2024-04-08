@@ -18,11 +18,9 @@ import org.sopt.santamanitto.room.create.setExpirationTime
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
 import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
 import org.sopt.santamanitto.util.base.BaseFragment
-import org.sopt.santamanitto.view.SantaEditText
 import org.sopt.santamanitto.view.SantaPeriodPicker
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
-import org.sopt.santamanitto.view.setTextColorById
 
 class CreateRoomFragment :
     BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
