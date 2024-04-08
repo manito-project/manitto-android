@@ -66,10 +66,10 @@ class BasicMyManittoViewHolder(
 
     private fun requestAndCacheInfo(roomId: Int) {
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
-            override fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel) {
-                userAuthController.getUserInfo(personalRoomModel.manittoUserId, object: UserAuthController.GetUserInfoCallback {
+            override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
+                userAuthController.getUserInfo(personalRoom.manittoUserId, object: UserAuthController.GetUserInfoCallback {
                     override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                        val info = MyManittoInfoModel(userInfoModel.userName, personalRoomModel.myMission?.content)
+                        val info = MyManittoInfoModel(userInfoModel.userName, personalRoom.myMission?.content)
                         cachedRoomInfo[roomId] = info
                         setManittoInfo(info)
                         clearLoading()

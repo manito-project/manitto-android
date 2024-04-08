@@ -1,13 +1,13 @@
 package org.sopt.santamanitto.room.manittoroom
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ActivityManittoRoomBinding
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ManittoRoomActivity : AppCompatActivity() {
@@ -19,7 +19,7 @@ class ManittoRoomActivity : AppCompatActivity() {
         const val EXTRA_IS_FINISHED = "isFinished"
     }
 
-    private val manittoRoomViewModel: ManittoRoomViewModel by viewModels()
+    private val viewModel: ManittoRoomViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +27,14 @@ class ManittoRoomActivity : AppCompatActivity() {
 
         val roomId = intent.getIntExtra(EXTRA_ROOM_ID, -1)
         if (roomId == -1) {
-            Log.e(TAG, "Wrong access.")
+            Timber.tag(TAG).e("Wrong access.")
             finish()
         } else {
-            manittoRoomViewModel.roomId = roomId
+            viewModel.roomId = roomId
         }
         val isMatched = intent.getBooleanExtra(EXTRA_IS_MATCHED, false)
-        manittoRoomViewModel.isMatched = isMatched
+        viewModel.isMatched = isMatched
         val isFinished = intent.getBooleanExtra(EXTRA_IS_FINISHED, false)
-        manittoRoomViewModel.isFinished = isFinished
+        viewModel.isFinished = isFinished
     }
 }

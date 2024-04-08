@@ -24,7 +24,7 @@ interface RoomRequest {
     }
 
     interface GetManittoRoomCallback {
-        fun onLoadManittoRoomData(manittoRoomModel: ManittoRoomModel)
+        fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel)
 
         fun onFailed()
     }
@@ -36,7 +36,7 @@ interface RoomRequest {
     }
 
     interface GetPersonalRoomInfoCallback {
-        fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel)
+        fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel)
 
         fun onDataNotAvailable()
     }

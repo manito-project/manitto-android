@@ -9,7 +9,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewModel"
+            name="vm"
             type="org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel" />
     </data>
 
@@ -38,7 +38,7 @@
             android:backgroundTint="@color/navy"
             android:paddingHorizontal="@dimen/padding_matched_manitto_horizontal"
             android:paddingVertical="@dimen/padding_matched_manitto_vertical"
-            android:text="@{viewModel.mySantaName}"
+            android:text="@{vm.mySantaName}"
             android:textColor="@color/white"
             android:textFontWeight="700"
             android:textSize="@dimen/size_matched_manitto"

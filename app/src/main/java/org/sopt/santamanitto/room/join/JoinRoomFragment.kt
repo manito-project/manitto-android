@@ -13,6 +13,7 @@ import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
+import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
 
 @AndroidEntryPoint
 class JoinRoomFragment: BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment_join_room, false) {
@@ -27,6 +28,7 @@ class JoinRoomFragment: BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment_
         binding.viewModel = joinRoomViewModel
         subscribeUI()
         setOnClickListener()
+        hideKeyboardOnOutsideEditText()
     }
 
     private fun subscribeUI() {

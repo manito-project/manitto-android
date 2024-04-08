@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.data.PersonalRoomModel
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
@@ -22,11 +22,7 @@ class ManittoRoomViewModel @Inject constructor(
     private val userDataSource: UserAuthController,
     private val cachedMainUserDataSource: CachedMainUserDataSource,
     private val roomRequest: RoomRequest
-): NetworkViewModel() {
-
-    companion object {
-        private const val TAG = "ManittoRoomViewModel"
-    }
+) : NetworkViewModel() {
 
     private var _roomId = -1
     var roomId: Int
@@ -59,7 +55,7 @@ class ManittoRoomViewModel @Inject constructor(
         get() = _expiration
 
     private val _members = MutableLiveData<List<ManittoRoomMember>>()
-    val members : LiveData<List<ManittoRoomMember>>
+    val members: LiveData<List<ManittoRoomMember>>
         get() = _members
 
     private val _isAdmin = MutableLiveData(false)
@@ -67,11 +63,11 @@ class ManittoRoomViewModel @Inject constructor(
         get() = _isAdmin
 
     private val _myManittoName = MutableLiveData("")
-    val myManittoName : LiveData<String>
+    val myManittoName: LiveData<String>
         get() = _myManittoName
 
     private val _mySantaName = MutableLiveData("")
-    val mySantaName : LiveData<String>
+    val mySantaName: LiveData<String>
         get() = _mySantaName
 
     private val _myMission = MutableLiveData<String?>("")
@@ -91,9 +87,9 @@ class ManittoRoomViewModel @Inject constructor(
 
     fun refreshManittoRoomInfo() {
         startLoading()
-        roomRequest.getManittoRoomData(roomId, object: RoomRequest.GetManittoRoomCallback {
-            override fun onLoadManittoRoomData(manittoRoomModel: ManittoRoomModel) {
-                manittoRoomModel.run {
+        roomRequest.getManittoRoomData(roomId, object : RoomRequest.GetManittoRoomCallback {
+            override fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel) {
+                manittoRoom.run {
                     _roomName.value = roomName
                     _expiration.value = expiration
                     _isExpired.value = TimeUtil.getDayDiffFromNow(expiration) < 0
@@ -131,32 +127,36 @@ class ManittoRoomViewModel @Inject constructor(
     fun getPersonalRelationInfo() {
         startLoading()
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
-            override fun onLoadPersonalRoomInfo(personalRoomModel: PersonalRoomModel) {
+            override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
                 startLoading()
-                userDataSource.getUserInfo(personalRoomModel.manittoUserId, object: UserAuthController.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                        _myManittoName.value = userInfoModel.userName
-                        stopLoading()
-                    }
+                userDataSource.getUserInfo(
+                    personalRoom.manittoUserId,
+                    object : UserAuthController.GetUserInfoCallback {
+                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                            _myManittoName.value = userInfoModel.userName
+                            stopLoading()
+                        }
 
-                    override fun onDataNotAvailable() {
-                        _networkErrorOccur.value = true
-                    }
-                })
+                        override fun onDataNotAvailable() {
+                            _networkErrorOccur.value = true
+                        }
+                    })
 
-                userDataSource.getUserInfo(personalRoomModel.santaUserId, object : UserAuthController.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                        _mySantaName.value = userInfoModel.userName
-                        stopLoading()
-                    }
+                userDataSource.getUserInfo(
+                    personalRoom.santaUserId,
+                    object : UserAuthController.GetUserInfoCallback {
+                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                            _mySantaName.value = userInfoModel.userName
+                            stopLoading()
+                        }
 
-                    override fun onDataNotAvailable() {
-                        _networkErrorOccur.value = true
-                    }
-                })
+                        override fun onDataNotAvailable() {
+                            _networkErrorOccur.value = true
+                        }
+                    })
 
-                _myMission.value = personalRoomModel.myMission?.content
-                _missionToMe.value = personalRoomModel.missionToMe?.content
+                _myMission.value = personalRoom.myMission?.content
+                _missionToMe.value = personalRoom.missionToMe?.content
             }
 
             override fun onDataNotAvailable() {
@@ -166,19 +166,9 @@ class ManittoRoomViewModel @Inject constructor(
     }
 
     fun removeHistory(callback: () -> Unit) {
-        roomRequest.removeHistory(roomId) {
-            if (it) {
+        roomRequest.removeHistory(roomId) { isRemoved ->
+            if (isRemoved) {
                 cachedMainUserDataSource.isMyManittoDirty = true
-                callback.invoke()
-            } else {
-                _networkErrorOccur.value = true
-            }
-        }
-    }
-
-    fun exitRoom(callback: () -> Unit) {
-        roomRequest.exitRoom(roomId) {
-            if (it) {
                 callback.invoke()
             } else {
                 _networkErrorOccur.value = true
@@ -198,19 +188,20 @@ class ManittoRoomViewModel @Inject constructor(
 
     private fun setMyMissionInfo(mission: MatchedMissionsModel) {
         _myMission.value = mission.myMission?.content
-        userDataSource.getUserInfo(mission.manittoUserId, object: UserAuthController.GetUserInfoCallback {
-            override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                _myManittoName.value = userInfoModel.userName
-                stopLoading()
-            }
+        userDataSource.getUserInfo(
+            mission.manittoUserId,
+            object : UserAuthController.GetUserInfoCallback {
+                override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                    _myManittoName.value = userInfoModel.userName
+                    stopLoading()
+                }
 
-            override fun onDataNotAvailable() {
-                _networkErrorOccur.value = true
-            }
-        })
+                override fun onDataNotAvailable() {
+                    _networkErrorOccur.value = true
+                }
+            })
     }
 
-    private fun getPeriod(createdAt: String, expiration: String): Int {
-        return TimeUtil.getDayDiff(expiration, createdAt)
-    }
+    private fun getPeriod(createdAt: String, expiration: String): Int =
+        TimeUtil.getDayDiff(expiration, createdAt)
 }

@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel" />
     </data>
 
@@ -39,7 +39,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_result"
             style="@style/RecyclerViewScrollbar"
-            replaceAll="@{viewModel.members}"
+            replaceAll="@{vm.members}"
             setItemMargin="@{@dimen/margin_result_recyclerview_item}"
             android:layout_width="match_parent"
             android:layout_height="0dp"

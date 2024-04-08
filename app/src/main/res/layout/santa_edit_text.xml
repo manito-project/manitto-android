@@ -31,8 +31,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:fontFamily="@font/notosans_font_family"
-                android:letterSpacing="-0.03"
-                android:lineHeight="23.68dp"
+                android:textColorHint="@color/gray_2"
                 android:singleLine="true"
                 android:textColor="@drawable/color_santaedittext_edittext"
                 android:textCursorDrawable="@drawable/cursor_edittext"
@@ -43,8 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:letterSpacing="-0.03"
-                android:lineHeight="23.68dp"
                 android:singleLine="true"
                 android:textSize="@dimen/size_santaedittext"/>
 

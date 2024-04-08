@@ -9,7 +9,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewModel"
+            name="vm"
             type="org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel" />
     </data>
 
@@ -21,7 +21,7 @@
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_waitingroom"
             style="@style/SantaBackground.SubTask"
-            setExpirationDescription="@{viewModel.expiration}"
+            setExpirationDescription="@{vm.expiration}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:santaTitle="@{viewModel.roomName}"
+            app:santaTitle="@{vm.roomName}"
             tool:santaDescription="오늘부터 7일 후인 12월 4일\n오전 10:00까지 진행되는 마니또"
             tool:santaTitle="마니또 방 이름" />
 
@@ -98,7 +98,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_waitingroom"
                     style="@style/RecyclerViewScrollbar"
-                    replaceAll="@{viewModel.members}"
+                    replaceAll="@{vm.members}"
                     setItemMargin="@{@dimen/margin_waitingroom_recyclerview_items}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -119,8 +119,8 @@
                 <org.sopt.santamanitto.view.SantaLoading
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-                    app:error="@{viewModel.networkErrorOccur}"
+                    android:visibility="@{vm.isLoading ? View.VISIBLE : View.GONE}"
+                    app:error="@{vm.networkErrorOccur}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
                     android:layout_marginBottom="@dimen/margin_waitingroom_notice_bottom"
-                    android:text="@{viewModel.isAdmin() ? @string/waitingroom_notice_admin : @string/waitingroom_notice_participant}"
+                    android:text="@{vm.isAdmin() ? @string/waitingroom_notice_admin : @string/waitingroom_notice_participant}"
                     android:textSize="@dimen/size_waitingroom_notice"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -160,13 +160,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_matched_buttons"
                 android:text="@string/waitingroom_modify"
-                android:visibility="@{viewModel.isAdmin() ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{vm.isAdmin() ? View.VISIBLE : View.GONE}" />
 
             <org.sopt.santamanitto.view.SantaBottomButton
                 android:id="@+id/santabottombutton_waitingroom_match"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="@{viewModel.canStart}"
+                android:enabled="@{vm.canStart}"
                 android:text="@string/waitingroom_bottombutton" />
 
         </LinearLayout>

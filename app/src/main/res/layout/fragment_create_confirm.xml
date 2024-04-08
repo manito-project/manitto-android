@@ -9,7 +9,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewModel"
+            name="vm"
             type="org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel" />
 
     </data>
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
                     android:layout_marginTop="@dimen/margin_createconfirm_roomname_top"
-                    android:text="@{viewModel.roomName}"
+                    android:text="@{vm.roomName}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="마니또 방 이름" />
@@ -73,9 +73,9 @@
                     android:id="@+id/linearlayout_createconfirm_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
                     android:layout_marginTop="@dimen/margin_createconfirm_preview_top"
                     android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_createconfirm_roomname">
 
@@ -129,7 +129,7 @@
                     android:id="@+id/group_createconfirm_nomission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="@{viewModel.missionIsEmpty ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{vm.missionIsEmpty ? View.VISIBLE : View.GONE}"
                     app:constraint_referenced_ids="view_createconfirm_divider, textview_createconfirm_nomission" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -144,7 +144,7 @@
                     android:overScrollMode="never"
                     android:paddingHorizontal="@dimen/padding_createmission_recyclerview_horizontal"
                     android:paddingBottom="@dimen/padding_createmission_recyclerview_bottom"
-                    android:visibility="@{viewModel.missionIsEmpty ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{vm.missionIsEmpty ? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
