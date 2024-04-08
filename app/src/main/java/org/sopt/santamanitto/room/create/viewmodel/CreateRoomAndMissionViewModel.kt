@@ -7,8 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.create.data.CreateMissionLiveList
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
-import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
+import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.network.RoomRequest
@@ -18,8 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateRoomAndMissionViewModel @Inject constructor(
-        private val cachedMainUserDataSource: CachedMainUserDataSource,
-        private val roomRequest: RoomRequest
+    private val cachedMainUserDataSource: CachedMainUserDataSource,
+    private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
     private var roomId = -1
@@ -38,16 +38,16 @@ class CreateRoomAndMissionViewModel @Inject constructor(
 
     var nameIsNullOrEmpty = roomName.map { it.isNullOrBlank() }
 
-    fun start(roomId: Int) {
+    fun getRoomData(roomId: Int) {
         if (roomId == -1) {
             return
         }
         this.roomId = roomId
         roomRequest.getManittoRoomData(roomId, object : RoomRequest.GetManittoRoomCallback {
-            override fun onLoadManittoRoomData(manittoRoomModel: ManittoRoomModel) {
-                roomName.value = manittoRoomModel.roomName
-                _hint.value = manittoRoomModel.roomName
-                expirationLiveData.init(manittoRoomModel.expiration)
+            override fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel) {
+                roomName.value = manittoRoom.roomName
+                _hint.value = manittoRoom.roomName
+                expirationLiveData.init(manittoRoom.expiration)
             }
 
             override fun onFailed() {
@@ -85,7 +85,9 @@ class CreateRoomAndMissionViewModel @Inject constructor(
     }
 
     fun createRoom(callback: (CreateRoomModel) -> Unit) {
-        val request = CreateRoomRequestModel(roomName.value!!, expirationLiveData.toString(), missions.getMissions())
+        val request = CreateRoomRequestModel(
+            roomName.value.orEmpty(), expirationLiveData.toString(), missions.getMissions()
+        )
         roomRequest.createRoom(request, object : RoomRequest.CreateRoomCallback {
             override fun onRoomCreated(createdRoom: CreateRoomModel) {
                 callback(createdRoom)
@@ -100,8 +102,10 @@ class CreateRoomAndMissionViewModel @Inject constructor(
     }
 
     fun modifyRoom(callback: () -> Unit) {
-        roomRequest.modifyRoom(roomId, ModifyRoomRequestModel(roomName.value!!, expirationLiveData.toString())) {
-            if (it) {
+        roomRequest.modifyRoom(
+            roomId, ModifyRoomRequestModel(roomName.value.orEmpty(), expirationLiveData.toString())
+        ) { isModified ->
+            if (isModified) {
                 callback.invoke()
             } else {
                 _networkErrorOccur.value = true

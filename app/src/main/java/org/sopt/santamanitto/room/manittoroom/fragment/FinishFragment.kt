@@ -1,10 +1,10 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -17,6 +17,7 @@ import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.ResultAdapter
 import org.sopt.santamanitto.util.BindingAdapters.setLayoutHeight
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
+import timber.log.Timber
 import javax.inject.Inject
 import android.view.View.OnLayoutChangeListener as OnLayoutChangeListener1
 
@@ -33,7 +34,7 @@ class FinishFragment : Fragment() {
     private lateinit var finishBinding: LayoutFinishBinding
     private lateinit var resultBinding: LayoutResultBinding
 
-    private val manittoRoomViewModel: ManittoRoomViewModel by activityViewModels()
+    private val viewModel: ManittoRoomViewModel by activityViewModels()
 
     @Inject
     lateinit var resultAdapter: ResultAdapter
@@ -52,7 +53,8 @@ class FinishFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.run {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = manittoRoomViewModel
+            vm = viewModel
+
             root.addOnLayoutChangeListener(object : OnLayoutChangeListener1 {
                 override fun onLayoutChange(
                     v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int,
@@ -66,13 +68,13 @@ class FinishFragment : Fragment() {
         }
 
         finishBinding = binding.includeFinishMatched.apply {
-            viewModel = manittoRoomViewModel
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
 
         resultBinding = binding.includeFinishResult
 
-        manittoRoomViewModel.run {
+        viewModel.run {
             refreshManittoRoomInfo()
             getPersonalRelationInfo()
         }
@@ -112,14 +114,14 @@ class FinishFragment : Fragment() {
         //finish 뷰 가리기, result 뷰 세팅
         finishBinding.root.visibility = GONE
         resultBinding.run {
-            viewModel = manittoRoomViewModel
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
             root.visibility = VISIBLE
             recyclerviewResult.adapter = resultAdapter
         }
 
         //총 인원 설정
-        manittoRoomViewModel.members.observe(viewLifecycleOwner) {
+        viewModel.members.observe(viewLifecycleOwner) {
             resultBinding.textviewResultTitle.text =
                 String.format(getString(R.string.result_title), it.size)
         }
@@ -137,26 +139,23 @@ class FinishFragment : Fragment() {
         finishBinding.textviewFinishMission.run {
             //현재 폰트의 2줄 크기를 반영하기 위함. 기본 텍스트가 \n\n 임
             setLayoutHeight(this, this.height)
-            manittoRoomViewModel.missionToMe.observe(viewLifecycleOwner) {
-                text = if (it.isNullOrEmpty()) {
-                    getString(R.string.matched_no_mission)
-                } else {
-                    it
-                }
+            viewModel.missionToMe.observe(viewLifecycleOwner) { mission ->
+                text =
+                    if (mission.isNullOrEmpty()) getString(R.string.matched_no_mission) else mission
             }
         }
     }
 
     private fun showExitDialog() {
-        if (manittoRoomViewModel.roomName.value == null) {
-            Log.e(TAG, "showExitDialog(): roomName is null")
+        if (viewModel.roomName.value == null) {
+            Timber.tag(TAG).e("showExitDialog(): roomName is null")
             return
         }
         RoundDialogBuilder()
             .setContentText(requireContext().getString(R.string.exit_dialog_history))
             .addHorizontalButton(requireContext().getString(R.string.dialog_cancel))
             .addHorizontalButton(requireContext().getString(R.string.dialog_confirm)) {
-                manittoRoomViewModel.removeHistory {
+                viewModel.removeHistory {
                     requireActivity().finish()
                 }
             }

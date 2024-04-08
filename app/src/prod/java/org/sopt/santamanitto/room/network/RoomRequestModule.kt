@@ -12,6 +12,9 @@ import retrofit2.Retrofit
 class RoomRequestModule {
 
     @Provides
-    fun provideCreateRoomRequest(roomService: RoomService, @AuthRetrofitClient retrofitClient: Retrofit): RoomRequest =
+    fun provideCreateRoomRequest(
+        roomService: RoomService,
+        @AuthRetrofitClient retrofitClient: Retrofit
+    ): RoomRequest =
         RoomRequestImpl(roomService, retrofitClient)
 }

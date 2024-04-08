@@ -26,6 +26,7 @@ class SantaBottomButton : AppCompatButton {
         }
         setTextSize(R.dimen.size_santabottombutton_text)
         setPaddingVerticalById(R.dimen.padding_santabottombutton_vertical)
+        includeFontPadding = false
         setRippleEffect(true)
         setBold(true)
         elevation = getDimen(R.dimen.elevation_shadow)
@@ -44,10 +45,8 @@ class SantaBottomButton : AppCompatButton {
 
         if (typeArray.hasValue(R.styleable.SantaBottomButton_darkShadow)) {
             val darkShadow = typeArray.getBoolean(R.styleable.SantaBottomButton_darkShadow, false)
-            if (!darkShadow) {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-                    outlineSpotShadowColor = getColor(R.color.shadow_gray)
-                }
+            if (!darkShadow && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                outlineSpotShadowColor = getColor(R.color.shadow_gray)
             }
         } else {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
@@ -79,10 +78,5 @@ class SantaBottomButton : AppCompatButton {
             setTextColorById(R.color.white)
         }
         elevation = getDimen(R.dimen.elevation_shadow)
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        height = getDimen(R.dimen.height_santabottombutton).toInt()
     }
 }

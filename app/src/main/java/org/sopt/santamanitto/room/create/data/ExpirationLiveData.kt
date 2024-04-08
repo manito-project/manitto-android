@@ -3,12 +3,12 @@ package org.sopt.santamanitto.room.create.data
 import androidx.lifecycle.LiveData
 import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.SantaPeriodPicker
-import java.util.*
+import java.util.Calendar
+import java.util.GregorianCalendar
 
 class ExpirationLiveData : LiveData<ExpirationLiveData>() {
 
     companion object {
-        private const val TAG = "ExpirationLiveData"
         private const val INITIAL_HOUR = 10
         private const val INITIAL_MINUTE = 0
         private const val INITIAL_AM_PM = Calendar.AM
@@ -24,17 +24,17 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
     }
 
     val year: Int
-        get() = expirationDate.get(Calendar.YEAR)
+        get() = expirationDate[Calendar.YEAR]
 
     val month: Int
-        get() = expirationDate.get(Calendar.MONTH) + 1
+        get() = expirationDate[Calendar.MONTH] + 1
 
     val day: Int
-        get() = expirationDate.get(Calendar.DAY_OF_MONTH)
+        get() = expirationDate[Calendar.DAY_OF_MONTH]
 
     val hour: Int
         get() {
-            var convertedHour = expirationDate.get(Calendar.HOUR)
+            var convertedHour = expirationDate[Calendar.HOUR]
             if (convertedHour == 0) {
                 convertedHour = 12
             }
@@ -42,10 +42,10 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
         }
 
     val minute: Int
-        get() = expirationDate.get(Calendar.MINUTE)
+        get() = expirationDate[Calendar.MINUTE]
 
     val isAm: Boolean
-        get() = expirationDate.get(Calendar.AM_PM) == Calendar.AM
+        get() = expirationDate[Calendar.AM_PM] == Calendar.AM
 
     private var _period = SantaPeriodPicker.DEFAULT_PERIOD
     var period: Int
@@ -59,11 +59,7 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
 
     fun setTime(hour: Int, minute: Int) {
         expirationDate.run {
-            val convertedHour = if (hour == 12) {
-                0
-            } else {
-                hour
-            }
+            val convertedHour = if (hour == 12) 0 else hour
             set(Calendar.HOUR, convertedHour)
             set(Calendar.MINUTE, minute)
             postValue(this@ExpirationLiveData)
@@ -72,9 +68,9 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
 
     fun setAmPm(isAm: Boolean) {
         if (isAm) {
-            expirationDate.set(Calendar.AM_PM, Calendar.AM)
+            expirationDate[Calendar.AM_PM] = Calendar.AM
         } else {
-            expirationDate.set(Calendar.AM_PM, Calendar.PM)
+            expirationDate[Calendar.AM_PM] = Calendar.PM
         }
         postValue(this)
     }

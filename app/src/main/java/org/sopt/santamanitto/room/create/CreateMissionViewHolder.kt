@@ -19,7 +19,6 @@ class CreateMissionViewHolder(
     private val editText = (itemView as SantaEditText)
 
     init {
-        editText.setContentWidth(180.toPixel())
         editText.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 return@setOnKeyListener true

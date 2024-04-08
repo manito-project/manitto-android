@@ -39,15 +39,15 @@
     <string name="santaloading_data_not_available">데이터를 불러오지 못했습니다.</string>
 
     <string name="createroom_background_title">방 만들기</string>
-    <string name="createroom_background_description">친구들이 방을 잘 찾아올 수 있도록\n방 이름과 종료일을 지정해보자!</string>
+    <string name="createroom_background_description">친구들이 방을 잘 찾아올 수 있도록\n초대 코드 알려주는 것 잊지 말자~</string>
     <string name="createroom_room_name">방 이름</string>
-    <string name="createroom_roomname_hint">방 이름을 지어줘!</string>
-    <string name="createroom_room_expiration">산타 마니또 종료일 설정</string>
-    <string name="createroom_expiration_description" formatted="false">최소 %d일 부터 최대 %d일까지 기간을 설정할 수 있어~</string>
+    <string name="createroom_roomname_hint">최대 %d자까지 설정할 수 있어! </string>
+    <string name="createroom_room_expiration">마니또 공개 예정일</string>
+    <string name="createroom_expiration_description" formatted="false">최소 %d일부터 최대 %d일까지 기간을 설정할 수 있어~</string>
     <string name="textview_createroom_expiration_time">산타 마니또 종료 시간</string>
     <string name="createroom_preview_end">산타 마니또 결과가 공개될거야!</string>
     <string name="createroom_preview_start">%d일 후인</string>
-    <string name="createroom_preview" formatted="false">%d/%02d/%02d %s %02d : %02d 에</string>
+    <string name="createroom_preview" formatted="false">%d/%02d/%02d %s %02d : %02d</string>
     <string name="createroom_expiration_time" formatted="false">%02d : %02d</string>
     <string name="createroom_dialog_expiration_time_setting">종료 시간 설정</string>
     <string name="createroom_modify_title">방 정보 수정</string>
@@ -58,14 +58,14 @@
     <string name="createmission_description_in_cardview">미션 한 개에 마니또 한명이 매칭돼\n미션은 최대 36자까지 입력할 수 있어!</string>
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
     <string name="createmission_skip_bottom_button">SKIP</string>
-    <string name="createmission_mission_hint">미션을 입력해줘!</string>
+    <string name="createmission_mission_hint">미션 입력 후 \'+\' 버튼을 눌러줘!</string>
     <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션을 삭제하고 SKIP 하는 거 맞지?</string>
     <string name="createmission_dialog_no_mission">아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?</string>
 
-    <string name="createconfirm_expiration_suffix"> 결과 공개!</string>
+    <string name="createconfirm_expiration_suffix">에 결과 공개!</string>
     <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
     <string name="createconfirm_create_room">방 만들기</string>
-    <string name="createconfirm_done_dialog">참여코드 생성 완료!</string>
+    <string name="createconfirm_done_dialog">초대 코드를 복사해서 친구들에게 보내줘!</string>
 
     <string name="joinroom_background_title">방 입장하기</string>
     <string name="joinroom_background_description">코드를 입력하면 방으로 이동할거야!\n산타 마니또를 찾아 떠나볼까?</string>
@@ -75,7 +75,7 @@
     <string name="joinroom_dialog_wrong_invitation_code">참여가 불가능한 방이야!</string>
 
     <string name="waitingroom_cardview_title">참여자</string>
-    <string name="waitingroom_copy_invitation_code">참여 코드 복사</string>
+    <string name="waitingroom_copy_invitation_code">초대 코드 복사</string>
     <string name="waitingroom_notice_admin">방장 산타는 참여자가 다 모이면 하단 버튼을 눌러줘:)</string>
     <string name="waitingroom_notice_participant">참여자 산타는 방장 산타가 매칭하기를 누를 때까지 기다려줘:)</string>
     <string name="waitingroom_bottombutton">마니또 랜덤 매칭하기</string>
