@@ -105,7 +105,7 @@
 
     <string name="editname_background">내 이름을\n변경할 수 있어!</string>
 
-    <string name="exit_dialog_host">방장이 나가면 팀원들도\n방을 이용할 수 없어!</string>
+    <string name="exit_dialog_host">방장이 나가면 친구들도\n방을 나가게 되는데 괜찮을까?</string>
     <string name="exit_dialog_guest">%s\n이 방을 나가는 거 맞지?</string>
     <string name="exit_dialog_history">나의 산타 마니또에서\n삭제하는거 맞지?</string>
 
