@@ -39,6 +39,15 @@ class FakeUserAuthController: UserAuthController {
         put(4, UserInfoModel(4, "fakeUser4", mutableListOf()))
         put(5, UserInfoModel(5, "fakeUser5", mutableListOf()))
         put(6, UserInfoModel(6, "fakeUser6", mutableListOf()))
+        put(7, UserInfoModel(7, "fakeUser7", mutableListOf()))
+        put(8, UserInfoModel(8, "fakeUser8", mutableListOf()))
+        put(9, UserInfoModel(9, "fakeUser9", mutableListOf()))
+        put(10, UserInfoModel(10, "fakeUser10", mutableListOf()))
+        put(11, UserInfoModel(11, "fakeUser11", mutableListOf()))
+        put(12, UserInfoModel(12, "fakeUser12", mutableListOf()))
+        put(13, UserInfoModel(13, "fakeUser13", mutableListOf()))
+        put(14, UserInfoModel(14, "fakeUser14", mutableListOf()))
+        put(15, UserInfoModel(15, "fakeUser15", mutableListOf()))
     }
 
     override fun changeUserName(

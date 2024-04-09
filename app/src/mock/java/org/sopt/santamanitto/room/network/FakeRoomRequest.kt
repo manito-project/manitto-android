@@ -118,7 +118,7 @@ class FakeRoomRequest : RoomRequest {
                     add(
                         ManittoRoomMember(
                             1,
-                            "FakeFirstUser",
+                            "FirstUser",
                             ManittoRoomRelations(
                                 2,
                                 3
@@ -128,7 +128,7 @@ class FakeRoomRequest : RoomRequest {
                     add(
                         ManittoRoomMember(
                             2,
-                            "FakeSecondUser",
+                            "SecondUser",
                             ManittoRoomRelations(
                                 3,
                                 1
@@ -138,10 +138,100 @@ class FakeRoomRequest : RoomRequest {
                     add(
                         ManittoRoomMember(
                             3,
-                            "FakeThirdUser",
+                            "ThirdUser",
                             ManittoRoomRelations(
                                 1,
                                 2
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            4,
+                            "FourthUser",
+                            ManittoRoomRelations(
+                                5,
+                                6
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            5,
+                            "FifthUser",
+                            ManittoRoomRelations(
+                                6,
+                                4
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            6,
+                            "SixthUser",
+                            ManittoRoomRelations(
+                                4,
+                                5
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            7,
+                            "SeventhUser",
+                            ManittoRoomRelations(
+                                8,
+                                9
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            8,
+                            "EighthUser",
+                            ManittoRoomRelations(
+                                9,
+                                7
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            9,
+                            "NinthUser",
+                            ManittoRoomRelations(
+                                7,
+                                8
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            10,
+                            "TenthUser",
+                            ManittoRoomRelations(
+                                11,
+                                12
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            11,
+                            "EleventhUser",
+                            ManittoRoomRelations(
+                                12,
+                                10
+                            )
+                        )
+                    )
+                    add(
+                        ManittoRoomMember(
+                            12,
+                            "TwelfthUser",
+                            ManittoRoomRelations(
+                                10,
+                                11
                             )
                         )
                     )
