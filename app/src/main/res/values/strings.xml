@@ -69,7 +69,7 @@
     <string name="createconfirm_done_dialog">초대 코드를 복사해서 친구들에게 보내줘!</string>
 
     <string name="joinroom_background_title">방 입장하기</string>
-    <string name="joinroom_background_description">코드를 입력하면 방으로 이동할거야!\n산타 마니또를 찾아 떠나볼까?</string>
+    <string name="joinroom_background_description">코드를 입력하고 초대된 방으로\n산타 마니또를 찾아 떠나볼까?</string>
     <string name="joinroom_participation_code_hint">참여코드를 입력해주세요</string>
     <string name="joinroom_dialog_duplicated_member">이미 참여 중인 방이야!</string>
     <string name="joinroom_dialog_already_matched">참여가 불가능한 방이야!</string>
