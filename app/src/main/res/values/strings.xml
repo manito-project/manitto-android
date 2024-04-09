@@ -11,7 +11,7 @@
     <string name="am">오전</string>
 
     <string name="santaperiodpicker_period">%d일 후</string>
-    <string name="entername_background_welcome">안녕!\n산타 마니또에 온 것을 환영해:)</string>
+    <string name="entername_background_welcome">이용약관에 동의하면\n산타 마니또 게임을 할 수 있어!</string>
     <string name="entername_title">기본 설정</string>
     <string name="entername_title_name">내 이름</string>
     <string name="entername_edittext_hint">산타야! 너의 이름이 궁금해</string>
