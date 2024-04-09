@@ -15,19 +15,26 @@ class ResultViewHolder(
 ) : BaseViewHolder<ManittoRoomMember, ItemResultBinding>(R.layout.item_result, parent) {
 
     override fun bind(data: ManittoRoomMember) {
-        binding.textviewItemresultSanta.text = data.userName
+        binding.apply {
+            textviewItemresultSanta.text = ""
+            textviewItemresultMinitto.text = ""
+            santaloadingItemresult.visibility = View.VISIBLE
+        }
 
-        userAuthController.getUserInfo(data.relations.manittoUserId, object : UserAuthController.GetUserInfoCallback {
-            override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                binding.run {
-                    textviewItemresultMinitto.text = userInfoModel.userName
-                    santaloadingItemresult.visibility = View.GONE
+        userAuthController.getUserInfo(
+            data.relations.manittoUserId,
+            object : UserAuthController.GetUserInfoCallback {
+                override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                    binding.run {
+                        textviewItemresultSanta.text = data.userName
+                        textviewItemresultMinitto.text = userInfoModel.userName
+                        santaloadingItemresult.visibility = View.GONE
+                    }
                 }
-            }
 
-            override fun onDataNotAvailable() {
-                binding.santaloadingItemresult.setError(true)
-            }
-        })
+                override fun onDataNotAvailable() {
+                    binding.santaloadingItemresult.setError(true)
+                }
+            })
     }
 }
