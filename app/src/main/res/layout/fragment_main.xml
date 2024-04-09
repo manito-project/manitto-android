@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/main_no_manitto_notice"
-                android:textColor="@color/gray_2"
+                android:textColor="@color/gray_3"
                 android:textSize="@dimen/size_main_no_manitto_notice"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
