@@ -27,7 +27,7 @@
     <string name="main_make_room_description">새로운 산타\n마니또 시작하기</string>
     <string name="main_join_room_description">산타 마니또\n초대 코드 입력하기</string>
     <string name="main_my_manitto_history">나의 산타 마니또</string>
-    <string name="main_no_manitto_notice">아직 진행중인 마니또가 없어요!</string>
+    <string name="main_no_manitto_notice">친구들과 산타 마니또 게임을 시작해봐!</string>
 
     <string name="joinedroom_exit_room">방 나가기</string>
     <string name="joinedroom_manitto_info">%s의 산타</string>
