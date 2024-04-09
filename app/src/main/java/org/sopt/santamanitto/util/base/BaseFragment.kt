@@ -25,21 +25,9 @@ open class BaseFragment<B : ViewDataBinding>(
 
     override fun onStart() {
         super.onStart()
-        val window = requireActivity().window
 
         if (adjustPan) {
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        } else {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                window.setDecorFitsSystemWindows(false)
-                binding.root.setOnApplyWindowInsetsListener { _, insets ->
-                    val imeHeight = insets.getInsets(WindowInsets.Type.ime()).bottom
-                    binding.root.setPadding(0, 0, 0, imeHeight)
-                    insets
-                }
-            } else {
-                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-            }
+            requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         }
     }
 }
