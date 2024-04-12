@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">santa manito</string>
+    <string name="dev_app_name">rudolf manito</string>
 
     <string name="dialog_confirm">확인</string>
     <string name="dialog_cancel">취소</string>

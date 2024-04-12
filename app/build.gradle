@@ -44,24 +44,34 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+
+            manifestPlaceholders = [
+                    appName: "@string/dev_app_name",
+                    appIcon: "@mipmap/ic_launcher_dev"
+            ]
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+
+            manifestPlaceholders = [
+                    appName: "@string/app_name",
+                    appIcon: "@mipmap/ic_launcher"
+            ]
         }
     }
 
-    flavorDimensions "default"
+    flavorDimensions += "default"
 
     productFlavors {
-        mock {
-            dimension "default"
+        create("mock") {
+            version "default"
             applicationIdSuffix = ".mock"
         }
-        prod {
-            dimension "default"
+        create("prod") {
+            version "default"
         }
     }
 
