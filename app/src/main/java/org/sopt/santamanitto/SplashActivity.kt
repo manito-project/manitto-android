@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil.*
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
@@ -28,6 +29,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)
 
         splashViewModel.run {

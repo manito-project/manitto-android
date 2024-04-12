@@ -18,7 +18,9 @@
         <activity android:name=".user.signin.SignInActivity" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Santa.Splash"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
