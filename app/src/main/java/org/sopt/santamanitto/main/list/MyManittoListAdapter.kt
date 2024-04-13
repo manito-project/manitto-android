@@ -1,18 +1,19 @@
 package org.sopt.santamanitto.main.list
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
-import org.sopt.santamanitto.view.recyclerview.BaseAdapter
+import org.sopt.santamanitto.util.ItemDiffCallback
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 
 class MyManittoListAdapter(
     private val userAuthController: UserAuthController,
     private val userMetadataSource: UserMetadataSource,
     private val roomRequest: RoomRequest
-) : BaseAdapter<MyManittoModel>() {
+) : ListAdapter<MyManittoModel, BaseViewHolder<MyManittoModel, *>>(DiffUtil) {
 
     private var enterListener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null
     private var exitListener: ((roomId: Int, roomName: String, isHost: Boolean) -> Unit)? = null
@@ -36,17 +37,34 @@ class MyManittoListAdapter(
         }
     }
 
+    override fun onBindViewHolder(holder: BaseViewHolder<MyManittoModel, *>, position: Int) {
+        when (holder) {
+            is BasicMyManittoViewHolder -> {
+                holder.clear()
+                holder.bind(getItem(position))
+            }
+            is RemovedMyManttioViewHolder -> {
+                holder.clear()
+                holder.bind(getItem(position))
+            }
+            is ExpiredMyManittoViewHolder -> {
+                holder.clear()
+                holder.bind(getItem(position))
+            }
+        }
+    }
+
     override fun getItemViewType(position: Int): Int {
         return when {
-            items[position].isDeletedByCreator -> 1
-            items[position].isExpiredWithoutMatching -> 2
+            currentList[position].isDeletedByCreator -> 1
+            currentList[position].isExpiredWithoutMatching -> 2
             else -> 0
         }
     }
 
-    override fun clear() {
+     fun clear() {
         cachedMyManittoInfoModel.clear()
-        super.clear()
+        submitList(emptyList())
     }
 
     fun setOnItemClickListener(
@@ -63,5 +81,12 @@ class MyManittoListAdapter(
 
     fun setOnRemoveClickListener(listener: (roomId: Int) -> Unit) {
         this.removeListener = listener
+    }
+
+    companion object {
+        private val DiffUtil = ItemDiffCallback<MyManittoModel>(
+            onContentsTheSame = { oldItem, newItem -> oldItem.roomId == newItem.roomId },
+            onItemsTheSame = { oldItem, newItem -> oldItem == newItem }
+        )
     }
 }
