@@ -89,7 +89,9 @@ class BasicMyManittoViewHolder(
 
     private fun setManittoInfo(info: MyManittoInfoModel) {
         missionText.text = info.mission
-        contentText.text = String.format(getString(R.string.joinedroom_manitto_info), info.manittoName)
+        if (stateText.text != getString(R.string.joinedroom_state_matching)) {
+            contentText.text = String.format(getString(R.string.joinedroom_manitto_info), info.manittoName)
+        }
     }
 
     private fun clearLoading() {
