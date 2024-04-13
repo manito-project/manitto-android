@@ -46,6 +46,9 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeUI() {
+        viewModel.myManittoModelList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
         viewModel.isRefreshing.observe(viewLifecycleOwner) {
             if (it) {
                 adapter.clear()
