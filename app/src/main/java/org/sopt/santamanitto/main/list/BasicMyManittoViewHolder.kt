@@ -43,8 +43,10 @@ class BasicMyManittoViewHolder(
         }
         exitListener?.let { listener ->
             exitButton.setOnClickListener {
-                listener.invoke(data.roomId, data.roomName,
-                    data.creatorId == userMetadataSource.getUserId())
+                listener.invoke(
+                    data.roomId, data.roomName,
+                    data.creatorId == userMetadataSource.getUserId()
+                )
             }
         }
 
@@ -57,28 +59,33 @@ class BasicMyManittoViewHolder(
 
         if (cachedRoomInfo.containsKey(data.roomId)) {
             val info = cachedRoomInfo[data.roomId]!!
-            setManittoInfo(info)
+            setManittoInfo(info = info, isMatched = true)
             clearLoading()
         } else {
-            requestAndCacheInfo(data.roomId)
+            requestAndCacheInfo(roomId = data.roomId, data = data)
         }
     }
 
-    private fun requestAndCacheInfo(roomId: Int) {
+    private fun requestAndCacheInfo(roomId: Int, data: MyManittoModel) {
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
             override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
-                userAuthController.getUserInfo(personalRoom.manittoUserId, object: UserAuthController.GetUserInfoCallback {
-                    override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                        val info = MyManittoInfoModel(userInfoModel.userName, personalRoom.myMission?.content)
-                        cachedRoomInfo[roomId] = info
-                        setManittoInfo(info)
-                        clearLoading()
-                    }
+                userAuthController.getUserInfo(
+                    personalRoom.manittoUserId,
+                    object : UserAuthController.GetUserInfoCallback {
+                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+                            val info = MyManittoInfoModel(
+                                userInfoModel.userName,
+                                personalRoom.myMission?.content
+                            )
+                            cachedRoomInfo[roomId] = info
+                            setManittoInfo(info = info, isMatched = data.isMatchingDone)
+                            clearLoading()
+                        }
 
-                    override fun onDataNotAvailable() {
-                        loadingBar.setError(true)
-                    }
-                })
+                        override fun onDataNotAvailable() {
+                            loadingBar.setError(true)
+                        }
+                    })
             }
 
             override fun onDataNotAvailable() {
@@ -87,11 +94,15 @@ class BasicMyManittoViewHolder(
         })
     }
 
-    private fun setManittoInfo(info: MyManittoInfoModel) {
-        missionText.text = info.mission
-        if (stateText.text != getString(R.string.joinedroom_state_matching)) {
-            contentText.text = String.format(getString(R.string.joinedroom_manitto_info), info.manittoName)
+    private fun setManittoInfo(info: MyManittoInfoModel, isMatched: Boolean) {
+        if (isMatched) {
+            missionText.text = info.mission
+            contentText.text =
+                String.format(getString(R.string.joinedroom_manitto_info), info.manittoName)
+        } else {
+            contentText.text = getString(R.string.joinedroom_santa_info_before_matching)
         }
+
     }
 
     private fun clearLoading() {
@@ -103,8 +114,10 @@ class BasicMyManittoViewHolder(
             showExitButton(false)
             if (TimeUtil.isLaterThanNow(data.expiration)) {
                 //마니또 진행 중
-                stateText.text = String.format(getString(R.string.joinedroom_daydiff),
-                    TimeUtil.getDayDiffFromNow(data.createdAt) * -1 + 1)
+                stateText.text = String.format(
+                    getString(R.string.joinedroom_daydiff),
+                    TimeUtil.getDayDiffFromNow(data.createdAt) * -1 + 1
+                )
                 stateText.setBackgroundTint(R.color.red)
             } else {
                 //결과 발표 완료 시
