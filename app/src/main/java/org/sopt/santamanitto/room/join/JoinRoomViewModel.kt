@@ -36,6 +36,10 @@ class JoinRoomViewModel @Inject constructor(
     val isAlreadyMatchedRoom: LiveData<Boolean>
         get() = _isAlreadyMatchedRoom
 
+    private val _isAlreadyEnteredRoom = MutableLiveData(false)
+    val isAlreadyEnteredRoom: LiveData<Boolean>
+        get() = _isAlreadyEnteredRoom
+
     fun joinRoom(callback: (JoinRoomModel) -> Unit) {
         roomRequest.joinRoom(JoinRoomRequestModel(invitationCode.value!!),
             object : RoomRequest.JoinRoomCallback {
@@ -50,6 +54,7 @@ class JoinRoomViewModel @Inject constructor(
                         JoinRoomError.WrongInvitationCode -> _isWrongInvitationCode.value = true
                         JoinRoomError.AlreadyMatched -> _isAlreadyMatchedRoom.value = true
                         JoinRoomError.DuplicatedMember -> _isDuplicatedMember.value = true
+                        JoinRoomError.AlreadyEntered -> _isAlreadyEnteredRoom.value = true
                         else -> _networkErrorOccur.value = true
                     }
                 }

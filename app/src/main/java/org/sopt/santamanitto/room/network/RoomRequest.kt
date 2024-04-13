@@ -42,7 +42,7 @@ interface RoomRequest {
     }
 
     enum class JoinRoomError {
-        WrongInvitationCode, DuplicatedMember, AlreadyMatched, Els
+        WrongInvitationCode, DuplicatedMember, AlreadyMatched, AlreadyEntered, Els
     }
 
     fun createRoom(request: CreateRoomRequestModel, callback: CreateRoomCallback)
