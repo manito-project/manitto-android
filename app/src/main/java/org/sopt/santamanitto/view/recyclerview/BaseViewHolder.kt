@@ -17,4 +17,5 @@ abstract class BaseViewHolder<T, B : ViewDataBinding>(
     protected var binding: B = DataBindingUtil.bind(itemView)!!
 
     abstract fun bind(data: T)
+    abstract fun clear()
 }
