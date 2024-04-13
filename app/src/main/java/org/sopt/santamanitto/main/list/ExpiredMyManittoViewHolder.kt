@@ -37,4 +37,9 @@ class ExpiredMyManittoViewHolder(
         title.text = data.roomName
         roomId = data.roomId
     }
+
+    override fun clear() {
+        title.text = ""
+        roomId = -1
+    }
 }

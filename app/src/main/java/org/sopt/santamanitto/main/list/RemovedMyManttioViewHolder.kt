@@ -27,4 +27,8 @@ class RemovedMyManttioViewHolder(
     override fun bind(data: MyManittoModel) {
         roomId = data.roomId
     }
+
+    override fun clear() {
+        roomId = -1
+    }
 }

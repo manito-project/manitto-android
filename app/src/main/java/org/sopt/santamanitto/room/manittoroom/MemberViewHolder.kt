@@ -22,4 +22,11 @@ class MemberViewHolder(parent: ViewGroup)
             textviewMemberitemName.text = data.userName
         }
     }
+
+    override fun clear() {
+        binding.run {
+            imageviewMemberitemImage.setImageResource(0)
+            textviewMemberitemName.text = ""
+        }
+    }
 }

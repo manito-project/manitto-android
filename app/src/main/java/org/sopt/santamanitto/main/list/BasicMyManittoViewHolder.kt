@@ -66,6 +66,15 @@ class BasicMyManittoViewHolder(
         }
     }
 
+    override fun clear() {
+        roomName.text = ""
+        contentText.text = getString(R.string.joinedroom_santa_info_before_matching)
+        stateText.text = ""
+        missionText.text = ""
+        loadingBar.visibility = View.VISIBLE
+        exitButton.visibility = View.GONE
+    }
+
     private fun requestAndCacheInfo(roomId: Int, data: MyManittoModel) {
         roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
             override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
