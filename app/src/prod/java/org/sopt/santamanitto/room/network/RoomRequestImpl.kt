@@ -1,7 +1,11 @@
 package org.sopt.santamanitto.room.network
 
 import okhttp3.ResponseBody
-import org.sopt.santamanitto.network.*
+import org.sopt.santamanitto.network.AuthRetrofitClient
+import org.sopt.santamanitto.network.RequestCallback
+import org.sopt.santamanitto.network.Response
+import org.sopt.santamanitto.network.SimpleResponse
+import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
@@ -25,6 +29,7 @@ class RoomRequestImpl(
         private const val JOIN_ROOM_ERROR_ALREADY_MATCHED = "이미 매칭이 완료된 방입니다"
         private const val JOIN_ROOM_ERROR_DUPLICATED_MEMBER = "이미 있는 멤버입니다"
         private const val JOIN_ROOM_ERROR_WRONG_INVITATION_CODE = "초대코드가 잘못되었습니다"
+        private const val JOIN_ROOM_ERROR_ALREADY_ENTERED = "이미 입장했던 방입니다"
     }
 
     override fun createRoom(
@@ -72,7 +77,10 @@ class RoomRequestImpl(
                         JOIN_ROOM_ERROR_ALREADY_MATCHED -> RoomRequest.JoinRoomError.AlreadyMatched
                         JOIN_ROOM_ERROR_DUPLICATED_MEMBER -> RoomRequest.JoinRoomError.DuplicatedMember
                         JOIN_ROOM_ERROR_WRONG_INVITATION_CODE -> RoomRequest.JoinRoomError.WrongInvitationCode
-                        else -> RoomRequest.JoinRoomError.Els
+                        JOIN_ROOM_ERROR_ALREADY_ENTERED -> RoomRequest.JoinRoomError.AlreadyEntered
+                        else -> {
+                            RoomRequest.JoinRoomError.Els
+                        }
                     }
                     callback.onFailed(error)
                 }
