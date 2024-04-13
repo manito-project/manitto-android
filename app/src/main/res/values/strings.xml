@@ -35,7 +35,7 @@
     <string name="joinedroom_daydiff">%d일째</string>
     <string name="joinedroom_state_done">결과 발표 완료</string>
     <string name="joinedroom_state_matching">매칭 대기 중</string>
-    <string name="joinedroom_santa_info_before_matching">누구의 산타가 될까요?</string>
+    <string name="joinedroom_santa_info_before_matching">나의 산타는 누구?</string>
 
     <string name="santaloading_data_not_available">데이터를 불러오지 못했습니다.</string>
 
