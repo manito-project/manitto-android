@@ -37,4 +37,12 @@ class ResultViewHolder(
                 }
             })
     }
+
+    override fun clear() {
+        binding.run {
+            textviewItemresultSanta.text = ""
+            textviewItemresultMinitto.text = ""
+            santaloadingItemresult.visibility = View.VISIBLE
+        }
+    }
 }
