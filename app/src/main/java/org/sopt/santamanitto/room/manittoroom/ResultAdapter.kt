@@ -1,18 +1,28 @@
 package org.sopt.santamanitto.room.manittoroom
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.user.data.controller.UserAuthController
-import org.sopt.santamanitto.view.recyclerview.BaseAdapter
-import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
+import org.sopt.santamanitto.util.ItemDiffCallback
 
-class ResultAdapter(private val userAuthController: UserAuthController) :
-    BaseAdapter<ManittoRoomMember>() {
+class ResultAdapter(
+    private val userAuthController: UserAuthController
+) : ListAdapter<ManittoRoomMember, ResultViewHolder>(DiffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<ManittoRoomMember, *> {
-        return ResultViewHolder(parent, userAuthController)
+    ): ResultViewHolder = ResultViewHolder(parent, userAuthController)
+
+    override fun onBindViewHolder(holder: ResultViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    companion object {
+        private val DiffUtil = ItemDiffCallback<ManittoRoomMember>(
+            onContentsTheSame = { oldItem, newItem -> oldItem.relations.manittoUserId == newItem.relations.manittoUserId },
+            onItemsTheSame = { oldItem, newItem -> oldItem == newItem }
+        )
     }
 }

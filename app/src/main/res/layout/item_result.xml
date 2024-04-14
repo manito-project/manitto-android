@@ -59,12 +59,12 @@
         <org.sopt.santamanitto.view.SantaLoading
             android:id="@+id/santaloading_itemresult"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/textview_itemresult_santa"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tool:visibility="gone" />
+            app:layout_constraintTop_toTopOf="@id/textview_itemresult_santa"
+/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
