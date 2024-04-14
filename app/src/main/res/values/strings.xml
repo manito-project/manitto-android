@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">santa manito</string>
+    <string name="app_name">santa manitto</string>
+    <string name="dev_app_name">rudolf manitto</string>
 
     <string name="dialog_confirm">확인</string>
     <string name="dialog_cancel">취소</string>
@@ -25,9 +26,9 @@
     <string name="main_make_room">방 만들기</string>
     <string name="main_join_room">방 입장하기</string>
     <string name="main_make_room_description">새로운 산타\n마니또 시작하기</string>
-    <string name="main_join_room_description">산타 마니또\n입장 코드 입력하기</string>
-    <string name="main_my_manitto_history">나의 산타 마니또</string>
-    <string name="main_no_manitto_notice">아직 진행중인 마니또가 없어요!</string>
+    <string name="main_join_room_description">초대 코드 입력하고\n마니또 방 들어가기</string>
+    <string name="main_my_manitto_history">진행중인 산타 마니또</string>
+    <string name="main_no_manitto_notice">친구들과 산타 마니또 게임을 시작해봐!</string>
 
     <string name="joinedroom_exit_room">방 나가기</string>
     <string name="joinedroom_manitto_info">%s의 산타</string>
@@ -68,11 +69,11 @@
     <string name="createconfirm_done_dialog">초대 코드를 복사해서 친구들에게 보내줘!</string>
 
     <string name="joinroom_background_title">방 입장하기</string>
-    <string name="joinroom_background_description">코드를 입력하면 방으로 이동할거야!\n산타 마니또를 찾아 떠나볼까?</string>
-    <string name="joinroom_participation_code_hint">참여코드를 입력해주세요</string>
+    <string name="joinroom_background_description">코드를 입력하고 초대된 방으로\n산타 마니또를 찾아 떠나볼까?</string>
+    <string name="joinroom_participation_code_hint">초대 코드 입력 시, 공백을 조심해줘!</string>
     <string name="joinroom_dialog_duplicated_member">이미 참여 중인 방이야!</string>
-    <string name="joinroom_dialog_already_matched">참여가 불가능한 방이야!</string>
-    <string name="joinroom_dialog_wrong_invitation_code">참여가 불가능한 방이야!</string>
+    <string name="joinroom_dialog_already_matched">이미 입장한 방이야!</string>
+    <string name="joinroom_dialog_wrong_invitation_code">참여가 불가능한 방이야!\n혹시 초대 코드에 공백이 있는지 확인해줘!</string>
 
     <string name="waitingroom_cardview_title">참여자</string>
     <string name="waitingroom_copy_invitation_code">초대 코드 복사</string>
@@ -104,7 +105,9 @@
 
     <string name="editname_background">내 이름을\n변경할 수 있어!</string>
 
-    <string name="exit_dialog_host">방장이 나가면 팀원들도\n방을 이용할 수 없어!</string>
+    <string name="exit_dialog_host">방장이 나가면 친구들도\n방을 나가게 되는데 괜찮을까?</string>
+    <string name="exit_dialog_host_confirm">방 나가기</string>
+    <string name="exit_dialog_host_cancel">방에 머무르기</string>
     <string name="exit_dialog_guest">%s\n이 방을 나가는 거 맞지?</string>
     <string name="exit_dialog_history">나의 산타 마니또에서\n삭제하는거 맞지?</string>
 

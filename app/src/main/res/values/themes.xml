@@ -23,6 +23,11 @@
         <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
     </style>
 
+    <style name="Theme.Santa.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="postSplashScreenTheme">@style/AppTheme.Base</item>
+    </style>
+
     <style name="TitleOfCardView" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray_3</item>
         <item name="android:textStyle">bold</item>
