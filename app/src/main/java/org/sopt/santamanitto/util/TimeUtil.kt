@@ -34,7 +34,9 @@ object TimeUtil {
     }
 
     fun isLaterThanNow(target: String): Boolean {
-        return getDateInstanceFromLocalFormat(target).time >= Date().time
+        val targetCal = getGregorianCalendarFromLocalFormat(target)
+        val nowCal = GregorianCalendar(Locale.KOREA)
+        return targetCal.timeInMillis >= nowCal.timeInMillis
     }
 
     fun getLocalFormatFromGregorianCalendar(gregorianCalendar: GregorianCalendar): String {

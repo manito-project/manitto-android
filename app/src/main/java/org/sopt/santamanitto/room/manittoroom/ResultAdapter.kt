@@ -6,7 +6,8 @@ import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.view.recyclerview.BaseAdapter
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 
-class ResultAdapter(private val userAuthController: UserAuthController): BaseAdapter<ManittoRoomMember>() {
+class ResultAdapter(private val userAuthController: UserAuthController) :
+    BaseAdapter<ManittoRoomMember>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
