@@ -22,12 +22,24 @@ android {
 
         Properties properties = new Properties()
         properties.load(rootProject.file('./local.properties').newDataInputStream())
+
+        def keystorePropertiesFile = rootProject.file("keystore.properties")
+        def keystoreProperties = new Properties()
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
         buildConfigField("String", "BASE_URL", properties['baseUrl'])
         buildConfigField("String", "TOS_URL", properties['tosUrl'])
         buildConfigField("String", "PRIVACY_POLICY_RUL", properties['privacyPolicyUrl'])
-    }
 
-    android {
+        signingConfigs {
+            release {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyPassword keystoreProperties['keyPassword']
+                keyAlias keystoreProperties['keyAlias']
+            }
+        }
+
         sourceSets {
             String sharedTestDir = 'src/sharedTest/java'
             test {
@@ -55,6 +67,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+            signingConfig signingConfigs.release
 
             manifestPlaceholders = [
                     appName: "@string/app_name",
