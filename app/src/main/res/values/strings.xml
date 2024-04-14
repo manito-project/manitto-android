@@ -11,6 +11,8 @@
     <string name="pm">오후</string>
     <string name="am">오전</string>
 
+    <string name="main_back_pressed">뒤로가기 버튼을 한번 더 누르면 종료됩니다.</string>
+
     <string name="santaperiodpicker_period">%d일 후</string>
     <string name="entername_background_welcome">이용약관에 동의하면\n산타 마니또 게임을 할 수 있어!</string>
     <string name="entername_title">기본 설정</string>
