@@ -134,6 +134,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.8.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-config-ktx'
 
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.7.0"
