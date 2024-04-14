@@ -91,7 +91,7 @@ class SplashViewModel @Inject constructor(
     private fun fetchRemoteConfig() {
         getRemoteConfigInstance().fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                _remoteServerCheck.value = getRemoteConfigInstance().getBoolean("test_server_check")
+                _remoteServerCheck.value = getRemoteConfigInstance().getBoolean("server_check")
                 _remoteServerCheckMessage.value =
                     getRemoteConfigInstance().getString("server_check_message")
             } else {
