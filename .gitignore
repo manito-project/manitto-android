@@ -34,6 +34,7 @@ proguard/
 # Android Studio
 /*/build/
 /*/local.properties
+/*/keystore.properties
 /*/out
 /*/*/build
 /*/*/production
