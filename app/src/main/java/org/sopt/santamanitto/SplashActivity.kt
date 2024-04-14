@@ -8,13 +8,13 @@ import android.os.Looper
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.databinding.DataBindingUtil.*
+import androidx.databinding.DataBindingUtil.setContentView
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
-import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.user.signin.SignInActivity
+import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
@@ -106,8 +106,8 @@ class SplashActivity : AppCompatActivity() {
                 }
                 else -> {
                     RoundDialogBuilder()
-                            .setContentText("네트워크 연결 상태가 좋지 않아!\n확인 후 다시 시도해줘!", false)
-                            .addHorizontalButton("확인") {
+                        .setContentText(getString(R.string.splash_network_error_dialog), false)
+                        .addHorizontalButton(getString(R.string.splash_network_error_dialog_button)) {
                                 finish()
                             }
                             .build()

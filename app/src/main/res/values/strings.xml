@@ -129,5 +129,8 @@
     <string name="mymanitto_epired_dialog">매칭 기간이 지나버렸어\n우리 새로운 방을 만들어볼래?</string>
     <string name="mymanitto_epired_dialog_button">홈으로 가기</string>
 
+    <string name="splash_network_error_dialog">네트워크 연결이 불안정한 상태야.\n연결 상태를 확인해줘.</string>
+    <string name="splash_network_error_dialog_button">확인 후 앱 닫기</string>
+
 
 </resources>
