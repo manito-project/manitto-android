@@ -5,29 +5,46 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        tools:replace="icon, label"
         android:name=".SantaManittoApplication"
         android:allowBackup="true"
         android:icon="${appIcon}"
         android:label="${appName}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Base"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".room.manittoroom.ManittoRoomActivity" />
-        <activity android:name=".room.create.CreateRoomActivity" />
-        <activity android:name=".user.signin.SignInActivity" />
+        android:usesCleartextTraffic="true"
+        tools:replace="icon, label">
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Santa.Splash"
-            >
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Santa.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" />
+
+        <activity
+            android:name=".room.manittoroom.ManittoRoomActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".room.create.CreateRoomActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".user.signin.SignInActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
