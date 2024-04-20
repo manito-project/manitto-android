@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             style="@style/SantaBackground.BigTitle"
-            app:bigTitle="@string/entername_background_welcome"
+            app:bigTitle="@string/condition_background_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintStart_toStartOf="parent"
