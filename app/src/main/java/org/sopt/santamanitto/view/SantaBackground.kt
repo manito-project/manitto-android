@@ -46,6 +46,8 @@ class SantaBackground @JvmOverloads constructor(
 
     private val descriptionTextView = binding.textviewSantabackgroundDescription
 
+    private val middleTitleTextView = binding.textviewSantabackgroundMiddleTitle
+
     var isBackKeyEnabled: Boolean
         get() = backButton.visibility == View.VISIBLE
         set(value) {
@@ -68,7 +70,9 @@ class SantaBackground @JvmOverloads constructor(
         set(value) {
             setVisible(titleTextView)
             titleTextView.text = if (value.length > MAX_LENGTH_PER_A_LINE_TITLE) {
-                value.substring(0, MAX_LENGTH_PER_A_LINE_TITLE) + "\n" + value.substring(MAX_LENGTH_PER_A_LINE_TITLE)
+                value.substring(0, MAX_LENGTH_PER_A_LINE_TITLE) + "\n" + value.substring(
+                    MAX_LENGTH_PER_A_LINE_TITLE
+                )
             } else {
                 value
             }
@@ -79,6 +83,13 @@ class SantaBackground @JvmOverloads constructor(
         set(value) {
             setVisible(descriptionTextView)
             descriptionTextView.text = value
+        }
+
+    var middleTitle: String
+        get() = middleTitleTextView.text.toString()
+        set(value) {
+            setVisible(middleTitleTextView)
+            middleTitleTextView.text = value
         }
 
     init {
@@ -149,6 +160,13 @@ class SantaBackground @JvmOverloads constructor(
             val str = typeArray.getString(R.styleable.SantaBackground_santaDescription)
             if (!str.isNullOrEmpty()) {
                 description = str
+            }
+        }
+
+        if (typeArray.hasValue(R.styleable.SantaBackground_middleTitle)) {
+            val str = typeArray.getString(R.styleable.SantaBackground_middleTitle)
+            if (!str.isNullOrEmpty()) {
+                middleTitle = str
             }
         }
 

@@ -64,6 +64,9 @@
     <dimen name="size_santabackground_description">14sp</dimen>
     <dimen name="margin_santabackground_description_bottom">80dp</dimen>
     <dimen name="margin_santabakcground_title">16dp</dimen>
+    <dimen name="margin_santabackground_middle_title_start">20dp</dimen>
+    <dimen name="margin_santabackground_middle_title_bottom">20dp</dimen>
+    <dimen name="size_santabackground_middle_title">16sp</dimen>
 
     <dimen name="size_santaindicator_text">15sp</dimen>
 
