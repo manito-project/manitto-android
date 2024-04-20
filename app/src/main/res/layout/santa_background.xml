@@ -62,19 +62,33 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textview_santabackground"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_santabackground_text_start"
-            android:layout_marginEnd="@dimen/margin_santabackground_text_end"
             android:layout_marginBottom="@dimen/margin_santabackground_text_bottom"
             android:elevation="@dimen/elevation_shadow"
             android:textColor="@color/white"
-            android:textFontWeight="700"
+            android:textFontWeight="600"
             android:textSize="@dimen/size_santabackground_text"
             android:visibility="gone"
-            app:fontWeight="700"
+            app:fontWeight="600"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/imageview_santabackground_santahead"
+            app:layout_constraintStart_toStartOf="parent"
+            tool:text="안녕!\n산타 마니또에 온 것을 환영해:)" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_santabackground_middle_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_santabackground_middle_title_start"
+            android:layout_marginBottom="@dimen/margin_santabackground_middle_title_bottom"
+            android:elevation="@dimen/elevation_shadow"
+            android:textColor="@color/white"
+            android:textFontWeight="600"
+            android:textSize="@dimen/size_santabackground_middle_title"
+            android:visibility="gone"
+            app:fontWeight="600"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tool:text="안녕!\n산타 마니또에 온 것을 환영해:)" />
 
