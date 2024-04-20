@@ -39,17 +39,18 @@
     </declare-styleable>
 
     <declare-styleable name="SantaBackground">
-        <attr name="backKey" format="boolean"/>
+        <attr name="backKey" format="boolean" />
 
-        <attr name="backgroundLogo" format="boolean"/>
-        <attr name="santa" format="boolean"/>
+        <attr name="backgroundLogo" format="boolean" />
+        <attr name="santa" format="boolean" />
         <attr name="santaHead" format="boolean" />
         <attr name="rudolf" format="boolean" />
         <attr name="snowMan" format="boolean" />
         <attr name="snowflake" format="boolean" />
-        <attr name="bigTitle" format="string"/>
-        <attr name="santaTitle" format="string"/>
-        <attr name="santaDescription" format="string"/>
+        <attr name="bigTitle" format="string" />
+        <attr name="santaTitle" format="string" />
+        <attr name="santaDescription" format="string" />
+        <attr name="middleTitle" format="string" />
     </declare-styleable>
 
     <declare-styleable name="SantaIndicator">
