@@ -40,6 +40,7 @@ class EditNameViewModel
             ) { isSuccess ->
                 if (isSuccess) {
                     userMetadataSource.setUserNameDirty()
+                    userMetadataSource.setUserName(newName.value.orEmpty())
                     _requestDone.value = true
                 } else {
                     _networkErrorOccur.value = true
