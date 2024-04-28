@@ -107,6 +107,7 @@
     <string name="santanameinput_alert">・이름은 최대 %d자까지 설정 가능해</string>
 
     <string name="editname_background">이름은 최대 10자까지\n입력할 수 있어!</string>
+    <string name="editname_finish">이름을 성공적으로 변경했어!</string>
 
     <string name="exit_dialog_host">방장이 나가면 친구들도\n방을 나가게 되는데 괜찮을까?</string>
     <string name="exit_dialog_host_confirm">방 나가기</string>

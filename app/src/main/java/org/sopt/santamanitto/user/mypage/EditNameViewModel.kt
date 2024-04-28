@@ -10,35 +10,40 @@ import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
 import javax.inject.Inject
 
 @HiltViewModel
-class EditNameViewModel @Inject constructor(
+class EditNameViewModel
+    @Inject
+    constructor(
         private val userMetadataSource: CachedUserMetadataSource,
-        private val userAuthController: UserAuthController
-) : NetworkViewModel() {
+        private val userAuthController: UserAuthController,
+    ) : NetworkViewModel() {
+        val previousName = userMetadataSource.getUserName()
 
-    val previousName = userMetadataSource.getUserName()
+        val newName = MutableLiveData<String>(null)
 
-    val newName = MutableLiveData<String>(null)
+        val isUserNameValid: LiveData<Boolean> =
+            newName.map {
+                !it.isNullOrBlank()
+            }
 
-    val isUserNameValid: LiveData<Boolean> = newName.map {
-        !it.isNullOrBlank()
-    }
+        private val _requestDone = MutableLiveData(false)
+        val requestDone: LiveData<Boolean>
+            get() = _requestDone
 
-    private val _requestDone = MutableLiveData(false)
-    val requestDone: LiveData<Boolean>
-        get() = _requestDone
-
-    fun requestChangeName() {
-        if (newName.value == previousName) {
-            _requestDone.value = true
-            return
-        }
-        userAuthController.changeUserName(userMetadataSource.getUserId(), newName.value!!) {
-            if (it) {
-                userMetadataSource.setUserNameDirty()
+        fun requestChangeName() {
+            if (newName.value == previousName) {
                 _requestDone.value = true
-            } else {
-                _networkErrorOccur.value = true
+                return
+            }
+            userAuthController.changeUserName(
+                userMetadataSource.getUserId(),
+                newName.value.orEmpty(),
+            ) { isSuccess ->
+                if (isSuccess) {
+                    userMetadataSource.setUserNameDirty()
+                    _requestDone.value = true
+                } else {
+                    _networkErrorOccur.value = true
+                }
             }
         }
     }
-}
