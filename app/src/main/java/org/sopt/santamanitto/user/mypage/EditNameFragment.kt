@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentEditNameBinding
+import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
 import org.sopt.santamanitto.util.base.BaseFragment
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment
 
         setOnClickListener()
         observeChangeRequest()
+        hideKeyboardOnOutsideEditText()
     }
 
     private fun setOnClickListener() {
@@ -30,7 +32,6 @@ class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment
             santabackgroundEditname.setOnBackKeyClickListener {
                 findNavController().navigateUp()
             }
-            //  buttonSettingBack.setOnClickListener { findNavController().navigateUp() }
         }
     }
 

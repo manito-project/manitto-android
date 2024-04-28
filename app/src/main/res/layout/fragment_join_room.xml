@@ -19,12 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:backKey="true"
-            app:santaDescription="@string/joinroom_background_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:santaDescription="@string/joinroom_background_description"
             app:santaTitle="@string/joinroom_background_title" />
 
         <View
