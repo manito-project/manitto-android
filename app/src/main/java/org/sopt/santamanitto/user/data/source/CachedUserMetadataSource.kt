@@ -1,6 +1,7 @@
 package org.sopt.santamanitto.user.data.source
 
-class CachedUserMetadataSource(private val userPreferenceManager: UserMetadataSource): UserMetadataSource {
+class CachedUserMetadataSource(private val userPreferenceManager: UserMetadataSource) :
+    UserMetadataSource {
     private var cachedUserId: Int? = null
     private var cachedAccessToken: String? = null
     private var cachedUserName: String? = null

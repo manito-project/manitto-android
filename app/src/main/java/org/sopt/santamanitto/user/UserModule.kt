@@ -19,12 +19,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class UserModule {
-
     @SuppressLint("HardwareIds")
     @Provides
     @Named("serialNumber")
-    fun provideSerialNumber(@ApplicationContext context: Context) =
-            Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    fun provideSerialNumber(
+        @ApplicationContext context: Context,
+    ) = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
 
     @Provides
     @Singleton
@@ -34,12 +34,12 @@ class UserModule {
     @Provides
     @Singleton
     fun provideUserMetadataSource(userPreferenceManager: UserPreferenceManager): UserMetadataSource =
-            CachedUserMetadataSource(userPreferenceManager)
+        CachedUserMetadataSource(userPreferenceManager)
 
     @Provides
     @Singleton
     fun provideCachedMainUserData(
         userMetadataSource: UserMetadataSource,
-        userAuthController: UserAuthController
+        userAuthController: UserAuthController,
     ): CachedMainUserDataSource = CachedMainUserDataSource(userMetadataSource, userAuthController)
 }
