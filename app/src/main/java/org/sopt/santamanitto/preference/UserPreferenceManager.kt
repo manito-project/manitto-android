@@ -2,8 +2,8 @@ package org.sopt.santamanitto.preference
 
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 
-class UserPreferenceManager(private val preferenceManager: SharedPreferenceManager) : UserMetadataSource {
-
+class UserPreferenceManager(private val preferenceManager: SharedPreferenceManager) :
+    UserMetadataSource {
     companion object {
         private const val PREF_KEY_USER_ID = "user_id"
         private const val PREF_KEY_SERIAL_NUMBER = "serial_number"
