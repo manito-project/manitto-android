@@ -26,7 +26,6 @@ import org.sopt.santamanitto.util.ClipBoardUtil
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
 class CreateConfirmFragment : Fragment(), CreateMissionAdaptor.CreateMissionCallback {
-
     private lateinit var binding: FragmentCreateConfirmBinding
 
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
@@ -34,13 +33,16 @@ class CreateConfirmFragment : Fragment(), CreateMissionAdaptor.CreateMissionCall
     private val createConfirmAdapter = CreateConfirmAdaptor(this)
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentCreateConfirmBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
-            vm = viewModel
-            recyclerviewCreateconfirm.adapter = createConfirmAdapter
-        }
+        binding =
+            FragmentCreateConfirmBinding.inflate(inflater, container, false).apply {
+                lifecycleOwner = viewLifecycleOwner
+                vm = viewModel
+                recyclerviewCreateconfirm.adapter = createConfirmAdapter
+            }
 
         initRecyclerView()
 
@@ -65,29 +67,35 @@ class CreateConfirmFragment : Fragment(), CreateMissionAdaptor.CreateMissionCall
     }
 
     private fun showInvitationCodeDialog(createRoom: CreateRoomModel) {
-        RoundDialogBuilder().setContentText(getString(R.string.createconfirm_done_dialog))
-            .setInvitationCode(createRoom.invitationCode) {
-                ClipBoardUtil.copy(
-                    requireContext(),
-                    INVITATION_CODE_LABEL,
-                    createRoom.invitationCode
-                )
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                    Toast.makeText(
+        if (context != null) {
+            RoundDialogBuilder().setContentText(getString(R.string.createconfirm_done_dialog))
+                .setInvitationCode(createRoom.invitationCode) {
+                    ClipBoardUtil.copy(
                         requireContext(),
-                        getString(org.sopt.santamanitto.R.string.waitingroom_snackbar_invitation_code),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                startMatchingRoomActivity(createRoom.id)
-            }.enableCancel(false).build().show(parentFragmentManager, "invitation_code_dialog")
+                        INVITATION_CODE_LABEL,
+                        createRoom.invitationCode,
+                    )
+                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.waitingroom_snackbar_invitation_code),
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    }
+                    startMatchingRoomActivity(createRoom.id)
+                }.enableCancel(false).build().show(parentFragmentManager, "invitation_code_dialog")
+        } else {
+            startMatchingRoomActivity(createRoom.id)
+        }
     }
 
     private fun startMatchingRoomActivity(createdRoomId: Int) {
         requireActivity().run {
-            startActivity(Intent(this, ManittoRoomActivity::class.java).apply {
-                putExtra(EXTRA_ROOM_ID, createdRoomId)
-            })
+            startActivity(
+                Intent(this, ManittoRoomActivity::class.java).apply {
+                    putExtra(EXTRA_ROOM_ID, createdRoomId)
+                },
+            )
             finish()
         }
     }
@@ -99,9 +107,10 @@ class CreateConfirmFragment : Fragment(), CreateMissionAdaptor.CreateMissionCall
 
     private fun setRecyclerViewHeight() {
         binding.recyclerviewCreateconfirm.run {
-            layoutParams = layoutParams.apply {
-                height = viewModel.heightOfRecyclerView
-            }
+            layoutParams =
+                layoutParams.apply {
+                    height = viewModel.heightOfRecyclerView
+                }
         }
     }
 
