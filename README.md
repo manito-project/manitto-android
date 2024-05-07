@@ -147,4 +147,6 @@ mock, prod Flavors를 추가해 위와 같이 빌드 형상을 나누어 개발�
 
 ## 개발자  
 
-- [김성규](https://github.com/SEONGGYU96) (단독)
+- [김성규](https://github.com/SEONGGYU96)
+- [김상호](https://github.com/Marchbreeze)
+- [이태희](https://github.com/taeheeL)
