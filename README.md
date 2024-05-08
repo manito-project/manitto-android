@@ -126,7 +126,8 @@ mock, prod Flavors를 추가해 위와 같이 빌드 형상을 나누어 개발�
 ## 사용 라이브러리  
 
 - [firebase-analytics-ktx](https://firebase.google.com/docs/analytics?authuser=4) : 앱을 사용하는 유저들의 현황을 파악하기 위해 사용했습니다.
-- [firebase-crashlytics-ktx](https://firebase.google.com/docs/crashlytics?authuser=4) : 미처 대응하지 못한 비정상 종료의 원인을 파악하고 수정하기 위해 사용했습니다.  
+- [firebase-crashlytics-ktx](https://firebase.google.com/docs/crashlytics?authuser=4) : 미처 대응하지 못한 비정상 종료의 원인을 파악하고 수정하기 위해 사용했습니다.
+- [firebase-config-ktx](https://firebase.google.com/docs/remote-config) : 서버 점검 시 별도의 업데이트 없이 간편하게 점검 팝업을 띄우기 위해 사용했습니다.
 - [hilt-android](https://github.com/google/dagger) : DI를 간편하게 적용하기 위해 사용하였습니다.  
 - [retrofit](https://github.com/square/retrofit) : 서버와의 HTTP 통신을 위해 사용했습니다.
 - 그 외 : `Room`, `navigation-fragment-ktx`, `lifecycle-extensions` 등  
@@ -135,11 +136,11 @@ mock, prod Flavors를 추가해 위와 같이 빌드 형상을 나누어 개발�
 
 ## 개발 환경  
 
-- IDE : AndroidStudio 4.1.1
+- IDE : AndroidStudio Iguana
 - Platform : Android
 - SdkVersion
-    - compile : 30
-    - target : 30
+    - compile : 34
+    - target : 34
     - min : 23
 - Language : Kotlin
 
