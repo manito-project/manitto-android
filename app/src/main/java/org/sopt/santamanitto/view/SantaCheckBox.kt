@@ -3,26 +3,22 @@ package org.sopt.santamanitto.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.CheckBox
 import android.widget.FrameLayout
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener
 import androidx.lifecycle.LiveData
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaCheckBoxBinding
 
 class SantaCheckBox @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val binding = DataBindingUtil.inflate<SantaCheckBoxBinding>(
-            LayoutInflater.from(context),
-            R.layout.santa_check_box,
-            this, true
+        LayoutInflater.from(context),
+        R.layout.santa_check_box,
+        this, true
     )
 
     private val checkBox = binding.checkboxSantacheckbox
@@ -54,9 +50,10 @@ class SantaCheckBox @JvmOverloads constructor(
     init {
         //사용자 속성
         val typeArray = context.theme.obtainStyledAttributes(
-                attrs,
-                R.styleable.SantaCheckBox,
-                0, 0)
+            attrs,
+            R.styleable.SantaCheckBox,
+            0, 0
+        )
 
         //버튼 문구
         if (typeArray.hasValue(R.styleable.SantaCheckBox_text)) {
@@ -103,7 +100,7 @@ class SantaCheckBox @JvmOverloads constructor(
         hasChild = true
     }
 
-    fun setOnCheckedChangedListener(listener: (isChecked: Boolean) -> Unit) {
+    private fun setOnCheckedChangedListener(listener: (isChecked: Boolean) -> Unit) {
         binding.checkboxSantacheckbox.setOnCheckedChangeListener { _, isChecked ->
             listener(isChecked)
         }
