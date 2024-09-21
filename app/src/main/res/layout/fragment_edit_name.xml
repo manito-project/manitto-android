@@ -29,7 +29,6 @@
 
         <org.sopt.santamanitto.view.SantaNameInput
             android:id="@+id/nameinput_editname"
-            setText="@={vm.newName}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
