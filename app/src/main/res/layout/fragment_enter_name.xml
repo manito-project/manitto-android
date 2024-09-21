@@ -14,7 +14,7 @@
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_entername"
             style="@style/SantaBackground.BigTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
@@ -62,7 +62,7 @@
 
         <org.sopt.santamanitto.view.SantaNameInput
             android:id="@+id/santanameinput_entername"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginTop="@dimen/margin_signin_cardview_top"
@@ -75,7 +75,7 @@
 
         <org.sopt.santamanitto.view.SantaBottomButton
             android:id="@+id/santabottombutton_entername"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_signin_button_bottom"
