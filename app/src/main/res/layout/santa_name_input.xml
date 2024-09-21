@@ -26,15 +26,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_nameinput_alert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/size_santainputname_alert"
-            android:text="@string/santanameinput_alert"
-            app:layout_constraintTop_toTopOf="@id/textview_nameinput_title"
-            app:layout_constraintBottom_toBottomOf="@id/textview_nameinput_title"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/textview_nameinput_alert"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:textSize="@dimen/size_santainputname_alert"-->
+        <!--            android:text="@string/santanameinput_alert"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/textview_nameinput_title"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/textview_nameinput_title"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"/>-->
 
         <org.sopt.santamanitto.view.SantaEditText
             android:id="@+id/edittext_nameinput_name"
