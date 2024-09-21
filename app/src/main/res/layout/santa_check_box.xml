@@ -39,17 +39,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tool:text="체크박스 설명" />
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageview_santacheckbox_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
