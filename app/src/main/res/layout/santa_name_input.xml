@@ -42,6 +42,8 @@
             android:layout_height="@dimen/height_santaedittext_big"
             android:layout_marginTop="@dimen/margin_signin_edittext_top"
             android:layout_marginBottom="@dimen/padding_signin_cardview_bottom_additional"
+            app:maxLength="10"
+            app:maxLines="1"
             app:hint="@string/entername_edittext_hint"
             app:isSingleLine="true"
             app:layout_constraintBottom_toBottomOf="parent"
