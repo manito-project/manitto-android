@@ -3,8 +3,12 @@ package org.sopt.santamanitto.user.signin.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentEnterNameBinding
 import org.sopt.santamanitto.user.signin.viewmodel.EnterNameViewModel
@@ -18,15 +22,46 @@ class EnterNameFragment :
     private val viewModel: EnterNameViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.viewModel = viewModel
+        observeUserName()
+        observeUserNameValidation()
+        setupButtonClickListener()
+        hideKeyboardOnOutsideEditText()
+    }
+
+    private fun observeUserName() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.userName.collect { userName ->
+                    if (binding.santanameinputEntername.getText() != userName) {
+                        binding.santanameinputEntername.setText(userName)
+                    }
+                }
+            }
+        }
+
+        binding.santanameinputEntername.observeTextChanges { text ->
+            viewModel.setUserName(text)
+        }
+    }
+
+    private fun observeUserNameValidation() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isUserNameValid.collect { isValid ->
+                    binding.santabottombuttonEntername.isEnabled = isValid
+                }
+            }
+        }
+    }
+
+    private fun setupButtonClickListener() {
         binding.santabottombuttonEntername.setOnClickListener {
             val userName = viewModel.userName.value
-            if (userName != null) {
+            if (userName.isNotBlank()) {
                 val direction =
                     EnterNameFragmentDirections.actionEnterNameFragmentToConditionFragment(userName)
                 findNavController().navigate(direction)
             }
         }
-        hideKeyboardOnOutsideEditText()
     }
 }

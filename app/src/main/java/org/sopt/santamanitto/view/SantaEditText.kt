@@ -11,14 +11,12 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaEditTextBinding
-import java.util.*
-
 
 class SantaEditText @JvmOverloads
 constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), TextObservable {
 
     companion object {
@@ -28,10 +26,10 @@ constructor(
     }
 
     private var binding: SantaEditTextBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(context),
-            R.layout.santa_edit_text,
-            this,
-            true
+        LayoutInflater.from(context),
+        R.layout.santa_edit_text,
+        this,
+        true
     )
 
     private val editText = binding.edittextSantaedittext
@@ -50,7 +48,6 @@ constructor(
             editText.hint = value
         }
 
-
     override var text: String?
         get() = editText.text.toString()
         set(value) {
@@ -65,9 +62,10 @@ constructor(
 
     init {
         val typeArray = context.theme.obtainStyledAttributes(
-                attrs,
-                R.styleable.SantaEditText,
-                0, 0)
+            attrs,
+            R.styleable.SantaEditText,
+            0, 0
+        )
 
         if (typeArray.hasValue(R.styleable.SantaEditText_rightButton)) {
             buttonStyle = typeArray.getInt(R.styleable.SantaEditText_rightButton, BUTTON_NONE)
@@ -78,7 +76,8 @@ constructor(
         }
 
         if (typeArray.hasValue(R.styleable.SantaEditText_isSingleLine)) {
-            editText.isSingleLine = typeArray.getBoolean(R.styleable.SantaEditText_isSingleLine, true)
+            editText.isSingleLine =
+                typeArray.getBoolean(R.styleable.SantaEditText_isSingleLine, true)
         }
 
         if (typeArray.hasValue(R.styleable.SantaEditText_isEditable)) {
@@ -142,11 +141,11 @@ constructor(
         buttonStyle = BUTTON_DELETE
     }
 
-    fun setMaxLength(maxLength: Int) {
+    private fun setMaxLength(maxLength: Int) {
         editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
     }
 
-    fun setMaxLines(maxLines: Int) {
+    private fun setMaxLines(maxLines: Int) {
         editText.maxLines = maxLines
     }
 
@@ -173,15 +172,14 @@ constructor(
         }
     }
 
-
     fun setSelection(index: Int) {
         editText.setSelection(index)
     }
 
     class SantaEditLimitLengthWatcher(
-            private val nameInput: SantaEditText,
-            private val maxLength: Int,
-            private val onWarning: (isWarning: Boolean) -> Unit
+        private val nameInput: SantaEditText,
+        private val maxLength: Int,
+        private val onWarning: (isWarning: Boolean) -> Unit
     ) : TextWatcher {
 
         private var isWarning = false

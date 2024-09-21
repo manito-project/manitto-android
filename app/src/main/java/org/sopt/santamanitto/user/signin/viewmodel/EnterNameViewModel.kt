@@ -1,16 +1,22 @@
 package org.sopt.santamanitto.user.signin.viewmodel
 
-
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class EnterNameViewModel : ViewModel() {
 
-    var userName = MutableLiveData<String?>()
+    private val _userName = MutableStateFlow("")
+    val userName: StateFlow<String> = _userName
 
-    var isUserNameValid: LiveData<Boolean> = userName.map {
-        !it.isNullOrBlank()
+    val isUserNameValid: StateFlow<Boolean> = userName.map { it.isNotBlank() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    fun setUserName(newName: String) {
+        _userName.value = newName
     }
 }
