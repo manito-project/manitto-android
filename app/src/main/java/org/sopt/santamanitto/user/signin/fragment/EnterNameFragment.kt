@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -30,13 +31,12 @@ class EnterNameFragment :
 
     private fun observeUserName() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userName.collect { userName ->
+            viewModel.userName.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { userName ->
                     if (binding.santanameinputEntername.getText() != userName) {
                         binding.santanameinputEntername.setText(userName)
                     }
                 }
-            }
         }
 
         binding.santanameinputEntername.observeTextChanges { text ->
