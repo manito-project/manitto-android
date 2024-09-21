@@ -35,6 +35,10 @@ class SplashActivity : AppCompatActivity() {
         installSplashScreen()
         setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)
 
+        handleRemoteServerCheck()
+    }
+
+    private fun handleRemoteServerCheck() {
         splashViewModel.run {
             lifecycleScope.launch {
                 remoteServerCheck.collect { isRemoteServerCheck ->
@@ -116,7 +120,6 @@ class SplashActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 
     private fun tryLogin() {
         Handler(Looper.getMainLooper()).postDelayed({
