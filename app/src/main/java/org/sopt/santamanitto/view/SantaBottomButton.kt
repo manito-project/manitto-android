@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
 import org.sopt.santamanitto.*
-import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 
 class SantaBottomButton : AppCompatButton {
     constructor(context: Context) : super(context)
@@ -12,7 +11,11 @@ class SantaBottomButton : AppCompatButton {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr,
+    ) {
         init(attrs)
     }
 
@@ -33,11 +36,13 @@ class SantaBottomButton : AppCompatButton {
     }
 
     private fun initAttribute(attrs: AttributeSet?) {
-        val typeArray = context.theme.obtainStyledAttributes(
+        val typeArray =
+            context.theme.obtainStyledAttributes(
                 attrs,
                 R.styleable.SantaBottomButton,
-                0, 0)
-
+                0,
+                0,
+            )
 
         if (typeArray.hasValue(R.styleable.SantaBottomButton_isGrayButton)) {
             isGrayButton = typeArray.getBoolean(R.styleable.SantaBottomButton_isGrayButton, false)
@@ -72,7 +77,7 @@ class SantaBottomButton : AppCompatButton {
     private fun enable() {
         if (isGrayButton) {
             setBackgroundTint(R.color.gray_1)
-            setTextColorById(R.color.gray_3)
+            setTextColorById(R.color.dark_gray)
         } else {
             setBackgroundTint(R.color.red)
             setTextColorById(R.color.white)

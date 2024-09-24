@@ -46,7 +46,7 @@
                     android:letterSpacing="-0.04"
                     android:lineHeight="21dp"
                     android:text="@string/joinedroom_santa_info_before_matching"
-                    android:textColor="@color/gray_3"
+                    android:textColor="@color/dark_gray"
                     android:textSize="12dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView

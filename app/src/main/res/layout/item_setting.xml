@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_entire"
-        android:textColor="@color/gray_3"
+        android:textColor="@color/dark_gray"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:layout_marginEnd="@dimen/padding_entire"
         android:background="@null"
         android:src="@drawable/ic_arrow_right"
-        android:tint="@color/gray_3"
+        android:tint="@color/dark_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -13,7 +13,7 @@
         android:src="@drawable/ic_santa_ic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_dialogcontent"
@@ -21,12 +21,12 @@
         android:layout_height="wrap_content"
         android:textFontWeight="700"
         android:textSize="@dimen/size_dialog_text"
-        android:textColor="@color/gray_3"
+        android:textColor="@color/dark_gray"
         android:gravity="center"
         tools:text="아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageview_dialogcontent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,17 +4,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
+
         <item name="android:statusBarColor" tools:targetApi="l">@color/navy</item>
-        <!-- Customize your theme here. -->
 
         <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
         <item name="android:buttonStyle">@style/customButtonFontStyle</item>
@@ -31,7 +22,7 @@
     </style>
 
     <style name="TitleOfCardView" parent="Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray_3</item>
+        <item name="android:textColor">@color/dark_gray</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/size_createroom_cardview_titles</item>
     </style>
@@ -39,13 +30,13 @@
     <style name="PreviewTextOfCreateRoom" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/size_createroom_expiration_description</item>
         <item name="android:letterSpacing">-0.04</item>
-        <item name="android:textColor">@color/gray_3</item>
+        <item name="android:textColor">@color/dark_gray</item>
     </style>
 
     <style name="PreviewTextOfCreateConfirm" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/size_createconfirm_expiration_description</item>
         <item name="android:letterSpacing">-0.04</item>
-        <item name="android:textColor">@color/gray_3</item>
+        <item name="android:textColor">@color/dark_gray</item>
     </style>
 
     <style name="RecyclerViewScrollbar">
