@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 하단 gray 추후 삭제 -->
+    <!-- TODO 하단 5개 색상 추후 삭제 -->
     <color name="gray_1">#EFEFEF</color>
     <color name="gray_2">#C4C4C4</color>
+    <color name="gray_4">#F7F7F7</color>
+    <color name="green">#2F5846</color>
+    <color name="shadow_gray">#E3E3E3</color>
 
     <color name="dark_gray">#666666</color>
     <color name="light_gray">#DADADA</color>
     <color name="light_bg">#F4F4F4</color>
 
-    <color name="shadow_gray">#E3E3E3</color>
     <color name="red">#f31523</color>
     <color name="navy">#00154B</color>
 </resources>
