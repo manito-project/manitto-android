@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_santacheckbox_textpadding_start"
             android:background="@null"
-            android:textColor="@color/gray_3"
+            android:textColor="@color/dark_gray"
             android:gravity="start|center"
             android:textSize="@dimen/size_santacheckbox_buttontext"
             app:layout_constraintBottom_toBottomOf="parent"
