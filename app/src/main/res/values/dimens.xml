@@ -197,7 +197,7 @@
     <dimen name="margin_result_recyclerview_item">15dp</dimen>
 
     <dimen name="size_santainputname_alert">10dp</dimen>
-    <dimen name="margin_editname_cardview_top">40dp</dimen>
+    <dimen name="margin_editname_cardview_top">30dp</dimen>
 
 
 </resources>
