@@ -7,17 +7,17 @@
     <fragment
         android:id="@+id/enterNameFragment"
         android:name="org.sopt.santamanitto.user.signin.fragment.EnterNameFragment"
-        tools:layout="@layout/fragment_enter_name"
-        android:label="EnterNameFragment" >
+        android:label="EnterNameFragment"
+        tools:layout="@layout/fragment_enter_name">
         <action
             android:id="@+id/action_enterNameFragment_to_conditionFragment"
             app:destination="@id/conditionFragment" />
     </fragment>
     <fragment
         android:id="@+id/conditionFragment"
-        tools:layout="@layout/fragment_condition"
         android:name="org.sopt.santamanitto.user.signin.fragment.ConditionFragment"
-        android:label="ConditionFragment" >
+        android:label="ConditionFragment"
+        tools:layout="@layout/fragment_condition">
         <argument
             android:name="userName"
             app:argType="string" />
@@ -28,8 +28,8 @@
     <fragment
         android:id="@+id/webViewFragment"
         android:name="org.sopt.santamanitto.user.signin.fragment.WebLinkFragment"
-        tools:layout="@layout/fragment_webview"
-        android:label="WebViewFragment" >
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_webview">
         <argument
             android:name="url"
             app:argType="string" />

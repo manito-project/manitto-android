@@ -27,6 +27,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_editname_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginTop="@dimen/margin_signin_title_top"
+            android:text="@string/entername_title"
+            android:textFontWeight="700"
+            android:textSize="@dimen/size_signin_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/santabackground_editname" />
+
         <org.sopt.santamanitto.view.SantaNameInput
             android:id="@+id/nameinput_editname"
             android:layout_width="match_parent"
@@ -37,7 +49,7 @@
             app:layout_constraintBottom_toTopOf="@id/santabottombutton_editname"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/santabackground_editname"
+            app:layout_constraintTop_toBottomOf="@id/textview_editname_title"
             app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <org.sopt.santamanitto.view.SantaBottomButton
@@ -48,7 +60,7 @@
             android:layout_marginBottom="@dimen/margin_signin_button_bottom"
             android:enabled="@{vm.isUserNameValid ? true : false}"
             android:onClick="@{() -> vm.requestChangeName()}"
-            android:text="@string/button_change"
+            android:text="@string/editname_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
