@@ -37,7 +37,6 @@ class SplashViewModel @Inject constructor(
     val versionCheckFail: LiveData<Boolean>
         get() = _versionCheckFail
 
-
     private val _loginSuccess = MutableLiveData(LoginState.WAITING)
     val loginSuccess: LiveData<LoginState>
         get() = _loginSuccess
@@ -114,7 +113,6 @@ class SplashViewModel @Inject constructor(
 
         fun getRemoteConfigInstance(): FirebaseRemoteConfig = remoteConfig
     }
-
 
     enum class LoginState {
         SUCCESS, FAIL, WAITING, ERROR
