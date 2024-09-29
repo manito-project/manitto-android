@@ -30,7 +30,8 @@ android {
         buildConfigField("String", "BASE_URL", properties['baseUrl'])
         buildConfigField("String", "TOS_URL", properties['tosUrl'])
         buildConfigField("String", "PRIVACY_POLICY_RUL", properties['privacyPolicyUrl'])
-
+        buildConfigField("String", "INQUIRY_URL", properties['inquiryUrl'])
+        
         signingConfigs {
             release {
                 storeFile file(keystoreProperties['storeFile'])

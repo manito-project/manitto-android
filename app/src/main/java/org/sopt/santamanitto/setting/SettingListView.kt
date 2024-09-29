@@ -3,7 +3,6 @@ package org.sopt.santamanitto.setting
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +10,7 @@ import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemSettingBinding
 
 class SettingListView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
     companion object {
@@ -37,7 +36,7 @@ class SettingListView @JvmOverloads constructor(
         adapter.notifyDataSetChanged()
     }
 
-    private class SettingListViewAdapter : RecyclerView.Adapter<SettingListViewHolder>() {
+    private class SettingListViewAdapter : Adapter<SettingListViewHolder>() {
 
         private val settingList = mutableListOf<Setting>()
 
@@ -58,8 +57,10 @@ class SettingListView @JvmOverloads constructor(
         }
     }
 
-    private class SettingListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context)
-            .inflate(VIEW_HOLDER_RES, parent, false)) {
+    private class SettingListViewHolder(parent: ViewGroup) : ViewHolder(
+        LayoutInflater.from(parent.context)
+            .inflate(VIEW_HOLDER_RES, parent, false)
+    ) {
 
         private val binding = ItemSettingBinding.bind(itemView)
 
@@ -72,7 +73,7 @@ class SettingListView @JvmOverloads constructor(
     }
 
     private data class Setting(
-            val title: String,
-            val listener: () -> Unit
+        val title: String,
+        val listener: () -> Unit
     )
 }

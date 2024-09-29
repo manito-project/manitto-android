@@ -116,9 +116,10 @@
     <string name="exit_dialog_guest">%s\n이 방을 나가는 거 맞지?</string>
     <string name="exit_dialog_history">나의 산타 마니또에서\n삭제하는거 맞지?</string>
 
-    <string name="setting_1_edit_name">닉네임 수정</string>
-    <string name="setting_2_tos">이용약관 동의</string>
-    <string name="setting_3_privacy_policy">개인정보 수집 및 이용 동의</string>
+    <string name="setting_1_edit_name">이름 수정</string>
+    <string name="setting_2_inquiry">문의하기</string>
+    <string name="setting_3_tos">서비스 이용약관</string>
+    <string name="setting_4_privacy_policy">개인정보 처리방침</string>
 
     <string name="update_dialog_content">원활한 산타마니또를 위해\n업데이트를 해야해!</string>
     <string name="update_dialog_exit">마니또 종료</string>

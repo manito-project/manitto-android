@@ -23,10 +23,13 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
                         SettingFragmentDirections.actionSettingFragmentToEditNameFragment(),
                     )
                 }
-                .addSetting(getString(R.string.setting_2_tos)) {
+                .addSetting(getString(R.string.setting_2_inquiry)) {
+                    goToWebViewFragment(BuildConfig.INQUIRY_URL)
+                }
+                .addSetting(getString(R.string.setting_3_tos)) {
                     goToWebViewFragment(BuildConfig.TOS_URL)
                 }
-                .addSetting(getString(R.string.setting_3_privacy_policy)) {
+                .addSetting(getString(R.string.setting_4_privacy_policy)) {
                     goToWebViewFragment(BuildConfig.PRIVACY_POLICY_RUL)
                 }
                 .commit()
