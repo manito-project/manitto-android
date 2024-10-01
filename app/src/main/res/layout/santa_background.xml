@@ -146,7 +146,7 @@
             android:layout_marginBottom="@dimen/margin_santabakcground_title"
             android:elevation="@dimen/elevation_shadow"
             android:textColor="@color/white"
-            android:textFontWeight="700"
+            android:textFontWeight="600"
             android:textSize="@dimen/size_santabackground_title"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/textview_santabackground_description"

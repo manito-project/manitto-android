@@ -19,7 +19,7 @@
     <dimen name="margin_santaedittext_edittext_vertical">12dp</dimen>
     <dimen name="margin_santaedittext_button_vertical">12dp</dimen>
     <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
-    <dimen name="size_santaedittext">14sp</dimen>
+    <dimen name="size_santaedittext">16sp</dimen>
     <dimen name="height_santaedittext_big">48dp</dimen>
 
     <dimen name="size_santabottombutton_text">18sp</dimen>
@@ -37,15 +37,15 @@
     <dimen name="margin_santacheckbox_vertical">15dp</dimen>
 
     <dimen name="height_santapereiodpicker_minusbutton">25dp</dimen>
-    <dimen name="height_santaperiodpicker">40dp</dimen>
+    <dimen name="height_santaperiodpicker">44dp</dimen>
     <dimen name="padding_santaperiodpicker_horizontal">12dp</dimen>
-    <dimen name="size_santaperiodpicker_text">14sp</dimen>
+    <dimen name="size_santaperiodpicker_text">16sp</dimen>
     <dimen name="margin_santaperiodpicker_text_horizontal">16dp</dimen>
 
-    <dimen name="size_santaswitch_text">14sp</dimen>
+    <dimen name="size_santaswitch_text">16sp</dimen>
     <dimen name="margin_santaswitch_cursor">2dp</dimen>
-    <dimen name="height_santaswitch_min">33dp</dimen>
-    <dimen name="width_santaswitch_min">96dp</dimen>
+    <dimen name="height_santaswitch_min">44dp</dimen>
+    <dimen name="width_santaswitch_min">122dp</dimen>
 
     <dimen name="width_santabackground_logo">80dp</dimen>
     <dimen name="height_santabackground_logo">36dp</dimen>
@@ -60,8 +60,8 @@
     <dimen name="margin_santabackground_rudolf_start">39dp</dimen>
     <dimen name="padding_santabackground_backbutton_vertical">20dp</dimen>
     <dimen name="padding_santabackground_backbutton_horizontal">16dp</dimen>
-    <dimen name="size_santabackground_title">18sp</dimen>
-    <dimen name="size_santabackground_description">14sp</dimen>
+    <dimen name="size_santabackground_title">20sp</dimen>
+    <dimen name="size_santabackground_description">16sp</dimen>
     <dimen name="margin_santabackground_description_bottom">80dp</dimen>
     <dimen name="margin_santabakcground_title">16dp</dimen>
     <dimen name="margin_santabackground_middle_title_start">20dp</dimen>
@@ -112,7 +112,7 @@
 
     <dimen name="margin_createroom_cardview_bottom">35dp</dimen>
     <dimen name="size_createroom_cardview_titles">16sp</dimen>
-    <dimen name="size_createroom_expiration_description">12sp</dimen>
+    <dimen name="size_createroom_expiration_description">14sp</dimen>
     <dimen name="margin_createroom_roomname_title_bottom">16dp</dimen>
     <dimen name="margin_createroom_crardview_titles_top">16dp</dimen>
     <dimen name="margin_createroom_crardview_titles_bottom">8dp</dimen>

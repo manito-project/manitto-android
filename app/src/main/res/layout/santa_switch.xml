@@ -10,7 +10,7 @@
         android:minWidth="@dimen/width_santaswitch_min"
         android:minHeight="@dimen/height_santaswitch_min"
         android:background="@drawable/round_ractangle_background"
-        android:backgroundTint="@color/gray_1"
+        android:backgroundTint="@color/light_bg"
         android:clipChildren="false">
 
         <org.sopt.santamanitto.view.SantaCardView

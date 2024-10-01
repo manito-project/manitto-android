@@ -8,60 +8,62 @@ import androidx.databinding.DataBindingUtil
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.SantaPeriodPickerBinding
 
-class SantaPeriodPicker @JvmOverloads constructor(
+class SantaPeriodPicker
+    @JvmOverloads
+    constructor(
         context: Context,
         attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
-
-    companion object {
-        const val DEFAULT_PERIOD = 7
-        const val MINIMUM_PERIOD = 3
-        const val MAXIMUM_PERIOD = 30
-    }
-
-    private val binding = DataBindingUtil.inflate<SantaPeriodPickerBinding>(
-            LayoutInflater.from(context),
-            R.layout.santa_period_picker,
-            this, true
-    )
-
-    private val minusButton = binding.viewSantaperiodpickerMinusarea
-
-    private val plusButton = binding.viewSantaperiodpickerPlusarea
-
-    private val text = binding.textviewSantaperiodpickerText
-
-    private var _period = DEFAULT_PERIOD
-
-    private var periodChangedListener: ((period: Int) -> Unit)? = null
-
-    init {
-        updateTextView()
-        minusButton.setOnClickListener {
-            period--
+        defStyleAttr: Int = 0,
+    ) : FrameLayout(context, attrs, defStyleAttr) {
+        companion object {
+            const val DEFAULT_PERIOD = 7
+            const val MINIMUM_PERIOD = 3
+            const val MAXIMUM_PERIOD = 14
         }
-        plusButton.setOnClickListener {
-            period++
 
-        }
-    }
+        private val binding =
+            DataBindingUtil.inflate<SantaPeriodPickerBinding>(
+                LayoutInflater.from(context),
+                R.layout.santa_period_picker,
+                this,
+                true,
+            )
 
-    var period: Int
-        get() = _period
-        set(value) {
-            if (value in MINIMUM_PERIOD..MAXIMUM_PERIOD) {
-                _period = value
-                updateTextView()
-                periodChangedListener?.let { it(period) }
+        private val minusButton = binding.viewSantaperiodpickerMinusarea
+
+        private val plusButton = binding.viewSantaperiodpickerPlusarea
+
+        private val text = binding.textviewSantaperiodpickerText
+
+        private var _period = DEFAULT_PERIOD
+
+        private var periodChangedListener: ((period: Int) -> Unit)? = null
+
+        init {
+            updateTextView()
+            minusButton.setOnClickListener {
+                period--
+            }
+            plusButton.setOnClickListener {
+                period++
             }
         }
 
-    private fun updateTextView() {
-        text.text = String.format(context.getString(R.string.santaperiodpicker_period), _period)
-    }
+        var period: Int
+            get() = _period
+            set(value) {
+                if (value in MINIMUM_PERIOD..MAXIMUM_PERIOD) {
+                    _period = value
+                    updateTextView()
+                    periodChangedListener?.let { it(period) }
+                }
+            }
 
-    fun setOnPeriodChangedListener(listener: (Int) -> Unit) {
-        this.periodChangedListener = listener
+        private fun updateTextView() {
+            text.text = String.format(context.getString(R.string.santaperiodpicker_period), _period)
+        }
+
+        fun setOnPeriodChangedListener(listener: (Int) -> Unit) {
+            this.periodChangedListener = listener
+        }
     }
-}

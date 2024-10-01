@@ -60,8 +60,8 @@
                     android:id="@+id/linearlayout_createroom_roomname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="20dp"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -82,6 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_santaedittext_big"
                         android:layout_marginTop="@dimen/margin_createroom_roomname_title_bottom"
+                        android:maxLength="17"
                         app:hint="@string/createroom_roomname_hint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textview_createroom_roomname" />
@@ -116,6 +117,7 @@
                         android:id="@+id/textview_createroom_expirationdescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:letterSpacing="-0.04"
                         android:textColor="@color/dark_gray"
                         android:textSize="@dimen/size_createroom_expiration_description"
                         tool:text="@string/createroom_expiration_description" />
@@ -149,10 +151,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:background="@drawable/round_ractangle_background"
-                        android:backgroundTint="@color/gray_1"
+                        android:backgroundTint="@color/light_bg"
                         android:gravity="center"
                         android:letterSpacing="-0.04"
-                        android:paddingHorizontal="13dp"
+                        android:paddingHorizontal="16dp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@id/santaswitch_createroom_ampm"
                         app:layout_constraintEnd_toStartOf="@id/santaswitch_createroom_ampm"
                         app:layout_constraintStart_toStartOf="parent"
@@ -204,10 +207,24 @@
                         android:textColor="@color/red"
                         android:textFontWeight="700"
                         app:layout_constraintBottom_toBottomOf="@id/textview_createroom_previewstart"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/textview_createroom_previewmid"
                         app:layout_constraintStart_toEndOf="@id/textview_createroom_previewstart"
                         app:layout_constraintTop_toTopOf="@id/textview_createroom_previewstart"
-                        tool:text="2020/12/04 오전 10 : 00에" />
+                        tool:text="2020/12/04 오전 10 : 00" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_createroom_previewmid"
+                        style="@style/PreviewTextOfCreateRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_space_letter"
+                        android:text="에"
+                        app:layout_constraintBottom_toTopOf="@id/textview_createroom_previewend"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toEndOf="@id/textview_createroom_previewdate"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textview_createroom_previewend"
@@ -233,9 +250,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.884" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </org.sopt.santamanitto.view.SantaCardView>
 

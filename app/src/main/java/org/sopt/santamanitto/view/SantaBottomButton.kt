@@ -3,7 +3,7 @@ package org.sopt.santamanitto.view
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
-import org.sopt.santamanitto.*
+import org.sopt.santamanitto.R
 
 class SantaBottomButton : AppCompatButton {
     constructor(context: Context) : super(context)

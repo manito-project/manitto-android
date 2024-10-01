@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_ractangle_background"
-        android:backgroundTint="@color/gray_1"
         android:paddingHorizontal="@dimen/padding_santaedittext_root_horizontal">
 
         <FrameLayout
@@ -31,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:fontFamily="@font/pretendard_font_family"
-                android:textColorHint="@color/gray_2"
+                android:textColorHint="@color/light_gray"
                 android:singleLine="true"
                 android:textColor="@drawable/color_santaedittext_edittext"
                 android:textCursorDrawable="@drawable/cursor_edittext"
