@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.fragment.CreateRoomFragmentDirections.Companion.actionCreateRoomFragmentToCreateConfirmFragment
 import org.sopt.santamanitto.room.create.fragment.CreateRoomFragmentDirections.Companion.actionCreateRoomFragmentToCreateMissionsFragment
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPeriod
@@ -85,6 +86,9 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
                     }
                 }
             }
+            santabottombuttonSkiproom.setOnClickListener {
+                showNoMissionDialog()
+            }
             santabackgroundCreateroom.setOnBackKeyClickListener {
                 if (isNewRoom) {
                     requireActivity().finish()
@@ -154,4 +158,16 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
                 findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
                     .setInitialPosition(viewModel.expirationLiveData.minute)
             }
+
+    private fun showNoMissionDialog() {
+        RoundDialogBuilder()
+            .setContentText(
+                getString(R.string.createmission_dialog_no_mission),
+                true,
+            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button))
+            .addHorizontalButton(getString(R.string.createroom_btn_next)) {
+                findNavController().navigate(actionCreateRoomFragmentToCreateConfirmFragment())
+            }.build()
+            .show(parentFragmentManager, "done_dialog")
+    }
 }

@@ -63,10 +63,10 @@
     <string name="createmission_background_description">흥미딘딘한 산타 마니또를 위해\n미션을 추가해볼까?</string>
     <string name="createmission_description_in_cardview">미션 한 개에 마니또 한명이 매칭돼\n미션은 최대 36자까지 입력할 수 있어!</string>
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
-    <string name="createmission_skip_bottom_button">SKIP</string>
+    <string name="createmission_skip_bottom_button">건너뛰기</string>
     <string name="createmission_mission_hint">미션 입력 후 \'+\' 버튼을 눌러줘!</string>
     <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션을 삭제하고 SKIP 하는 거 맞지?</string>
-    <string name="createmission_dialog_no_mission">아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?</string>
+    <string name="createmission_dialog_no_mission">미션없는 마니또 게임은\n친구들이 심심해할 수 있어!</string>
 
     <string name="createconfirm_expiration_suffix">에 결과 공개!</string>
     <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
