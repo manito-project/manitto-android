@@ -56,6 +56,8 @@
     <string name="createroom_dialog_expiration_time_setting">종료 시간 설정</string>
     <string name="createroom_modify_title">방 정보 수정</string>
     <string name="createroom_modify_done">수정 완료</string>
+    <string name="createroom_btn_skip">미션없이 방 만들기</string>
+    <string name="createroom_btn_next">미션 만들기</string>
 
     <string name="createmission_background_title">미션 만들기</string>
     <string name="createmission_background_description">흥미딘딘한 산타 마니또를 위해\n미션을 추가해볼까?</string>

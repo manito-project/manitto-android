@@ -29,6 +29,7 @@ class SantaBottomButton : AppCompatButton {
         }
         setTextSize(R.dimen.size_santabottombutton_text)
         setPaddingVerticalById(R.dimen.padding_santabottombutton_vertical)
+        setTextColorById(R.color.white)
         includeFontPadding = false
         setRippleEffect(true)
         setBold(true)
@@ -66,8 +67,7 @@ class SantaBottomButton : AppCompatButton {
         if (enabled) {
             enable()
         } else {
-            setBackgroundTint(R.color.gray_1)
-            setTextColorById(R.color.gray_2)
+            setBackgroundTint(R.color.light_gray)
             elevation = 0F
         }
 
@@ -76,11 +76,9 @@ class SantaBottomButton : AppCompatButton {
 
     private fun enable() {
         if (isGrayButton) {
-            setBackgroundTint(R.color.gray_1)
-            setTextColorById(R.color.dark_gray)
+            setBackgroundTint(R.color.dark_gray)
         } else {
             setBackgroundTint(R.color.red)
-            setTextColorById(R.color.white)
         }
         elevation = getDimen(R.dimen.elevation_shadow)
     }
