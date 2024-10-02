@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/height_dialog_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageview_dialogcontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/textview_dialogcontent"
         android:src="@drawable/ic_santa_ic"
+        app:layout_constraintBottom_toTopOf="@id/textview_dialogcontent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_dialogcontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textFontWeight="700"
-        android:textSize="@dimen/size_dialog_text"
-        android:textColor="@color/dark_gray"
         android:gravity="center"
-        tools:text="아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?"
+        android:lineSpacingMultiplier="1.1"
+        android:textColor="@color/dark_gray"
+        android:textFontWeight="600"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageview_dialogcontent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        tools:text="아직 작성한 미션이 없어!\n미션 설정을 안하는 거 맞지?" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

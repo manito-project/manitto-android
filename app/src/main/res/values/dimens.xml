@@ -10,10 +10,10 @@
     <dimen name="padding_cardview_vertical">25dp</dimen>
     <dimen name="margin_cardview_to_guidline_top">16dp</dimen>
 
-    <dimen name="margin_dialog_title_text_vertical">15dp</dimen>
-    <dimen name="margin_dialog_button_text_vertical">25dp</dimen>
-    <dimen name="size_dialog_text">17sp</dimen>
-    <dimen name="height_dialog_content">175dp</dimen>
+    <dimen name="margin_dialog_title_text_vertical">20dp</dimen>
+    <dimen name="margin_dialog_button_text_vertical">22dp</dimen>
+    <dimen name="size_dialog_text">16sp</dimen>
+    <dimen name="height_dialog_content">185dp</dimen>
 
     <dimen name="width_edittext_rightbutton">30dp</dimen>
     <dimen name="margin_santaedittext_edittext_vertical">12dp</dimen>
