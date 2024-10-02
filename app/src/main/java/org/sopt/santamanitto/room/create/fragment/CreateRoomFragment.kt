@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
+import org.sopt.santamanitto.room.create.fragment.CreateRoomFragmentDirections.Companion.actionCreateRoomFragmentToCreateConfirmFragment
 import org.sopt.santamanitto.room.create.fragment.CreateRoomFragmentDirections.Companion.actionCreateRoomFragmentToCreateMissionsFragment
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPeriod
@@ -22,20 +23,17 @@ import org.sopt.santamanitto.view.SantaPeriodPicker
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 
-class CreateRoomFragment :
-    BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
-
-    companion object {
-        private const val MAX_ROOM_NAME_LENGTH = 17
-    }
-
+class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
     private val args: CreateRoomFragmentArgs by navArgs()
 
     private var isNewRoom = true
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.vm = viewModel
@@ -60,14 +58,12 @@ class CreateRoomFragment :
 
     private fun initView() {
         binding.run {
-            textviewCreateroomExpirationdescription.text = String.format(
-                getString(R.string.createroom_expiration_description),
-                SantaPeriodPicker.MINIMUM_PERIOD,
-                SantaPeriodPicker.MAXIMUM_PERIOD
-            )
-
-            edittextCreateroomRoomname.hint =
-                String.format(getString(R.string.createroom_roomname_hint), MAX_ROOM_NAME_LENGTH)
+            textviewCreateroomExpirationdescription.text =
+                String.format(
+                    getString(R.string.createroom_expiration_description),
+                    SantaPeriodPicker.MINIMUM_PERIOD,
+                    SantaPeriodPicker.MAXIMUM_PERIOD,
+                )
         }
 
         if (!isNewRoom) {
@@ -89,6 +85,9 @@ class CreateRoomFragment :
                         findNavController().navigateUp()
                     }
                 }
+            }
+            santabottombuttonSkiproom.setOnClickListener {
+                showNoMissionDialog()
             }
             santabackgroundCreateroom.setOnBackKeyClickListener {
                 if (isNewRoom) {
@@ -137,19 +136,21 @@ class CreateRoomFragment :
             .addHorizontalButton(getString(R.string.dialog_cancel))
             .addHorizontalButton(getString(R.string.dialog_confirm)) {
                 val hour =
-                    it!!.findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_hour)
+                    it!!
+                        .findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_hour)
                         .getCurrentNumber()
                 val minute =
-                    it.findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
+                    it
+                        .findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
                         .getCurrentNumber()
                 viewModel.setTime(hour, minute)
-            }
-            .build()
+            }.build()
             .show(parentFragmentManager, "createroom_timepicker")
     }
 
     private fun getPickerView(): View =
-        LayoutInflater.from(requireContext())
+        LayoutInflater
+            .from(requireContext())
             .inflate(R.layout.dialog_create_room_time_picker, binding.root as ViewGroup, false)
             .apply {
                 findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_hour)
@@ -157,4 +158,16 @@ class CreateRoomFragment :
                 findViewById<SantaNumberPicker>(R.id.santanumberpicker_pickerdialog_minute)
                     .setInitialPosition(viewModel.expirationLiveData.minute)
             }
+
+    private fun showNoMissionDialog() {
+        RoundDialogBuilder()
+            .setContentText(
+                getString(R.string.createmission_dialog_no_mission),
+                true,
+            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button))
+            .addHorizontalButton(getString(R.string.createroom_btn_next)) {
+                findNavController().navigate(actionCreateRoomFragmentToCreateConfirmFragment())
+            }.build()
+            .show(parentFragmentManager, "done_dialog")
+    }
 }

@@ -3,14 +3,18 @@ package org.sopt.santamanitto.view.dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
+import android.view.Window
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,6 +22,7 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.util.toPixel
@@ -36,10 +41,8 @@ internal class RoundDialog(
     @ColorRes private val pointColor: Int?,
     @ColorRes private val dividerColor: Int?,
     private val enableCancel: Boolean,
-    private val enableDivider: Boolean
-
+    private val enableDivider: Boolean,
 ) : DialogFragment() {
-
     companion object {
         private const val TAG = "LTDialog"
         private const val RADIUS_OF_DIALOG_DP = 20
@@ -66,15 +69,16 @@ internal class RoundDialog(
             }?.getRealSize(size)
             deviceSizeX = size.x
         }
-        if (deviceSizeX == null) {
-            return
-        }
         val params = dialog?.window?.attributes
         params?.width = (deviceSizeX!! * DIALOG_WITH_RATIO).toInt()
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         checkIsIllegalAttribute()
         val rootView = FrameLayout(inflater.context)
 
@@ -87,7 +91,7 @@ internal class RoundDialog(
         if (dialog != null) {
             val window: Window? = dialog!!.window
             if (window != null) {
-                //다이얼로그의 윤곽선을 둥글게 깎기
+                // 다이얼로그의 윤곽선을 둥글게 깎기
                 window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 window.requestFeature(Window.FEATURE_NO_TITLE)
             } else {
@@ -105,14 +109,16 @@ internal class RoundDialog(
     }
 
     private fun initView(rootView: ViewGroup) {
-        val cardView = CardView(rootView.context).apply {
-            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            radius = RADIUS_OF_DIALOG_DP.toPixel().toFloat()
-        }
-        val linearLayout = LinearLayout(rootView.context).apply {
-            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            orientation = LinearLayout.VERTICAL
-        }
+        val cardView =
+            CardView(rootView.context).apply {
+                layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                radius = RADIUS_OF_DIALOG_DP.toPixel().toFloat()
+            }
+        val linearLayout =
+            LinearLayout(rootView.context).apply {
+                layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                orientation = LinearLayout.VERTICAL
+            }
 
         initTitle(linearLayout)
 
@@ -147,19 +153,25 @@ internal class RoundDialog(
             return
         }
 
-        val buttonLayout = LinearLayout(parent.context).apply {
-            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            orientation = LinearLayout.VERTICAL
-        }
+        val buttonLayout =
+            LinearLayout(parent.context).apply {
+                layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                orientation = LinearLayout.VERTICAL
+            }
 
         if (invitationCode != null) {
-            val invitationCodeView = LayoutInflater.from(buttonLayout.context)
+            val invitationCodeView =
+                LayoutInflater
+                    .from(buttonLayout.context)
                     .inflate(R.layout.dialog_invitation_code, buttonLayout, false)
-            invitationCodeView.findViewById<AppCompatTextView>(R.id.textview_invitationcode).text = invitationCode
-            invitationCodeView.findViewById<AppCompatTextView>(R.id.textview_invitationcode_copybutton).setOnClickListener {
-                invitationCodeCallback?.let { it() }
-                dismiss()
-            }
+            invitationCodeView.findViewById<AppCompatTextView>(R.id.textview_invitationcode).text =
+                invitationCode
+            invitationCodeView
+                .findViewById<AppCompatTextView>(R.id.textview_invitationcode_copybutton)
+                .setOnClickListener {
+                    invitationCodeCallback?.let { it() }
+                    dismiss()
+                }
             addDivider(buttonLayout, true)
             buttonLayout.addView(invitationCodeView)
         } else {
@@ -170,53 +182,56 @@ internal class RoundDialog(
 
             horizontalButtons?.let {
                 addDivider(buttonLayout, true)
-                //가로 버튼을 담을 하나의 LinearLayout을 생성
-                val verticalButtonLayout = LinearLayout(parent.context).apply {
-                    layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-                    orientation = LinearLayout.HORIZONTAL
-                }
+                // 가로 버튼을 담을 하나의 LinearLayout을 생성
+                val verticalButtonLayout =
+                    LinearLayout(parent.context).apply {
+                        layoutParams =
+                            LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                        orientation = LinearLayout.HORIZONTAL
+                    }
 
-                //생성한 LinearLayout에 버튼들을 추가
+                // 생성한 LinearLayout에 버튼들을 추가
                 makeButtons(it, verticalButtonLayout, true)
 
-                //버튼이 추가된 LinearLayout을 다이얼로그에 추가
+                // 버튼이 추가된 LinearLayout을 다이얼로그에 추가
                 buttonLayout.addView(verticalButtonLayout)
             }
         }
         parent.addView(buttonLayout)
     }
 
-    private fun makeButtons(buttons: List<RoundDialogButton>, parent: ViewGroup, isHorizontal: Boolean) {
-
+    private fun makeButtons(
+        buttons: List<RoundDialogButton>,
+        parent: ViewGroup,
+        isHorizontal: Boolean,
+    ) {
         for (roundDialogButton in buttons) {
+            val button =
+                getButtonTextView(parent.context).apply {
+                    layoutParams =
+                        if (isHorizontal) {
+                            LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                        } else {
+                            LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                        }
 
-            val button = getButtonTextView(parent.context).apply {
-                layoutParams = if (isHorizontal) {
-                    LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-                } else {
-                    LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-                }
+                    foreground = getRippleBackground(parent.context)
 
-                foreground = getRippleBackground(parent.context)
+                    // 버튼에 문자열 적용
+                    text = roundDialogButton.text
+                    setBackgroundResource(R.color.navy)
+                    setTextColor(ContextCompat.getColor(parent.context, R.color.white))
 
-                //버튼에 문자열 적용
-                text = roundDialogButton.text
-
-                //클릭 리스너 적용
-                setOnClickListener {
-                    roundDialogButton.listener?.let { it(contentView) }
-                    if (roundDialogButton.canDismiss) {
-                        dismiss()
+                    // 클릭 리스너 적용
+                    setOnClickListener {
+                        roundDialogButton.listener?.let { it(contentView) }
+                        if (roundDialogButton.canDismiss) {
+                            dismiss()
+                        }
                     }
                 }
-            }
-            //첫 번째 버튼이 아니라면
-            if (roundDialogButton != buttons[0]) {
-                //구분선 삽입
-                addDivider(parent, !isHorizontal)
-            }
 
-            //버튼 추가
+            // 버튼 추가
             parent.addView(button)
         }
     }
@@ -227,28 +242,32 @@ internal class RoundDialog(
         return ContextCompat.getDrawable(context, outValue.resourceId)
     }
 
-    private fun addDivider(container: ViewGroup, isHorizontal: Boolean) {
+    private fun addDivider(
+        container: ViewGroup,
+        isHorizontal: Boolean,
+    ) {
         if (!enableDivider) {
             return
         }
-        //뷰 하나 생성
+        // 뷰 하나 생성
         val divider = View(context)
 
-        //간격을 1로 하여 선처럼 보이게 함
-        divider.layoutParams = if (isHorizontal) {
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1.toPixel())
-        } else {
-            LinearLayout.LayoutParams(1.toPixel(), LinearLayout.LayoutParams.MATCH_PARENT)
-        }
+        // 간격을 1로 하여 선처럼 보이게 함
+        divider.layoutParams =
+            if (isHorizontal) {
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1.toPixel())
+            } else {
+                LinearLayout.LayoutParams(1.toPixel(), LinearLayout.LayoutParams.MATCH_PARENT)
+            }
 
-        //색 지정
+        // 색 지정
         if (dividerColor == null) {
             divider.setBackgroundColor(Color.parseColor(DIVIDER_COLOR))
         } else {
             divider.setBackgroundResource(dividerColor)
         }
 
-        //삽입
+        // 삽입
         container.addView(divider)
     }
 
@@ -261,27 +280,47 @@ internal class RoundDialog(
         }
     }
 
-    private fun getTitleTextView(context: Context): TextView {
-        return getNewTextView(context, context.resources.getDimension(R.dimen.margin_dialog_title_text_vertical), hasColor = true, isBold = true)
-    }
+    private fun getTitleTextView(context: Context): TextView =
+        getNewTextView(
+            context,
+            context.resources.getDimension(R.dimen.margin_dialog_title_text_vertical),
+            hasColor = true,
+            isBold = true,
+        )
 
-    private fun getContentTextLayout(context: Context, parent: ViewGroup, contentText: String): View {
-        val layout = LayoutInflater.from(context).inflate(R.layout.dialog_text_content_layout, parent, false)
+    private fun getContentTextLayout(
+        context: Context,
+        parent: ViewGroup,
+        contentText: String,
+    ): View {
+        val layout =
+            LayoutInflater.from(context).inflate(R.layout.dialog_text_content_layout, parent, false)
         layout.findViewById<AppCompatTextView>(R.id.textview_dialogcontent).text = contentText
         return layout
     }
 
-    private fun getButtonTextView(context: Context): TextView {
-        return getNewTextView(context, context.resources.getDimension(R.dimen.margin_dialog_button_text_vertical), hasColor = true, isBold = false)
-    }
+    private fun getButtonTextView(context: Context): TextView =
+        getNewTextView(
+            context,
+            context.resources.getDimension(R.dimen.margin_dialog_button_text_vertical),
+            hasColor = true,
+            isBold = false,
+        )
 
-    private fun getNewTextView(context: Context, marginVertical: Float, hasColor: Boolean, isBold: Boolean): TextView {
-        return TextView(context).apply {
+    private fun getNewTextView(
+        context: Context,
+        marginVertical: Float,
+        hasColor: Boolean,
+        isBold: Boolean,
+    ): TextView =
+        TextView(context).apply {
             this.text = title
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             setPadding(
-                    0, marginVertical.toInt(),
-                    0, marginVertical.toInt()
+                0,
+                marginVertical.toInt(),
+                0,
+                marginVertical.toInt(),
             )
             gravity = Gravity.CENTER
             setTextSize(R.dimen.size_dialog_text)
@@ -289,8 +328,7 @@ internal class RoundDialog(
                 setBackgroundResource(pointColor)
             }
             if (isBold) {
-                setTypeface(typeface, Typeface.BOLD)
+                typeface = ResourcesCompat.getFont(context, R.font.pretendard_semi_bold)
             }
         }
-    }
 }

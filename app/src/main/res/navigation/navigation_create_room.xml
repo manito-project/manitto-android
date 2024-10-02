@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_createRoomFragment_to_createMissionsFragment"
             app:destination="@id/createMissionsFragment" />
+        <action
+            android:id="@+id/action_createRoomFragment_to_createConfirmFragment"
+            app:destination="@id/createConfirmFragment" />
         <argument
             android:name="roomId"
             app:argType="integer"
