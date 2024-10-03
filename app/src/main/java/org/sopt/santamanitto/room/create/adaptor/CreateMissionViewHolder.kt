@@ -1,21 +1,14 @@
-package org.sopt.santamanitto.room.create
+package org.sopt.santamanitto.room.create.adaptor
 
 import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.santamanitto.R
-import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
+import org.sopt.santamanitto.databinding.ItemCreateMissionBinding
 import org.sopt.santamanitto.view.SantaEditText
 
 class CreateMissionViewHolder(
     private val callback: CreateMissionAdaptor.CreateMissionCallback,
-    parent: ViewGroup,
-) : RecyclerView.ViewHolder(
-        LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.item_create_mission, parent, false),
-    ) {
+    private val binding: ItemCreateMissionBinding,
+) : RecyclerView.ViewHolder(binding.root) {
     private val editText = (itemView as SantaEditText)
 
     init {

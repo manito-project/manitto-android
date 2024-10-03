@@ -20,6 +20,7 @@
             android:text="마니또 미션 추가"
             android:textColor="@color/white"
             android:textFontWeight="600"
+            android:letterSpacing="-0.04"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_add_mission"
             app:layout_constraintHorizontal_chainStyle="packed"

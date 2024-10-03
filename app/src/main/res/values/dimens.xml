@@ -16,11 +16,11 @@
     <dimen name="height_dialog_content">185dp</dimen>
 
     <dimen name="width_edittext_rightbutton">24dp</dimen>
-    <dimen name="margin_santaedittext_edittext_vertical">12dp</dimen>
+    <dimen name="margin_santaedittext_edittext_vertical">16dp</dimen>
     <dimen name="margin_santaedittext_button_vertical">12dp</dimen>
     <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
     <dimen name="size_santaedittext">16sp</dimen>
-    <dimen name="height_santaedittext_big">48dp</dimen>
+    <dimen name="height_santaedittext_big">56dp</dimen>
 
     <dimen name="size_santabottombutton_text">18sp</dimen>
     <dimen name="padding_santabottombutton_vertical">14dp</dimen>
