@@ -39,8 +39,13 @@ class CreateMissionViewHolder(
                 ) {
                 }
 
-                override fun afterTextChanged(s: Editable?) {
-                    onTextChanged(s?.toString())
+                override fun afterTextChanged(editable: Editable?) {
+                    onTextChanged(editable?.toString())
+                    if (editable?.isNotBlank() == true) {
+                        editText.setDeleteImage()
+                    } else {
+                        editText.removeButton()
+                    }
                 }
             },
         )
@@ -50,7 +55,6 @@ class CreateMissionViewHolder(
         editText.run {
             text = mission
             setButtonClickListener { text -> callback.onMissionDeleted(text) }
-            setDeleteImage()
             if (mission == null) {
                 compress(false)
                 isEditable = true

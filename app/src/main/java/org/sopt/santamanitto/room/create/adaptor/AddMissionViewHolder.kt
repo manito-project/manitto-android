@@ -11,7 +11,7 @@ class AddMissionViewHolder(
 
     fun updateText(mission: String?) {
         binding.root.setOnClickListener {
-            if (mission != null) {
+            if (!mission.isNullOrBlank()) {
                 callback.onMissionInserted(mission)
             }
         }

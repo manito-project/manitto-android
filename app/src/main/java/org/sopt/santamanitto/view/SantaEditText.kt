@@ -144,6 +144,10 @@ class SantaEditText
             buttonStyle = BUTTON_DELETE
         }
 
+        fun removeButton() {
+            rightButton.visibility = View.INVISIBLE
+        }
+
         private fun setMaxLength(maxLength: Int) {
             editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
         }
