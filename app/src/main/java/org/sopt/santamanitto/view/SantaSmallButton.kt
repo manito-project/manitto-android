@@ -80,7 +80,7 @@ class SantaSmallButton
                     BUTTON_MINUS_LIMIT -> R.drawable.ic_minus_light_gray
                     BUTTON_PLUS -> R.drawable.ic_plus_dark_gray
                     BUTTON_PLUS_LIMIT -> R.drawable.ic_plus_light_gray
-                    else -> R.drawable.ic_btn_cancle
+                    else -> R.drawable.ic_btn_cancel
                 }
             setBackgroundResource(resId)
         }

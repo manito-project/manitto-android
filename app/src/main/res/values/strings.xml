@@ -60,11 +60,10 @@
     <string name="createroom_btn_next">미션 만들기</string>
 
     <string name="createmission_background_title">미션 만들기</string>
-    <string name="createmission_background_description">흥미딘딘한 산타 마니또를 위해\n미션을 추가해볼까?</string>
-    <string name="createmission_description_in_cardview">미션 한 개에 마니또 한명이 매칭돼\n미션은 최대 36자까지 입력할 수 있어!</string>
+    <string name="createmission_background_description">어떤 미션이 괜찮을까\n천 번쯤 고민 중</string>
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
     <string name="createmission_skip_bottom_button">건너뛰기</string>
-    <string name="createmission_mission_hint">미션 입력 후 \'+\' 버튼을 눌러줘!</string>
+    <string name="createmission_mission_hint">산타 할아버지 여기 미션 하나 추가요!</string>
     <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션이 사라져도 괜찮아?</string>
     <string name="createmission_dialog_no_mission">미션없는 마니또 게임은\n친구들이 심심해할 수 있어!</string>
 

@@ -15,7 +15,7 @@
     <dimen name="size_dialog_text">16sp</dimen>
     <dimen name="height_dialog_content">185dp</dimen>
 
-    <dimen name="width_edittext_rightbutton">30dp</dimen>
+    <dimen name="width_edittext_rightbutton">24dp</dimen>
     <dimen name="margin_santaedittext_edittext_vertical">12dp</dimen>
     <dimen name="margin_santaedittext_button_vertical">12dp</dimen>
     <dimen name="padding_santaedittext_root_horizontal">16dp</dimen>
@@ -124,8 +124,8 @@
     <dimen name="size_createmission_cardview_title">13sp</dimen>
     <dimen name="padding_createmission_cardview_top">20dp</dimen>
     <dimen name="padding_createmission_cardview_horizontal">28dp</dimen>
-    <dimen name="margin_createmission_recyclerview_top">20dp</dimen>
-    <dimen name="padding_createmission_recyclerview_horizontal">12dp</dimen>
+    <dimen name="margin_createmission_recyclerview_top">24dp</dimen>
+    <dimen name="padding_createmission_recyclerview_horizontal">16dp</dimen>
     <dimen name="margin_createmission_recyclerview_items">15dp</dimen>
     <dimen name="margin_createmission_skip_bottom">16dp</dimen>
     <dimen name="padding_createmission_recyclerview_bottom">23dp</dimen>
