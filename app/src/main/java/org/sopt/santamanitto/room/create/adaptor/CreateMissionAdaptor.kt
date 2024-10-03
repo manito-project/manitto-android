@@ -10,20 +10,40 @@ open class CreateMissionAdaptor(
     private val createMissionCallback: CreateMissionCallback,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     protected val missions = mutableListOf<String>()
+    private var currentMissionText: String? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): RecyclerView.ViewHolder =
-        if (viewType == VIEW_TYPE_ITEM) {
-            val binding =
-                ItemCreateMissionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            CreateMissionViewHolder(createMissionCallback, binding)
+    ): RecyclerView.ViewHolder {
+        val inflater by lazy { LayoutInflater.from(parent.context) }
+        return if (viewType == VIEW_TYPE_ITEM) {
+            val binding = ItemCreateMissionBinding.inflate(inflater, parent, false)
+            CreateMissionViewHolder(createMissionCallback, binding) { text ->
+                currentMissionText = text
+                (parent as? RecyclerView)?.post {
+                    notifyItemChanged(missions.size + 1, PAYLOAD_TEXT_CHANGED)
+                }
+            }
         } else {
-            val binding =
-                ItemAddMissionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            AddMissionViewHolder(binding)
+            val binding = ItemAddMissionBinding.inflate(inflater, parent, false)
+            AddMissionViewHolder(createMissionCallback, binding)
         }
+    }
+
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>,
+    ) {
+        if (payloads.isNotEmpty()) {
+            if (holder is AddMissionViewHolder && payloads.contains(PAYLOAD_TEXT_CHANGED)) {
+                holder.updateText(currentMissionText)
+            }
+        } else {
+            onBindViewHolder(holder, position)
+        }
+    }
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
@@ -44,31 +64,10 @@ open class CreateMissionAdaptor(
 
     override fun getItemViewType(position: Int): Int = if (position == missions.size + 1) VIEW_TYPE_FOOTER else VIEW_TYPE_ITEM
 
-    private fun addMission(mission: String) {
-        missions.add(mission)
-        notifyItemInserted(missions.size)
-    }
-
     fun setList(data: List<String>) {
         missions.clear()
         missions.addAll(data)
         notifyDataSetChanged()
-    }
-
-    fun clear() {
-        val size = missions.size
-        missions.clear()
-        notifyItemRangeRemoved(0, size)
-    }
-
-    fun addAll(data: List<String>?) {
-        if (data == null) {
-            return
-        }
-
-        val startIndex = missions.size
-        missions.addAll(startIndex, data)
-        notifyItemRangeInserted(startIndex, data.size)
     }
 
     interface CreateMissionCallback {
@@ -80,5 +79,7 @@ open class CreateMissionAdaptor(
     companion object {
         private const val VIEW_TYPE_ITEM = 0
         private const val VIEW_TYPE_FOOTER = 1
+
+        private const val PAYLOAD_TEXT_CHANGED = "PAYLOAD_TEXT_CHANGED"
     }
 }
