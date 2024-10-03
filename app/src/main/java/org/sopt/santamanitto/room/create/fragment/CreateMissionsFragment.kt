@@ -40,10 +40,12 @@ class CreateMissionsFragment :
 
     override fun onMissionInserted(mission: String) {
         viewModel.addMission(mission)
+        binding.santabottombuttonCreatemissionDone.isEnabled = true
     }
 
     override fun onMissionDeleted(mission: String) {
         viewModel.deleteMission(mission)
+        if (!viewModel.hasMissions()) binding.santabottombuttonCreatemissionDone.isEnabled = false
     }
 
     private fun setOnClickListener() {
@@ -85,11 +87,11 @@ class CreateMissionsFragment :
                 .setContentText(
                     getString(R.string.createmission_dialog_skip_has_mission),
                     true,
-                ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button))
-                .addHorizontalButton(getString(R.string.createroom_btn_next)) {
+                ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
                     viewModel.clearMission()
                     navigateConfirmFragment()
-                }.build()
+                }.addHorizontalButton(getString(R.string.createroom_btn_next))
+                .build()
                 .show(parentFragmentManager, "skip_dialog")
         } else {
             showNoMissionDialog()
@@ -101,10 +103,10 @@ class CreateMissionsFragment :
             .setContentText(
                 getString(R.string.createmission_dialog_no_mission),
                 true,
-            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button))
-            .addHorizontalButton(getString(R.string.createroom_btn_next)) {
+            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
                 navigateConfirmFragment()
-            }.build()
+            }.addHorizontalButton(getString(R.string.createroom_btn_next))
+            .build()
             .show(parentFragmentManager, "done_dialog")
     }
 
