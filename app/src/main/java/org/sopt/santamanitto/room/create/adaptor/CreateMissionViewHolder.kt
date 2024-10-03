@@ -40,11 +40,13 @@ class CreateMissionViewHolder(
                 }
 
                 override fun afterTextChanged(editable: Editable?) {
-                    onTextChanged(editable?.toString())
                     if (editable?.isNotBlank() == true) {
                         editText.setDeleteImage()
                     } else {
                         editText.removeButton()
+                    }
+                    if (bindingAdapterPosition == bindingAdapter?.itemCount?.minus(2)) {
+                        onTextChanged(editable?.toString())
                     }
                 }
             },
