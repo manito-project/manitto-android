@@ -65,7 +65,7 @@
     <string name="createmission_done_bottom_button">미션 만들기 완료</string>
     <string name="createmission_skip_bottom_button">건너뛰기</string>
     <string name="createmission_mission_hint">미션 입력 후 \'+\' 버튼을 눌러줘!</string>
-    <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션을 삭제하고 SKIP 하는 거 맞지?</string>
+    <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션이 사라져도 괜찮아?</string>
     <string name="createmission_dialog_no_mission">미션없는 마니또 게임은\n친구들이 심심해할 수 있어!</string>
 
     <string name="createconfirm_expiration_suffix">에 결과 공개!</string>

@@ -85,8 +85,8 @@ class CreateMissionsFragment :
                 .setContentText(
                     getString(R.string.createmission_dialog_skip_has_mission),
                     true,
-                ).addHorizontalButton(getString(R.string.dialog_cancel))
-                .addHorizontalButton(getString(R.string.dialog_confirm)) {
+                ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button))
+                .addHorizontalButton(getString(R.string.createroom_btn_next)) {
                     viewModel.clearMission()
                     navigateConfirmFragment()
                 }.build()
