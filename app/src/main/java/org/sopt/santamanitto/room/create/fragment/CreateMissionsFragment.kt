@@ -16,7 +16,7 @@ import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 class CreateMissionsFragment :
     BaseFragment<FragmentCreateMissionBinding>(
         R.layout.fragment_create_mission,
-        true,
+        false,
     ),
     CreateMissionAdaptor.CreateMissionCallback {
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
