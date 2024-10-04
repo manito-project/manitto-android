@@ -4,6 +4,7 @@
 
     <org.sopt.santamanitto.view.SantaEditText xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/et_create_mission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:letterSpacing="-0.04"

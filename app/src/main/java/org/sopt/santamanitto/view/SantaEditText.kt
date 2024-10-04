@@ -206,7 +206,10 @@ class SantaEditText
                 before: Int,
                 count: Int,
             ) {
-                if (s.isNullOrEmpty() || s == preText) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty() || s.toString() == preText) {
                     return
                 }
                 if (s.length > maxLength) {
@@ -225,7 +228,5 @@ class SantaEditText
                     }
                 }
             }
-
-            override fun afterTextChanged(s: Editable?) {}
         }
     }
