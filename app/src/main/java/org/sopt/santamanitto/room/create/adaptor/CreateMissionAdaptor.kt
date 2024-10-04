@@ -16,7 +16,7 @@ open class CreateMissionAdaptor(
         parent: ViewGroup,
         viewType: Int,
     ): RecyclerView.ViewHolder {
-        val inflater by lazy { LayoutInflater.from(parent.context) }
+        val inflater = LayoutInflater.from(parent.context)
         return if (viewType == VIEW_TYPE_ITEM) {
             val binding = ItemCreateMissionBinding.inflate(inflater, parent, false)
             CreateMissionViewHolder(createMissionCallback, binding) { text ->
@@ -50,11 +50,7 @@ open class CreateMissionAdaptor(
         position: Int,
     ) {
         if (holder is CreateMissionViewHolder) {
-            if (position == missions.size) {
-                holder.bind(null)
-            } else {
-                holder.bind(missions[position])
-            }
+            holder.bind(missions.getOrNull(position))
         } else if (holder is AddMissionViewHolder) {
             holder.bind()
         }

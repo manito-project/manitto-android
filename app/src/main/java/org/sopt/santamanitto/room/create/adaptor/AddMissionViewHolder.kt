@@ -9,15 +9,19 @@ class AddMissionViewHolder(
     private val callback: CreateMissionAdaptor.CreateMissionCallback,
     private val binding: ItemAddMissionBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind() {}
+    private var currentMission: String? = null
 
-    fun updateText(mission: String?) {
+    fun bind() {
         binding.btnAddMission.setOnClickListener {
-            if (!mission.isNullOrBlank()) {
-                callback.onMissionInserted(mission)
+            if (!currentMission.isNullOrBlank()) {
+                callback.onMissionInserted(currentMission!!)
                 hideKeyboard()
             }
         }
+    }
+
+    fun updateText(mission: String?) {
+        currentMission = mission
     }
 
     private fun hideKeyboard() {
