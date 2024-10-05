@@ -127,15 +127,14 @@
                     tool:listitem="@layout/item_member" />
 
                 <org.sopt.santamanitto.view.SantaLoading
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:visibility="@{vm.isLoading ? View.VISIBLE : View.GONE}"
                     app:error="@{vm.networkErrorOccur}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tool:visibility="gone" />
+                    app:layout_constraintTop_toBottomOf="@id/view_waitingroom_divider" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

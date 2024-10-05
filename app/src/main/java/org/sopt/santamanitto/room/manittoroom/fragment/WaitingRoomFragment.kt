@@ -20,11 +20,8 @@ import org.sopt.santamanitto.util.ClipBoardUtil
 import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
-
 @AndroidEntryPoint
-class WaitingRoomFragment :
-    BaseFragment<FragmentWaitingRoomBinding>(R.layout.fragment_waiting_room, false) {
-
+class WaitingRoomFragment : BaseFragment<FragmentWaitingRoomBinding>(R.layout.fragment_waiting_room, false) {
     companion object {
         const val INVITATION_CODE_LABEL = "InvitationCode"
     }
@@ -36,7 +33,7 @@ class WaitingRoomFragment :
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         if (viewModel.isMatched) {
             if (viewModel.isFinished) {
@@ -48,7 +45,10 @@ class WaitingRoomFragment :
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
@@ -78,14 +78,16 @@ class WaitingRoomFragment :
             textviewWaitingroomInvitationcode.setOnClickListener {
                 ClipBoardUtil.copy(
                     requireContext(),
-                    INVITATION_CODE_LABEL, viewModel.invitationCode
+                    INVITATION_CODE_LABEL,
+                    viewModel.invitationCode,
                 )
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                    Snackbar.make(
-                        binding.root,
-                        getString(org.sopt.santamanitto.R.string.waitingroom_snackbar_invitation_code),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    Snackbar
+                        .make(
+                            binding.root,
+                            getString(R.string.waitingroom_snackbar_invitation_code),
+                            Snackbar.LENGTH_SHORT,
+                        ).show()
                 }
             }
             santabottombuttonWaitingroomModify.setOnClickListener {
@@ -94,6 +96,9 @@ class WaitingRoomFragment :
             santabottombuttonWaitingroomMatch.setOnClickListener {
                 viewModel.match()
                 navigateMatchingFragment()
+            }
+            buttonWaitingroomRefresh.setOnClickListener {
+                viewModel.refreshManittoRoomInfo()
             }
         }
     }
@@ -105,8 +110,7 @@ class WaitingRoomFragment :
                     .setContentText(getString(R.string.mymanitto_epired_dialog))
                     .addHorizontalButton(getString(R.string.mymanitto_epired_dialog_button)) {
                         requireActivity().finish()
-                    }
-                    .enableCancel(false)
+                    }.enableCancel(false)
                     .build()
                     .show(childFragmentManager, "expired")
             }
