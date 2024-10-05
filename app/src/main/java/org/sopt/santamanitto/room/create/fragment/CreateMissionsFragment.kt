@@ -71,6 +71,7 @@ class CreateMissionsFragment :
         viewModel.missions.observe(viewLifecycleOwner) { missionList ->
             createMissionAdaptor.setList(missionList.getMissions())
             binding.recyclerviewCreatemission.scrollToPosition(createMissionAdaptor.itemCount - 1)
+            binding.santabottombuttonCreatemissionDone.isEnabled = !missionList.isEmpty()
         }
     }
 
