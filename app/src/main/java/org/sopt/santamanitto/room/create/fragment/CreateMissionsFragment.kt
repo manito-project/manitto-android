@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.create.fragment
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -76,7 +77,8 @@ class CreateMissionsFragment :
     private fun saveMeasuredHeightOfRecyclerView() {
         binding.recyclerviewCreatemission.run {
             viewTreeObserver.addOnGlobalLayoutListener {
-                viewModel.heightOfRecyclerView = height
+                viewModel.heightOfRecyclerView =
+                    height - (100 * Resources.getSystem().displayMetrics.density).toInt()
             }
         }
     }

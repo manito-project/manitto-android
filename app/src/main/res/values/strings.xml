@@ -67,8 +67,10 @@
     <string name="createmission_dialog_skip_has_mission">아직 작성중인 미션이 있어!\n미션이 사라져도 괜찮아?</string>
     <string name="createmission_dialog_no_mission">미션없는 마니또 게임은\n친구들이 심심해할 수 있어!</string>
 
+    <string name="createconfirm_background_title">방 정보 확인</string>
+    <string name="createconfirm_background_description">초대 전 상태 점검\n방 정보 췍~!</string>
     <string name="createconfirm_expiration_suffix">에 결과 공개!</string>
-    <string name="createconfirm_no_mission">추가된 미션이 없어요!</string>
+    <string name="createconfirm_no_mission">이번에는 마니또만 매칭될거야!\n다음에는 재미있는 미션을 추가해줘!</string>
     <string name="createconfirm_create_room">방 만들기</string>
     <string name="createconfirm_done_dialog">초대 코드를 복사해서 친구들에게 보내줘!</string>
 

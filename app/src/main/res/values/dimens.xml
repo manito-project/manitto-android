@@ -123,7 +123,7 @@
 
     <dimen name="size_createmission_cardview_title">13sp</dimen>
     <dimen name="padding_createmission_cardview_top">20dp</dimen>
-    <dimen name="padding_createmission_cardview_horizontal">28dp</dimen>
+    <dimen name="padding_createmission_cardview_horizontal">16dp</dimen>
     <dimen name="margin_createmission_recyclerview_top">24dp</dimen>
     <dimen name="padding_createmission_recyclerview_horizontal">16dp</dimen>
     <dimen name="margin_createmission_recyclerview_items">15dp</dimen>
@@ -132,9 +132,9 @@
     <dimen name="margin_createmission_item_horizontal">18dp</dimen>
     <dimen name="size_createmission_scrollbar">6dp</dimen>
 
-    <dimen name="margin_createconfirm_roomname_top">20dp</dimen>
+    <dimen name="margin_createconfirm_roomname_top">24dp</dimen>
     <dimen name="size_createconfirm_expiration_description">14sp</dimen>
-    <dimen name="margin_createconfirm_preview_top">5dp</dimen>
+    <dimen name="margin_createconfirm_preview_top">12dp</dimen>
     <dimen name="margin_createconfirm_divider_top">20dp</dimen>
     <dimen name="margin_createconfirm_no_mission_vertical">25dp</dimen>
 
