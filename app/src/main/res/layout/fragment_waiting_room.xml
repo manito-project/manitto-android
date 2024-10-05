@@ -49,7 +49,7 @@
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginTop="@dimen/margin_cardview_to_guidline_top"
             android:layout_marginBottom="@dimen/margin_waitingroom_cardview_bottom"
-            app:layout_constraintBottom_toTopOf="@id/linearlayout_waitingroom_buttons"
+            app:layout_constraintBottom_toTopOf="@id/textview_waitingroom_notice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_waitingroom_guideline"
@@ -70,20 +70,31 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/button_waitingroom_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_refresh"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_waitingroom_cardviewtitle"
+                    app:layout_constraintStart_toEndOf="@id/textview_waitingroom_cardviewtitle"
+                    app:layout_constraintTop_toTopOf="@id/textview_waitingroom_cardviewtitle" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_waitingroom_invitationcode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_waitingroom_invitation_code_top"
                     android:layout_marginEnd="@dimen/padding_createmission_cardview_horizontal"
-                    android:background="@drawable/background_invitation_code_button"
+                    android:background="@drawable/shape_light_gray_fill_4_rect"
                     android:paddingHorizontal="@dimen/padding_waitingroom_invitation_code_horizontal"
                     android:paddingVertical="@dimen/padding_waitingroom_invitation_code_vertical"
                     android:text="@string/waitingroom_copy_invitation_code"
+                    android:textColor="@color/dark_gray"
                     android:textSize="@dimen/size_waitingroom_invitation_code"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_waitingroom_cardviewtitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tool:ignore="SmallSp" />
+                    app:layout_constraintTop_toTopOf="@id/textview_waitingroom_cardviewtitle" />
 
                 <View
                     android:id="@+id/view_waitingroom_divider"
@@ -104,12 +115,11 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="@dimen/margin_waitingroom_recyclerview_top"
                     android:layout_marginEnd="@dimen/margin_waitingroom_recyclerview_end"
-                    android:layout_marginBottom="@dimen/margin_waitingroom_recyclerview_bottom"
                     android:orientation="vertical"
                     android:overScrollMode="never"
                     android:paddingStart="@dimen/padding_waitingroom_recyclerview_start"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toTopOf="@id/textview_waitingroom_notice"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_waitingroom_divider"
@@ -124,52 +134,59 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textview_waitingroom_notice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
-                    android:layout_marginBottom="@dimen/margin_waitingroom_notice_bottom"
-                    android:text="@{vm.isAdmin() ? @string/waitingroom_notice_admin : @string/waitingroom_notice_participant}"
-                    android:textSize="@dimen/size_waitingroom_notice"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    tool:visibility="gone" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </org.sopt.santamanitto.view.SantaCardView>
 
-        <LinearLayout
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_waitingroom_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
+            android:layout_marginBottom="@dimen/margin_waitingroom_notice_bottom"
+            android:text="@{vm.isAdmin() ? @string/waitingroom_notice_admin : @string/waitingroom_notice_participant}"
+            android:textSize="@dimen/size_waitingroom_notice"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_waitingroom_buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tool:text="@string/waitingroom_notice_admin" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearlayout_waitingroom_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <org.sopt.santamanitto.view.SantaBottomButton
                 android:id="@+id/santabottombutton_waitingroom_modify"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_matched_buttons"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="12dp"
+                app:isGrayButton="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/santabottombutton_waitingroom_match"
                 android:text="@string/waitingroom_modify"
                 android:visibility="@{vm.isAdmin() ? View.VISIBLE : View.GONE}" />
 
             <org.sopt.santamanitto.view.SantaBottomButton
                 android:id="@+id/santabottombutton_waitingroom_match"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/santabottombutton_waitingroom_modify"
                 android:enabled="@{vm.canStart}"
                 android:text="@string/waitingroom_bottombutton" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
