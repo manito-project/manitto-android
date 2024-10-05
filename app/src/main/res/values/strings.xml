@@ -72,7 +72,7 @@
     <string name="createconfirm_expiration_suffix">에 결과 공개!</string>
     <string name="createconfirm_no_mission">이번에는 마니또만 매칭될거야!\n다음에는 재미있는 미션을 추가해줘!</string>
     <string name="createconfirm_create_room">방 만들기</string>
-    <string name="createconfirm_done_dialog">초대 코드를 복사해서 친구들에게 보내줘!</string>
+    <string name="createconfirm_done_dialog">초대 코드를 복사해서\n친구들에게 공유해 주자!</string>
 
     <string name="joinroom_background_title">방 입장하기</string>
     <string name="joinroom_background_description">코드를 입력하고 초대된 방으로\n산타 마니또를 찾아 떠나볼까?</string>

@@ -161,18 +161,14 @@ internal class RoundDialog(
 
         if (invitationCode != null) {
             val invitationCodeView =
-                LayoutInflater
-                    .from(buttonLayout.context)
-                    .inflate(R.layout.dialog_invitation_code, buttonLayout, false)
-            invitationCodeView.findViewById<AppCompatTextView>(R.id.textview_invitationcode).text =
-                invitationCode
-            invitationCodeView
-                .findViewById<AppCompatTextView>(R.id.textview_invitationcode_copybutton)
-                .setOnClickListener {
-                    invitationCodeCallback?.let { it() }
-                    dismiss()
+                layoutInflater.inflate(R.layout.dialog_invitation_code, buttonLayout, false).apply {
+                    findViewById<AppCompatTextView>(R.id.textview_invitationcode).text =
+                        invitationCode
+                    findViewById<AppCompatTextView>(R.id.textview_invitationcode_copybutton).setOnClickListener {
+                        invitationCodeCallback?.invoke()
+                        dismiss()
+                    }
                 }
-            addDivider(buttonLayout, true)
             buttonLayout.addView(invitationCodeView)
         } else {
             verticalButtons?.let {

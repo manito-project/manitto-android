@@ -158,7 +158,7 @@
     <dimen name="margin_memberitem_image_end">12dp</dimen>
     <dimen name="size_memberitem_name">17sp</dimen>
 
-    <dimen name="size_dialog_invitationcode_copy">12sp</dimen>
+    <dimen name="size_dialog_invitationcode_copy">16sp</dimen>
     <dimen name="padding_dialog_invitationcode_button_horizontal">10dp</dimen>
     <dimen name="padding_dialog_invitationcode_button_vertical">6dp</dimen>
     <dimen name="height_invitationcode_root">96dp</dimen>
