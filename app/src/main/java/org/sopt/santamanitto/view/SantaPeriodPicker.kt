@@ -54,6 +54,7 @@ class SantaPeriodPicker
             set(value) {
                 if (value in MINIMUM_PERIOD..MAXIMUM_PERIOD) {
                     _period = value
+                    checkLimit(value)
                     updateTextView()
                     periodChangedListener?.let { it(period) }
                 }
@@ -61,6 +62,19 @@ class SantaPeriodPicker
 
         private fun updateTextView() {
             text.text = String.format(context.getString(R.string.santaperiodpicker_period), _period)
+        }
+
+        private fun checkLimit(value: Int) {
+            with(binding) {
+                if (value == MINIMUM_PERIOD) {
+                    imagebuttonSantaperiodpickerMinus.setMinusImage(false)
+                } else if (value == MAXIMUM_PERIOD) {
+                    imagebuttonSantaperiodpickerPlus.setPlusImage(false)
+                } else {
+                    imagebuttonSantaperiodpickerMinus.setMinusImage(true)
+                    imagebuttonSantaperiodpickerPlus.setPlusImage(true)
+                }
+            }
         }
 
         fun setOnPeriodChangedListener(listener: (Int) -> Unit) {

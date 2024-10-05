@@ -27,8 +27,10 @@
     <declare-styleable name="SantaSmallButton">
         <attr name="buttonMode" format="enum">
             <enum name="minus" value="0" />
-            <enum name="add" value="1" />
-            <enum name="cancel" value="2" />
+            <enum name="minus_limit" value="1" />
+            <enum name="plus" value="2" />
+            <enum name="plus_limit" value="3" />
+            <enum name="cancel" value="4" />
         </attr>
     </declare-styleable>
 

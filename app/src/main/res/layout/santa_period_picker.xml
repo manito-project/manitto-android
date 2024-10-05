@@ -26,9 +26,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textview_santaperiodpicker_text"
-            android:layout_width="wrap_content"
+            android:layout_width="60sp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_santaperiodpicker_text_horizontal"
+            android:gravity="center"
             android:textSize="@dimen/size_santaperiodpicker_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/imagebutton_santaperiodpicker_plus"
@@ -41,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/height_santapereiodpicker_minusbutton"
             android:layout_marginEnd="@dimen/padding_santaperiodpicker_horizontal"
-            app:buttonMode="add"
+            app:buttonMode="plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

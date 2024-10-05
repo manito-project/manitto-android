@@ -48,71 +48,51 @@
             app:layout_constraintTop_toBottomOf="@id/view_createmission_guideline"
             app:moreRound="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_createmission"
+                setItemMargin="@{@dimen/margin_createmission_recyclerview_items}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textview_createmission_description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
-                    android:layout_marginTop="@dimen/padding_createmission_cardview_top"
-                    android:letterSpacing="-0.04"
-                    android:lineSpacingMultiplier="1.2"
-                    android:text="@string/createmission_description_in_cardview"
-                    android:textSize="@dimen/size_createmission_cardview_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_createmission"
-                    setItemMargin="@{@dimen/margin_createmission_recyclerview_items}"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/margin_createmission_recyclerview_top"
-                    android:clipToPadding="false"
-                    android:orientation="vertical"
-                    android:overScrollMode="never"
-                    android:paddingHorizontal="@dimen/padding_createmission_recyclerview_horizontal"
-                    android:paddingBottom="@dimen/padding_createmission_recyclerview_bottom"
-                    android:scrollbarSize="@dimen/size_createmission_scrollbar"
-                    android:scrollbarThumbVertical="@drawable/scrollbar_round_30"
-                    android:scrollbars="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_createmission_description"
-                    tools:listitem="@layout/item_create_mission" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_createmission_recyclerview_top"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:paddingHorizontal="@dimen/padding_createmission_recyclerview_horizontal"
+                android:paddingBottom="@dimen/padding_createmission_recyclerview_bottom"
+                android:scrollbarSize="@dimen/size_createmission_scrollbar"
+                android:scrollbarThumbVertical="@drawable/scrollbar_round_30"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_create_mission" />
 
         </org.sopt.santamanitto.view.SantaCardView>
 
         <org.sopt.santamanitto.view.SantaBottomButton
             android:id="@+id/santabottombutton_createmission_skip"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/padding_entire"
-            android:layout_marginBottom="@dimen/margin_createmission_skip_bottom"
+            android:layout_marginStart="@dimen/padding_entire"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:text="@string/createmission_skip_bottom_button"
             app:isGrayButton="true"
-            app:layout_constraintBottom_toTopOf="@id/santabottombutton_createmission_done"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/santabottombutton_createmission_done"
             app:layout_constraintStart_toStartOf="parent" />
 
         <org.sopt.santamanitto.view.SantaBottomButton
             android:id="@+id/santabottombutton_createmission_done"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/padding_entire"
+            android:layout_marginStart="6dp"
+            android:enabled="false"
+            android:layout_marginEnd="@dimen/padding_entire"
             android:layout_marginBottom="@dimen/margin_bottombutton_bottom"
             android:text="@string/createmission_done_bottom_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/santabottombutton_createmission_skip" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
