@@ -69,6 +69,7 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
         if (!isNewRoom) {
             binding.run {
                 santabackgroundCreateroom.hideDescription()
+                santabottombuttonSkiproom.visibility = View.GONE
                 santabottombuttonCreateroom.text = getString(R.string.createroom_modify_done)
                 santabackgroundCreateroom.title = getString(R.string.createroom_modify_title)
             }
