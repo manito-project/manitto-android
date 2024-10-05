@@ -52,7 +52,11 @@ class CreateMissionsFragment :
     private fun setOnClickListener() {
         binding.run {
             santabottombuttonCreatemissionSkip.setOnClickListener {
-                showSkipDialog()
+                if (viewModel.hasMissions()) {
+                    showSkipDialog()
+                } else {
+                    showNoMissionDialog()
+                }
             }
             santabottombuttonCreatemissionDone.setOnClickListener {
                 if (viewModel.hasMissions()) {
@@ -85,20 +89,16 @@ class CreateMissionsFragment :
     }
 
     private fun showSkipDialog() {
-        if (viewModel.hasMissions()) {
-            RoundDialogBuilder()
-                .setContentText(
-                    getString(R.string.createmission_dialog_skip_has_mission),
-                    true,
-                ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
-                    viewModel.clearMission()
-                    navigateConfirmFragment()
-                }.addHorizontalButton(getString(R.string.createroom_btn_next))
-                .build()
-                .show(parentFragmentManager, "skip_dialog")
-        } else {
-            showNoMissionDialog()
-        }
+        RoundDialogBuilder()
+            .setContentText(
+                getString(R.string.createmission_dialog_skip_has_mission),
+                true,
+            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
+                viewModel.clearMission()
+                navigateConfirmFragment()
+            }.addHorizontalButton(getString(R.string.createroom_btn_next))
+            .build()
+            .show(parentFragmentManager, "skip_dialog")
     }
 
     private fun showNoMissionDialog() {

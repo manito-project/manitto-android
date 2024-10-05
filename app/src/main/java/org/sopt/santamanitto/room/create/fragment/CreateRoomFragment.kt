@@ -164,9 +164,10 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
             .setContentText(
                 getString(R.string.createmission_dialog_no_mission),
                 true,
-            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button))
-            .addHorizontalButton(getString(R.string.createroom_btn_next)) {
+            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
                 findNavController().navigate(actionCreateRoomFragmentToCreateConfirmFragment())
+            }.addHorizontalButton(getString(R.string.createroom_btn_next)) {
+                findNavController().navigate(actionCreateRoomFragmentToCreateMissionsFragment())
             }.build()
             .show(parentFragmentManager, "done_dialog")
     }
