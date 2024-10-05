@@ -82,10 +82,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_santaedittext_big"
                         android:layout_marginTop="@dimen/margin_createroom_roomname_title_bottom"
-                        android:maxLength="17"
                         app:hint="@string/createroom_roomname_hint"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textview_createroom_roomname" />
+                        app:layout_constraintTop_toBottomOf="@id/textview_createroom_roomname"
+                        app:maxLength="17" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
