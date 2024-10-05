@@ -1,10 +1,12 @@
 package org.sopt.santamanitto.user.network
 
+import org.sopt.santamanitto.auth.SignInRequestModel
+import org.sopt.santamanitto.auth.SignUpRequestModel
 import org.sopt.santamanitto.network.Response
-import org.sopt.santamanitto.user.data.UserLoginModel
 import org.sopt.santamanitto.user.data.UserInfoModel
-import org.sopt.santamanitto.user.mypage.UserNameRequestModel
+import org.sopt.santamanitto.user.data.UserLoginModel
 import org.sopt.santamanitto.user.mypage.UserNameModel
+import org.sopt.santamanitto.user.mypage.UserNameRequestModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,14 +16,14 @@ import retrofit2.http.Path
 
 
 interface UserService {
-    @POST("users")
+    @POST("auth/sign-up")
     fun createAccount(
-        @Body body: UserLoginModel
+        @Body body: SignUpRequestModel
     ): Call<Response<UserLoginModel>>
 
-    @GET("users/check-serial/{serialNumber}")
+    @POST("auth/sign-in")
     fun login(
-        @Path("serialNumber") serialNumber: String
+        @Body body: SignInRequestModel
     ): Call<Response<UserCheckModel>>
 
     @Deprecated("deprecated", ReplaceWith("UserAuthService#getUserInfo"))
