@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.create.fragment
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -51,7 +52,11 @@ class CreateMissionsFragment :
     private fun setOnClickListener() {
         binding.run {
             santabottombuttonCreatemissionSkip.setOnClickListener {
-                showSkipDialog()
+                if (viewModel.hasMissions()) {
+                    showSkipDialog()
+                } else {
+                    showNoMissionDialog()
+                }
             }
             santabottombuttonCreatemissionDone.setOnClickListener {
                 if (viewModel.hasMissions()) {
@@ -70,32 +75,30 @@ class CreateMissionsFragment :
         viewModel.missions.observe(viewLifecycleOwner) { missionList ->
             createMissionAdaptor.setList(missionList.getMissions())
             binding.recyclerviewCreatemission.scrollToPosition(createMissionAdaptor.itemCount - 1)
+            binding.santabottombuttonCreatemissionDone.isEnabled = !missionList.isEmpty()
         }
     }
 
     private fun saveMeasuredHeightOfRecyclerView() {
         binding.recyclerviewCreatemission.run {
             viewTreeObserver.addOnGlobalLayoutListener {
-                viewModel.heightOfRecyclerView = height
+                viewModel.heightOfRecyclerView =
+                    height - (100 * Resources.getSystem().displayMetrics.density).toInt()
             }
         }
     }
 
     private fun showSkipDialog() {
-        if (viewModel.hasMissions()) {
-            RoundDialogBuilder()
-                .setContentText(
-                    getString(R.string.createmission_dialog_skip_has_mission),
-                    true,
-                ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
-                    viewModel.clearMission()
-                    navigateConfirmFragment()
-                }.addHorizontalButton(getString(R.string.createroom_btn_next))
-                .build()
-                .show(parentFragmentManager, "skip_dialog")
-        } else {
-            showNoMissionDialog()
-        }
+        RoundDialogBuilder()
+            .setContentText(
+                getString(R.string.createmission_dialog_skip_has_mission),
+                true,
+            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
+                viewModel.clearMission()
+                navigateConfirmFragment()
+            }.addHorizontalButton(getString(R.string.createroom_btn_next))
+            .build()
+            .show(parentFragmentManager, "skip_dialog")
     }
 
     private fun showNoMissionDialog() {

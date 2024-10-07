@@ -15,8 +15,10 @@ class AddMissionViewHolder(
         binding.btnAddMission.setOnClickListener {
             if (!currentMission.isNullOrBlank()) {
                 callback.onMissionInserted(currentMission!!)
-                hideKeyboard()
             }
+        }
+        binding.root.setOnClickListener {
+            hideKeyboard()
         }
     }
 

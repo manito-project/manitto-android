@@ -3,7 +3,7 @@
 
     <style name="TitleOfCardView" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/dark_gray</item>
-        <item name="android:textFontWeight">700</item>
+        <item name="android:textFontWeight">600</item>
         <item name="android:textSize">@dimen/size_createroom_cardview_titles</item>
     </style>
 

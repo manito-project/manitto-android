@@ -14,7 +14,7 @@
             android:id="@+id/btn_add_mission"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_ractangle_background_dark"
+            android:background="@drawable/shape_dark_gray_fill_10_rect"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -50,7 +50,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="165dp"
+            android:layout_height="145dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_add_mission" />

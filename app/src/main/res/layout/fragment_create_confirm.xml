@@ -21,14 +21,16 @@
 
         <org.sopt.santamanitto.view.SantaBackground
             android:id="@+id/santabackground_createconfirm"
-            style="@style/SantaBackground.Confirm"
+            style="@style/SantaBackground.SubTask"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.396"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:santaDescription="@string/createconfirm_background_description"
+            app:santaTitle="@string/createconfirm_background_title" />
 
         <View
             android:id="@+id/view_createconfirm_guideline"
@@ -93,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/margin_space_letter"
                         android:textColor="@color/red"
-                        android:textFontWeight="700"
+                        android:textFontWeight="600"
                         tools:text="2020/12/04 오전 10:00" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -109,28 +111,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/margin_createconfirm_divider_top"
-                    android:background="@color/gray_1"
+                    android:background="@color/light_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/linearlayout_createconfirm_preview" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_createconfirm_nomission"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.1"
+                    android:layout_marginHorizontal="@dimen/padding_createmission_cardview_horizontal"
                     android:layout_marginVertical="@dimen/margin_createconfirm_no_mission_vertical"
                     android:text="@string/createconfirm_no_mission"
+                    android:visibility="@{vm.missionIsEmpty ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_createconfirm_divider" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/group_createconfirm_nomission"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="@{vm.missionIsEmpty ? View.VISIBLE : View.GONE}"
-                    app:constraint_referenced_ids="view_createconfirm_divider, textview_createconfirm_nomission" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_createconfirm"
@@ -149,7 +147,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearlayout_createconfirm_preview"
+                    app:layout_constraintTop_toBottomOf="@id/view_createconfirm_divider"
                     tools:listitem="@layout/item_create_mission" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

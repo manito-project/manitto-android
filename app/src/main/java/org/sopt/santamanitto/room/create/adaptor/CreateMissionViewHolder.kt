@@ -59,6 +59,9 @@ class CreateMissionViewHolder(
             } else {
                 compress(true)
             }
+            if (bindingAdapterPosition == bindingAdapter?.itemCount?.minus(2)) {
+                requestFocus()
+            }
         }
     }
 }

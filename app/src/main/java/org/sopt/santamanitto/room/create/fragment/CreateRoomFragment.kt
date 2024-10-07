@@ -69,6 +69,7 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
         if (!isNewRoom) {
             binding.run {
                 santabackgroundCreateroom.hideDescription()
+                santabottombuttonSkiproom.visibility = View.GONE
                 santabottombuttonCreateroom.text = getString(R.string.createroom_modify_done)
                 santabackgroundCreateroom.title = getString(R.string.createroom_modify_title)
             }
@@ -164,9 +165,10 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
             .setContentText(
                 getString(R.string.createmission_dialog_no_mission),
                 true,
-            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button))
-            .addHorizontalButton(getString(R.string.createroom_btn_next)) {
+            ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
                 findNavController().navigate(actionCreateRoomFragmentToCreateConfirmFragment())
+            }.addHorizontalButton(getString(R.string.createroom_btn_next)) {
+                findNavController().navigate(actionCreateRoomFragmentToCreateMissionsFragment())
             }.build()
             .show(parentFragmentManager, "done_dialog")
     }
