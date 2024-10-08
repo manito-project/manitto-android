@@ -14,7 +14,7 @@ data class ManittoRoomModel(
     @SerializedName("Members") val members: List<ManittoRoomMember>
 ) {
     data class ManittoRoomCreator(
-        @SerializedName("id") val userId: Int,
+        @SerializedName("id") val userId: String,
         @SerializedName("username") val userName: String,
         val serialNumber: String
     )

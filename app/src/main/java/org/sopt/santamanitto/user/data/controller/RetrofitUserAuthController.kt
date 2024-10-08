@@ -10,7 +10,7 @@ import org.sopt.santamanitto.user.network.UserAuthService
 class RetrofitUserAuthController(private val userAuthService: UserAuthService) :
     UserAuthController {
     override fun changeUserName(
-        userId: Int,
+        userId: String,
         newName: String,
         callback: (isSuccess: Boolean) -> Unit,
     ) {
@@ -29,7 +29,7 @@ class RetrofitUserAuthController(private val userAuthService: UserAuthService) :
     }
 
     override fun getUserInfo(
-        userId: Int,
+        userId: String,
         callback: UserAuthController.GetUserInfoCallback,
     ) {
         userAuthService.getUserInfo(userId).start(

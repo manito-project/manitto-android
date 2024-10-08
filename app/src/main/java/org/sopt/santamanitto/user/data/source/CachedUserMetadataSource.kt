@@ -2,13 +2,13 @@ package org.sopt.santamanitto.user.data.source
 
 class CachedUserMetadataSource(private val userPreferenceManager: UserMetadataSource) :
     UserMetadataSource {
-    private var cachedUserId: Int? = null
+    private var cachedUserId: String? = null
     private var cachedAccessToken: String? = null
     private var cachedUserName: String? = null
 
     private var userNameIsDirty = false
 
-    override fun getUserId(): Int {
+    override fun getUserId(): String {
         if (cachedUserId == null) {
             cachedUserId = userPreferenceManager.getUserId()
         }
@@ -30,7 +30,7 @@ class CachedUserMetadataSource(private val userPreferenceManager: UserMetadataSo
         return cachedUserName!!
     }
 
-    override fun setUserId(userId: Int) {
+    override fun setUserId(userId: String) {
         cachedUserId = userId
         userPreferenceManager.setUserId(userId)
     }
