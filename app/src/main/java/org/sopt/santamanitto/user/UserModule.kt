@@ -24,7 +24,7 @@ class UserModule {
     @Named("serialNumber")
     fun provideSerialNumber(
         @ApplicationContext context: Context,
-    ) = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    ): String = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
 
     @Provides
     @Singleton

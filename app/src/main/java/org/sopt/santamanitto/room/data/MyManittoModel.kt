@@ -6,7 +6,7 @@ import org.sopt.santamanitto.util.TimeUtil
 data class MyManittoModel(
     @SerializedName("id") val roomId: Int,
     val roomName: String,
-    val creatorId: Int,
+    val creatorId: String,
     val isDeletedByCreator: Boolean,
     val isMatchingDone: Boolean,
     val expiration: String,

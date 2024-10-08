@@ -13,11 +13,11 @@ class UserPreferenceManager(private val preferenceManager: SharedPreferenceManag
         private const val PREF_KEY_ACCESS_TOKEN = "access_token"
     }
 
-    override fun setUserId(userId: Int) {
-        preferenceManager.setInt(PREF_KEY_USER_ID, userId)
+    override fun setUserId(userId: String) {
+        preferenceManager.setString(PREF_KEY_USER_ID, userId)
     }
 
-    override fun getUserId(): Int = preferenceManager.getInt(PREF_KEY_USER_ID, -1)
+    override fun getUserId(): String = preferenceManager.getString(PREF_KEY_USER_ID) ?: ""
 
     fun setSerialNumber(serialNumber: String) {
         preferenceManager.setString(PREF_KEY_SERIAL_NUMBER, serialNumber)
