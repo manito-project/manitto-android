@@ -3,21 +3,21 @@ package org.sopt.santamanitto.room.network
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
+import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
 import org.sopt.santamanitto.room.data.MissionContentModel
 import org.sopt.santamanitto.room.data.PersonalRoomModel
-import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel.JoinRoomInfo
 import org.sopt.santamanitto.room.join.network.JoinRoomModel.JoinRoomUserInfo
-import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
+import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomCreator
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomMission
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomRelations
+import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
 import org.sopt.santamanitto.util.TimeUtil
 
 class FakeRoomRequest : RoomRequest {
@@ -84,7 +84,7 @@ class FakeRoomRequest : RoomRequest {
                 "2021-02-28 11:01:00",
                 "2021-02-21 14:47:10",
                 ManittoRoomCreator(
-                    1,
+                    "1",
                     "FakeFirstUser",
                     "12fsfe2"
                 ),
@@ -120,8 +120,8 @@ class FakeRoomRequest : RoomRequest {
                             1,
                             "FakeFirstUser",
                             ManittoRoomRelations(
-                                2,
-                                3
+                                "2",
+                                "3"
                             )
                         )
                     )
@@ -130,8 +130,8 @@ class FakeRoomRequest : RoomRequest {
                             2,
                             "FakeSecondUser",
                             ManittoRoomRelations(
-                                3,
-                                1
+                                "3",
+                                "1"
                             )
                         )
                     )
@@ -140,8 +140,8 @@ class FakeRoomRequest : RoomRequest {
                             3,
                             "FakeThirdUser",
                             ManittoRoomRelations(
-                                1,
-                                2
+                                "1",
+                                "2"
                             )
                         )
                     )
@@ -156,25 +156,25 @@ class FakeRoomRequest : RoomRequest {
             callback.onSuccessMatching(mutableListOf<MatchedMissionsModel>().apply {
                 add(
                     MatchedMissionsModel(
-                        1,
+                        "1",
                         2,
-                        3,
+                        "3",
                         MissionContentModel("FakeMission1")
                     )
                 )
                 add(
                     MatchedMissionsModel(
-                        2,
+                        "2",
                         3,
-                        1,
+                        "1",
                         MissionContentModel("FakeMission2")
                     )
                 )
                 add(
                     MatchedMissionsModel(
-                        3,
+                        "3",
                         1,
-                        2,
+                        "2",
                         MissionContentModel("FakeMission3")
                     )
                 )
@@ -183,40 +183,45 @@ class FakeRoomRequest : RoomRequest {
     }
 
     private val fakePersonalRoomInfos = HashMap<Int, PersonalRoomModel>().apply {
-        put(1, PersonalRoomModel(
-            1,
-            2,
-            MissionContentModel("fake my mission"),
-            MissionContentModel("fake mission to me")
+        put(
+            1, PersonalRoomModel(
+                "1",
+                "2",
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
+            )
         )
+        put(
+            2, PersonalRoomModel(
+                "1",
+                "3",
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
+            )
         )
-        put(2, PersonalRoomModel(
-            1,
-            3,
-            MissionContentModel("fake my mission"),
-            MissionContentModel("fake mission to me")
+        put(
+            3, PersonalRoomModel(
+                "1",
+                "4",
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
+            )
         )
+        put(
+            4, PersonalRoomModel(
+                "1",
+                "5",
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
+            )
         )
-        put(3, PersonalRoomModel(
-            1,
-            4,
-            MissionContentModel("fake my mission"),
-            MissionContentModel("fake mission to me")
-        )
-        )
-        put(4, PersonalRoomModel(
-            1,
-            5,
-            MissionContentModel("fake my mission"),
-            MissionContentModel("fake mission to me")
-        )
-        )
-        put(5, PersonalRoomModel(
-            1,
-            6,
-            MissionContentModel("fake my mission"),
-            MissionContentModel("fake mission to me")
-        )
+        put(
+            5, PersonalRoomModel(
+                "1",
+                "6",
+                MissionContentModel("fake my mission"),
+                MissionContentModel("fake mission to me")
+            )
         )
     }
 
