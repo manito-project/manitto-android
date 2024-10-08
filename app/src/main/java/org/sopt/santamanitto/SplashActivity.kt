@@ -1,5 +1,6 @@
 package org.sopt.santamanitto
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,6 +19,7 @@ import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.user.signin.SignInActivity
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
+@SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
@@ -77,6 +79,8 @@ class SplashActivity : AppCompatActivity() {
                 return@observe
             } else if (latestVersion.compare(BuildConfig.VERSION_NAME, Version.MAJOR) > 0) {
                 showUpdateDialog()
+                isDialogShown = true
+                return@observe
             } else {
                 tryLogin()
             }
