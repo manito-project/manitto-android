@@ -3,7 +3,6 @@ package org.sopt.santamanitto
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -11,10 +10,8 @@ import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import org.sopt.santamanitto.auth.data.response.SignInResponseModel
 import org.sopt.santamanitto.update.version.Version
-import org.sopt.santamanitto.update.version.VersionChecker
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import timber.log.Timber
@@ -25,41 +22,38 @@ import javax.inject.Named
 class SplashViewModel @Inject constructor(
     private val userController: UserController,
     private val userMetadataSource: UserMetadataSource,
-    private val versionChecker: VersionChecker,
     @Named("serialNumber") private val serialNumber: String
 ) : ViewModel() {
 
     private val _latestVersion = MutableLiveData<Version?>(null)
-    val latestVersion: LiveData<Version?>
-        get() = _latestVersion
+    val latestVersion: LiveData<Version?> = _latestVersion
 
     private val _versionCheckFail = MutableLiveData(false)
-    val versionCheckFail: LiveData<Boolean>
-        get() = _versionCheckFail
+    val versionCheckFail: LiveData<Boolean> = _versionCheckFail
 
     private val _loginSuccess = MutableLiveData(LoginState.WAITING)
-    val loginSuccess: LiveData<LoginState>
-        get() = _loginSuccess
+    val loginSuccess: LiveData<LoginState> = _loginSuccess
 
     private val _remoteServerCheck = MutableStateFlow(false)
-    val remoteServerCheck: StateFlow<Boolean>
-        get() = _remoteServerCheck
+    val remoteServerCheck: StateFlow<Boolean> = _remoteServerCheck
 
     private val _remoteServerCheckMessage = MutableStateFlow("")
-    val remoteServerCheckMessage: StateFlow<String>
-        get() = _remoteServerCheckMessage
+    val remoteServerCheckMessage: StateFlow<String> = _remoteServerCheckMessage
 
     init {
         fetchRemoteConfig()
     }
 
     fun checkUpdate() {
-        viewModelScope.launch {
+        val versionString = getRemoteConfigInstance().getString("latest_version")
+        if (versionString.isNotEmpty()) {
             try {
-                _latestVersion.value = versionChecker.getLatestVersion()
+                _latestVersion.value = Version.create(versionString)
             } catch (e: Exception) {
                 _versionCheckFail.value = true
             }
+        } else {
+            _versionCheckFail.value = true
         }
     }
 

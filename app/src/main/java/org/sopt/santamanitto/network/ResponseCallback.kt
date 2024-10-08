@@ -13,12 +13,7 @@ fun <T> Call<Response<T>>.start(callback: RequestCallback<T>) {
         ) {
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    if (response.body()!!.success) {
-                        callback.onSuccess(response.body()!!.data)
-                    } else {
-                        Timber.tag(TAG).e("response body is not successful. ${response.body()!!.message}")
-                        callback.onFail()
-                    }
+                    callback.onSuccess(response.body()!!.data)
                 } else {
                     Timber.tag(TAG).e("response body is null. ${response.message()}")
                     callback.onFail()
