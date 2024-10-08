@@ -1,10 +1,11 @@
 package org.sopt.santamanitto.user.network
 
-import org.sopt.santamanitto.auth.SignInRequestModel
-import org.sopt.santamanitto.auth.SignUpRequestModel
+import org.sopt.santamanitto.auth.data.request.SignInRequestModel
+import org.sopt.santamanitto.auth.data.request.SignUpRequestModel
+import org.sopt.santamanitto.auth.data.response.SignInResponseModel
+import org.sopt.santamanitto.auth.data.response.SignUpResponseModel
 import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.user.data.UserInfoModel
-import org.sopt.santamanitto.user.data.UserLoginModel
 import org.sopt.santamanitto.user.mypage.UserNameModel
 import org.sopt.santamanitto.user.mypage.UserNameRequestModel
 import retrofit2.Call
@@ -19,12 +20,12 @@ interface UserService {
     @POST("auth/sign-up")
     fun createAccount(
         @Body body: SignUpRequestModel
-    ): Call<Response<UserLoginModel>>
+    ): Call<Response<SignUpResponseModel>>
 
     @POST("auth/sign-in")
     fun login(
         @Body body: SignInRequestModel
-    ): Call<Response<UserCheckModel>>
+    ): Call<Response<SignInResponseModel>>
 
     @Deprecated("deprecated", ReplaceWith("UserAuthService#getUserInfo"))
     @GET("users/{userId}")
