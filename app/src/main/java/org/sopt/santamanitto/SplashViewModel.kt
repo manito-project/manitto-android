@@ -12,9 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.sopt.santamanitto.auth.data.response.SignInResponseModel
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.update.version.VersionChecker
-import org.sopt.santamanitto.user.data.UserLoginModel
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import timber.log.Timber
@@ -58,7 +58,6 @@ class SplashViewModel @Inject constructor(
             try {
                 _latestVersion.value = versionChecker.getLatestVersion()
             } catch (e: Exception) {
-                Timber.tag(this.javaClass.simpleName).e(e.stackTraceToString())
                 _versionCheckFail.value = true
             }
         }
@@ -66,10 +65,9 @@ class SplashViewModel @Inject constructor(
 
     fun login() {
         userController.login(serialNumber, object : UserController.LoginCallback {
-            override fun onLoginSuccess(userLoginModel: UserLoginModel) {
+            override fun onLoginSuccess(signInResponseModel: SignInResponseModel) {
                 userMetadataSource.run {
-                    userLoginModel.let {
-                        setUserName(it.userName)
+                    signInResponseModel.let {
                         setAccessToken(it.accessToken)
                         setUserId(it.id)
                     }
