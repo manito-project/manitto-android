@@ -2,8 +2,9 @@ package org.sopt.santamanitto.user.signin.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import org.sopt.santamanitto.auth.data.response.SignUpResponseModel
+import kotlinx.coroutines.launch
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Inject
@@ -30,31 +31,31 @@ class ConditionViewModel @Inject constructor(
             return
         }
         _isWaitingForResponse = true
-        userController.createAccount(
-            userName,
-            serialNumber,
-            object : UserController.CreateAccountCallback {
-                override fun onCreateAccountSuccess(signUpResponseModel: SignUpResponseModel) {
-                    userMetadataSource.run {
-                        signUpResponseModel.let {
-//                            setUserName(it.userName)
-                            setAccessToken(it.accessToken)
-                            setUserId(it.id)
-                        }
+
+        viewModelScope.launch {
+            val result = userController.createAccount(userName, serialNumber)
+            _isWaitingForResponse = false
+
+            result.onSuccess { signUpResponseModel ->
+                userMetadataSource.run {
+                    setAccessToken(signUpResponseModel.accessToken)
+                    setUserId(signUpResponseModel.id)
+                }
+                userSaveSuccess.value = true
+                _isWaitingForResponse = false
+            }.onFailure { exception ->
+                when {
+                    exception.message == "409" -> {
+                        isUserExist.value = true
+                        _isWaitingForResponse = false
                     }
-                    userSaveSuccess.value = true
-                    _isWaitingForResponse = false
-                }
 
-                override fun onAlreadyExistAccount() {
-                    isUserExist.value = true
-                    _isWaitingForResponse = false
+                    else -> {
+                        userSaveFail.value = true
+                        _isWaitingForResponse = false
+                    }
                 }
-
-                override fun onCreateAccountFailed() {
-                    userSaveFail.value = true
-                    _isWaitingForResponse = false
-                }
-            })
+            }
+        }
     }
 }

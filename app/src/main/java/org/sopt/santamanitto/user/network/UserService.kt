@@ -18,14 +18,14 @@ import retrofit2.http.Path
 
 interface UserService {
     @POST("auth/sign-up")
-    fun createAccount(
+    suspend fun createAccount(
         @Body body: SignUpRequestModel
-    ): Call<Response<SignUpResponseModel>>
+    ): Response<SignUpResponseModel>
 
     @POST("auth/sign-in")
-    fun login(
+    suspend fun login(
         @Body body: SignInRequestModel
-    ): Call<Response<SignInResponseModel>>
+    ): Response<SignInResponseModel>
 
     @Deprecated("deprecated", ReplaceWith("UserAuthService#getUserInfo"))
     @GET("users/{userId}")
