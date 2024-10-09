@@ -17,10 +17,9 @@ class ConditionViewModel @Inject constructor(
 ) : ViewModel() {
 
     val isReady = MutableLiveData<Boolean>()
-
     val userSaveSuccess = MutableLiveData(false)
-
     val userSaveFail = MutableLiveData(false)
+    val isUserExist = MutableLiveData(false)
 
     private var _isWaitingForResponse = false
     val isWaitingForResponse: Boolean
@@ -44,6 +43,11 @@ class ConditionViewModel @Inject constructor(
                         }
                     }
                     userSaveSuccess.value = true
+                    _isWaitingForResponse = false
+                }
+
+                override fun onAlreadyExistAccount() {
+                    isUserExist.value = true
                     _isWaitingForResponse = false
                 }
 

@@ -4,9 +4,7 @@ import org.sopt.santamanitto.auth.data.request.SignInRequestModel
 import org.sopt.santamanitto.auth.data.request.SignUpRequestModel
 import org.sopt.santamanitto.auth.data.response.SignInResponseModel
 import org.sopt.santamanitto.auth.data.response.SignUpResponseModel
-import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.Response
-import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.user.network.UserService
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,13 +47,23 @@ class RetrofitUserController(private val userService: UserService) : UserControl
                 serialNumber = serialNumber,
                 name = userName
             )
-        ).start(object :
-            RequestCallback<SignUpResponseModel> {
-            override fun onSuccess(data: SignUpResponseModel) {
-                callback.onCreateAccountSuccess(data)
+        ).enqueue(object : Callback<Response<SignUpResponseModel>> {
+            override fun onResponse(
+                call: Call<Response<SignUpResponseModel>>,
+                response: retrofit2.Response<Response<SignUpResponseModel>>
+            ) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.statusCode == 409) {
+                        callback.onAlreadyExistAccount()
+                    } else {
+                        callback.onCreateAccountSuccess(response.body()!!.data)
+                    }
+                } else {
+                    callback.onCreateAccountFailed()
+                }
             }
 
-            override fun onFail() {
+            override fun onFailure(call: Call<Response<SignUpResponseModel>>, t: Throwable) {
                 callback.onCreateAccountFailed()
             }
         })

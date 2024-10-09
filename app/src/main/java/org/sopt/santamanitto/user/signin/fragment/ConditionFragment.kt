@@ -2,21 +2,20 @@ package org.sopt.santamanitto.user.signin.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.BuildConfig
-import org.sopt.santamanitto.main.MainActivity
-import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
+import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.user.signin.viewmodel.ConditionViewModel
-import androidx.activity.OnBackPressedCallback
 
 
 @AndroidEntryPoint
@@ -31,17 +30,23 @@ class ConditionFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 요청 대기 중에 뒤로 가기 버튼을 눌러 화면을 벗어나는 것을 방지
-        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
 
-            override fun handleOnBackPressed() {
-                if (!viewModel.isWaitingForResponse) {
-                    findNavController().navigateUp()
+                override fun handleOnBackPressed() {
+                    if (!viewModel.isWaitingForResponse) {
+                        findNavController().navigateUp()
+                    }
                 }
-            }
-        })
+            })
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentConditionBinding.inflate(inflater, container, false).apply {
             viewModel = this@ConditionFragment.viewModel
             lifecycleOwner = this@ConditionFragment
@@ -58,18 +63,28 @@ class ConditionFragment : Fragment() {
     private fun subscribeUi() {
         viewModel.userSaveSuccess.observe(viewLifecycleOwner) {
             if (it) {
-                requireActivity().run {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
+                navigateToMain()
             }
         }
 
         viewModel.userSaveFail.observe(viewLifecycleOwner) {
             if (it) {
-                //Todo: 계정 생성에 실패했다는 다이얼로그 띄우기
-                Log.e("ConditionFragment", "Fail to create new account")
+                Toast.makeText(binding.root.context, "회원가입에 실패했어요!", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        viewModel.isUserExist.observe(viewLifecycleOwner) {
+            if (it) {
+                Toast.makeText(binding.root.context, "이미 가입된 계정이야!", Toast.LENGTH_SHORT).show()
+                navigateToMain()
+            }
+        }
+    }
+
+    private fun navigateToMain() {
+        requireActivity().run {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 

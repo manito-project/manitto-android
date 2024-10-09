@@ -6,7 +6,7 @@ import org.sopt.santamanitto.auth.data.response.SignUpResponseModel
 interface UserController {
     interface CreateAccountCallback {
         fun onCreateAccountSuccess(signUpResponseModel: SignUpResponseModel)
-
+        fun onAlreadyExistAccount()
         fun onCreateAccountFailed()
     }
 
