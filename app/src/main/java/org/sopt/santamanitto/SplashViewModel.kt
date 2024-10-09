@@ -3,6 +3,7 @@ package org.sopt.santamanitto
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -10,7 +11,7 @@ import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import org.sopt.santamanitto.auth.data.response.SignInResponseModel
+import kotlinx.coroutines.launch
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
@@ -58,25 +59,22 @@ class SplashViewModel @Inject constructor(
     }
 
     fun login() {
-        userController.login(serialNumber, object : UserController.LoginCallback {
-            override fun onLoginSuccess(signInResponseModel: SignInResponseModel) {
+        viewModelScope.launch {
+            val result = userController.login(serialNumber)
+            result.onSuccess { signInResponseModel ->
                 userMetadataSource.run {
-                    signInResponseModel.let {
-                        setAccessToken(it.accessToken)
-                        setUserId(it.id)
-                    }
+                    setAccessToken(signInResponseModel.accessToken)
+                    setUserId(signInResponseModel.id)
                 }
                 _loginSuccess.value = LoginState.SUCCESS
-            }
-
-            override fun onLoginFailed(isError: Boolean) {
-                _loginSuccess.value = if (isError) {
+            }.onFailure { exception ->
+                _loginSuccess.value = if (exception.message != "404") {
                     LoginState.ERROR
                 } else {
                     LoginState.FAIL
                 }
             }
-        })
+        }
     }
 
     private fun fetchRemoteConfig() {

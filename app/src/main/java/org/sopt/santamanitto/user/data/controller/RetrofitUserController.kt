@@ -4,68 +4,45 @@ import org.sopt.santamanitto.auth.data.request.SignInRequestModel
 import org.sopt.santamanitto.auth.data.request.SignUpRequestModel
 import org.sopt.santamanitto.auth.data.response.SignInResponseModel
 import org.sopt.santamanitto.auth.data.response.SignUpResponseModel
-import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.user.network.UserService
-import retrofit2.Call
-import retrofit2.Callback
 
 class RetrofitUserController(private val userService: UserService) : UserController {
-    override fun login(serialNumber: String, callback: UserController.LoginCallback) {
-        userService.login(
-            SignInRequestModel(serialNumber)
-        ).enqueue(object : Callback<Response<SignInResponseModel>> {
-            override fun onResponse(
-                call: Call<Response<SignInResponseModel>>,
-                response: retrofit2.Response<Response<SignInResponseModel>>
-            ) {
-                if (response.isSuccessful) {
-                    val result = response.body()!!.data
-                    callback.onLoginSuccess(
-                        SignInResponseModel(
-                            accessToken = result.accessToken,
-                            id = result.id
-                        )
-                    )
-                } else {
-                    callback.onLoginFailed(false)
-                }
+    override suspend fun login(serialNumber: String): Result<SignInResponseModel> {
+        return try {
+            val response = userService.login(SignInRequestModel(serialNumber))
+            if (response.statusCode == 200) {
+                val result = response.data
+                Result.success(result)
+            } else {
+                Result.failure(Exception("${response.statusCode}"))
             }
-
-            override fun onFailure(call: Call<Response<SignInResponseModel>>, t: Throwable) {
-                callback.onLoginFailed(true)
-            }
-        })
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
-    override fun createAccount(
+    override suspend fun createAccount(
         userName: String,
         serialNumber: String,
-        callback: UserController.CreateAccountCallback
-    ) {
-        userService.createAccount(
-            SignUpRequestModel(
-                serialNumber = serialNumber,
-                name = userName
-            )
-        ).enqueue(object : Callback<Response<SignUpResponseModel>> {
-            override fun onResponse(
-                call: Call<Response<SignUpResponseModel>>,
-                response: retrofit2.Response<Response<SignUpResponseModel>>
-            ) {
-                if (response.isSuccessful) {
-                    if (response.body()!!.statusCode == 409) {
-                        callback.onAlreadyExistAccount()
-                    } else {
-                        callback.onCreateAccountSuccess(response.body()!!.data)
-                    }
-                } else {
-                    callback.onCreateAccountFailed()
+    ): Result<SignUpResponseModel> {
+        return try {
+            val response = userService.createAccount(SignUpRequestModel(serialNumber, userName))
+            when (response.statusCode) {
+                200 -> {
+                    val result = response.data
+                    Result.success(result)
+                }
+
+                409 -> {
+                    Result.failure(Exception("${response.statusCode}"))
+                }
+
+                else -> {
+                    Result.failure(Exception("Account creation failed: ${response.message}"))
                 }
             }
-
-            override fun onFailure(call: Call<Response<SignUpResponseModel>>, t: Throwable) {
-                callback.onCreateAccountFailed()
-            }
-        })
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }
