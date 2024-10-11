@@ -68,7 +68,7 @@ class SplashViewModel @Inject constructor(
                 }
                 _loginSuccess.value = LoginState.SUCCESS
             }.onFailure { exception ->
-                _loginSuccess.value = if (exception.message != "404") {
+                _loginSuccess.value = if (exception.message?.contains("404") == false) {
                     LoginState.ERROR
                 } else {
                     LoginState.FAIL
