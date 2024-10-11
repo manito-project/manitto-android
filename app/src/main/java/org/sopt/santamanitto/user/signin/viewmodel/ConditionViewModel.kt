@@ -45,7 +45,7 @@ class ConditionViewModel @Inject constructor(
                 _isWaitingForResponse = false
             }.onFailure { exception ->
                 when {
-                    exception.message == "409" -> {
+                    exception.message?.contains("409") == true -> {
                         isUserExist.value = true
                         _isWaitingForResponse = false
                     }

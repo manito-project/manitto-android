@@ -27,19 +27,11 @@ class RetrofitUserController(private val userService: UserService) : UserControl
     ): Result<SignUpResponseModel> {
         return try {
             val response = userService.createAccount(SignUpRequestModel(serialNumber, userName))
-            when (response.statusCode) {
-                200 -> {
-                    val result = response.data
-                    Result.success(result)
-                }
-
-                409 -> {
-                    Result.failure(Exception("${response.statusCode}"))
-                }
-
-                else -> {
-                    Result.failure(Exception("Account creation failed: ${response.message}"))
-                }
+            if (response.statusCode == 201) {
+                val result = response.data
+                Result.success(result)
+            } else {
+                Result.failure(Exception("${response.statusCode}"))
             }
         } catch (e: Exception) {
             Result.failure(e)
