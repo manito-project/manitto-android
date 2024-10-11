@@ -38,6 +38,7 @@ class ConditionViewModel @Inject constructor(
 
             result.onSuccess { signUpResponseModel ->
                 userMetadataSource.run {
+                    setUserName(userName)
                     setAccessToken(signUpResponseModel.accessToken)
                     setUserId(signUpResponseModel.id)
                 }
