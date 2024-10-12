@@ -10,7 +10,7 @@ interface UserAuthController {
         fun onDataNotAvailable()
     }
 
-    fun changeUserName(userId: String, newName: String, callback: (isSuccess: Boolean) -> Unit)
+    suspend fun changeUserName(newName: String): Result<Boolean>
 
     fun getUserInfo(userId: String, callback: GetUserInfoCallback)
 }
