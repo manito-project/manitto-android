@@ -3,29 +3,24 @@ package org.sopt.santamanitto.user.data.controller
 import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.user.data.UserInfoModel
-import org.sopt.santamanitto.user.mypage.UserNameModel
 import org.sopt.santamanitto.user.mypage.UserNameRequestModel
 import org.sopt.santamanitto.user.network.UserAuthService
 
 class RetrofitUserAuthController(private val userAuthService: UserAuthService) :
     UserAuthController {
-    override fun changeUserName(
-        userId: String,
+    override suspend fun changeUserName(
         newName: String,
-        callback: (isSuccess: Boolean) -> Unit,
-    ) {
-        userAuthService.changeUserName(userId, UserNameRequestModel(newName))
-            .start(
-                object : RequestCallback<UserNameModel> {
-                    override fun onSuccess(data: UserNameModel) {
-                        callback.invoke(true)
-                    }
-
-                    override fun onFail() {
-                        callback.invoke(false)
-                    }
-                },
-            )
+    ): Result<Boolean> {
+        return try {
+            val response = userAuthService.changeUserName(UserNameRequestModel(newName))
+            if (response.statusCode == 200) {
+                Result.success(true)
+            } else {
+                Result.failure(Exception("Failed to change user name: ${response.message}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     override fun getUserInfo(

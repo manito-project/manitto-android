@@ -4,8 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentEditNameBinding
 import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
@@ -24,6 +29,7 @@ class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment
 
         setOnClickListener()
         observeChangeRequest()
+        setupNameInputObserver()
         hideKeyboardOnOutsideEditText()
     }
 
@@ -36,11 +42,22 @@ class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment
     }
 
     private fun observeChangeRequest() {
-        viewModel.requestDone.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                findNavController().popBackStack(R.id.mainFragment, false)
-                Toast.makeText(context, R.string.editname_finish, Toast.LENGTH_SHORT).show()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.requestDone.flowWithLifecycle(
+                viewLifecycleOwner.lifecycle,
+                Lifecycle.State.STARTED
+            ).collectLatest { isSuccess ->
+                if (isSuccess) {
+                    findNavController().popBackStack(R.id.mainFragment, false)
+                    Toast.makeText(context, R.string.editname_finish, Toast.LENGTH_SHORT).show()
+                }
             }
+        }
+    }
+
+    private fun setupNameInputObserver() {
+        binding.nameinputEditname.observeTextChanges { newName ->
+            viewModel.setNewName(newName)
         }
     }
 }

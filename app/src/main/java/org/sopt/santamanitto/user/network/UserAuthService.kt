@@ -2,7 +2,6 @@ package org.sopt.santamanitto.user.network
 
 import org.sopt.santamanitto.network.Response
 import org.sopt.santamanitto.user.data.UserInfoModel
-import org.sopt.santamanitto.user.mypage.UserNameModel
 import org.sopt.santamanitto.user.mypage.UserNameRequestModel
 import retrofit2.Call
 import retrofit2.http.Body
@@ -16,9 +15,8 @@ interface UserAuthService {
         @Path("userId") userId: String
     ): Call<Response<UserInfoModel>>
 
-    @PUT("users/{userId}")
-    fun changeUserName(
-        @Path("userId") userId: String,
+    @PUT("users/my/nickname")
+    suspend fun changeUserName(
         @Body request: UserNameRequestModel
-    ): Call<Response<UserNameModel>>
+    ): Response<String>
 }
