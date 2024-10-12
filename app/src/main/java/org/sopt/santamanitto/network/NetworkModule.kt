@@ -35,7 +35,7 @@ object NetworkModule {
         return OkHttpClient.Builder()
             .addInterceptor {
                 val request = it.request().newBuilder()
-                    .addHeader("jwt", userMetadataSource.getAccessToken())
+                    .addHeader("Authorization", "Bearer ${userMetadataSource.getAccessToken()}")
                     .build()
                 it.proceed(request)
             }
