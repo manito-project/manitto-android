@@ -35,7 +35,7 @@
             android:layout_marginTop="@dimen/margin_main_setting_top"
             android:background="@null"
             android:padding="@dimen/padding_entire"
-            android:src="@drawable/ic_setting"
+            android:src="@drawable/ic_my_page"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
