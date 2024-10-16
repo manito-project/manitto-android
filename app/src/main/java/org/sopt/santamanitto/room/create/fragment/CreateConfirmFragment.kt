@@ -1,6 +1,5 @@
 package org.sopt.santamanitto.room.create.fragment
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,13 +18,13 @@ import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.setExpirationDiff
 import org.sopt.santamanitto.room.create.setExpirationPreview
 import org.sopt.santamanitto.room.create.viewmodel.CreateRoomAndMissionViewModel
-import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
-import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity.Companion.EXTRA_ROOM_ID
 import org.sopt.santamanitto.room.manittoroom.fragment.WaitingRoomFragment.Companion.INVITATION_CODE_LABEL
 import org.sopt.santamanitto.util.ClipBoardUtil
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
-class CreateConfirmFragment : Fragment(), CreateMissionAdaptor.CreateMissionCallback {
+class CreateConfirmFragment :
+    Fragment(),
+    CreateMissionAdaptor.CreateMissionCallback {
     private lateinit var binding: FragmentCreateConfirmBinding
 
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
@@ -68,7 +67,8 @@ class CreateConfirmFragment : Fragment(), CreateMissionAdaptor.CreateMissionCall
 
     private fun showInvitationCodeDialog(createRoom: CreateRoomModel) {
         if (context != null) {
-            RoundDialogBuilder().setContentText(getString(R.string.createconfirm_done_dialog))
+            RoundDialogBuilder()
+                .setContentText(getString(R.string.createconfirm_done_dialog))
                 .setInvitationCode(createRoom.invitationCode) {
                     ClipBoardUtil.copy(
                         requireContext(),
@@ -76,27 +76,19 @@ class CreateConfirmFragment : Fragment(), CreateMissionAdaptor.CreateMissionCall
                         createRoom.invitationCode,
                     )
                     if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.waitingroom_snackbar_invitation_code),
-                            Toast.LENGTH_SHORT,
-                        ).show()
+                        Toast
+                            .makeText(
+                                requireContext(),
+                                getString(R.string.waitingroom_snackbar_invitation_code),
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     }
-                    startMatchingRoomActivity(createRoom.id)
-                }.enableCancel(false).build().show(parentFragmentManager, "invitation_code_dialog")
+                    requireActivity().finish()
+                }.enableCancel(false)
+                .build()
+                .show(parentFragmentManager, "invitation_code_dialog")
         } else {
-            startMatchingRoomActivity(createRoom.id)
-        }
-    }
-
-    private fun startMatchingRoomActivity(createdRoomId: Int) {
-        requireActivity().run {
-            startActivity(
-                Intent(this, ManittoRoomActivity::class.java).apply {
-                    putExtra(EXTRA_ROOM_ID, createdRoomId)
-                },
-            )
-            finish()
+            requireActivity().finish()
         }
     }
 
