@@ -11,7 +11,6 @@ import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
-import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
 import javax.inject.Inject
@@ -20,12 +19,11 @@ import javax.inject.Inject
 class ManittoRoomViewModel @Inject constructor(
     private val userMetadataSource: UserMetadataSource,
     private val userDataSource: UserAuthController,
-    private val cachedMainUserDataSource: CachedMainUserDataSource,
     private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
-    private var _roomId = -1
-    var roomId: Int
+    private var _roomId = ""
+    var roomId: String
         get() = _roomId
         set(value) {
             _roomId = value
@@ -111,7 +109,6 @@ class ManittoRoomViewModel @Inject constructor(
 
     fun match() {
         startLoading()
-        cachedMainUserDataSource.isMyManittoDirty = true
         roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
             override fun onSuccessMatching(missions: List<MatchedMissionsModel>) {
                 isMatched = true
@@ -168,7 +165,6 @@ class ManittoRoomViewModel @Inject constructor(
     fun removeHistory(callback: () -> Unit) {
         roomRequest.removeHistory(roomId) { isRemoved ->
             if (isRemoved) {
-                cachedMainUserDataSource.isMyManittoDirty = true
                 callback.invoke()
             } else {
                 _networkErrorOccur.value = true

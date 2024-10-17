@@ -5,16 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
-import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
+import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.room.network.RoomRequest.JoinRoomError
-import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import javax.inject.Inject
 
 @HiltViewModel
 class JoinRoomViewModel @Inject constructor(
-    private val cachedMainUserDataSource: CachedMainUserDataSource,
     private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
@@ -45,7 +43,6 @@ class JoinRoomViewModel @Inject constructor(
             object : RoomRequest.JoinRoomCallback {
 
                 override fun onSuccessJoinRoom(joinedRoom: JoinRoomModel) {
-                    cachedMainUserDataSource.isMyManittoDirty = true
                     callback(joinedRoom)
                 }
 

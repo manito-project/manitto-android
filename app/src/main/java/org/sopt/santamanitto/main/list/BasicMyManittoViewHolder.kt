@@ -1,12 +1,14 @@
 package org.sopt.santamanitto.main.list
 
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemMymanittoBinding
-import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.room.data.PersonalRoomModel
+import org.sopt.santamanitto.room.data.TempMyManittoModel
 import org.sopt.santamanitto.room.network.RoomRequest
 import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
@@ -20,10 +22,10 @@ class BasicMyManittoViewHolder(
     private val userAuthController: UserAuthController,
     private val roomRequest: RoomRequest,
     private val userMetadataSource: UserMetadataSource,
-    private val cachedRoomInfo: HashMap<Int, MyManittoInfoModel>,
-    private var listener: ((roomId: Int, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null,
-    private var exitListener: ((roomId: Int, roomName: String, isHost: Boolean) -> Unit)? = null,
-) : BaseViewHolder<MyManittoModel, ItemMymanittoBinding>(R.layout.item_mymanitto, parent) {
+    private val cachedRoomInfo: HashMap<String, MyManittoInfoModel>,
+    private var listener: ((roomId: String, isMatched: Boolean, isFinished: Boolean) -> Unit)? = null,
+    private var exitListener: ((roomId: String, roomName: String, isHost: Boolean) -> Unit)? = null,
+) : BaseViewHolder<TempMyManittoModel, ItemMymanittoBinding>(R.layout.item_mymanitto, parent) {
     private val contentText = binding.textviewMymanittoManittoinfo
     private val stateText = binding.textviewMymanittoState
     private val missionText = binding.textviewMymanittoMission
@@ -31,13 +33,17 @@ class BasicMyManittoViewHolder(
     private val exitButton = binding.buttonMymanittoExit
     private val roomName = binding.textviewMymanittoTitle
 
-    override fun bind(data: MyManittoModel) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun bind(data: TempMyManittoModel) {
         roomName.text = data.roomName
 
         listener?.let { listener ->
-            val isFinished = !TimeUtil.isLaterThanNow(data.expiration)
+            val isFinished = if (data.expirationDate == null) {
+                true
+            } else !TimeUtil.isExpired(data.expirationDate)
+
             binding.root.setOnClickListener {
-                listener.invoke(data.roomId, data.isMatchingDone, isFinished)
+                listener.invoke(data.roomId, data.matchingDate != null, isFinished)
             }
         }
         exitListener?.let { listener ->
@@ -45,14 +51,14 @@ class BasicMyManittoViewHolder(
                 listener.invoke(
                     data.roomId,
                     data.roomName,
-                    data.creatorId == userMetadataSource.getUserId(),
+                    data.creator.id == userMetadataSource.getUserId(),
                 )
             }
         }
 
         setRoomState(data)
 
-        if (!data.isMatchingDone) {
+        if (data.matchingDate == null) {
             clearLoading()
             return
         }
@@ -76,8 +82,8 @@ class BasicMyManittoViewHolder(
     }
 
     private fun requestAndCacheInfo(
-        roomId: Int,
-        data: MyManittoModel,
+        roomId: String,
+        data: TempMyManittoModel,
     ) {
         roomRequest.getPersonalRoomInfo(
             roomId,
@@ -93,7 +99,7 @@ class BasicMyManittoViewHolder(
                                         personalRoom.myMission?.content,
                                     )
                                 cachedRoomInfo[roomId] = info
-                                setManittoInfo(info = info, isMatched = data.isMatchingDone)
+                                setManittoInfo(info = info, isMatched = data.matchingDate != null)
                                 clearLoading()
                             }
 
@@ -128,10 +134,11 @@ class BasicMyManittoViewHolder(
         loadingBar.visibility = View.GONE
     }
 
-    private fun setRoomState(data: MyManittoModel) {
-        if (data.isMatchingDone) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setRoomState(data: TempMyManittoModel) {
+        if (data.matchingDate != null) {
             showExitButton(false)
-            if (TimeUtil.isLaterThanNow(data.expiration)) {
+            if (data.expirationDate != null && !TimeUtil.isExpired(data.expirationDate)) {
                 // 마니또 진행 중
                 stateText.text =
                     String.format(

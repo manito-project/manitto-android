@@ -12,17 +12,15 @@ import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import javax.inject.Inject
 
 
 @HiltViewModel
 class CreateRoomAndMissionViewModel @Inject constructor(
-    private val cachedMainUserDataSource: CachedMainUserDataSource,
     private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
-    private var roomId = -1
+    private var roomId = ""
 
     var expirationLiveData = ExpirationLiveData()
 
@@ -38,8 +36,8 @@ class CreateRoomAndMissionViewModel @Inject constructor(
 
     var nameIsNullOrEmpty = roomName.map { it.isNullOrBlank() }
 
-    fun getRoomData(roomId: Int) {
-        if (roomId == -1) {
+    fun getRoomData(roomId: String) {
+        if (roomId.isBlank()) {
             return
         }
         this.roomId = roomId
@@ -98,7 +96,6 @@ class CreateRoomAndMissionViewModel @Inject constructor(
             }
         })
 
-        cachedMainUserDataSource.isMyManittoDirty = true
     }
 
     fun modifyRoom(callback: () -> Unit) {
