@@ -10,6 +10,7 @@ import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
 import org.sopt.santamanitto.room.data.PersonalRoomModel
+import org.sopt.santamanitto.room.data.TempMyManittoModel
 import org.sopt.santamanitto.room.join.network.JoinRoomErrorModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
@@ -32,6 +33,16 @@ class RoomRequestImpl(
         private const val JOIN_ROOM_ERROR_ALREADY_ENTERED = "이미 입장했던 방입니다"
     }
 
+    override suspend fun getRooms(): List<TempMyManittoModel> {
+        val response = roomService.getRooms()
+
+        if (response.statusCode == 200) {
+            return response.data
+        } else {
+            throw Exception("Failed to get rooms: ${response.message}")
+        }
+    }
+
     override fun createRoom(
         request: CreateRoomRequestModel,
         callback: RoomRequest.CreateRoomCallback
@@ -48,7 +59,7 @@ class RoomRequestImpl(
     }
 
     override fun modifyRoom(
-        roomId: Int,
+        roomId: String,
         request: ModifyRoomRequestModel,
         callback: (onSuccess: Boolean) -> Unit
     ) {
@@ -92,7 +103,7 @@ class RoomRequestImpl(
         })
     }
 
-    override fun getManittoRoomData(roomId: Int, callback: RoomRequest.GetManittoRoomCallback) {
+    override fun getManittoRoomData(roomId: String, callback: RoomRequest.GetManittoRoomCallback) {
         roomService.getManittoRoomData(roomId).start(object : RequestCallback<ManittoRoomModel> {
             override fun onSuccess(data: ManittoRoomModel) {
                 callback.onLoadManittoRoomData(data)
@@ -104,7 +115,7 @@ class RoomRequestImpl(
         })
     }
 
-    override fun matchManitto(roomId: Int, callback: RoomRequest.MatchManittoCallback) {
+    override fun matchManitto(roomId: String, callback: RoomRequest.MatchManittoCallback) {
         roomService.matchManitto(MatchingRequestModel(roomId))
             .start(object : RequestCallback<List<MatchedMissionsModel>> {
                 override fun onSuccess(data: List<MatchedMissionsModel>) {
@@ -118,7 +129,7 @@ class RoomRequestImpl(
     }
 
     override fun getPersonalRoomInfo(
-        roomId: Int,
+        roomId: String,
         callback: RoomRequest.GetPersonalRoomInfoCallback
     ) {
         roomService.getRoomPersonalInfo(roomId).start(object : RequestCallback<PersonalRoomModel> {
@@ -132,11 +143,11 @@ class RoomRequestImpl(
         })
     }
 
-    override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
-        roomService.exitRoom(ExitRoomRequestModel(roomId.toString())).start(callback)
+    override fun exitRoom(roomId: String, callback: (onSuccess: Boolean) -> Unit) {
+        roomService.exitRoom(ExitRoomRequestModel(roomId)).start(callback)
     }
 
-    override fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
+    override fun removeHistory(roomId: String, callback: (onSuccess: Boolean) -> Unit) {
         roomService.removeHistory(roomId).start(callback)
     }
 

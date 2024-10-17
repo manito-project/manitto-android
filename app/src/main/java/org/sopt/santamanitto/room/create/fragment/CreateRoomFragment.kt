@@ -23,7 +23,8 @@ import org.sopt.santamanitto.view.SantaPeriodPicker
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 import org.sopt.santamanitto.view.santanumberpicker.SantaNumberPicker
 
-class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
+class CreateRoomFragment :
+    BaseFragment<FragmentCreateRoomBinding>(R.layout.fragment_create_room, true) {
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
     private val args: CreateRoomFragmentArgs by navArgs()
@@ -53,7 +54,7 @@ class CreateRoomFragment : BaseFragment<FragmentCreateRoomBinding>(R.layout.frag
 
     private fun loadDataWhenModifying() {
         viewModel.getRoomData(args.roomId)
-        isNewRoom = args.roomId == -1
+        isNewRoom = args.roomId == ""
     }
 
     private fun initView() {

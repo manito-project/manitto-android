@@ -60,10 +60,11 @@
         android:id="@+id/createRoomFragmentModify"
         android:name="org.sopt.santamanitto.room.create.fragment.CreateRoomFragment"
         android:label="CreateRoomFragment"
-        tool:layout="@layout/fragment_create_room" >
-        <argument android:name="roomId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+        tool:layout="@layout/fragment_create_room">
+        <argument
+            android:name="roomId"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
 
 </navigation>

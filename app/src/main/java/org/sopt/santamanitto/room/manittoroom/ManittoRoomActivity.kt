@@ -25,8 +25,8 @@ class ManittoRoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView<ActivityManittoRoomBinding>(this, R.layout.activity_manitto_room)
 
-        val roomId = intent.getIntExtra(EXTRA_ROOM_ID, -1)
-        if (roomId == -1) {
+        val roomId = intent.getStringExtra(EXTRA_ROOM_ID) ?: ""
+        if (roomId.isBlank()) {
             Timber.tag(TAG).e("Wrong access.")
             finish()
         } else {

@@ -18,8 +18,8 @@
             app:destination="@id/createConfirmFragment" />
         <argument
             android:name="roomId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
 
     <fragment
