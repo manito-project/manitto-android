@@ -94,8 +94,8 @@
     <dimen name="margin_main_nomanitto_snowman_bottom">16dp</dimen>
     <dimen name="margin_main_setting_top">32dp</dimen>
 
-    <dimen name="height_mymanitto_viewholder">184dp</dimen>
-    <dimen name="width_mymanitto_viewholder">145dp</dimen>
+    <dimen name="height_mymanitto_viewholder">204dp</dimen>
+    <dimen name="width_mymanitto_viewholder">160dp</dimen>
     <dimen name="size_mymanitto_title">17sp</dimen>
     <dimen name="padding_mymanitto_horizontal">14dp</dimen>
     <dimen name="padding_mymanitto_veertical">17dp</dimen>
