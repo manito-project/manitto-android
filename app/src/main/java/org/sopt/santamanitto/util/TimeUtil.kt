@@ -1,6 +1,10 @@
 package org.sopt.santamanitto.util
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatterBuilder
 import java.util.Calendar
 import java.util.Date
 import java.util.GregorianCalendar
@@ -37,6 +41,21 @@ object TimeUtil {
         val targetCal = getGregorianCalendarFromLocalFormat(target)
         val nowCal = GregorianCalendar(Locale.KOREA)
         return targetCal.timeInMillis >= nowCal.timeInMillis
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun parseExpirationDate(expirationDate: String): LocalDateTime {
+        val formatter = DateTimeFormatterBuilder()
+            .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
+            .toFormatter()
+        return LocalDateTime.parse(expirationDate, formatter)
+    }
+
+    // 임시 만료 로직 (서버에서 만료 로직이 정해지면 수정 필요)
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun isExpired(expirationDate: String): Boolean {
+        val parsedExpirationDate = parseExpirationDate(expirationDate)
+        return parsedExpirationDate.isBefore(LocalDateTime.now())
     }
 
     fun getLocalFormatFromGregorianCalendar(gregorianCalendar: GregorianCalendar): String {
