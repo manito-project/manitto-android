@@ -9,8 +9,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import org.sopt.santamanitto.preference.UserPreferenceManager
-import org.sopt.santamanitto.user.data.controller.UserAuthController
-import org.sopt.santamanitto.user.data.source.CachedMainUserDataSource
 import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Named
@@ -35,11 +33,4 @@ class UserModule {
     @Singleton
     fun provideUserMetadataSource(userPreferenceManager: UserPreferenceManager): UserMetadataSource =
         CachedUserMetadataSource(userPreferenceManager)
-
-    @Provides
-    @Singleton
-    fun provideCachedMainUserData(
-        userMetadataSource: UserMetadataSource,
-        userAuthController: UserAuthController,
-    ): CachedMainUserDataSource = CachedMainUserDataSource(userMetadataSource, userAuthController)
 }

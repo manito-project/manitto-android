@@ -10,5 +10,5 @@ interface MainUserDataSource {
         fun onDataNotAvailable()
     }
 
-    fun getMyManittoList(callback: GetJoinedRoomsCallback)
+    suspend fun getMyManittoList(): List<MyManittoModel>
 }

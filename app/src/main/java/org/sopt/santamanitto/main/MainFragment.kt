@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.main.list.MyManittoListAdapter
@@ -52,11 +56,20 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeUI() {
-        viewModel.myManittoModelList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.myManittoModelList.collect { list ->
+                    adapter.submitList(list)
+                }
+            }
         }
-        viewModel.isRefreshing.observe(viewLifecycleOwner) { isRefreshing ->
-            if (isRefreshing) adapter.clear()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isRefreshing.collect { isRefreshing ->
+                    if (isRefreshing) adapter.clear()
+                }
+            }
         }
     }
 
