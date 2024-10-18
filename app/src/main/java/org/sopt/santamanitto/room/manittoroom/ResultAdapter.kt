@@ -21,7 +21,7 @@ class ResultAdapter(
 
     companion object {
         private val DiffUtil = ItemDiffCallback<ManittoRoomMember>(
-            onContentsTheSame = { oldItem, newItem -> oldItem.relations.manittoUserId == newItem.relations.manittoUserId },
+            onContentsTheSame = { oldItem, newItem -> oldItem.manitto.userId == newItem.manitto.userId },
             onItemsTheSame = { oldItem, newItem -> oldItem == newItem }
         )
     }

@@ -18,7 +18,7 @@ class MemberAdapter : ListAdapter<ManittoRoomMember, MemberViewHolder>(DiffUtil)
 
     companion object {
         private val DiffUtil = ItemDiffCallback<ManittoRoomMember>(
-            onContentsTheSame = { oldItem, newItem -> oldItem.userId == newItem.userId },
+            onContentsTheSame = { oldItem, newItem -> oldItem.santa.userId == newItem.santa.userId },
             onItemsTheSame = { oldItem, newItem -> oldItem == newItem }
         )
     }

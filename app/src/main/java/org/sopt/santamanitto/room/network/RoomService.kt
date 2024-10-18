@@ -11,13 +11,12 @@ import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
-import org.sopt.santamanitto.room.manittoroom.network.MatchingRequestModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface RoomService {
@@ -34,7 +33,7 @@ interface RoomService {
         @Body request: CreateRoomRequestModel
     ): Call<Response<CreateRoomModel>>
 
-    @PUT("rooms/{roomId}")
+    @PATCH("rooms/{roomId}")
     fun modifyRoom(
         @Path("roomId") roomId: String,
         @Body request: ModifyRoomRequestModel
@@ -50,9 +49,9 @@ interface RoomService {
         @Path("roomId") roomId: String
     ): Call<Response<ManittoRoomModel>>
 
-    @POST("rooms/match")
+    @POST("rooms/{roomId}/match")
     fun matchManitto(
-        @Body request: MatchingRequestModel
+        @Path("roomId") roomId: String
     ): Call<Response<List<MatchedMissionsModel>>>
 
     @POST("rooms/exit")

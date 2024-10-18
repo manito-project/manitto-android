@@ -13,6 +13,7 @@ import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
+import org.sopt.santamanitto.util.TimeUtil.changeTempServerToLocalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -89,14 +90,19 @@ class ManittoRoomViewModel @Inject constructor(
             override fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel) {
                 manittoRoom.run {
                     _roomName.value = roomName
-                    _expiration.value = expiration
-                    _isExpired.value = TimeUtil.getDayDiffFromNow(expiration) < 0
+                    _expiration.value =
+                        expirationDate.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                    _isExpired.value =
+                        TimeUtil.getDayDiffFromNow(expirationDate.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")) < 0
                     _members.value = members
                     _invitationCode = invitationCode
                     _isAdmin.value = userMetadataSource.getUserId() == creator.userId
                     _canStart.value = _isAdmin.value!! && members.size > 1
                     this@ManittoRoomViewModel.isMatched = isMatched
-                    _period.value = getPeriod(createdAt, expiration)
+                    _period.value = getPeriod(
+                        createdAt.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss"),
+                        expirationDate.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                    )
                     stopLoading()
                 }
             }

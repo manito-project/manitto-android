@@ -1,14 +1,11 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
@@ -22,7 +19,7 @@ import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.fragment.MatchingFragmentDirections.Companion.actionMatchingFragmentToMatchedFragment
 
 @AndroidEntryPoint
-class MatchingFragment: Fragment() {
+class MatchingFragment : Fragment() {
 
     companion object {
         private const val DELAY_MILLIS = 2000L
@@ -47,8 +44,6 @@ class MatchingFragment: Fragment() {
             isDelayDone = true
         }, DELAY_MILLIS)
 
-        setAnimation()
-
         return binding.root
     }
 
@@ -63,20 +58,10 @@ class MatchingFragment: Fragment() {
         isInBackground = true
     }
 
-    private fun setAnimation() {
-        ObjectAnimator.ofFloat(binding.imageviewMatchingRoulette, View.ROTATION, -360f, 0f)
-            .apply {
-                duration = 500
-                repeatCount = ValueAnimator.INFINITE
-                repeatMode = ValueAnimator.RESTART
-                interpolator = LinearInterpolator()
-            }
-            .start()
-    }
-
     private fun navigateMissionFragment() {
         viewModel.viewModelScope.launch(Dispatchers.Default) {
-            while ((!viewModel.isMatched || !isDelayDone) && !isInBackground) { }
+            while ((!viewModel.isMatched || !isDelayDone) && !isInBackground) {
+            }
             if (isInBackground) {
                 return@launch
             }

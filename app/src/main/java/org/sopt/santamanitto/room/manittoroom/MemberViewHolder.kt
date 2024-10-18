@@ -7,8 +7,8 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.util.RandomUtil
 import org.sopt.santamanitto.view.recyclerview.BaseViewHolder
 
-class MemberViewHolder(parent: ViewGroup)
-    : BaseViewHolder<ManittoRoomMember, ItemMemberBinding>(R.layout.item_member, parent) {
+class MemberViewHolder(parent: ViewGroup) :
+    BaseViewHolder<ManittoRoomMember, ItemMemberBinding>(R.layout.item_member, parent) {
 
     companion object {
         private val imageSource = arrayOf(R.drawable.ic_santa_ic, R.drawable.ic_rudolf_ic)
@@ -19,7 +19,7 @@ class MemberViewHolder(parent: ViewGroup)
             imageviewMemberitemImage.setImageResource(
                 imageSource[RandomUtil.getRandomValue(imageSource.size)]
             )
-            textviewMemberitemName.text = data.userName
+            textviewMemberitemName.text = data.santa.userName
         }
     }
 

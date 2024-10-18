@@ -3,27 +3,28 @@ package org.sopt.santamanitto.room.manittoroom.network
 import com.google.gson.annotations.SerializedName
 
 data class ManittoRoomModel(
-    @SerializedName("id") val roomId: Int,
+    @SerializedName("id") val roomId: String,
     val roomName: String,
     val invitationCode: String,
-    @SerializedName("isMatchingDone") val _isMatched: String,
-    val expiration: String,
     val createdAt: String,
+    val expirationDate: String,
+    val matchingDate: String?,
+    val deletedByCreatorDate: String?,
     @SerializedName("Creator") val creator: ManittoRoomCreator,
     @SerializedName("Missions") val missions: List<ManittoRoomMission>,
-    @SerializedName("Members") val members: List<ManittoRoomMember>
+    @SerializedName("Members") val members: List<ManittoRoomMember>,
 ) {
     data class ManittoRoomCreator(
         @SerializedName("id") val userId: String,
         @SerializedName("username") val userName: String,
-        val serialNumber: String
+        val manittoUserId: String?,
     )
 
     data class ManittoRoomMission(
-        @SerializedName("id") val missionId: Int,
-        val content: String
+        @SerializedName("id") val missionId: String,
+        val content: String,
     )
 
     val isMatched: Boolean
-        get() = _isMatched == "true"
+        get() = matchingDate != null
 }

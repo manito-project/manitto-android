@@ -22,11 +22,11 @@ class ResultViewHolder(
         }
 
         userAuthController.getUserInfo(
-            data.relations.manittoUserId,
+            data.manitto.userId,
             object : UserAuthController.GetUserInfoCallback {
                 override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
                     binding.run {
-                        textviewItemresultSanta.text = data.userName
+                        textviewItemresultSanta.text = data.santa.userName
                         textviewItemresultMinitto.text = userInfoModel.userName
                         santaloadingItemresult.visibility = View.GONE
                     }
