@@ -16,8 +16,8 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface RoomService {
@@ -34,7 +34,7 @@ interface RoomService {
         @Body request: CreateRoomRequestModel
     ): Call<Response<CreateRoomModel>>
 
-    @PUT("rooms/{roomId}")
+    @PATCH("rooms/{roomId}")
     fun modifyRoom(
         @Path("roomId") roomId: String,
         @Body request: ModifyRoomRequestModel
