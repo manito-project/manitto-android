@@ -16,7 +16,6 @@ import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
-import org.sopt.santamanitto.room.manittoroom.network.MatchingRequestModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -116,7 +115,7 @@ class RoomRequestImpl(
     }
 
     override fun matchManitto(roomId: String, callback: RoomRequest.MatchManittoCallback) {
-        roomService.matchManitto(MatchingRequestModel(roomId))
+        roomService.matchManitto(roomId)
             .start(object : RequestCallback<List<MatchedMissionsModel>> {
                 override fun onSuccess(data: List<MatchedMissionsModel>) {
                     callback.onSuccessMatching(data)
