@@ -92,5 +92,24 @@ object TimeUtil {
     fun getCurrentTimeByServerFormat(): String =
         SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).format(Date())
 
+    // 임시 처리
+    fun String.changeTempServerToLocalFormat(pattern: String): String {
+        return try {
+            val formattedInput = if (this.length == 19) {
+                "$this.000"
+            } else {
+                this
+            }
+            val serverDateFormat = SimpleDateFormat(pattern, Locale.KOREA)
+            val localDateFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA)
+            val parsedDate = serverDateFormat.parse(formattedInput)
+            parsedDate?.let {
+                localDateFormat.format(it)
+            } ?: ""
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
+        }
+    }
 
 }
