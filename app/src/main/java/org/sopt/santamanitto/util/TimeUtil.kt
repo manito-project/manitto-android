@@ -1,14 +1,11 @@
 package org.sopt.santamanitto.util
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatterBuilder
 import java.util.Calendar
 import java.util.Date
 import java.util.GregorianCalendar
 import java.util.Locale
+import java.util.TimeZone
 import kotlin.math.roundToInt
 
 object TimeUtil {
@@ -16,6 +13,43 @@ object TimeUtil {
     private const val LOCAL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     private const val SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     private const val WRONG_FORMAT = "날짜 형식이 잘못되었습니다."
+
+    private val UTC_TIME_ZONE: TimeZone = TimeZone.getTimeZone("UTC")
+    private val KOREA_TIME_ZONE: TimeZone = TimeZone.getTimeZone("Asia/Seoul")
+
+    // UTC -> Local
+    fun convertUtcToLocal(utcTime: String): String {
+        return try {
+            val utcFormat = SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).apply {
+                timeZone = UTC_TIME_ZONE
+            }
+            val localFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).apply {
+                timeZone = KOREA_TIME_ZONE
+            }
+            val date = utcFormat.parse(utcTime)
+            date?.let { localFormat.format(it) } ?: throw IllegalArgumentException(WRONG_FORMAT)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            WRONG_FORMAT
+        }
+    }
+
+    // Local -> UTC
+    fun convertLocalToUtc(localTime: String): String {
+        return try {
+            val localFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).apply {
+                timeZone = KOREA_TIME_ZONE
+            }
+            val utcFormat = SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).apply {
+                timeZone = UTC_TIME_ZONE
+            }
+            val date = localFormat.parse(localTime)
+            date?.let { utcFormat.format(it) } ?: throw IllegalArgumentException(WRONG_FORMAT)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            WRONG_FORMAT
+        }
+    }
 
     fun getDayDiff(later: String, early: String): Int {
         val laterCalendar = getGregorianCalendarFromLocalFormat(later)
@@ -43,19 +77,16 @@ object TimeUtil {
         return targetCal.timeInMillis >= nowCal.timeInMillis
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun parseExpirationDate(expirationDate: String): LocalDateTime {
-        val formatter = DateTimeFormatterBuilder()
-            .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
-            .toFormatter()
-        return LocalDateTime.parse(expirationDate, formatter)
-    }
-
-    // 임시 만료 로직 (서버에서 만료 로직이 정해지면 수정 필요)
-    @RequiresApi(Build.VERSION_CODES.O)
     fun isExpired(expirationDate: String): Boolean {
-        val parsedExpirationDate = parseExpirationDate(expirationDate)
-        return parsedExpirationDate.isBefore(LocalDateTime.now())
+        return try {
+            val parsedExpirationDate = SimpleDateFormat(SERVER_DATE_FORMAT, Locale.KOREA).apply {
+                timeZone = UTC_TIME_ZONE
+            }.parse(expirationDate)
+            parsedExpirationDate?.before(Date()) ?: true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            true
+        }
     }
 
     fun getLocalFormatFromGregorianCalendar(gregorianCalendar: GregorianCalendar): String {
