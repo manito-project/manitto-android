@@ -30,8 +30,8 @@ class MyManittoListAdapter(
         viewType: Int
     ): BaseViewHolder<TempMyManittoModel, *> {
         return when (viewType) {
-            1 -> RemovedMyManttioViewHolder(parent, removeListener)
-            2 -> ExpiredMyManittoViewHolder(parent, enterListener, removeListener)
+            VIEW_TYPE_REMOVED -> RemovedMyManttioViewHolder(parent, removeListener)
+            VIEW_TYPE_EXPIRED -> ExpiredMyManittoViewHolder(parent, enterListener, removeListener)
             else -> BasicMyManittoViewHolder(
                 parent,
                 userAuthController,
@@ -68,9 +68,9 @@ class MyManittoListAdapter(
         val item = currentList[position]
 
         return when {
-            item.deletedByCreatorDate != null -> 1  // 삭제된 경우
-            item.expirationDate != null && item.matchingDate == null && isExpired(item.expirationDate) -> 2  // 매칭되지 않고 만료된 경우
-            else -> 0  // 기본
+            item.deletedByCreatorDate != null -> VIEW_TYPE_REMOVED  // 삭제된 경우
+            item.expirationDate != null && item.matchingDate == null && isExpired(item.expirationDate) -> VIEW_TYPE_EXPIRED  // 매칭되지 않고 만료된 경우
+            else -> VIEW_TYPE_DEFAULT  // 기본
         }
     }
 
@@ -96,6 +96,10 @@ class MyManittoListAdapter(
     }
 
     companion object {
+        private const val VIEW_TYPE_DEFAULT = 0
+        private const val VIEW_TYPE_REMOVED = 1
+        private const val VIEW_TYPE_EXPIRED = 2
+
         private val DiffUtil = ItemDiffCallback<TempMyManittoModel>(
             onContentsTheSame = { oldItem, newItem -> oldItem.roomId == newItem.roomId },
             onItemsTheSame = { oldItem, newItem -> oldItem == newItem }
