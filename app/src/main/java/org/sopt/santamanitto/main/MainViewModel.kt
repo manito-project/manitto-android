@@ -2,7 +2,9 @@ package org.sopt.santamanitto.main
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.NetworkViewModel
@@ -15,8 +17,8 @@ class MainViewModel @Inject constructor(
     private val roomRequest: RoomRequest
 ) : NetworkViewModel() {
 
-    private var _myManittoModelList = MutableStateFlow<List<TempMyManittoModel>?>(null)
-    val myManittoModelList: StateFlow<List<TempMyManittoModel>?> = _myManittoModelList
+    private var _myManittoModelList = MutableSharedFlow<List<TempMyManittoModel>>(replay = 1)
+    val myManittoModelList: SharedFlow<List<TempMyManittoModel>> = _myManittoModelList
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing
@@ -27,7 +29,7 @@ class MainViewModel @Inject constructor(
             _isLoading.value = true
             try {
                 val rooms = roomRequest.getRooms()
-                _myManittoModelList.value = rooms
+                _myManittoModelList.emit(rooms)
             } catch (e: Exception) {
                 _networkErrorOccur.value = true
             } finally {

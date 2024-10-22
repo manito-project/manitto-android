@@ -80,12 +80,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_entire"
-            android:layout_marginBottom="@dimen/margin_main_recyclerview_top"
+            android:layout_marginTop="30dp"
             android:text="@string/main_my_manitto_history"
             android:textColor="@color/dark_gray"
-            android:textFontWeight="700"
+            android:textFontWeight="600"
             android:textSize="@dimen/size_main_mymanitto"
-            app:layout_constraintBottom_toTopOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintTop_toBottomOf="@id/santaimageroundbutton_main_makeroom"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -102,7 +102,6 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_main_history"
-            replaceAll="@{viewModel.myManittoModelList}"
             setItemMargin="@{@dimen/margin_mymanitto_item_decoration}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,13 +122,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_mymanitto_viewholder"
             android:layout_marginHorizontal="@dimen/padding_entire"
-            android:layout_marginBottom="@dimen/margin_main_recyclerview_bottom"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_ractangle_background"
             android:backgroundTint="@color/gray_1"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_main_joinedroom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:visibility="@{viewModel.myManittoModelList.empty ? View.VISIBLE : View.INVISIBLE}">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageview_main_nomanittosnowman"
@@ -162,7 +160,6 @@
             android:id="@+id/progressbar_main_joinedRooms"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintEnd_toEndOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
