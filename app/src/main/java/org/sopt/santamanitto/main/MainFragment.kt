@@ -44,6 +44,8 @@ class MainFragment : Fragment() {
                 lifecycleOwner = this@MainFragment
                 viewModel = this@MainFragment.viewModel
                 recyclerviewMainHistory.adapter = adapter
+                recyclerviewMainHistory.visibility = View.GONE
+                constraintlayoutMainNomymanitto.visibility = View.VISIBLE
             }
 
         subscribeUI()
@@ -58,15 +60,30 @@ class MainFragment : Fragment() {
     private fun subscribeUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.myManittoModelList.collect { list ->
-                    adapter.submitList(list)
-                }
+                viewModel.myManittoModelList
+                    .collect { list ->
+                        adapter.submitList(list)
+
+                        if (list.isEmpty()) {
+                            binding.recyclerviewMainHistory.visibility = View.INVISIBLE
+                            binding.constraintlayoutMainNomymanitto.visibility = View.VISIBLE
+                        } else {
+                            binding.recyclerviewMainHistory.visibility = View.VISIBLE
+                            binding.constraintlayoutMainNomymanitto.visibility = View.INVISIBLE
+                        }
+                    }
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.isRefreshing.collect { isRefreshing ->
+                    binding.progressbarMainJoinedRooms.visibility = if (isRefreshing) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+
                     if (isRefreshing) adapter.clear()
                 }
             }
