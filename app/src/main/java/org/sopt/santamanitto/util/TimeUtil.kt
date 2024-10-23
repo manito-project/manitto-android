@@ -52,11 +52,20 @@ object TimeUtil {
     }
 
     fun getDayDiff(later: String, early: String): Int {
-        val laterCalendar = getGregorianCalendarFromLocalFormat(later)
-        val earlyCalendar = getGregorianCalendarFromLocalFormat(early)
-        initHourAndBelow(laterCalendar)
-        initHourAndBelow(earlyCalendar)
-        return getDayDiff(laterCalendar.timeInMillis, earlyCalendar.timeInMillis)
+        return try {
+            val laterDate = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).parse(later)
+            val earlyDate = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).parse(early)
+
+            if (laterDate != null && earlyDate != null) {
+                val diffInMillis = laterDate.time - earlyDate.time
+                (diffInMillis / (24 * 60 * 60 * 1000)).toInt()
+            } else {
+                throw IllegalArgumentException(WRONG_FORMAT)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            -1
+        }
     }
 
     private fun getDayDiff(later: Long, early: Long): Int {
@@ -69,12 +78,6 @@ object TimeUtil {
         val inputFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA)
         return inputFormat.parse(localFormatString)
             ?: throw IllegalArgumentException(WRONG_FORMAT)
-    }
-
-    fun isLaterThanNow(target: String): Boolean {
-        val targetCal = getGregorianCalendarFromLocalFormat(target)
-        val nowCal = GregorianCalendar(Locale.KOREA)
-        return targetCal.timeInMillis >= nowCal.timeInMillis
     }
 
     fun isExpired(expirationDate: String): Boolean {
@@ -97,18 +100,37 @@ object TimeUtil {
     }
 
     fun getGregorianCalendarFromLocalFormat(localFormatString: String): GregorianCalendar {
-        return GregorianCalendar(Locale.KOREA).apply {
-            time = getDateInstanceFromLocalFormat(localFormatString)
-            add(Calendar.HOUR_OF_DAY, -9)
+        return try {
+            val localFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).apply {
+                timeZone = KOREA_TIME_ZONE
+            }
+            val date = localFormat.parse(localFormatString)
+
+            GregorianCalendar(KOREA_TIME_ZONE).apply {
+                time = date ?: throw IllegalArgumentException(WRONG_FORMAT)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw IllegalArgumentException(WRONG_FORMAT)
         }
     }
 
-    fun getDayDiffFromNow(localFormatString: String): Int {
-        val later = getGregorianCalendarFromLocalFormat(localFormatString)
-        initHourAndBelow(later)
-        val early = GregorianCalendar()
-        initHourAndBelow(early)
-        return getDayDiff(later.timeInMillis, early.timeInMillis)
+    private fun getCurrentTimeByLocalFormat(): String {
+        val localFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.KOREA).apply {
+            timeZone = KOREA_TIME_ZONE
+        }
+        return localFormat.format(Date())
+    }
+
+    fun getDayDiffFromNow(utcFormatString: String): Int {
+        return try {
+            val localFormatString = convertUtcToLocal(utcFormatString)
+            val nowString = getCurrentTimeByLocalFormat()
+            getDayDiff(localFormatString, nowString)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            -1
+        }
     }
 
     private fun initHourAndBelow(gregorianCalendar: GregorianCalendar) {
