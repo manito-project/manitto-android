@@ -21,7 +21,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/navy"
-                android:textFontWeight="700"
+                android:textFontWeight="600"
                 android:textSize="@dimen/size_mymanitto_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -36,7 +36,7 @@
                 app:layout_constraintBottom_toTopOf="@id/framelayout_mymanitto_bottoms"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_mymanitto_title"
-                app:layout_constraintVertical_bias="0.444">
+                app:layout_constraintVertical_bias="0.666">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_mymanitto_manittoinfo"
@@ -44,10 +44,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:letterSpacing="-0.04"
-                    android:lineHeight="21dp"
+                    android:lineHeight="14dp"
                     android:text="@string/joinedroom_santa_info_before_matching"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="12dp" />
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_mymanitto_state"
@@ -58,8 +58,9 @@
                     android:paddingHorizontal="@dimen/padding_mymanitto_daydiff_textview_horizontal"
                     android:paddingVertical="@dimen/padding_mymanitto_daydiff_textview_vertical"
                     android:textColor="@color/white"
+                    android:textFontWeight="500"
                     android:textSize="@dimen/size_mymanitto_state_text"
-                    tool:text="1일째" />
+                    tool:text="공개 1일 전" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,9 +74,10 @@
                     android:id="@+id/textview_mymanitto_mission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:letterSpacing="-0.06"
                     android:lineHeight="@dimen/lineheight_mymanitto_mission_text"
-                    android:textColor="@color/gray_2"
+                    android:textColor="@color/dark_gray"
                     android:textSize="@dimen/size_mymanitto_mission_text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -83,13 +85,16 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_mymanitto_exit"
-                    android:layout_width="65dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/round_ractangle_background_30"
-                    android:backgroundTint="@color/gray_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_ractangle_background_4"
+                    android:backgroundTint="@color/gray_3"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="6dp"
                     android:text="@string/joinedroom_exit_room"
-                    android:textFontWeight="700"
-                    android:textSize="12dp"
+                    android:textColor="@color/dark_gray"
+                    android:textFontWeight="500"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tool:visibility="gone" />
