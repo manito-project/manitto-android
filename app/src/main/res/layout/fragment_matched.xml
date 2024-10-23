@@ -44,11 +44,10 @@
 
         <org.sopt.santamanitto.view.SantaCardView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
             android:layout_marginTop="@dimen/margin_cardview_to_guidline_top"
             android:layout_marginBottom="@dimen/margin_waitingroom_cardview_bottom"
-            app:layout_constraintBottom_toTopOf="@id/santabottombutton_matched"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_matched_guideline"
@@ -65,9 +64,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/padding_matched_cardview_vertical"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tool:text="이영진 산타의 마니또는" />
+                    tool:text="이영진 산타의 마니또" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_matched_manitto"
@@ -80,7 +80,7 @@
                     android:paddingVertical="@dimen/padding_matched_manitto_vertical"
                     android:text="@{vm.myManittoName}"
                     android:textColor="@color/white"
-                    android:textFontWeight="700"
+                    android:textFontWeight="600"
                     android:textSize="@dimen/size_matched_manitto"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,25 +92,33 @@
                     style="@style/TitleOfCardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_matched_mission_title_bottom"
+                    android:layout_marginTop="30dp"
                     android:text="@string/matched_mission_title"
-                    app:layout_constraintBottom_toTopOf="@id/textview_matched_mission"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_matched_manitto" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_matched_mission"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_matched_mission_bottom"
+                    android:layout_marginTop="@dimen/margin_matched_manitto_top"
                     android:background="@drawable/round_ractangle_background"
-                    android:backgroundTint="@color/gray_1"
+                    android:backgroundTint="@color/light_gray"
                     android:maxLines="3"
                     android:padding="@dimen/padding_matched_mission"
                     android:text="\n\n"
                     android:textSize="@dimen/size_matched_mission"
-                    app:layout_constraintBottom_toTopOf="@id/imageview_matched_tree"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_matched_missiontitle" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="92dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_matched_mission" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imageview_matched_tree"
