@@ -7,10 +7,9 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemMymanittoBinding
-import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.data.TempMyManittoModel
+import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
@@ -46,6 +45,7 @@ class BasicMyManittoViewHolder(
                 listener.invoke(data.roomId, data.matchingDate != null, isFinished)
             }
         }
+
         exitListener?.let { listener ->
             exitButton.setOnClickListener {
                 listener.invoke(
@@ -88,26 +88,16 @@ class BasicMyManittoViewHolder(
         roomRequest.getPersonalRoomInfo(
             roomId,
             object : RoomRequest.GetPersonalRoomInfoCallback {
-                override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
-                    userAuthController.getUserInfo(
-                        personalRoom.manittoUserId,
-                        object : UserAuthController.GetUserInfoCallback {
-                            override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                                val info =
-                                    MyManittoInfoModel(
-                                        userInfoModel.userName,
-                                        personalRoom.myMission?.content,
-                                    )
-                                cachedRoomInfo[roomId] = info
-                                setManittoInfo(info = info, isMatched = data.matchingDate != null)
-                                clearLoading()
-                            }
-
-                            override fun onDataNotAvailable() {
-                                loadingBar.setError(true)
-                            }
-                        },
+                override fun onLoadPersonalRoomInfo(personalRoom: TempPersonalRoomModel) {
+                    val info = MyManittoInfoModel(
+                        manittoName = personalRoom.manitto.username ?: "",
+                        mission = personalRoom.mission.content,
                     )
+
+                    cachedRoomInfo[roomId] = info
+
+                    setManittoInfo(info = info, isMatched = data.matchingDate != null)
+                    clearLoading()
                 }
 
                 override fun onDataNotAvailable() {
@@ -116,6 +106,7 @@ class BasicMyManittoViewHolder(
             },
         )
     }
+
 
     private fun setManittoInfo(
         info: MyManittoInfoModel,
@@ -140,10 +131,11 @@ class BasicMyManittoViewHolder(
             showExitButton(false)
             if (data.expirationDate != null && !TimeUtil.isExpired(data.expirationDate)) {
                 // 마니또 진행 중
+                val daysUntilExpiration = TimeUtil.getDayDiffFromNow(data.expirationDate)
                 stateText.text =
                     String.format(
                         getString(R.string.joinedroom_daydiff),
-                        TimeUtil.getDayDiffFromNow(data.createdAt) * -1 + 1,
+                        daysUntilExpiration
                     )
                 stateText.setBackgroundTint(R.color.red)
             } else {
