@@ -43,6 +43,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <org.sopt.santamanitto.view.SantaCardView
+            android:id="@+id/cardview_matched"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_entire"
@@ -76,6 +77,7 @@
                     android:layout_marginTop="@dimen/margin_matched_manitto_top"
                     android:background="@drawable/round_ractangle_background_30"
                     android:backgroundTint="@color/navy"
+                    android:minHeight="48dp"
                     android:paddingHorizontal="@dimen/padding_matched_manitto_horizontal"
                     android:paddingVertical="@dimen/padding_matched_manitto_vertical"
                     android:text="@{vm.myManittoName}"
@@ -135,20 +137,24 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <org.sopt.santamanitto.view.SantaLoading
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="@{vm.isLoading ? View.VISIBLE : View.GONE}"
-                    app:error="@{vm.networkErrorOccur}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tool:visibility="gone" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </org.sopt.santamanitto.view.SantaCardView>
+
+        <org.sopt.santamanitto.view.SantaLoading
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"
+            android:elevation="6dp"
+            android:visibility="@{vm.isLoading ? View.VISIBLE : View.GONE}"
+            app:error="@{vm.networkErrorOccur}"
+            app:layout_constraintBottom_toTopOf="@id/santabottombutton_matched"
+            app:layout_constraintEnd_toEndOf="@id/cardview_matched"
+            app:layout_constraintStart_toStartOf="@id/cardview_matched"
+            app:layout_constraintTop_toTopOf="@id/cardview_matched"
+            tool:visibility="gone" />
 
         <org.sopt.santamanitto.view.SantaBottomButton
             android:id="@+id/santabottombutton_matched"
