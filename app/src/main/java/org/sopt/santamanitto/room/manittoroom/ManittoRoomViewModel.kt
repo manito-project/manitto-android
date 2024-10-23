@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
-import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
@@ -13,7 +12,6 @@ import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
-import org.sopt.santamanitto.util.TimeUtil.changeTempServerToLocalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -90,19 +88,15 @@ class ManittoRoomViewModel @Inject constructor(
             override fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel) {
                 manittoRoom.run {
                     _roomName.value = roomName
-                    _expiration.value =
-                        expirationDate.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                    _expiration.value = expirationDate
                     _isExpired.value =
-                        TimeUtil.getDayDiffFromNow(expirationDate.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")) < 0
+                        TimeUtil.getDayDiffFromNow(expirationDate) < 0
                     _members.value = members
                     _invitationCode = invitationCode
                     _isAdmin.value = userMetadataSource.getUserId() == creator.userId
                     _canStart.value = _isAdmin.value!! && members.size > 1
                     this@ManittoRoomViewModel.isMatched = isMatched
-                    _period.value = getPeriod(
-                        createdAt.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss"),
-                        expirationDate.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-                    )
+                    _period.value = getPeriod(createdAt, expirationDate)
                     stopLoading()
                 }
             }
@@ -127,46 +121,46 @@ class ManittoRoomViewModel @Inject constructor(
         })
     }
 
-    fun getPersonalRelationInfo() {
-        startLoading()
-        roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
-            override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
-                startLoading()
-                userDataSource.getUserInfo(
-                    personalRoom.manittoUserId,
-                    object : UserAuthController.GetUserInfoCallback {
-                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                            _myManittoName.value = userInfoModel.userName
-                            stopLoading()
-                        }
-
-                        override fun onDataNotAvailable() {
-                            _networkErrorOccur.value = true
-                        }
-                    })
-
-                userDataSource.getUserInfo(
-                    personalRoom.santaUserId,
-                    object : UserAuthController.GetUserInfoCallback {
-                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                            _mySantaName.value = userInfoModel.userName
-                            stopLoading()
-                        }
-
-                        override fun onDataNotAvailable() {
-                            _networkErrorOccur.value = true
-                        }
-                    })
-
-                _myMission.value = personalRoom.myMission?.content
-                _missionToMe.value = personalRoom.missionToMe?.content
-            }
-
-            override fun onDataNotAvailable() {
-                _networkErrorOccur.value = true
-            }
-        })
-    }
+//    fun getPersonalRelationInfo() {
+//        startLoading()
+//        roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
+//            override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
+//                startLoading()
+//                userDataSource.getUserInfo(
+//                    personalRoom.manittoUserId,
+//                    object : UserAuthController.GetUserInfoCallback {
+//                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+//                            _myManittoName.value = userInfoModel.userName
+//                            stopLoading()
+//                        }
+//
+//                        override fun onDataNotAvailable() {
+//                            _networkErrorOccur.value = true
+//                        }
+//                    })
+//
+//                userDataSource.getUserInfo(
+//                    personalRoom.santaUserId,
+//                    object : UserAuthController.GetUserInfoCallback {
+//                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
+//                            _mySantaName.value = userInfoModel.userName
+//                            stopLoading()
+//                        }
+//
+//                        override fun onDataNotAvailable() {
+//                            _networkErrorOccur.value = true
+//                        }
+//                    })
+//
+//                _myMission.value = personalRoom.myMission?.content
+//                _missionToMe.value = personalRoom.missionToMe?.content
+//            }
+//
+//            override fun onDataNotAvailable() {
+//                _networkErrorOccur.value = true
+//            }
+//        })
+//    }
 
     fun removeHistory(callback: () -> Unit) {
         roomRequest.removeHistory(roomId) { isRemoved ->

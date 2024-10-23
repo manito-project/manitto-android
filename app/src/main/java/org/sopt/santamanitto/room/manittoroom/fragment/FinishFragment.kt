@@ -76,7 +76,7 @@ class FinishFragment : Fragment() {
 
         viewModel.run {
             refreshManittoRoomInfo()
-            getPersonalRelationInfo()
+            // getPersonalRelationInfo()
         }
 
         setOnClickListener()

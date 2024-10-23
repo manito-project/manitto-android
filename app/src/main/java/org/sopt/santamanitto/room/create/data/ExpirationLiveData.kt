@@ -3,6 +3,7 @@ package org.sopt.santamanitto.room.create.data
 import androidx.lifecycle.LiveData
 import org.sopt.santamanitto.util.TimeUtil
 import org.sopt.santamanitto.view.SantaPeriodPicker
+import timber.log.Timber
 import java.util.Calendar
 import java.util.GregorianCalendar
 
@@ -76,12 +77,14 @@ class ExpirationLiveData : LiveData<ExpirationLiveData>() {
     }
 
     fun init(expiration: String) {
-        expirationDate = TimeUtil.getGregorianCalendarFromLocalFormat(expiration)
+        expirationDate = TimeUtil.convertLocalToGregorianCalendar(expiration)
         _period = TimeUtil.getDayDiffFromNow(expiration)
         postValue(this)
     }
 
     override fun toString(): String {
-        return TimeUtil.getLocalFormatFromGregorianCalendar(expirationDate)
+        Timber.tag("qqqq").d("$expirationDate")
+        Timber.tag("qqqq").d(TimeUtil.convertGregorianCalendarToLocal(expirationDate))
+        return TimeUtil.convertGregorianCalendarToLocal(expirationDate)
     }
 }
