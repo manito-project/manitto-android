@@ -42,7 +42,7 @@ class MatchedFragment : Fragment() {
 
         viewModel.run {
             refreshManittoRoomInfo()
-            // getPersonalRelationInfo()
+            getPersonalRelationInfo()
         }
 
         initManittoTitle()

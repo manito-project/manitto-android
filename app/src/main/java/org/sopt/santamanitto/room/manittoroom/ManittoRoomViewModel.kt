@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.NetworkViewModel
+import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
@@ -121,46 +122,20 @@ class ManittoRoomViewModel @Inject constructor(
         })
     }
 
-//    fun getPersonalRelationInfo() {
-//        startLoading()
-//        roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
-//            override fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel) {
-//                startLoading()
-//                userDataSource.getUserInfo(
-//                    personalRoom.manittoUserId,
-//                    object : UserAuthController.GetUserInfoCallback {
-//                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-//                            _myManittoName.value = userInfoModel.userName
-//                            stopLoading()
-//                        }
-//
-//                        override fun onDataNotAvailable() {
-//                            _networkErrorOccur.value = true
-//                        }
-//                    })
-//
-//                userDataSource.getUserInfo(
-//                    personalRoom.santaUserId,
-//                    object : UserAuthController.GetUserInfoCallback {
-//                        override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-//                            _mySantaName.value = userInfoModel.userName
-//                            stopLoading()
-//                        }
-//
-//                        override fun onDataNotAvailable() {
-//                            _networkErrorOccur.value = true
-//                        }
-//                    })
-//
-//                _myMission.value = personalRoom.myMission?.content
-//                _missionToMe.value = personalRoom.missionToMe?.content
-//            }
-//
-//            override fun onDataNotAvailable() {
-//                _networkErrorOccur.value = true
-//            }
-//        })
-//    }
+    fun getPersonalRelationInfo() {
+        startLoading()
+        roomRequest.getPersonalRoomInfo(roomId, object : RoomRequest.GetPersonalRoomInfoCallback {
+            override fun onLoadPersonalRoomInfo(personalRoom: TempPersonalRoomModel) {
+                _mySantaName.value = personalRoom.manitto.username
+                _myMission.value = personalRoom.mission.content
+                stopLoading()
+            }
+
+            override fun onDataNotAvailable() {
+                _networkErrorOccur.value = true
+            }
+        })
+    }
 
     fun removeHistory(callback: () -> Unit) {
         roomRequest.removeHistory(roomId) { isRemoved ->
