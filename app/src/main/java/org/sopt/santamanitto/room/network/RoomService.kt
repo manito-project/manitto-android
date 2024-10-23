@@ -5,8 +5,8 @@ import org.sopt.santamanitto.network.SimpleResponse
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
-import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.data.TempMyManittoModel
+import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
@@ -26,7 +26,7 @@ interface RoomService {
     @GET("rooms/{roomId}/my")
     fun getRoomPersonalInfo(
         @Path("roomId") roomId: String
-    ): Call<Response<PersonalRoomModel>>
+    ): Call<Response<TempPersonalRoomModel>>
 
     @POST("rooms")
     fun createRoom(

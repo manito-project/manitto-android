@@ -3,8 +3,8 @@ package org.sopt.santamanitto.room.network
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
-import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.data.TempMyManittoModel
+import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
@@ -37,7 +37,7 @@ interface RoomRequest {
     }
 
     interface GetPersonalRoomInfoCallback {
-        fun onLoadPersonalRoomInfo(personalRoom: PersonalRoomModel)
+        fun onLoadPersonalRoomInfo(personalRoom: TempPersonalRoomModel)
 
         fun onDataNotAvailable()
     }

@@ -9,8 +9,8 @@ import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
-import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.data.TempMyManittoModel
+import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomErrorModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
@@ -131,15 +131,16 @@ class RoomRequestImpl(
         roomId: String,
         callback: RoomRequest.GetPersonalRoomInfoCallback
     ) {
-        roomService.getRoomPersonalInfo(roomId).start(object : RequestCallback<PersonalRoomModel> {
-            override fun onSuccess(data: PersonalRoomModel) {
-                callback.onLoadPersonalRoomInfo(data)
-            }
+        roomService.getRoomPersonalInfo(roomId)
+            .start(object : RequestCallback<TempPersonalRoomModel> {
+                override fun onSuccess(data: TempPersonalRoomModel) {
+                    callback.onLoadPersonalRoomInfo(data)
+                }
 
-            override fun onFail() {
-                callback.onDataNotAvailable()
-            }
-        })
+                override fun onFail() {
+                    callback.onDataNotAvailable()
+                }
+            })
     }
 
     override fun exitRoom(roomId: String, callback: (onSuccess: Boolean) -> Unit) {
