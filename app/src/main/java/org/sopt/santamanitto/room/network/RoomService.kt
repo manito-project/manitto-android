@@ -10,7 +10,6 @@ import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
-import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -52,7 +51,7 @@ interface RoomService {
     @POST("rooms/{roomId}/match")
     fun matchManitto(
         @Path("roomId") roomId: String
-    ): Call<Response<List<MatchedMissionsModel>>>
+    ): Call<Response<SimpleResponse>>
 
     @POST("rooms/exit")
     fun exitRoom(

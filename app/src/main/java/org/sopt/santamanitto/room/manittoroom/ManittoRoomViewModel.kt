@@ -7,9 +7,7 @@ import org.sopt.santamanitto.NetworkViewModel
 import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
-import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.user.data.UserInfoModel
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import org.sopt.santamanitto.util.TimeUtil
@@ -110,16 +108,14 @@ class ManittoRoomViewModel @Inject constructor(
 
     fun match() {
         startLoading()
-        roomRequest.matchManitto(roomId, object : RoomRequest.MatchManittoCallback {
-            override fun onSuccessMatching(missions: List<MatchedMissionsModel>) {
+        roomRequest.matchManitto(roomId) { isSuccess ->
+            if (isSuccess) {
                 isMatched = true
-                findMyMission(missions)
-            }
-
-            override fun onFailed() {
+                stopLoading()
+            } else {
                 _networkErrorOccur.value = true
             }
-        })
+        }
     }
 
     fun getPersonalRelationInfo() {
@@ -145,32 +141,6 @@ class ManittoRoomViewModel @Inject constructor(
                 _networkErrorOccur.value = true
             }
         }
-    }
-
-    private fun findMyMission(missions: List<MatchedMissionsModel>) {
-        for (mission in missions) {
-            if (mission.userId == userMetadataSource.getUserId()) {
-                setMyMissionInfo(mission)
-                return
-            }
-        }
-        _networkErrorOccur.value = true
-    }
-
-    private fun setMyMissionInfo(mission: MatchedMissionsModel) {
-        _myMission.value = mission.myMission?.content
-        userDataSource.getUserInfo(
-            mission.manittoUserId,
-            object : UserAuthController.GetUserInfoCallback {
-                override fun onUserInfoLoaded(userInfoModel: UserInfoModel) {
-                    _myManittoName.value = userInfoModel.userName
-                    stopLoading()
-                }
-
-                override fun onDataNotAvailable() {
-                    _networkErrorOccur.value = true
-                }
-            })
     }
 
     private fun getPeriod(createdAt: String, expiration: String): Int =

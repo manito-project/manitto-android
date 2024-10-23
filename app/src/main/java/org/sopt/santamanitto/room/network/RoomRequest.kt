@@ -8,7 +8,6 @@ import org.sopt.santamanitto.room.data.TempPersonalRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
-import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
 
 interface RoomRequest {
 
@@ -26,12 +25,6 @@ interface RoomRequest {
 
     interface GetManittoRoomCallback {
         fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel)
-
-        fun onFailed()
-    }
-
-    interface MatchManittoCallback {
-        fun onSuccessMatching(missions: List<MatchedMissionsModel>)
 
         fun onFailed()
     }
@@ -60,7 +53,7 @@ interface RoomRequest {
 
     fun getManittoRoomData(roomId: String, callback: GetManittoRoomCallback)
 
-    fun matchManitto(roomId: String, callback: MatchManittoCallback)
+    fun matchManitto(roomId: String, callback: (onSuccess: Boolean) -> Unit)
 
     fun getPersonalRoomInfo(roomId: String, callback: GetPersonalRoomInfoCallback)
 
