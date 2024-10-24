@@ -42,7 +42,7 @@ class MatchedFragment : Fragment() {
 
         viewModel.run {
             refreshManittoRoomInfo()
-            // getPersonalRelationInfo()
+            getPersonalRelationInfo()
         }
 
         initManittoTitle()
@@ -65,6 +65,8 @@ class MatchedFragment : Fragment() {
     private fun initManittoTitle() {
         binding.textviewMatchedTitle.text =
             String.format(getString(R.string.matched_manitto_title), viewModel.myName)
+        binding.textviewMatchedMissiontitle.text =
+            String.format(getString(R.string.matched_mission_title), viewModel.myName)
     }
 
     private fun setOnClickListener() {
