@@ -12,7 +12,6 @@ import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.network.RoomRequest
-import org.sopt.santamanitto.util.TimeUtil.changeTempServerToLocalFormat
 import javax.inject.Inject
 
 
@@ -46,7 +45,7 @@ class CreateRoomAndMissionViewModel @Inject constructor(
             override fun onLoadManittoRoomData(manittoRoom: ManittoRoomModel) {
                 roomName.value = manittoRoom.roomName
                 _hint.value = manittoRoom.roomName
-                expirationLiveData.init(manittoRoom.expirationDate.changeTempServerToLocalFormat("yyyy-MM-dd'T'HH:mm:ss.SSS"))
+                expirationLiveData.init(manittoRoom.expirationDate)
             }
 
             override fun onFailed() {

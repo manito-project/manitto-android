@@ -69,10 +69,15 @@ class SantaBackground @JvmOverloads constructor(
         get() = titleTextView.text.toString()
         set(value) {
             setVisible(titleTextView)
-            titleTextView.text = if (value.length > MAX_LENGTH_PER_A_LINE_TITLE) {
-                value.substring(0, MAX_LENGTH_PER_A_LINE_TITLE) + "\n" + value.substring(
-                    MAX_LENGTH_PER_A_LINE_TITLE
-                )
+            val trimmedValue = value.replace(" ", "")
+            titleTextView.text = if (trimmedValue.length > MAX_LENGTH_PER_A_LINE_TITLE) {
+                val firstPartLength =
+                    value.substring(0, MAX_LENGTH_PER_A_LINE_TITLE).replace(" ", "").length
+                var actualLength = MAX_LENGTH_PER_A_LINE_TITLE
+                while (firstPartLength > MAX_LENGTH_PER_A_LINE_TITLE && actualLength < value.length) {
+                    actualLength++
+                }
+                value.substring(0, actualLength) + "\n" + value.substring(actualLength)
             } else {
                 value
             }
