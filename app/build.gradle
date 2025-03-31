@@ -31,6 +31,7 @@ android {
         buildConfigField("String", "TOS_URL", properties['tosUrl'])
         buildConfigField("String", "PRIVACY_POLICY_RUL", properties['privacyPolicyUrl'])
         buildConfigField("String", "INQUIRY_URL", properties['inquiryUrl'])
+        buildConfigField("String", "AMPLITUDE_KEY", properties['amplitudeApiKey'])
 
         signingConfigs {
             release {
@@ -155,6 +156,8 @@ dependencies {
     //splash screen
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
+    //analytics
+    implementation 'com.amplitude:analytics-android:1.17.3'
 }
 
 hilt {
