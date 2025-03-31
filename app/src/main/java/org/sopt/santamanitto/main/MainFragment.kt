@@ -17,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.main.list.MyManittoListAdapter
 import org.sopt.santamanitto.room.create.CreateRoomActivity
@@ -48,16 +50,17 @@ class MainFragment : Fragment() {
                 recyclerviewMainHistory.visibility = View.GONE
                 constraintlayoutMainNomymanitto.visibility = View.VISIBLE
             }
-
-        binding.santabackgroundMain.isBackKeyEnabled = false
-
-        subscribeUI()
-
-        setOnClickListener()
-
-        initBackPressedCallback()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("home", EventType.PAGE)
+        binding.santabackgroundMain.isBackKeyEnabled = false
+        subscribeUI()
+        setOnClickListener()
+        initBackPressedCallback()
     }
 
     private fun subscribeUI() {

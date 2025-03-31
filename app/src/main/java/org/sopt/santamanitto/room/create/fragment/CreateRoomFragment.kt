@@ -8,6 +8,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentCreateRoomBinding
 import org.sopt.santamanitto.room.create.data.ExpirationLiveData
 import org.sopt.santamanitto.room.create.fragment.CreateRoomFragmentDirections.Companion.actionCreateRoomFragmentToCreateConfirmFragment
@@ -31,24 +33,16 @@ class CreateRoomFragment :
 
     private var isNewRoom = true
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        AmplitudeManager.trackEvent("make_room_information", EventType.PAGE)
         binding.vm = viewModel
-
         loadDataWhenModifying()
-
         initView()
-
         refreshUI(viewModel.expirationLiveData)
-
         subscribeUI()
-
         setOnClickListener()
-
         hideKeyboardOnOutsideEditText()
     }
 
@@ -81,6 +75,7 @@ class CreateRoomFragment :
         binding.run {
             santabottombuttonCreateroom.setOnClickListener {
                 if (isNewRoom) {
+                    AmplitudeManager.trackEvent("make_room_mission_btn", EventType.BUTTON)
                     findNavController().navigate(actionCreateRoomFragmentToCreateMissionsFragment())
                 } else {
                     viewModel.modifyRoom {
@@ -89,6 +84,10 @@ class CreateRoomFragment :
                 }
             }
             santabottombuttonSkiproom.setOnClickListener {
+                AmplitudeManager.trackEvent(
+                    "make_room_information_no_mission_btn",
+                    EventType.BUTTON
+                )
                 showNoMissionDialog()
             }
             santabackgroundCreateroom.setOnBackKeyClickListener {
@@ -166,13 +165,16 @@ class CreateRoomFragment :
             }
 
     private fun showNoMissionDialog() {
+        AmplitudeManager.trackEvent("mission_no_popup", EventType.MODAL)
         RoundDialogBuilder()
             .setContentText(
                 getString(R.string.createmission_dialog_no_mission),
                 true,
             ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
+                AmplitudeManager.trackEvent("mission_no_popup_skip_btn", EventType.BUTTON)
                 findNavController().navigate(actionCreateRoomFragmentToCreateConfirmFragment())
             }.addHorizontalButton(getString(R.string.createroom_btn_next)) {
+                AmplitudeManager.trackEvent("mission_no_popup_mission_btn", EventType.BUTTON)
                 findNavController().navigate(actionCreateRoomFragmentToCreateMissionsFragment())
             }.build()
             .show(parentFragmentManager, "done_dialog")

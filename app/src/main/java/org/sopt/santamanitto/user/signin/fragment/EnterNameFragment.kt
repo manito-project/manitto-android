@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentEnterNameBinding
 import org.sopt.santamanitto.user.signin.viewmodel.EnterNameViewModel
 import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
@@ -23,6 +25,9 @@ class EnterNameFragment :
     private val viewModel: EnterNameViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("onboarding_name", EventType.PAGE)
         observeUserName()
         observeUserNameValidation()
         setupButtonClickListener()

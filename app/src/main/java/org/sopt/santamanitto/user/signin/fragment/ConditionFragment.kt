@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.BuildConfig
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentConditionBinding
 import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.user.signin.viewmodel.ConditionViewModel
@@ -55,6 +57,9 @@ class ConditionFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("onboarding_personal_information", EventType.PAGE)
         binding.userName = args.userName
         initView()
         subscribeUi()

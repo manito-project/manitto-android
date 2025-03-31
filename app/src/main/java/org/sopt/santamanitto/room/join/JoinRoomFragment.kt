@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
 import org.sopt.santamanitto.room.join.network.JoinRoomResponseModel
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
@@ -21,13 +23,14 @@ class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment
     private val joinRoomViewModel: JoinRoomViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("invite_code", EventType.PAGE)
         binding.viewModel = joinRoomViewModel
         subscribeUI()
         setOnClickListener()
         hideKeyboardOnOutsideEditText()
-
         binding.santabackgroundJoinroom.setMiddleTitleFontWeight(500)
-
         observeSantaEditText()
     }
 
@@ -70,6 +73,7 @@ class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment
             }
 
             santabottomButtonJoinroom.setOnClickListener {
+                AmplitudeManager.trackEvent("invite_code_enter_btn", EventType.BUTTON)
                 joinRoomViewModel.joinRoom(this@JoinRoomFragment::startManittoRoomActivity)
             }
         }
