@@ -6,19 +6,23 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentSettingBinding
 import org.sopt.santamanitto.util.base.BaseFragment
 
 @AndroidEntryPoint
 class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting, false) {
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("setting", EventType.PAGE)
         binding.run {
             buttonSettingBack.setOnClickListener { findNavController().navigateUp() }
             settinglistviewSetting
                 .addSetting(getString(R.string.setting_1_edit_name)) {
+                    AmplitudeManager.trackEvent("setting_name_edit_btn", EventType.BUTTON)
                     findNavController().navigate(
                         SettingFragmentDirections.actionSettingFragmentToEditNameFragment(),
                     )

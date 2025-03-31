@@ -121,8 +121,16 @@ class MainFragment : Fragment() {
                 }
             }
             setOnExitClickListener { roomId, roomName, isHost ->
+                AmplitudeManager.trackEvent(
+                    if (isHost) "leader_exit_popup" else "participant_exit_popup",
+                    EventType.MODAL
+                )
                 ExitDialogCreator.create(requireContext(), roomName, isHost) {
                     viewModel.exitRoom(roomId)
+                    AmplitudeManager.trackEvent(
+                        if (isHost) "leader_exit_popup_exit_btn" else "participant_exit_popup_exit_btn",
+                        EventType.BUTTON
+                    )
                 }.show(childFragmentManager, "exit")
             }
             setOnRemoveClickListener { roomId ->

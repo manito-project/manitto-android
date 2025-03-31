@@ -14,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentMatchingBinding
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.fragment.MatchingFragmentDirections.Companion.actionMatchingFragmentToMatchedFragment
@@ -39,6 +41,8 @@ class MatchingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMatchingBinding.inflate(inflater, container, false)
+
+        AmplitudeManager.trackEvent("manitto_matching_lottie", EventType.PAGE)
 
         Handler(Looper.getMainLooper()).postDelayed({
             isDelayDone = true

@@ -13,6 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentEditNameBinding
 import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
 import org.sopt.santamanitto.util.base.BaseFragment
@@ -22,13 +24,11 @@ import org.sopt.santamanitto.view.dialog.withdraw.WithdrawDialogCreator
 class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment_edit_name, true) {
     private val viewModel: EditNameViewModel by viewModels()
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = viewModel
 
+        AmplitudeManager.trackEvent("name_edit", EventType.PAGE)
+        binding.vm = viewModel
         setOnClickListener()
         observeChangeRequest()
         observeWithdrawEvent()
@@ -43,6 +43,7 @@ class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment
             }
 
             textviewWithdraw.setOnClickListener {
+                AmplitudeManager.trackEvent("name_edit_withdrawal_btn", EventType.BUTTON)
                 showWithDrawDialog()
             }
         }
@@ -55,6 +56,7 @@ class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment
                 Lifecycle.State.STARTED
             ).collectLatest { isSuccess ->
                 if (isSuccess) {
+                    AmplitudeManager.trackEvent("name_edit_complete_btn", EventType.BUTTON)
                     findNavController().popBackStack(R.id.mainFragment, false)
                     Toast.makeText(context, R.string.editname_finish, Toast.LENGTH_SHORT).show()
                 }
@@ -79,7 +81,9 @@ class EditNameFragment : BaseFragment<FragmentEditNameBinding>(R.layout.fragment
     }
 
     private fun showWithDrawDialog() {
+        AmplitudeManager.trackEvent("withdrawal_popup", EventType.MODAL)
         WithdrawDialogCreator.create(requireContext()) {
+            AmplitudeManager.trackEvent("withdrawal_popup_withdrawal_btn", EventType.BUTTON)
             viewModel.withdraw()
         }.show(childFragmentManager, "withdraw")
     }

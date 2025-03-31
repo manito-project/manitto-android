@@ -36,7 +36,6 @@ class CreateRoomFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AmplitudeManager.trackEvent("make_room_information", EventType.PAGE)
         binding.vm = viewModel
         loadDataWhenModifying()
         initView()
@@ -53,6 +52,7 @@ class CreateRoomFragment :
 
     private fun initView() {
         binding.run {
+
             textviewCreateroomExpirationdescription.text =
                 String.format(
                     getString(R.string.createroom_expiration_description),
@@ -61,7 +61,10 @@ class CreateRoomFragment :
                 )
         }
 
-        if (!isNewRoom) {
+        if (isNewRoom) {
+            AmplitudeManager.trackEvent("make_room_information", EventType.PAGE)
+        } else {
+            AmplitudeManager.trackEvent("room_edit", EventType.PAGE)
             binding.run {
                 santabackgroundCreateroom.hideDescription()
                 santabottombuttonSkiproom.visibility = View.GONE
@@ -78,6 +81,7 @@ class CreateRoomFragment :
                     AmplitudeManager.trackEvent("make_room_mission_btn", EventType.BUTTON)
                     findNavController().navigate(actionCreateRoomFragmentToCreateMissionsFragment())
                 } else {
+                    AmplitudeManager.trackEvent("room_edit_complete_btn", EventType.BUTTON)
                     viewModel.modifyRoom {
                         findNavController().navigateUp()
                     }

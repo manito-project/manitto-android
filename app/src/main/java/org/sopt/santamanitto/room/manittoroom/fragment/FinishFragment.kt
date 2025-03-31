@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentManittoRoomFinishBinding
 import org.sopt.santamanitto.databinding.LayoutFinishBinding
 import org.sopt.santamanitto.databinding.LayoutResultBinding
@@ -48,33 +50,28 @@ class FinishFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("manitto_result_my", EventType.PAGE)
         binding.run {
             lifecycleOwner = viewLifecycleOwner
             vm = viewModel
-
             root.addOnLayoutChangeListener(object : OnLayoutChangeListener1 {
                 override fun onLayoutChange(
                     v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int,
                     oldTop: Int, oldRight: Int, oldBottom: Int
                 ) {
                     binding.root.removeOnLayoutChangeListener(this)
-
                     initMissionText()
                 }
             })
         }
-
         finishBinding = binding.includeFinishMatched.apply {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
-
         resultBinding = binding.includeFinishResult
-
-        viewModel.run {
-            refreshManittoRoomInfo()
-        }
-
+        viewModel.refreshManittoRoomInfo()
         setResultBinding()
         setOnClickListener()
     }
@@ -104,19 +101,21 @@ class FinishFragment : Fragment() {
                 requireActivity().finish()
             }
             santabottombuttonReturn.setOnClickListener {
+                AmplitudeManager.trackEvent("manitto_result_home_btn", EventType.BUTTON)
                 requireActivity().finish()
             }
-            // TODO: 방나가기 로직 수정 필요 (우선 버튼 visibility gone 상태)
             santabuttonFinishExit.setOnClickListener {
                 showExitDialog()
             }
             santabottombuttonFinish.setOnClickListener {
                 if (isFinishScreen) {
+                    AmplitudeManager.trackEvent("manitto_result_my", EventType.PAGE)
                     isFinishScreen = false
-                    binding.santabottombuttonFinish.setText(R.string.finish_bottom_button)
-                } else {
-                    isFinishScreen = true
                     binding.santabottombuttonFinish.setText(R.string.result_bottom)
+                } else {
+                    AmplitudeManager.trackEvent("manitto_result_all", EventType.PAGE)
+                    isFinishScreen = true
+                    binding.santabottombuttonFinish.setText(R.string.finish_bottom_button)
                 }
                 finishBinding.root.isVisible = isFinishScreen
                 resultBinding.root.isVisible = !isFinishScreen
@@ -136,13 +135,13 @@ class FinishFragment : Fragment() {
     }
 
     private fun showExitDialog() {
-        if (viewModel.roomName.value == null) {
-            return
-        }
+        if (viewModel.roomName.value == null) return
+        AmplitudeManager.trackEvent("participant_exit_popup", EventType.MODAL)
         RoundDialogBuilder()
             .setContentText(requireContext().getString(R.string.exit_dialog_history))
             .addHorizontalButton(requireContext().getString(R.string.exit_dialog_host_cancel))
             .addHorizontalButton(requireContext().getString(R.string.exit_dialog_host_confirm)) {
+                AmplitudeManager.trackEvent("participant_exit_popup_exit_btn", EventType.BUTTON)
                 viewModel.removeHistory {
                     requireActivity().finish()
                 }

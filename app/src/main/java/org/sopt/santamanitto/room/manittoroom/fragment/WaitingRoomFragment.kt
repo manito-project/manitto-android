@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentWaitingRoomBinding
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomViewModel
 import org.sopt.santamanitto.room.manittoroom.MemberAdapter
@@ -46,16 +48,12 @@ class WaitingRoomFragment :
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        AmplitudeManager.trackEvent("room_manitto_list", EventType.PAGE)
         initView()
-
         setOnClickListener()
-
         subscribeUI()
     }
 
@@ -77,6 +75,7 @@ class WaitingRoomFragment :
                 requireActivity().finish()
             }
             textviewWaitingroomInvitationcode.setOnClickListener {
+                AmplitudeManager.trackEvent("room_code_copy_btn", EventType.BUTTON)
                 ClipBoardUtil.copy(
                     requireContext(),
                     INVITATION_CODE_LABEL,
@@ -92,13 +91,16 @@ class WaitingRoomFragment :
                 }
             }
             santabottombuttonWaitingroomModify.setOnClickListener {
+                AmplitudeManager.trackEvent("room_edit_btn", EventType.BUTTON)
                 navigateModifyFragment()
             }
             santabottombuttonWaitingroomMatch.setOnClickListener {
+                AmplitudeManager.trackEvent("room_start_btn", EventType.BUTTON)
                 viewModel.match()
                 navigateMatchingFragment()
             }
             buttonWaitingroomRefresh.setOnClickListener {
+                AmplitudeManager.trackEvent("room_refresh_btn", EventType.BUTTON)
                 viewModel.refreshManittoRoomInfo()
             }
         }
