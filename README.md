@@ -2,7 +2,7 @@
 
 <img src="https://user-images.githubusercontent.com/57310034/111138328-258c4a00-85c3-11eb-813e-f66dfff116c1.png"/>
 
-[![Release](https://img.shields.io/endpoint?color=green&logo=google-play&logoColor=green&url=https%3A%2F%2Fplayshields.herokuapp.com%2Fplay%3Fi%3Dorg.sopt.santamanitto%26l%3DPlayStore%26m%3D%24version)](https://play.google.com/store/apps/details?id=org.sopt.santamanitto)
+[![Release](https://img.shields.io/endpoint?color=green&logo=google-play&logoColor=green&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dorg.sopt.santamanitto%26gl%3Dkr%26hl%3Dko%26l%3DPlay%2520Store%26m%3D%24version)](https://play.google.com/store/apps/details?id=org.sopt.santamanitto)
 
 아이스브레이킹을 위한 안드로이드 마니또 어플리케이션  
 
@@ -147,7 +147,4 @@ mock, prod Flavors를 추가해 위와 같이 빌드 형상을 나누어 개발�
 <br>
 
 ## 개발자  
-
-- [김성규](https://github.com/SEONGGYU96)
-- [김상호](https://github.com/Marchbreeze)
-- [이태희](https://github.com/haeti-dev)
+[![contributors](https://contrib.rocks/image?repo=manito-project/manitto-android)](https://github.com/manito-project/manitto-android/contributors)
