@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.NetworkViewModel
+import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.data.source.CachedUserMetadataSource
 import javax.inject.Inject
@@ -52,6 +53,7 @@ class EditNameViewModel @Inject constructor(
             if (result.isSuccess) {
                 userMetadataSource.setUserNameDirty()
                 userMetadataSource.setUserName(newName.value)
+                AmplitudeManager.updateStringProperty("user_name", newName.value)
                 _requestDone.value = true
             } else {
                 _networkErrorOccur.value = true

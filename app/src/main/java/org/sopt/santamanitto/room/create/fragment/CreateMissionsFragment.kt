@@ -7,6 +7,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentCreateMissionBinding
 import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
 import org.sopt.santamanitto.room.create.fragment.CreateMissionsFragmentDirections.Companion.actionCreateMissionsFragmentToCreateConfirmFragment
@@ -16,10 +18,7 @@ import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
 
 class CreateMissionsFragment :
-    BaseFragment<FragmentCreateMissionBinding>(
-        R.layout.fragment_create_mission,
-        false,
-    ),
+    BaseFragment<FragmentCreateMissionBinding>(R.layout.fragment_create_mission, false),
     CreateMissionAdaptor.CreateMissionCallback {
     private val viewModel: CreateRoomAndMissionViewModel by activityViewModels()
 
@@ -31,32 +30,28 @@ class CreateMissionsFragment :
         })
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("make_mission", EventType.PAGE)
         binding.recyclerviewCreatemission.adapter = createMissionAdaptor
-
         subscribeUI()
-
         saveMeasuredHeightOfRecyclerView()
-
         setOnClickListener()
-
         initOnBackPressedListener()
-
         observeUnsavedMission()
-
         hideKeyboardOnOutsideEditText()
     }
 
     override fun onMissionInserted(mission: String) {
+        AmplitudeManager.trackEvent("make_mission_plus_btn", EventType.BUTTON)
         viewModel.addMission(mission)
         viewModel.unsavedMission.value = ""
         binding.santabottombuttonCreatemissionDone.isEnabled = true
     }
 
     override fun onMissionDeleted(mission: String) {
+        AmplitudeManager.trackEvent("make_mission_minus_btn", EventType.BUTTON)
         saveUnsavedMission()
         viewModel.deleteMission(mission)
         if (!viewModel.hasMissions()) binding.santabottombuttonCreatemissionDone.isEnabled = false
@@ -65,6 +60,7 @@ class CreateMissionsFragment :
     private fun setOnClickListener() {
         binding.run {
             santabottombuttonCreatemissionSkip.setOnClickListener {
+                AmplitudeManager.trackEvent("make_mission_skip_btn", EventType.BUTTON)
                 if (viewModel.hasMissions()) {
                     showSkipDialog()
                 } else {
@@ -72,6 +68,7 @@ class CreateMissionsFragment :
                 }
             }
             santabottombuttonCreatemissionDone.setOnClickListener {
+                AmplitudeManager.trackEvent("make_mission_complete_btn", EventType.BUTTON)
                 saveUnsavedMission()
                 if (viewModel.hasMissions()) {
                     navigateConfirmFragment()
@@ -131,11 +128,13 @@ class CreateMissionsFragment :
     }
 
     private fun showSkipDialog() {
+        AmplitudeManager.trackEvent("mission_skip_popup", EventType.MODAL)
         RoundDialogBuilder()
             .setContentText(
                 getString(R.string.createmission_dialog_skip_has_mission),
                 true,
             ).addHorizontalButton(getString(R.string.createmission_skip_bottom_button)) {
+                AmplitudeManager.trackEvent("mission_skip_popup_skip_btn", EventType.BUTTON)
                 viewModel.clearMission()
                 navigateConfirmFragment()
             }.addHorizontalButton(getString(R.string.createroom_btn_next))

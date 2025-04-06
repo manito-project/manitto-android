@@ -14,6 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.ActivitySplashBinding
 import org.sopt.santamanitto.main.MainActivity
 import org.sopt.santamanitto.update.version.Version
@@ -39,6 +41,7 @@ class SplashActivity : AppCompatActivity() {
 		installSplashScreen()
 		setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)
 
+		AmplitudeManager.trackEvent("splash", EventType.PAGE)
 		handleRemoteServerCheck()
 	}
 

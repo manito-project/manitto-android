@@ -8,6 +8,9 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+Properties properties = new Properties()
+properties.load(rootProject.file('./local.properties').newDataInputStream())
+
 android {
     compileSdk 34
 
@@ -15,13 +18,10 @@ android {
         applicationId "org.sopt.santamanitto"
         minSdk 23
         targetSdk 34
-        versionCode 16
-        versionName "2.0.1"
+        versionCode 17
+        versionName "2.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        Properties properties = new Properties()
-        properties.load(rootProject.file('./local.properties').newDataInputStream())
 
         def keystorePropertiesFile = rootProject.file("keystore.properties")
         def keystoreProperties = new Properties()
@@ -62,6 +62,8 @@ android {
                     appName: "@string/dev_app_name",
                     appIcon: "@mipmap/ic_launcher_dev"
             ]
+
+            buildConfigField("String", "AMPLITUDE_KEY", properties['amplitudeDebugKey'])
         }
 
         release {
@@ -74,6 +76,8 @@ android {
                     appName: "@string/app_name",
                     appIcon: "@mipmap/ic_launcher"
             ]
+
+            buildConfigField("String", "AMPLITUDE_KEY", properties['amplitudeProdKey'])
         }
     }
 
@@ -155,6 +159,8 @@ dependencies {
     //splash screen
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
+    //analytics
+    implementation 'com.amplitude:analytics-android:1.17.3'
 }
 
 hilt {

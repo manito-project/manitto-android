@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.update.version.Version
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
@@ -66,6 +67,7 @@ class SplashViewModel @Inject constructor(
                     setAccessToken(signInResponseModel.accessToken)
                     setUserId(signInResponseModel.id)
                 }
+                AmplitudeManager.setUserId(signInResponseModel.id)
                 _loginSuccess.value = LoginState.SUCCESS
             }.onFailure { exception ->
                 _loginSuccess.value = if (exception.message?.contains("404") == false) {

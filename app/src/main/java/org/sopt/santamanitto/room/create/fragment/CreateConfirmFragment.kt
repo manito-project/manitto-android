@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentCreateConfirmBinding
 import org.sopt.santamanitto.room.create.adaptor.CreateConfirmAdaptor
 import org.sopt.santamanitto.room.create.adaptor.CreateMissionAdaptor
@@ -36,27 +38,29 @@ class CreateConfirmFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding =
-            FragmentCreateConfirmBinding.inflate(inflater, container, false).apply {
-                lifecycleOwner = viewLifecycleOwner
-                vm = viewModel
-                recyclerviewCreateconfirm.adapter = createConfirmAdapter
-            }
-
-        initRecyclerView()
-
-        refreshUI(viewModel.expirationLiveData)
-
-        subscribeUI()
-
-        setOnClickListener()
-
+        binding = FragmentCreateConfirmBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("make_complete", EventType.PAGE)
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            vm = viewModel
+            recyclerviewCreateconfirm.adapter = createConfirmAdapter
+        }
+        initRecyclerView()
+        refreshUI(viewModel.expirationLiveData)
+        subscribeUI()
+        setOnClickListener()
     }
 
     private fun setOnClickListener() {
         binding.run {
             santabottombuttonCreatemconfirm.setOnClickListener {
+                AmplitudeManager.trackEvent("make_complete_btn", EventType.BUTTON)
                 viewModel.createRoom(::showInvitationCodeDialog)
             }
             santabackgroundCreateconfirm.setOnBackKeyClickListener {
@@ -66,10 +70,12 @@ class CreateConfirmFragment :
     }
 
     private fun showInvitationCodeDialog(createRoom: CreateRoomModel) {
+        AmplitudeManager.trackEvent("make_code_complete_popup", EventType.MODAL)
         if (context != null) {
             RoundDialogBuilder()
                 .setContentText(getString(R.string.createconfirm_done_dialog))
                 .setInvitationCode(createRoom.invitationCode) {
+                    AmplitudeManager.trackEvent("make_code_copy_btn", EventType.BUTTON)
                     ClipBoardUtil.copy(
                         requireContext(),
                         INVITATION_CODE_LABEL,
@@ -125,6 +131,7 @@ class CreateConfirmFragment :
     }
 
     override fun onMissionDeleted(mission: String) {
+        AmplitudeManager.trackEvent("make_complete_mission_minus_btn", EventType.BUTTON)
         viewModel.deleteMission(mission)
     }
 }

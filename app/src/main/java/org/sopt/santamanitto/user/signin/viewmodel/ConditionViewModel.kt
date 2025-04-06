@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.data.source.UserMetadataSource
 import javax.inject.Inject
@@ -41,6 +42,10 @@ class ConditionViewModel @Inject constructor(
                     setUserName(userName)
                     setAccessToken(signUpResponseModel.accessToken)
                     setUserId(signUpResponseModel.id)
+                }
+                AmplitudeManager.run {
+                    setUserId(signUpResponseModel.id)
+                    updateStringProperty("user_name", userName)
                 }
                 userSaveSuccess.value = true
                 _isWaitingForResponse = false

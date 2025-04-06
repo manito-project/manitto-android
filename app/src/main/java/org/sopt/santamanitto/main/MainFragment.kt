@@ -17,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.analytics.AmplitudeManager
+import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.main.list.MyManittoListAdapter
 import org.sopt.santamanitto.room.create.CreateRoomActivity
@@ -48,16 +50,17 @@ class MainFragment : Fragment() {
                 recyclerviewMainHistory.visibility = View.GONE
                 constraintlayoutMainNomymanitto.visibility = View.VISIBLE
             }
-
-        binding.santabackgroundMain.isBackKeyEnabled = false
-
-        subscribeUI()
-
-        setOnClickListener()
-
-        initBackPressedCallback()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        AmplitudeManager.trackEvent("home", EventType.PAGE)
+        binding.santabackgroundMain.isBackKeyEnabled = false
+        subscribeUI()
+        setOnClickListener()
+        initBackPressedCallback()
     }
 
     private fun subscribeUI() {
@@ -118,8 +121,16 @@ class MainFragment : Fragment() {
                 }
             }
             setOnExitClickListener { roomId, roomName, isHost ->
+                AmplitudeManager.trackEvent(
+                    if (isHost) "leader_exit_popup" else "participant_exit_popup",
+                    EventType.MODAL
+                )
                 ExitDialogCreator.create(requireContext(), roomName, isHost) {
                     viewModel.exitRoom(roomId)
+                    AmplitudeManager.trackEvent(
+                        if (isHost) "leader_exit_popup_exit_btn" else "participant_exit_popup_exit_btn",
+                        EventType.BUTTON
+                    )
                 }.show(childFragmentManager, "exit")
             }
             setOnRemoveClickListener { roomId ->
