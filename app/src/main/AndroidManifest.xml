@@ -15,6 +15,10 @@
         android:usesCleartextTraffic="true"
         tools:replace="icon, label">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${admobAppId}" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -40,8 +44,8 @@
         <activity
             android:name=".user.signin.SignInActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".main.MainActivity"
