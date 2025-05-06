@@ -2,6 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
@@ -165,6 +166,15 @@
             app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto" />
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/ads_home_banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            ads:adSize="BANNER"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

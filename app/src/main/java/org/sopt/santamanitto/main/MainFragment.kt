@@ -13,9 +13,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
@@ -61,6 +63,7 @@ class MainFragment : Fragment() {
         subscribeUI()
         setOnClickListener()
         initBackPressedCallback()
+        loadAds()
     }
 
     private fun subscribeUI() {
@@ -177,6 +180,14 @@ class MainFragment : Fragment() {
             viewLifecycleOwner,
             onBackPressedCallback,
         )
+    }
+
+    private fun loadAds() {
+        val adsHomeBanner = binding.adsHomeBanner
+        val adRequest = AdRequest.Builder().build()
+
+        adsHomeBanner.adUnitId = BuildConfig.ADMOB_CA_APP_PUB
+        adsHomeBanner.loadAd(adRequest)
     }
 
     companion object {
