@@ -93,6 +93,12 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+        dataBinding = true
+    }
+
     flavorDimensions += "default"
     productFlavors {
         create("mock") {
@@ -103,17 +109,13 @@ android {
             dimension = "default"
         }
     }
+}
 
-    variantFilter {
-        if (buildType.name == "release" && flavors[0].name == "mock") {
-            ignore = true
+androidComponents {
+    beforeVariants { variantBuilder ->
+        if (variantBuilder.buildType == "release" && variantBuilder.flavorName == "mock") {
+            variantBuilder.enable = false
         }
-    }
-
-    buildFeatures {
-        buildConfig = true
-        viewBinding = true
-        dataBinding = true
     }
 }
 
