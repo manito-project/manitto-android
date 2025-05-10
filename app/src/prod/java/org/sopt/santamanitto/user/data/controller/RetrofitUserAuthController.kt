@@ -1,5 +1,3 @@
-package org.sopt.santamanitto.user.data.controller
-
 import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.user.data.UserInfoModel

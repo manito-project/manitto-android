@@ -1,5 +1,3 @@
-package org.sopt.santamanitto.user.data.controller
-
 import org.sopt.santamanitto.auth.data.request.SignInRequestModel
 import org.sopt.santamanitto.auth.data.request.SignUpRequestModel
 import org.sopt.santamanitto.auth.data.response.SignInResponseModel
