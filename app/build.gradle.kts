@@ -19,15 +19,15 @@ val keystoreProps = Properties().apply {
 }
 
 android {
-    namespace = "org.sopt.santamanitto"
-    compileSdk = 34
+    namespace = libs.versions.packageName.get()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.sopt.santamanitto"
-        minSdk = 23
-        targetSdk = 34
-        versionCode = 17
-        versionName = "2.0.2"
+        applicationId = libs.versions.packageName.get()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -35,25 +35,15 @@ android {
         buildConfigField("String", "TOS_URL", localProps["tosUrl"] as String)
         buildConfigField("String", "PRIVACY_POLICY_RUL", localProps["privacyPolicyUrl"] as String)
         buildConfigField("String", "INQUIRY_URL", localProps["inquiryUrl"] as String)
-
-        sourceSets {
-            val sharedTestDir = "src/sharedTest/java"
-            getByName("test") {
-                java.srcDir(sharedTestDir)
-            }
-            getByName("androidTest") {
-                java.srcDir(sharedTestDir)
-            }
-        }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.toVersion(libs.versions.jvmVersion.get())
+        targetCompatibility = JavaVersion.toVersion(libs.versions.jvmVersion.get())
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = libs.versions.jvmVersion.get()
     }
 
     signingConfigs {
@@ -62,6 +52,16 @@ android {
             storePassword = keystoreProps["storePassword"] as String
             keyAlias = keystoreProps["keyAlias"] as String
             keyPassword = keystoreProps["keyPassword"] as String
+        }
+    }
+
+    sourceSets {
+        val sharedTestDir = "src/sharedTest/java"
+        getByName("test") {
+            java.srcDir(sharedTestDir)
+        }
+        getByName("androidTest") {
+            java.srcDir(sharedTestDir)
         }
     }
 
@@ -122,7 +122,6 @@ androidComponents {
 hilt {
     enableTransformForLocalTests = true
 }
-
 
 dependencies {
     implementation(libs.bundles.androidx)

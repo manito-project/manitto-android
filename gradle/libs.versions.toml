@@ -1,8 +1,17 @@
 [versions]
+# App Constants
+packageName = "org.sopt.santamanitto"
+minSdk = "23"
+targetSdk = "34"
+compileSdk = "34"
+versionCode = "17"
+versionName = "2.0.2"
+jvmVersion = "17"
+
 # Build Tools
 agp = "8.4.0"
 
-# Kotlin
+# Kotlin Version
 kotlin = "1.9.22"
 
 # AndroidX
