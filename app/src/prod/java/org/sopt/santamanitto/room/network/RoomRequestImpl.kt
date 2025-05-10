@@ -51,7 +51,10 @@ class RoomRequestImpl(
         roomService.modifyRoom(roomId, request).start(callback)
     }
 
-    override fun joinRoom(request: JoinRoomRequestModel, callback: RoomRequest.JoinRoomCallback) {
+    override fun joinRoom(
+        request: JoinRoomRequestModel,
+        callback: RoomRequest.JoinRoomCallback
+    ) {
         roomService.joinRoom(request).enqueue(object : Callback<Response<JoinRoomResponseModel>> {
             override fun onResponse(
                 call: Call<Response<JoinRoomResponseModel>>,
@@ -78,7 +81,10 @@ class RoomRequestImpl(
         })
     }
 
-    override fun getManittoRoomData(roomId: String, callback: RoomRequest.GetManittoRoomCallback) {
+    override fun getManittoRoomData(
+        roomId: String,
+        callback: RoomRequest.GetManittoRoomCallback
+    ) {
         roomService.getManittoRoomData(roomId).start(object : RequestCallback<ManittoRoomModel> {
             override fun onSuccess(data: ManittoRoomModel) {
                 callback.onLoadManittoRoomData(data)
@@ -90,7 +96,10 @@ class RoomRequestImpl(
         })
     }
 
-    override fun matchManitto(roomId: String, callback: (onSuccess: Boolean) -> Unit) {
+    override fun matchManitto(
+        roomId: String,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
         roomService.matchManitto(roomId).start(callback)
     }
 
@@ -98,24 +107,29 @@ class RoomRequestImpl(
         roomId: String,
         callback: RoomRequest.GetPersonalRoomInfoCallback
     ) {
-        roomService.getRoomPersonalInfo(roomId)
-            .start(object : RequestCallback<PersonalRoomModel> {
-                override fun onSuccess(data: PersonalRoomModel) {
-                    callback.onLoadPersonalRoomInfo(data)
-                }
+        roomService.getRoomPersonalInfo(roomId).start(object : RequestCallback<PersonalRoomModel> {
+            override fun onSuccess(data: PersonalRoomModel) {
+                callback.onLoadPersonalRoomInfo(data)
+            }
 
-                override fun onFail() {
-                    callback.onDataNotAvailable()
-                }
-            })
+            override fun onFail() {
+                callback.onDataNotAvailable()
+            }
+        })
     }
 
-    override fun exitRoom(roomId: String, callback: (onSuccess: Boolean) -> Unit) {
+    override fun exitRoom(
+        roomId: String,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
         roomService.exitRoom(roomId).start(callback)
     }
 
 
-    override fun removeHistory(roomId: String, callback: (onSuccess: Boolean) -> Unit) {
+    override fun removeHistory(
+        roomId: String,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
         roomService.removeHistory(roomId).start(callback)
     }
 

@@ -10,8 +10,6 @@ import dagger.hilt.components.SingletonComponent
 class RoomRequestModule {
 
     @Provides
-    fun provideCreateRoomRequest(
-        roomService: RoomService,
-    ): RoomRequest =
+    fun provideCreateRoomRequest(roomService: RoomService): RoomRequest =
         RoomRequestImpl(roomService)
 }
