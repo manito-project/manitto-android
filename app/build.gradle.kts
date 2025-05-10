@@ -70,7 +70,6 @@ android {
             manifestPlaceholders["appName"] = "@string/dev_app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_dev"
             applicationIdSuffix = ".debug"
-            versionNameSuffix = "-DEBUG"
             buildConfigField(
                 "String",
                 "AMPLITUDE_KEY",
@@ -106,7 +105,6 @@ android {
         create("mock") {
             dimension = "default"
             applicationIdSuffix = ".mock"
-            versionNameSuffix = "-MOCK"
         }
         create("prod") {
             dimension = "default"
