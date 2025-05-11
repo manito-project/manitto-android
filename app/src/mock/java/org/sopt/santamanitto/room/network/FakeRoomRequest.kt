@@ -1,7 +1,9 @@
 package org.sopt.santamanitto.room.network
 
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import androidx.annotation.RequiresApi
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
@@ -19,6 +21,7 @@ class FakeRoomRequest : RoomRequest {
         private const val TAG = "FakeRoomRequest"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun getRooms(): List<MyManittoModel> {
         return getMyManittoList()
     }
