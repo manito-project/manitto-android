@@ -2,6 +2,7 @@ package org.sopt.santamanitto.room.network
 
 import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.room.data.PersonalRoomModel
+import org.sopt.santamanitto.room.data.toMyManittoModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomCreator
@@ -79,4 +80,11 @@ object FakeRoomItems {
 
             else -> null
         }
+
+    fun getMyManittoList(): List<MyManittoModel> = listOf(
+        getFakeManittoRoomData("1").toMyManittoModel(),
+        getFakeManittoRoomData("2").toMyManittoModel(),
+        getFakeManittoRoomData("3").toMyManittoModel(),
+        getFakeManittoRoomData("4").toMyManittoModel(),
+    )
 }

@@ -10,6 +10,7 @@ import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.join.network.JoinRoomResponseModel
 import org.sopt.santamanitto.room.network.FakeRoomItems.getFakeManittoRoomData
 import org.sopt.santamanitto.room.network.FakeRoomItems.getFakePersonalRoomInfo
+import org.sopt.santamanitto.room.network.FakeRoomItems.getMyManittoList
 import timber.log.Timber
 
 class FakeRoomRequest : RoomRequest {
@@ -19,37 +20,7 @@ class FakeRoomRequest : RoomRequest {
     }
 
     override suspend fun getRooms(): List<MyManittoModel> {
-        return listOf(
-            MyManittoModel(
-                createdAt = "2025-05-11T11:01:00.000Z",
-                creator = MyManittoModel.Creator(
-                    id = "1",
-                    manittoUserId = "1",
-                    username = "FakeFirstUser"
-                ),
-                deletedByCreatorDate = null,
-                expirationDate = "2025-05-18T11:01:00.000Z",
-                roomId = "1",
-                invitationCode = "oE1qwEe",
-                matchingDate = null,
-                members = listOf(
-                    MyManittoModel.Member(
-                        santa = MyManittoModel.Member.Santa("1", "FakeFirstUser"),
-                        manitto = MyManittoModel.Member.Manitto("2", "FakeSecondUser")
-                    ),
-                    MyManittoModel.Member(
-                        santa = MyManittoModel.Member.Santa("2", "FakeSecondUser"),
-                        manitto = MyManittoModel.Member.Manitto("3", "FakeThirdUser")
-                    ),
-                    MyManittoModel.Member(
-                        santa = MyManittoModel.Member.Santa("3", "FakeThirdUser"),
-                        manitto = MyManittoModel.Member.Manitto("1", "FakeFirstUser")
-                    )
-                ),
-                missions = emptyList(),
-                roomName = "FakeRoom1"
-            )
-        )
+        return getMyManittoList()
     }
 
     override fun createRoom(
