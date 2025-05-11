@@ -35,6 +35,7 @@ android {
         buildConfigField("String", "TOS_URL", localProps["tosUrl"] as String)
         buildConfigField("String", "PRIVACY_POLICY_RUL", localProps["privacyPolicyUrl"] as String)
         buildConfigField("String", "INQUIRY_URL", localProps["inquiryUrl"] as String)
+        buildConfigField("String", "ADMOB_CA_APP_PUB", localProps["admobCaAppPub"] as String)
     }
 
     compileOptions {
@@ -70,6 +71,8 @@ android {
             manifestPlaceholders["appName"] = "@string/dev_app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_dev"
             applicationIdSuffix = ".debug"
+            manifestPlaceholders["admobAppId"] = localProps["admobCaAppPub"] as String
+
             buildConfigField(
                 "String",
                 "AMPLITUDE_KEY",
@@ -80,6 +83,8 @@ android {
         release {
             manifestPlaceholders["appName"] = "@string/app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
+            manifestPlaceholders["admobAppId"] = localProps["admobCaAppPub"] as String
+
             buildConfigField(
                 "String",
                 "AMPLITUDE_KEY",
@@ -146,4 +151,7 @@ dependencies {
     implementation(libs.amplitude)
     implementation(libs.timber)
     implementation(libs.lottie)
+
+    // Admob
+    implementation("com.google.android.gms:play-services-ads:22.2.0")
 }
