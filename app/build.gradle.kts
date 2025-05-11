@@ -70,8 +70,8 @@ android {
         debug {
             manifestPlaceholders["appName"] = "@string/dev_app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_dev"
+            manifestPlaceholders["admobAppId"] = localProps["admobAppId"] as String
             applicationIdSuffix = ".debug"
-            manifestPlaceholders["admobAppId"] = localProps["admobCaAppPub"] as String
 
             buildConfigField(
                 "String",
@@ -83,7 +83,7 @@ android {
         release {
             manifestPlaceholders["appName"] = "@string/app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
-            manifestPlaceholders["admobAppId"] = localProps["admobCaAppPub"] as String
+            manifestPlaceholders["admobAppId"] = localProps["admobAppId"] as String
 
             buildConfigField(
                 "String",
@@ -152,6 +152,5 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.lottie)
 
-    // Admob
-    implementation("com.google.android.gms:play-services-ads:22.2.0")
+    implementation(libs.play.services.ads)
 }

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
+
+        <import type="org.sopt.santamanitto.BuildConfig" />
 
         <variable
             name="viewModel"
@@ -81,13 +83,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_entire"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
             android:text="@string/main_my_manitto_history"
             android:textColor="@color/dark_gray"
             android:textFontWeight="600"
             android:textSize="@dimen/size_main_mymanitto"
-            app:layout_constraintBottom_toTopOf="@id/constraintlayout_main_nomymanitto"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/santaimageroundbutton_main_join" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/imagebutton_main_refresh"
@@ -123,12 +125,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_mymanitto_viewholder"
             android:layout_marginHorizontal="@dimen/padding_entire"
-            android:layout_marginBottom="@dimen/margin_main_recyclerview_bottom"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_ractangle_background"
             android:backgroundTint="@color/gray_1"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_main_joinedroom">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageview_main_nomanittosnowman"
@@ -166,15 +168,14 @@
             app:layout_constraintStart_toStartOf="@id/constraintlayout_main_nomymanitto"
             app:layout_constraintTop_toTopOf="@id/constraintlayout_main_nomymanitto" />
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/ads_home_banner"
+        <FrameLayout
+            android:id="@+id/ad_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/constraintlayout_main_nomymanitto"
-            app:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toBottomOf="@id/constraintlayout_main_nomymanitto"
+            ads:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            ads:adSize="BANNER"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

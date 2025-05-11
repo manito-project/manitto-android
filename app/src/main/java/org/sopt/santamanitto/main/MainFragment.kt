@@ -2,6 +2,7 @@ package org.sopt.santamanitto.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -183,11 +188,36 @@ class MainFragment : Fragment() {
     }
 
     private fun loadAds() {
-        val adsHomeBanner = binding.adsHomeBanner
-        val adRequest = AdRequest.Builder().build()
+        binding.adContainer.post {
+            val metrics = requireContext().resources.displayMetrics
+            val widthPx  = binding.adContainer.width
+            val widthDp  = (widthPx / metrics.density).toInt()  // px → dp
 
-        adsHomeBanner.adUnitId = BuildConfig.ADMOB_CA_APP_PUB
-        adsHomeBanner.loadAd(adRequest)
+            val adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+                requireContext(),
+                widthDp
+            )
+
+            val adView = AdView(requireContext()).apply {
+                adUnitId = BuildConfig.ADMOB_CA_APP_PUB       // 반드시 “/” 들어간 배너 단위 ID
+                setAdSize(adSize)
+                adListener = object : AdListener() {
+                    override fun onAdFailedToLoad(error: LoadAdError) {
+                        Log.e("AdMob", "실패 코드=${error.code}, 메시지=${error.message}")
+                    }
+                    override fun onAdLoaded() {
+                        Log.d("AdMob", "광고 로드 성공")
+                    }
+                }
+            }
+
+            binding.adContainer
+                .apply {
+                    removeAllViews()
+                    addView(adView)
+                }
+            adView.loadAd(AdRequest.Builder().build())
+        }
     }
 
     companion object {
