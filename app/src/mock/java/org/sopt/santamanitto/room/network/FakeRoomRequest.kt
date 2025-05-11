@@ -6,13 +6,10 @@ import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
 import org.sopt.santamanitto.room.data.MyManittoModel
-import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
 import org.sopt.santamanitto.room.join.network.JoinRoomResponseModel
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomCreator
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomMission
+import org.sopt.santamanitto.room.network.FakeRoomItems.getFakeManittoRoomData
+import org.sopt.santamanitto.room.network.FakeRoomItems.getFakePersonalRoomInfo
 import timber.log.Timber
 
 class FakeRoomRequest : RoomRequest {
@@ -22,8 +19,37 @@ class FakeRoomRequest : RoomRequest {
     }
 
     override suspend fun getRooms(): List<MyManittoModel> {
-        // TODO
-        return emptyList()
+        return listOf(
+            MyManittoModel(
+                createdAt = "2025-05-11T11:01:00.000Z",
+                creator = MyManittoModel.Creator(
+                    id = "1",
+                    manittoUserId = "1",
+                    username = "FakeFirstUser"
+                ),
+                deletedByCreatorDate = null,
+                expirationDate = "2025-05-18T11:01:00.000Z",
+                roomId = "1",
+                invitationCode = "oE1qwEe",
+                matchingDate = null,
+                members = listOf(
+                    MyManittoModel.Member(
+                        santa = MyManittoModel.Member.Santa("1", "FakeFirstUser"),
+                        manitto = MyManittoModel.Member.Manitto("2", "FakeSecondUser")
+                    ),
+                    MyManittoModel.Member(
+                        santa = MyManittoModel.Member.Santa("2", "FakeSecondUser"),
+                        manitto = MyManittoModel.Member.Manitto("3", "FakeThirdUser")
+                    ),
+                    MyManittoModel.Member(
+                        santa = MyManittoModel.Member.Santa("3", "FakeThirdUser"),
+                        manitto = MyManittoModel.Member.Manitto("1", "FakeFirstUser")
+                    )
+                ),
+                missions = emptyList(),
+                roomName = "FakeRoom1"
+            )
+        )
     }
 
     override fun createRoom(
@@ -60,48 +86,7 @@ class FakeRoomRequest : RoomRequest {
         roomId: String,
         callback: RoomRequest.GetManittoRoomCallback
     ) {
-        callback.onLoadManittoRoomData(
-            ManittoRoomModel(
-                roomId = roomId,
-                roomName = "FakeRoom",
-                invitationCode = "oU3lsEo-",
-                createdAt = "false",
-                expirationDate = "2021-02-28 11:01:00",
-                matchingDate = "2021-02-21 14:47:10",
-                deletedByCreatorDate = null,
-                creator = ManittoRoomCreator(
-                    userId = "1",
-                    userName = "FakeFirstUser",
-                    manittoUserId = "12fsfe2"
-                ),
-                missions = mutableListOf<ManittoRoomMission>().apply {
-                    add(ManittoRoomMission("1", "Fake Mission 1"))
-                    add(ManittoRoomMission("2", "Fake Mission 2"))
-                    add(ManittoRoomMission("3", "Fake Mission 3"))
-                    add(ManittoRoomMission("4", "Fake Mission 4"))
-                },
-                members = mutableListOf<ManittoRoomMember>().apply {
-                    add(
-                        ManittoRoomMember(
-                            santa = ManittoRoomMember.SantaRoomInfo("1", "FakeFirstUser", "1"),
-                            manitto = ManittoRoomMember.ManittoRoomInfo("2", "FakeSecondUser")
-                        )
-                    )
-                    add(
-                        ManittoRoomMember(
-                            santa = ManittoRoomMember.SantaRoomInfo("2", "FakeSecondUser", "1"),
-                            manitto = ManittoRoomMember.ManittoRoomInfo("3", "FakeThirdUser")
-                        )
-                    )
-                    add(
-                        ManittoRoomMember(
-                            santa = ManittoRoomMember.SantaRoomInfo("3", "FakeThirdUser", "1"),
-                            manitto = ManittoRoomMember.ManittoRoomInfo("1", "FakeFirstUser")
-                        )
-                    )
-                }
-            )
-        )
+        callback.onLoadManittoRoomData(getFakeManittoRoomData(roomId))
     }
 
     override fun matchManitto(
@@ -114,45 +99,13 @@ class FakeRoomRequest : RoomRequest {
         }, 5000L)
     }
 
-    private val fakePersonalRoomInfos = HashMap<String, PersonalRoomModel>().apply {
-        put(
-            "1", PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("1", "FakeFirstUser"),
-                mission = MyManittoModel.Mission("Fake Mission 1", "1")
-            )
-        )
-        put(
-            "2", PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("2", "FakeSecondUser"),
-                mission = MyManittoModel.Mission("Fake Mission 2", "2")
-            )
-        )
-        put(
-            "3", PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("3", "FakeThirdUser"),
-                mission = MyManittoModel.Mission("Fake Mission 3", "3")
-            )
-        )
-        put(
-            "4", PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("4", "FakeFourthUser"),
-                mission = MyManittoModel.Mission("Fake Mission 4", "4")
-            )
-        )
-        put(
-            "5", PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("5", "FakeFifthUser"),
-                mission = MyManittoModel.Mission("Fake Mission 5", "5")
-            )
-        )
-    }
-
     override fun getPersonalRoomInfo(
         roomId: String,
         callback: RoomRequest.GetPersonalRoomInfoCallback
     ) {
-        if (fakePersonalRoomInfos.containsKey(roomId)) {
-            callback.onLoadPersonalRoomInfo(fakePersonalRoomInfos[roomId]!!)
+        val personalRoomInfo = getFakePersonalRoomInfo(roomId)
+        if (personalRoomInfo != null) {
+            callback.onLoadPersonalRoomInfo(personalRoomInfo)
         } else {
             callback.onDataNotAvailable()
         }
