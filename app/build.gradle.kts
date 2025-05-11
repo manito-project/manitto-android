@@ -36,6 +36,9 @@ android {
         buildConfigField("String", "PRIVACY_POLICY_RUL", localProps["privacyPolicyUrl"] as String)
         buildConfigField("String", "INQUIRY_URL", localProps["inquiryUrl"] as String)
         buildConfigField("String", "ADMOB_CA_APP_PUB", localProps["admobCaAppPub"] as String)
+
+        val admobAppId = localProps["admobAppId"] as String
+        manifestPlaceholders["admobAppId"] = admobAppId.trim('"')
     }
 
     compileOptions {
@@ -70,8 +73,6 @@ android {
         debug {
             manifestPlaceholders["appName"] = "@string/dev_app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_dev"
-            manifestPlaceholders["admobAppId"] = localProps["admobAppId"] as String
-            applicationIdSuffix = ".debug"
 
             buildConfigField(
                 "String",
@@ -83,7 +84,6 @@ android {
         release {
             manifestPlaceholders["appName"] = "@string/app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
-            manifestPlaceholders["admobAppId"] = localProps["admobAppId"] as String
 
             buildConfigField(
                 "String",
