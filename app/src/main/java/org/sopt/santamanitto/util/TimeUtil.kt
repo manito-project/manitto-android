@@ -87,4 +87,11 @@ object TimeUtil {
             time = kstFormat.parse(kstFormatString) ?: throw IllegalArgumentException(WRONG_FORMAT)
         }
     }
+
+    // Fake 객체로 서버 대체 위한 UTC 포맷 날짜 생성
+    fun getDateWithOffsetFromNow(offsetDays: Int): String {
+        return utcFormat.format(
+            Calendar.getInstance(UTC_TIME_ZONE).apply { add(Calendar.DATE, offsetDays) }.time
+        )
+    }
 }

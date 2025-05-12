@@ -1,7 +1,5 @@
 package org.sopt.santamanitto.room.network
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.room.data.PersonalRoomModel
 import org.sopt.santamanitto.room.data.toMyManittoModel
@@ -9,9 +7,7 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomCreator
 import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomMission
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
+import org.sopt.santamanitto.util.TimeUtil
 
 object FakeRoomItems {
     fun getFakeManittoRoomData(
@@ -95,56 +91,50 @@ object FakeRoomItems {
             else -> null
         }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getMyManittoList(): List<MyManittoModel> {
-        val nowUtc = OffsetDateTime.now(ZoneOffset.UTC)
-        val isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    fun getMyManittoList(): List<MyManittoModel> = listOf(
+        // 1. 삭제된 방: createdAt = 3일 전, expirationDate = 4일 뒤, deletedByCreatorDate = 어제
+        getFakeManittoRoomData(
+            roomId = "1",
+            createdAt = TimeUtil.getDateWithOffsetFromNow(-3),
+            expirationDate = TimeUtil.getDateWithOffsetFromNow(4),
+            matchingDate = null,
+            deletedByCreatorDate = TimeUtil.getDateWithOffsetFromNow(-1)
+        ).toMyManittoModel(),
 
-        return listOf(
-            // 1. (삭제된 방) createdAt: 3일 전, expirationDate: 4일 뒤, deletedByCreatorDate: 어제
-            getFakeManittoRoomData(
-                roomId = "1",
-                createdAt = nowUtc.minusDays(3).format(isoFormatter),
-                expirationDate = nowUtc.plusDays(4).format(isoFormatter),
-                matchingDate = null,
-                deletedByCreatorDate = nowUtc.minusDays(1).format(isoFormatter)
-            ).toMyManittoModel(),
+        // 2. 진행중인 방: createdAt = 3일 전, expirationDate = 4일 뒤, matchingDate = 어제
+        getFakeManittoRoomData(
+            roomId = "2",
+            createdAt = TimeUtil.getDateWithOffsetFromNow(-3),
+            expirationDate = TimeUtil.getDateWithOffsetFromNow(4),
+            matchingDate = TimeUtil.getDateWithOffsetFromNow(-1),
+            deletedByCreatorDate = null
+        ).toMyManittoModel(),
 
-            // 2. (진행중인 방) createdAt: 3일 전, expirationDate: 4일 뒤, matchingDate: 어제
-            getFakeManittoRoomData(
-                roomId = "2",
-                createdAt = nowUtc.minusDays(3).format(isoFormatter),
-                expirationDate = nowUtc.plusDays(4).format(isoFormatter),
-                matchingDate = nowUtc.minusDays(1).format(isoFormatter),
-                deletedByCreatorDate = null
-            ).toMyManittoModel(),
+        // 3. 대기중인 방: createdAt = 어제, expirationDate = 6일 뒤
+        getFakeManittoRoomData(
+            roomId = "3",
+            createdAt = TimeUtil.getDateWithOffsetFromNow(-1),
+            expirationDate = TimeUtil.getDateWithOffsetFromNow(6),
+            matchingDate = null,
+            deletedByCreatorDate = null
+        ).toMyManittoModel(),
 
-            //  3. (대기중인 방) createdAt: 어제, expirationDate: 6일 뒤
-            getFakeManittoRoomData(
-                roomId = "3",
-                createdAt = nowUtc.minusDays(1).format(isoFormatter),
-                expirationDate = nowUtc.plusDays(6).format(isoFormatter),
-                matchingDate = null,
-                deletedByCreatorDate = null
-            ).toMyManittoModel(),
+        // 4. 종료된 방: createdAt = 7일 전, expirationDate = 어제, matchingDate = 3일 전
+        getFakeManittoRoomData(
+            roomId = "4",
+            createdAt = TimeUtil.getDateWithOffsetFromNow(-7),
+            expirationDate = TimeUtil.getDateWithOffsetFromNow(-1),
+            matchingDate = TimeUtil.getDateWithOffsetFromNow(-3),
+            deletedByCreatorDate = null
+        ).toMyManittoModel(),
 
-            // 4. (종료된 방) createdAt: 7일 전, expirationDate: 어제, matchingDate: 3일 전
-            getFakeManittoRoomData(
-                roomId = "4",
-                createdAt = nowUtc.minusDays(7).format(isoFormatter),
-                expirationDate = nowUtc.minusDays(1).format(isoFormatter),
-                matchingDate = nowUtc.minusDays(3).format(isoFormatter),
-                deletedByCreatorDate = null
-            ).toMyManittoModel(),
-
-            // 5. (만료된 방) createdAt: 7일 전, expirationDate: 어제
-            getFakeManittoRoomData(
-                roomId = "5",
-                createdAt = nowUtc.minusDays(7).format(isoFormatter),
-                expirationDate = nowUtc.minusDays(1).format(isoFormatter),
-                matchingDate = null,
-                deletedByCreatorDate = null
-            ).toMyManittoModel(),
-        )
-    }
+        // 5. 만료된 방: createdAt = 7일 전, expirationDate = 어제
+        getFakeManittoRoomData(
+            roomId = "5",
+            createdAt = TimeUtil.getDateWithOffsetFromNow(-7),
+            expirationDate = TimeUtil.getDateWithOffsetFromNow(-1),
+            matchingDate = null,
+            deletedByCreatorDate = null
+        ).toMyManittoModel()
+    )
 }
