@@ -10,82 +10,78 @@ import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRo
 import org.sopt.santamanitto.util.TimeUtil
 
 object FakeRoomItems {
-    // 날짜 오프셋 값을 보관할 데이터 클래스
-    private data class FakeRoomDates(
-        val createdOffsetDays: Int,
-        val expirationOffsetDays: Int,
-        val matchingOffsetDays: Int?,
-        val deletedOffsetDays: Int?
-    )
 
-    // roomId별 날짜 오프셋 매핑
-    private val fakeRoomDatesMap = mapOf(
-        // 1. 삭제된 방
-        "1" to FakeRoomDates(-3, 4, null, -1),
-        // 2. 진행중인 방
-        "2" to FakeRoomDates(-3, 4, -1, null),
-        // 3. 대기중인 방
-        "3" to FakeRoomDates(-1, 6, null, null),
-        // 4. 종료된 방
-        "4" to FakeRoomDates(-7, -1, -3, null),
-        // 5. 만료된 방
-        "5" to FakeRoomDates(-7, -1, null, null)
-    )
+    /**
+     * 입력된 인자를 통해 ManittoRoomModel을 반환하는 빌더
+     *
+     * @param roomId 방 식별자
+     * @param createdOffsetDays 생성일을 현재로부터 offset만큼 이동한 일자
+     * @param expirationOffsetDays 만료일을 현재로부터 offset만큼 이동한 일자
+     * @param matchingOffsetDays 매칭일을 현재로부터 offset만큼 이동한 일자; null이면 매칭되지 않음
+     * @param deletedOffsetDays 삭제일을 현재로부터 offset만큼 이동한 일자; null이면 삭제되지 않음
+     * @param missionCount 생성할 미션 개수
+     * @param memberCount 생성할 멤버 개수
+     * @param invitationCode 방 초대 코드
+     * @return 생성된 ManittoRoomModel 객체
+     */
+    private fun buildFakeManittoRoomModel(
+        roomId: String,
+        createdOffsetDays: Int,
+        expirationOffsetDays: Int,
+        matchingOffsetDays: Int?,
+        deletedOffsetDays: Int?,
+        missionCount: Int = 5,
+        memberCount: Int = 5,
+        invitationCode: String = "oU3lsEo-",
+    ): ManittoRoomModel {
+        val createdDate = TimeUtil.getDateWithOffsetFromNow(createdOffsetDays)
+        val expirationDate = TimeUtil.getDateWithOffsetFromNow(expirationOffsetDays)
+        val matchingDate = matchingOffsetDays?.let { TimeUtil.getDateWithOffsetFromNow(it) }
+        val deletedDate = deletedOffsetDays?.let { TimeUtil.getDateWithOffsetFromNow(it) }
 
-    // 날짜 오프셋과 모델 데이터를 조합해 미리 생성해두는 맵
-    private val fakeRoomModelMap: Map<String, ManittoRoomModel> =
-        fakeRoomDatesMap.mapValues { (roomId, dates) ->
-            val createdAt = TimeUtil.getDateWithOffsetFromNow(dates.createdOffsetDays)
-            val expirationDate = TimeUtil.getDateWithOffsetFromNow(dates.expirationOffsetDays)
-            val matchingDate =
-                dates.matchingOffsetDays?.let { TimeUtil.getDateWithOffsetFromNow(it) }
-            val deletedByCreatorDate =
-                dates.deletedOffsetDays?.let { TimeUtil.getDateWithOffsetFromNow(it) }
-
-            ManittoRoomModel(
-                roomId = roomId,
-                roomName = "FakeRoom $roomId",
-                invitationCode = "oU3lsEo-",
-                createdAt = createdAt,
-                expirationDate = expirationDate,
-                matchingDate = matchingDate,
-                deletedByCreatorDate = deletedByCreatorDate,
-                creator = ManittoRoomCreator(
-                    userId = "1",
-                    userName = "FakeFirstUser",
-                    manittoUserId = "12fsfe2"
-                ),
-                missions = listOf(
-                    ManittoRoomMission("1", "Fake Mission 1"),
-                    ManittoRoomMission("2", "Fake Mission 2"),
-                    ManittoRoomMission("3", "Fake Mission 3"),
-                    ManittoRoomMission("4", "Fake Mission 4"),
-                    ManittoRoomMission("5", "Fake Mission 5")
-                ),
-                members = listOf(
-                    ManittoRoomMember(
-                        santa = ManittoRoomMember.SantaRoomInfo("1", "FakeFirstUser", "1"),
-                        manitto = ManittoRoomMember.ManittoRoomInfo("2", "FakeSecondUser")
+        return ManittoRoomModel(
+            roomId = roomId,
+            roomName = "FakeRoom $roomId",
+            invitationCode = invitationCode,
+            createdAt = createdDate,
+            expirationDate = expirationDate,
+            matchingDate = matchingDate,
+            deletedByCreatorDate = deletedDate,
+            creator = ManittoRoomCreator("1", "FakeFirstUser", "12fsfe2"),
+            missions = List(missionCount) { index ->
+                ManittoRoomMission(index.toString(), "Fake Mission $index")
+            },
+            members = List(memberCount) { index ->
+                val santaId = (index + 1).toString()
+                val manittoId = ((index + 1) % memberCount + 1).toString()
+                ManittoRoomMember(
+                    santa = ManittoRoomMember.SantaRoomInfo(
+                        userId = santaId,
+                        userName = "Fake User $santaId",
+                        missionId = santaId
                     ),
-                    ManittoRoomMember(
-                        santa = ManittoRoomMember.SantaRoomInfo("2", "FakeSecondUser", "1"),
-                        manitto = ManittoRoomMember.ManittoRoomInfo("3", "FakeThirdUser")
-                    ),
-                    ManittoRoomMember(
-                        santa = ManittoRoomMember.SantaRoomInfo("3", "FakeThirdUser", "1"),
-                        manitto = ManittoRoomMember.ManittoRoomInfo("4", "FakeFourthUser")
-                    ),
-                    ManittoRoomMember(
-                        santa = ManittoRoomMember.SantaRoomInfo("4", "FakeFourthUser", "1"),
-                        manitto = ManittoRoomMember.ManittoRoomInfo("5", "FakeFifthUser")
-                    ),
-                    ManittoRoomMember(
-                        santa = ManittoRoomMember.SantaRoomInfo("5", "FakeFifthUser", "1"),
-                        manitto = ManittoRoomMember.ManittoRoomInfo("1", "FakeFirstUser")
+                    manitto = ManittoRoomMember.ManittoRoomInfo(
+                        userId = manittoId,
+                        userName = "Fake User $manittoId"
                     )
                 )
-            )
-        }
+            }
+        )
+    }
+
+    // 방의 5가지 상태에 해당하는 가짜 객체 매핑
+    private val fakeRoomModelMap: Map<String, ManittoRoomModel> = mapOf(
+        // 1. 삭제된 방
+        "1" to buildFakeManittoRoomModel("1", -3, 4, null, -1),
+        // 2. 진행중인 방
+        "2" to buildFakeManittoRoomModel("2", -3, 4, -1, null),
+        // 3. 대기중인 방
+        "3" to buildFakeManittoRoomModel("3", -1, 6, null, null),
+        // 4. 종료된 방
+        "4" to buildFakeManittoRoomModel("4", -7, -1, -3, null),
+        // 5. 만료된 방
+        "5" to buildFakeManittoRoomModel("5", -7, -1, null, null)
+    )
 
     /**
      * roomId로 미리 생성된 방 데이터를 반환 (없으면 null)
@@ -103,32 +99,18 @@ object FakeRoomItems {
      * roomId에 따라서 매칭된 결과 값을 반환 (없으면 null)
      */
     fun getFakePersonalRoomInfo(roomId: String): PersonalRoomModel? =
-        when (roomId) {
-            "1" -> PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("1", "FakeFirstUser"),
-                mission = MyManittoModel.Mission("Fake Mission 1", "1")
+        fakeRoomModelMap[roomId]?.let { room ->
+            val mission = room.missions.firstOrNull() ?: return null
+            val member = room.members.firstOrNull() ?: return null
+            PersonalRoomModel(
+                manitto = MyManittoModel.Member.Manitto(
+                    id = member.santa.userId,
+                    username = member.santa.userName
+                ),
+                mission = MyManittoModel.Mission(
+                    content = mission.content,
+                    id = mission.missionId
+                )
             )
-
-            "2" -> PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("2", "FakeSecondUser"),
-                mission = MyManittoModel.Mission("Fake Mission 2", "2")
-            )
-
-            "3" -> PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("3", "FakeThirdUser"),
-                mission = MyManittoModel.Mission("Fake Mission 3", "3")
-            )
-
-            "4" -> PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("4", "FakeFourthUser"),
-                mission = MyManittoModel.Mission("Fake Mission 4", "4")
-            )
-
-            "5" -> PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto("5", "FakeFifthUser"),
-                mission = MyManittoModel.Mission("Fake Mission 4", "5")
-            )
-
-            else -> null
         }
 }
