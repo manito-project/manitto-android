@@ -1,8 +1,8 @@
 package org.sopt.santamanitto.room.data
 
-
 import com.google.gson.annotations.SerializedName
 import org.sopt.santamanitto.main.list.RoomState
+import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
 import org.sopt.santamanitto.util.TimeUtil
 
 data class MyManittoModel(
@@ -85,3 +85,37 @@ fun MyManittoModel.getRoomState(): RoomState {
         else -> RoomState.LEFT
     }
 }
+
+fun ManittoRoomModel.toMyManittoModel(): MyManittoModel =
+    MyManittoModel(
+        createdAt = this.createdAt,
+        creator = MyManittoModel.Creator(
+            id = this.creator.userId,
+            manittoUserId = this.creator.manittoUserId,
+            username = this.creator.userName
+        ),
+        deletedByCreatorDate = this.deletedByCreatorDate,
+        expirationDate = this.expirationDate,
+        roomId = this.roomId,
+        invitationCode = this.invitationCode,
+        matchingDate = this.matchingDate,
+        members = this.members.map { member ->
+            MyManittoModel.Member(
+                manitto = MyManittoModel.Member.Manitto(
+                    id = member.manitto.userId,
+                    username = member.manitto.userName
+                ),
+                santa = MyManittoModel.Member.Santa(
+                    id = member.santa.userId,
+                    username = member.santa.userName
+                )
+            )
+        },
+        missions = this.missions.map { mission ->
+            MyManittoModel.Mission(
+                content = mission.content,
+                id = mission.missionId
+            )
+        },
+        roomName = this.roomName
+    )

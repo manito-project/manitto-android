@@ -2,247 +2,101 @@ package org.sopt.santamanitto.room.network
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import org.sopt.santamanitto.room.create.network.CreateRoomModel
 import org.sopt.santamanitto.room.create.network.CreateRoomRequestModel
 import org.sopt.santamanitto.room.create.network.ModifyRoomRequestModel
-import org.sopt.santamanitto.room.data.MissionContentModel
-import org.sopt.santamanitto.room.data.PersonalRoomModel
-import org.sopt.santamanitto.room.join.network.JoinRoomModel
-import org.sopt.santamanitto.room.join.network.JoinRoomModel.JoinRoomInfo
-import org.sopt.santamanitto.room.join.network.JoinRoomModel.JoinRoomUserInfo
+import org.sopt.santamanitto.room.data.MyManittoModel
 import org.sopt.santamanitto.room.join.network.JoinRoomRequestModel
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomMember
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomCreator
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomModel.ManittoRoomMission
-import org.sopt.santamanitto.room.manittoroom.network.ManittoRoomRelations
-import org.sopt.santamanitto.room.manittoroom.network.MatchedMissionsModel
-import org.sopt.santamanitto.util.TimeUtil
+import org.sopt.santamanitto.room.join.network.JoinRoomResponseModel
 
 class FakeRoomRequest : RoomRequest {
 
-    companion object {
-        private const val TAG = "FakeRoomRequest"
+    override suspend fun getRooms(): List<MyManittoModel> {
+        return FakeRoomItems.getMyManittoList()
     }
 
     override fun createRoom(
         request: CreateRoomRequestModel,
         callback: RoomRequest.CreateRoomCallback
     ) {
-        callback.onRoomCreated(
-            CreateRoomModel(
-                false, 1, request.roomName, request.expiration,
-                "oU3lsEo", TimeUtil.getCurrentTimeByServerFormat(),
-                TimeUtil.getCurrentTimeByServerFormat()
-            )
-        )
+        callback.onRoomCreated(CreateRoomModel("oU3lsEo"))
     }
 
     override fun modifyRoom(
-        roomId: Int,
+        roomId: String,
         request: ModifyRoomRequestModel,
         callback: (onSuccess: Boolean) -> Unit
     ) {
         callback.invoke(true)
     }
 
-    override fun joinRoom(request: JoinRoomRequestModel, callback: RoomRequest.JoinRoomCallback) {
+    object InvitationCodeInput {
+        // 코드 입력 창에 해당 문자 입력
+        const val SUCCESS = "success"
+        const val MEMBER = "member"
+        const val MATCHED = "matched"
+    }
+
+    override fun joinRoom(
+        request: JoinRoomRequestModel,
+        callback: RoomRequest.JoinRoomCallback
+    ) {
         when (request.invitationCode) {
-            "success" ->
-                callback.onSuccessJoinRoom(
-                    JoinRoomModel(
-                        JoinRoomInfo(
-                            1, "TEST ROOM",
-                            TimeUtil.getCurrentTimeByServerFormat(), "oU3lsEo"
-                        ),
-                        JoinRoomUserInfo(1, "TEST USER")
-                    )
-                )
-
-            "member" ->
-                callback.onFailed(RoomRequest.JoinRoomError.DuplicatedMember)
-
-            "matched" ->
-                callback.onFailed(RoomRequest.JoinRoomError.AlreadyMatched)
-
-            else ->
-                callback.onFailed(RoomRequest.JoinRoomError.WrongInvitationCode)
+            InvitationCodeInput.SUCCESS -> callback.onSuccessJoinRoom(JoinRoomResponseModel("0"))
+            InvitationCodeInput.MEMBER -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyEntered)
+            InvitationCodeInput.MATCHED -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyMatched)
+            else -> callback.onFailed(RoomRequest.JoinRoomError.WrongInvitationCode)
         }
     }
 
     override fun getManittoRoomData(
-        roomId: Int,
+        roomId: String,
         callback: RoomRequest.GetManittoRoomCallback
     ) {
-        callback.onLoadManittoRoomData(
-            ManittoRoomModel(
-                roomId,
-                "FakeRoom",
-                "oU3lsEo-",
-                "false",
-                "2021-02-28 11:01:00",
-                "2021-02-21 14:47:10",
-                ManittoRoomCreator(
-                    "1",
-                    "FakeFirstUser",
-                    "12fsfe2"
-                ),
-                mutableListOf<ManittoRoomMission>().apply {
-                    add(
-                        ManittoRoomMission(
-                            1,
-                            "Fake Mission 1"
-                        )
-                    )
-                    add(
-                        ManittoRoomMission(
-                            2,
-                            "Fake Mission 2"
-                        )
-                    )
-                    add(
-                        ManittoRoomMission(
-                            3,
-                            "Fake Mission 3"
-                        )
-                    )
-                    add(
-                        ManittoRoomMission(
-                            4,
-                            "Fake Mission 4"
-                        )
-                    )
-                },
-                mutableListOf<ManittoRoomMember>().apply {
-                    add(
-                        ManittoRoomMember(
-                            1,
-                            "FakeFirstUser",
-                            ManittoRoomRelations(
-                                "2",
-                                "3"
-                            )
-                        )
-                    )
-                    add(
-                        ManittoRoomMember(
-                            2,
-                            "FakeSecondUser",
-                            ManittoRoomRelations(
-                                "3",
-                                "1"
-                            )
-                        )
-                    )
-                    add(
-                        ManittoRoomMember(
-                            3,
-                            "FakeThirdUser",
-                            ManittoRoomRelations(
-                                "1",
-                                "2"
-                            )
-                        )
-                    )
-                }
-            )
-        )
+        val manittoRoomData = FakeRoomItems.getFakeManittoRoomData(roomId)
+        if (manittoRoomData != null) {
+            callback.onLoadManittoRoomData(manittoRoomData)
+        } else {
+            callback.onFailed()
+        }
     }
 
-    override fun matchManitto(roomId: Int, callback: RoomRequest.MatchManittoCallback) {
+    override fun matchManitto(
+        roomId: String,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
         Handler(Looper.getMainLooper()).postDelayed({
-
-            callback.onSuccessMatching(mutableListOf<MatchedMissionsModel>().apply {
-                add(
-                    MatchedMissionsModel(
-                        "1",
-                        2,
-                        "3",
-                        MissionContentModel("FakeMission1")
-                    )
-                )
-                add(
-                    MatchedMissionsModel(
-                        "2",
-                        3,
-                        "1",
-                        MissionContentModel("FakeMission2")
-                    )
-                )
-                add(
-                    MatchedMissionsModel(
-                        "3",
-                        1,
-                        "2",
-                        MissionContentModel("FakeMission3")
-                    )
-                )
-            })
+            callback.invoke(true)
         }, 5000L)
     }
 
-    private val fakePersonalRoomInfos = HashMap<Int, PersonalRoomModel>().apply {
-        put(
-            1, PersonalRoomModel(
-                "1",
-                "2",
-                MissionContentModel("fake my mission"),
-                MissionContentModel("fake mission to me")
-            )
-        )
-        put(
-            2, PersonalRoomModel(
-                "1",
-                "3",
-                MissionContentModel("fake my mission"),
-                MissionContentModel("fake mission to me")
-            )
-        )
-        put(
-            3, PersonalRoomModel(
-                "1",
-                "4",
-                MissionContentModel("fake my mission"),
-                MissionContentModel("fake mission to me")
-            )
-        )
-        put(
-            4, PersonalRoomModel(
-                "1",
-                "5",
-                MissionContentModel("fake my mission"),
-                MissionContentModel("fake mission to me")
-            )
-        )
-        put(
-            5, PersonalRoomModel(
-                "1",
-                "6",
-                MissionContentModel("fake my mission"),
-                MissionContentModel("fake mission to me")
-            )
-        )
-    }
-
     override fun getPersonalRoomInfo(
-        roomId: Int,
+        roomId: String,
         callback: RoomRequest.GetPersonalRoomInfoCallback
     ) {
-        if (fakePersonalRoomInfos.containsKey(roomId)) {
-            callback.onLoadPersonalRoomInfo(fakePersonalRoomInfos[roomId]!!)
+        val personalRoomInfo = FakeRoomItems.getFakePersonalRoomInfo(roomId)
+        if (personalRoomInfo != null) {
+            callback.onLoadPersonalRoomInfo(personalRoomInfo)
         } else {
             callback.onDataNotAvailable()
         }
     }
 
-    override fun exitRoom(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
-        Log.d(TAG, "exitRoom: room(id : $roomId) is exited")
+    override fun exitRoom(
+        roomId: String,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
         callback.invoke(true)
     }
 
-    override fun removeHistory(roomId: Int, callback: (onSuccess: Boolean) -> Unit) {
-        Log.d(TAG, "removeHistory: room(id : $roomId) is removed from history")
+    override fun removeHistory(
+        roomId: String,
+        callback: (onSuccess: Boolean) -> Unit
+    ) {
         callback.invoke(true)
+    }
+
+    override suspend fun deleteRoom(roomId: String): Result<Unit> {
+        return Result.success(Unit)
     }
 }

@@ -69,6 +69,7 @@ android {
         debug {
             manifestPlaceholders["appName"] = "@string/dev_app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_dev"
+            applicationIdSuffix = ".debug"
             buildConfigField(
                 "String",
                 "AMPLITUDE_KEY",
