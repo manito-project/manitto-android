@@ -41,7 +41,7 @@ object FakeRoomItems {
 
         return ManittoRoomModel(
             roomId = roomId,
-            roomName = "FakeRoom $roomId",
+            roomName = "Fake Room $roomId",
             invitationCode = invitationCode,
             createdAt = createdDate,
             expirationDate = expirationDate,
@@ -52,8 +52,8 @@ object FakeRoomItems {
                 ManittoRoomMission(index.toString(), "Fake Mission $index")
             },
             members = List(memberCount) { index ->
-                val santaId = (index + 1).toString()
-                val manittoId = ((index + 1) % memberCount + 1).toString()
+                val santaId = index.toString()
+                val manittoId = (index % memberCount).toString()
                 ManittoRoomMember(
                     santa = ManittoRoomMember.SantaRoomInfo(
                         userId = santaId,
@@ -71,16 +71,16 @@ object FakeRoomItems {
 
     // 방의 5가지 상태에 해당하는 가짜 객체 매핑
     private val fakeRoomModelMap: Map<String, ManittoRoomModel> = mapOf(
-        // 1. 삭제된 방
-        "1" to buildFakeManittoRoomModel("1", -3, 4, null, -1),
-        // 2. 진행중인 방
-        "2" to buildFakeManittoRoomModel("2", -3, 4, -1, null),
-        // 3. 대기중인 방
-        "3" to buildFakeManittoRoomModel("3", -1, 6, null, null),
-        // 4. 종료된 방
-        "4" to buildFakeManittoRoomModel("4", -7, -1, -3, null),
-        // 5. 만료된 방
-        "5" to buildFakeManittoRoomModel("5", -7, -1, null, null)
+        // 삭제된 방
+        "0" to buildFakeManittoRoomModel("0", -3, 4, null, -1),
+        // 진행중인 방
+        "1" to buildFakeManittoRoomModel("1", -3, 4, -1, null),
+        // 대기중인 방
+        "2" to buildFakeManittoRoomModel("2", -1, 6, null, null),
+        // 종료된 방
+        "3" to buildFakeManittoRoomModel("3", -7, -1, -3, null),
+        // 만료된 방
+        "4" to buildFakeManittoRoomModel("4", -7, -1, null, null)
     )
 
     /**
@@ -100,17 +100,12 @@ object FakeRoomItems {
      */
     fun getFakePersonalRoomInfo(roomId: String): PersonalRoomModel? =
         fakeRoomModelMap[roomId]?.let { room ->
-            val mission = room.missions.firstOrNull() ?: return null
-            val member = room.members.firstOrNull() ?: return null
+            val index = roomId.toIntOrNull() ?: return null
+            val member = room.members[index]
+            val mission = room.missions[index]
             PersonalRoomModel(
-                manitto = MyManittoModel.Member.Manitto(
-                    id = member.santa.userId,
-                    username = member.santa.userName
-                ),
-                mission = MyManittoModel.Mission(
-                    content = mission.content,
-                    id = mission.missionId
-                )
+                manitto = MyManittoModel.Member.Manitto(member.santa.userId, member.santa.userName),
+                mission = MyManittoModel.Mission(mission.content, mission.missionId)
             )
         }
 }

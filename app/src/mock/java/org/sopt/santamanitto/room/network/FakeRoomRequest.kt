@@ -36,7 +36,7 @@ class FakeRoomRequest : RoomRequest {
     ) {
         when (request.invitationCode) {
             // 코드 창에 해당 문자 입력
-            "success" -> callback.onSuccessJoinRoom(JoinRoomResponseModel("1"))
+            "success" -> callback.onSuccessJoinRoom(JoinRoomResponseModel("0"))
             "member" -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyEntered)
             "matched" -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyMatched)
             else -> callback.onFailed(RoomRequest.JoinRoomError.WrongInvitationCode)
