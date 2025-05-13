@@ -25,11 +25,11 @@ object FakeRoomItems {
      * @return 생성된 ManittoRoomModel 객체
      */
     private fun buildFakeManittoRoomModel(
-        roomId: String,
-        createdOffsetDays: Int,
-        expirationOffsetDays: Int,
-        matchingOffsetDays: Int?,
-        deletedOffsetDays: Int?,
+        roomId: String = "0",
+        createdOffsetDays: Int = 0,
+        expirationOffsetDays: Int = 0,
+        matchingOffsetDays: Int? = null,
+        deletedOffsetDays: Int? = null,
         missionCount: Int = 5,
         memberCount: Int = 5,
         invitationCode: String = "oU3lsEo-",
@@ -72,15 +72,45 @@ object FakeRoomItems {
     // 방의 5가지 상태에 해당하는 가짜 객체 매핑
     private val fakeRoomModelMap: Map<String, ManittoRoomModel> = mapOf(
         // 삭제된 방
-        "0" to buildFakeManittoRoomModel("0", -3, 4, null, -1),
+        "0" to buildFakeManittoRoomModel(
+            roomId = "0",
+            createdOffsetDays = -3,
+            expirationOffsetDays = 4,
+            matchingOffsetDays = null,
+            deletedOffsetDays = -1
+        ),
         // 진행중인 방
-        "1" to buildFakeManittoRoomModel("1", -3, 4, -1, null),
+        "1" to buildFakeManittoRoomModel(
+            roomId = "1",
+            createdOffsetDays = -3,
+            expirationOffsetDays = 4,
+            matchingOffsetDays = -1,
+            deletedOffsetDays = null
+        ),
         // 대기중인 방
-        "2" to buildFakeManittoRoomModel("2", -1, 6, null, null),
+        "2" to buildFakeManittoRoomModel(
+            roomId = "2",
+            createdOffsetDays = -1,
+            expirationOffsetDays = 6,
+            matchingOffsetDays = null,
+            deletedOffsetDays = null
+        ),
         // 종료된 방
-        "3" to buildFakeManittoRoomModel("3", -7, -1, -3, null),
+        "3" to buildFakeManittoRoomModel(
+            roomId = "3",
+            createdOffsetDays = -7,
+            expirationOffsetDays = -1,
+            matchingOffsetDays = -3,
+            deletedOffsetDays = null
+        ),
         // 만료된 방
-        "4" to buildFakeManittoRoomModel("4", -7, -1, null, null)
+        "4" to buildFakeManittoRoomModel(
+            roomId = "4",
+            createdOffsetDays = -7,
+            expirationOffsetDays = -1,
+            matchingOffsetDays = null,
+            deletedOffsetDays = null
+        )
     )
 
     /**

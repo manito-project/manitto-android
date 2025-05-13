@@ -30,15 +30,21 @@ class FakeRoomRequest : RoomRequest {
         callback.invoke(true)
     }
 
+    object InvitationCodeInput {
+        // 코드 입력 창에 해당 문자 입력
+        const val SUCCESS = "success"
+        const val MEMBER = "member"
+        const val MATCHED = "matched"
+    }
+
     override fun joinRoom(
         request: JoinRoomRequestModel,
         callback: RoomRequest.JoinRoomCallback
     ) {
         when (request.invitationCode) {
-            // 코드 창에 해당 문자 입력
-            "success" -> callback.onSuccessJoinRoom(JoinRoomResponseModel("0"))
-            "member" -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyEntered)
-            "matched" -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyMatched)
+            InvitationCodeInput.SUCCESS -> callback.onSuccessJoinRoom(JoinRoomResponseModel("0"))
+            InvitationCodeInput.MEMBER -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyEntered)
+            InvitationCodeInput.MATCHED -> callback.onFailed(RoomRequest.JoinRoomError.AlreadyMatched)
             else -> callback.onFailed(RoomRequest.JoinRoomError.WrongInvitationCode)
         }
     }
