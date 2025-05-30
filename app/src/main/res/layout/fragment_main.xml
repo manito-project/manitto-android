@@ -83,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_entire"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             android:text="@string/main_my_manitto_history"
             android:textColor="@color/dark_gray"
             android:textFontWeight="600"

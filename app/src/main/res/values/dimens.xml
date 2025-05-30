@@ -87,7 +87,7 @@
     <dimen name="margin_condition_divider_bottom">9dp</dimen>
     <dimen name="margin_condition_divider_top">6dp</dimen>
 
-    <dimen name="margin_main_guideline_bottom">22dp</dimen>
+    <dimen name="margin_main_guideline_bottom">60dp</dimen>
     <dimen name="margin_main_recyclerview_top">16dp</dimen>
     <dimen name="margin_main_recyclerview_bottom">40dp</dimen>
     <dimen name="size_main_no_manitto_notice">14sp</dimen>
