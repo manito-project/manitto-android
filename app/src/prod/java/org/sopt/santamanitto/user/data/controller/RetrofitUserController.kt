@@ -2,6 +2,7 @@ import org.sopt.santamanitto.auth.data.request.SignInRequestModel
 import org.sopt.santamanitto.auth.data.request.SignUpRequestModel
 import org.sopt.santamanitto.auth.data.response.SignInResponseModel
 import org.sopt.santamanitto.auth.data.response.SignUpResponseModel
+import org.sopt.santamanitto.user.data.controller.UserController
 import org.sopt.santamanitto.user.network.UserService
 
 class RetrofitUserController(private val userService: UserService) : UserController {
