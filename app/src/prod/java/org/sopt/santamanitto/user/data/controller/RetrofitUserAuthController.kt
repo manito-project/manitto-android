@@ -1,6 +1,7 @@
 import org.sopt.santamanitto.network.RequestCallback
 import org.sopt.santamanitto.network.start
 import org.sopt.santamanitto.user.data.UserInfoModel
+import org.sopt.santamanitto.user.data.controller.UserAuthController
 import org.sopt.santamanitto.user.mypage.UserNameRequestModel
 import org.sopt.santamanitto.user.network.UserAuthService
 import timber.log.Timber
