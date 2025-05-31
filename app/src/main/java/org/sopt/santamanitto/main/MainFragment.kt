@@ -191,7 +191,7 @@ class MainFragment : Fragment() {
         binding.adContainer.post {
             val metrics = requireContext().resources.displayMetrics
             val widthPx  = binding.adContainer.width
-            val widthDp  = (widthPx / metrics.density).toInt()  // px → dp
+            val widthDp  = (widthPx / metrics.density).toInt()
 
             val adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
                 requireContext(),
@@ -199,7 +199,7 @@ class MainFragment : Fragment() {
             )
 
             val adView = AdView(requireContext()).apply {
-                adUnitId = BuildConfig.ADMOB_CA_APP_PUB       // 반드시 “/” 들어간 배너 단위 ID
+                adUnitId = BuildConfig.ADMOB_CA_APP_PUB
                 setAdSize(adSize)
                 adListener = object : AdListener() {
                     override fun onAdFailedToLoad(error: LoadAdError) {
