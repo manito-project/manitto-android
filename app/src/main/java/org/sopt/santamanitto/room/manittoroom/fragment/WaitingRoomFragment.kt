@@ -7,8 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
@@ -30,8 +37,10 @@ class WaitingRoomFragment :
     }
 
     private val viewModel: ManittoRoomViewModel by activityViewModels()
-
     private val memberAdapter = MemberAdapter()
+
+    private var interstitialAd: InterstitialAd? = null
+    private var isAdLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +49,8 @@ class WaitingRoomFragment :
     ): View {
         if (viewModel.isMatched) {
             if (viewModel.isFinished) {
-                navigateFinishFragment()
+                loadInterstitialAd()
+                showAdOrNavigate()
             } else {
                 navigateMatchingFragment()
             }
@@ -130,5 +140,57 @@ class WaitingRoomFragment :
 
     private fun navigateMatchingFragment() {
         findNavController().navigate(actionWaitingRoomFragmentToMatchingFragment())
+    }
+
+    private fun loadInterstitialAd() {
+        if (isAdLoading) return
+
+        isAdLoading = true
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            requireContext(),
+            BuildConfig.ADMOB_MATCHING_RESULT_ID,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    isAdLoading = false
+                    interstitialAd = ad
+                }
+
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    isAdLoading = false
+                    interstitialAd = null
+                }
+            }
+        )
+    }
+
+    private fun showAdOrNavigate() {
+        if (interstitialAd != null) {
+            showAd()
+        } else {
+            navigateFinishFragment()
+        }
+    }
+
+    private fun showAd() {
+        interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                interstitialAd = null
+                navigateFinishFragment()
+            }
+
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                interstitialAd = null
+                navigateFinishFragment()
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                interstitialAd = null
+            }
+        }
+
+        interstitialAd?.show(requireActivity())
     }
 }
