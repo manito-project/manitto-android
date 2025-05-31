@@ -9,6 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
@@ -33,6 +40,9 @@ class CreateConfirmFragment :
 
     private val createConfirmAdapter = CreateConfirmAdaptor(this)
 
+    private var interstitialAd: InterstitialAd? = null
+    private var isAdLoading = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +55,7 @@ class CreateConfirmFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadInterstitialAd()
         AmplitudeManager.trackEvent("make_complete", EventType.PAGE)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -61,7 +72,7 @@ class CreateConfirmFragment :
         binding.run {
             santabottombuttonCreatemconfirm.setOnClickListener {
                 AmplitudeManager.trackEvent("make_complete_btn", EventType.BUTTON)
-                viewModel.createRoom(::showInvitationCodeDialog)
+                showInterstitialAdAndCreateRoom()
             }
             santabackgroundCreateconfirm.setOnBackKeyClickListener {
                 findNavController().navigateUp()
@@ -133,5 +144,63 @@ class CreateConfirmFragment :
     override fun onMissionDeleted(mission: String) {
         AmplitudeManager.trackEvent("make_complete_mission_minus_btn", EventType.BUTTON)
         viewModel.deleteMission(mission)
+    }
+
+    private fun loadInterstitialAd(){
+        if (isAdLoading) return
+
+        isAdLoading = true
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            requireContext(),
+            BuildConfig.ADMOB_ROOM_CREATE_ID,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    isAdLoading = false
+                    interstitialAd = ad
+                    setAdCallback()
+                    super.onAdLoaded(ad)
+                }
+
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    isAdLoading = false
+                    interstitialAd = null
+                    super.onAdFailedToLoad(adError)
+                }
+            }
+        )
+    }
+
+    private fun setAdCallback() {
+        interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                interstitialAd = null
+                viewModel.createRoom(::showInvitationCodeDialog)
+                loadInterstitialAd()
+                super.onAdDismissedFullScreenContent()
+            }
+
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                interstitialAd = null
+                viewModel.createRoom(::showInvitationCodeDialog)
+                super.onAdFailedToShowFullScreenContent(adError)
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                interstitialAd = null
+                super.onAdShowedFullScreenContent()
+            }
+        }
+    }
+
+    private fun showInterstitialAdAndCreateRoom() {
+        if (interstitialAd != null) {
+            interstitialAd?.show(requireActivity())
+        } else {
+            viewModel.createRoom(::showInvitationCodeDialog)
+            loadInterstitialAd()
+        }
     }
 }
