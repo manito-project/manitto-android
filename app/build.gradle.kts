@@ -37,6 +37,8 @@ android {
         buildConfigField("String", "INQUIRY_URL", localProps["inquiryUrl"] as String)
         buildConfigField("String", "ADMOB_CA_APP_PUB", localProps["admobCaAppPub"] as String)
         buildConfigField("String", "ADMOB_ROOM_CREATE_ID", localProps["admobRoomCreateId"] as String)
+        buildConfigField("String", "ADMOB_ENTER_ROOM_ID", localProps["admobEnterRoomId"] as String)
+        buildConfigField("String", "ADMOB_MATCHING_RESULT_ID", localProps["admobMatchingResultId"] as String)
         buildConfigField("String", "TH_TEST_ID", localProps["thTestId"] as String)
 
         val admobAppId = localProps["admobAppId"] as String
