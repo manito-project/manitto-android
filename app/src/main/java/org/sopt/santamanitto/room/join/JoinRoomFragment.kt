@@ -4,10 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
@@ -22,9 +30,13 @@ class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment
 
     private val joinRoomViewModel: JoinRoomViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private var interstitialAd: InterstitialAd? = null
+    private var isAdLoading = false
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        loadInterstitialAd()
+
+        super.onViewCreated(view, savedInstanceState)
         AmplitudeManager.trackEvent("invite_code", EventType.PAGE)
         binding.viewModel = joinRoomViewModel
         subscribeUI()
@@ -74,7 +86,7 @@ class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment
 
             santabottomButtonJoinroom.setOnClickListener {
                 AmplitudeManager.trackEvent("invite_code_enter_btn", EventType.BUTTON)
-                joinRoomViewModel.joinRoom(this@JoinRoomFragment::startManittoRoomActivity)
+                joinRoomViewModel.joinRoom(::onJoinSuccess)
             }
         }
     }
@@ -125,5 +137,68 @@ class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment
 
     private fun enableJoinButton() {
         binding.santabottomButtonJoinroom.isEnabled = true
+    }
+
+    private fun loadInterstitialAd() {
+        if (isAdLoading) return
+
+        isAdLoading = true
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            requireContext(),
+            BuildConfig.ADMOB_ENTER_ROOM_ID,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    Log.d("AdMob", "JoinRoom - 광고 로드 성공")
+                    isAdLoading = false
+                    interstitialAd = ad
+                }
+
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.e("AdMob", "JoinRoom - 광고 로드 실패: ${adError.message}")
+                    isAdLoading = false
+                    interstitialAd = null
+                }
+            }
+        )
+    }
+
+    private fun onJoinSuccess(joinRoomResponse: JoinRoomResponseModel) {
+        if (interstitialAd != null) {
+            showAd(joinRoomResponse)
+        } else {
+            navigateToRoom(joinRoomResponse)
+        }
+    }
+
+    private fun showAd(joinRoomResponse: JoinRoomResponseModel) {
+        interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                cleanup()
+                navigateToRoom(joinRoomResponse)
+            }
+
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                cleanup()
+                navigateToRoom(joinRoomResponse)
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                interstitialAd = null
+            }
+        }
+
+        interstitialAd?.show(requireActivity())
+    }
+
+    private fun cleanup() {
+        interstitialAd = null
+        loadInterstitialAd()
+    }
+
+    private fun navigateToRoom(joinRoomResponse: JoinRoomResponseModel) {
+        startManittoRoomActivity(joinRoomResponse)
     }
 }
