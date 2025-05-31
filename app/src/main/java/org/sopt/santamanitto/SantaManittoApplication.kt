@@ -36,7 +36,7 @@ class SantaManittoApplication : Application() {
     private fun initializeAds() {
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
-                .setTestDeviceIds(listOf("1d5b257d-5941-451b-947b-6c7275f5a7ae"))
+                .setTestDeviceIds(listOf(BuildConfig.TH_TEST_ID))
                 .build()
         )
 
