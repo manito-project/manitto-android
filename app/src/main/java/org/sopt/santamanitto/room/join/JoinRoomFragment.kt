@@ -1,22 +1,18 @@
 package org.sopt.santamanitto.room.join
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.admob.AdmobInterstitialAdHelper
+import org.sopt.santamanitto.admob.InterstitialAdHelper
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentJoinRoomBinding
@@ -24,18 +20,24 @@ import org.sopt.santamanitto.room.join.network.JoinRoomResponseModel
 import org.sopt.santamanitto.room.manittoroom.ManittoRoomActivity
 import org.sopt.santamanitto.util.FragmentUtil.hideKeyboardOnOutsideEditText
 import org.sopt.santamanitto.util.base.BaseFragment
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment_join_room, false) {
 
+    @Inject
+    lateinit var adHelper : InterstitialAdHelper
     private val joinRoomViewModel: JoinRoomViewModel by viewModels()
 
-    private var interstitialAd: InterstitialAd? = null
-    private var isAdLoading = false
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        adHelper = AdmobInterstitialAdHelper(requireContext()).apply {
+            initialize(requireActivity(), BuildConfig.ADMOB_ENTER_ROOM_ID)
+            loadAd()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loadInterstitialAd()
-
         super.onViewCreated(view, savedInstanceState)
         AmplitudeManager.trackEvent("invite_code", EventType.PAGE)
         binding.viewModel = joinRoomViewModel
@@ -139,63 +141,10 @@ class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment
         binding.santabottomButtonJoinroom.isEnabled = true
     }
 
-    private fun loadInterstitialAd() {
-        if (isAdLoading) return
-
-        isAdLoading = true
-        val adRequest = AdRequest.Builder().build()
-
-        InterstitialAd.load(
-            requireContext(),
-            BuildConfig.ADMOB_ENTER_ROOM_ID,
-            adRequest,
-            object : InterstitialAdLoadCallback() {
-                override fun onAdLoaded(ad: InterstitialAd) {
-                    Log.d("AdMob", "JoinRoom - 광고 로드 성공")
-                    isAdLoading = false
-                    interstitialAd = ad
-                }
-
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.e("AdMob", "JoinRoom - 광고 로드 실패: ${adError.message}")
-                    isAdLoading = false
-                    interstitialAd = null
-                }
-            }
-        )
-    }
-
     private fun onJoinSuccess(joinRoomResponse: JoinRoomResponseModel) {
-        if (interstitialAd != null) {
-            showAd(joinRoomResponse)
-        } else {
+        adHelper.showAdIfAvailable {
             navigateToRoom(joinRoomResponse)
         }
-    }
-
-    private fun showAd(joinRoomResponse: JoinRoomResponseModel) {
-        interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                cleanup()
-                navigateToRoom(joinRoomResponse)
-            }
-
-            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                cleanup()
-                navigateToRoom(joinRoomResponse)
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                interstitialAd = null
-            }
-        }
-
-        interstitialAd?.show(requireActivity())
-    }
-
-    private fun cleanup() {
-        interstitialAd = null
-        loadInterstitialAd()
     }
 
     private fun navigateToRoom(joinRoomResponse: JoinRoomResponseModel) {

@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.room.manittoroom.fragment
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,8 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.admob.AdmobInterstitialAdHelper
+import org.sopt.santamanitto.admob.InterstitialAdHelper
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
 import org.sopt.santamanitto.databinding.FragmentWaitingRoomBinding
@@ -28,19 +31,29 @@ import org.sopt.santamanitto.room.manittoroom.fragment.WaitingRoomFragmentDirect
 import org.sopt.santamanitto.util.ClipBoardUtil
 import org.sopt.santamanitto.util.base.BaseFragment
 import org.sopt.santamanitto.view.dialog.RoundDialogBuilder
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class WaitingRoomFragment :
     BaseFragment<FragmentWaitingRoomBinding>(R.layout.fragment_waiting_room, false) {
+
     companion object {
         const val INVITATION_CODE_LABEL = "InvitationCode"
     }
 
+    @Inject
+    lateinit var adHelper: InterstitialAdHelper
+
     private val viewModel: ManittoRoomViewModel by activityViewModels()
     private val memberAdapter = MemberAdapter()
 
-    private var interstitialAd: InterstitialAd? = null
-    private var isAdLoading = false
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        adHelper = AdmobInterstitialAdHelper(requireContext()).apply {
+            initialize(requireActivity(), BuildConfig.ADMOB_MATCHING_RESULT_ID)
+            loadAd()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,8 +62,9 @@ class WaitingRoomFragment :
     ): View {
         if (viewModel.isMatched) {
             if (viewModel.isFinished) {
-                loadInterstitialAd()
-                showAdOrNavigate()
+                adHelper.showAdIfAvailable {
+                    navigateFinishFragment()
+                }
             } else {
                 navigateMatchingFragment()
             }
@@ -140,57 +154,5 @@ class WaitingRoomFragment :
 
     private fun navigateMatchingFragment() {
         findNavController().navigate(actionWaitingRoomFragmentToMatchingFragment())
-    }
-
-    private fun loadInterstitialAd() {
-        if (isAdLoading) return
-
-        isAdLoading = true
-        val adRequest = AdRequest.Builder().build()
-
-        InterstitialAd.load(
-            requireContext(),
-            BuildConfig.ADMOB_MATCHING_RESULT_ID,
-            adRequest,
-            object : InterstitialAdLoadCallback() {
-                override fun onAdLoaded(ad: InterstitialAd) {
-                    isAdLoading = false
-                    interstitialAd = ad
-                }
-
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    isAdLoading = false
-                    interstitialAd = null
-                }
-            }
-        )
-    }
-
-    private fun showAdOrNavigate() {
-        if (interstitialAd != null) {
-            showAd()
-        } else {
-            navigateFinishFragment()
-        }
-    }
-
-    private fun showAd() {
-        interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                interstitialAd = null
-                navigateFinishFragment()
-            }
-
-            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                interstitialAd = null
-                navigateFinishFragment()
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                interstitialAd = null
-            }
-        }
-
-        interstitialAd?.show(requireActivity())
     }
 }
