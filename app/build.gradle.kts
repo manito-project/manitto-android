@@ -41,8 +41,7 @@ android {
         buildConfigField("String", "ADMOB_MATCHING_RESULT_ID", localProps["admobMatchingResultId"] as String)
         buildConfigField("String", "TH_TEST_ID", localProps["thTestId"] as String)
 
-        val admobAppId = localProps["admobAppId"] as String
-        manifestPlaceholders["admobAppId"] = admobAppId.trim('"')
+        manifestPlaceholders["admobAppId"] = localProps["admobAppId"] as Any
     }
 
     compileOptions {
