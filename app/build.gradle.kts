@@ -1,3 +1,4 @@
+import com.android.tools.r8.internal.ca
 import java.util.Properties
 
 plugins {
@@ -35,10 +36,6 @@ android {
         buildConfigField("String", "TOS_URL", localProps["tosUrl"] as String)
         buildConfigField("String", "PRIVACY_POLICY_RUL", localProps["privacyPolicyUrl"] as String)
         buildConfigField("String", "INQUIRY_URL", localProps["inquiryUrl"] as String)
-        buildConfigField("String", "ADMOB_CA_APP_PUB", localProps["admobCaAppPub"] as String)
-        buildConfigField("String", "ADMOB_ROOM_CREATE_ID", localProps["admobRoomCreateId"] as String)
-        buildConfigField("String", "ADMOB_ENTER_ROOM_ID", localProps["admobEnterRoomId"] as String)
-        buildConfigField("String", "ADMOB_MATCHING_RESULT_ID", localProps["admobMatchingResultId"] as String)
         buildConfigField("String", "TH_TEST_ID", localProps["thTestId"] as String)
 
         manifestPlaceholders["admobAppId"] = localProps["admobAppId"] as Any
@@ -77,7 +74,26 @@ android {
             manifestPlaceholders["appName"] = "@string/dev_app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_dev"
             applicationIdSuffix = ".debug"
-
+            buildConfigField(
+                "String",
+                "ADMOB_CA_APP_PUB",
+                "\"ca-app-pub-3940256099942544/6300978111\""
+            )
+            buildConfigField(
+                "String",
+                "ADMOB_ROOM_CREATE_ID",
+                "\"ca-app-pub-3940256099942544/1033173712\""
+            )
+            buildConfigField(
+                "String",
+                "ADMOB_ENTER_ROOM_ID",
+                "\"ca-app-pub-3940256099942544/1033173712\""
+            )
+            buildConfigField(
+                "String",
+                "ADMOB_MATCHING_RESULT_ID",
+                "\"ca-app-pub-3940256099942544/1033173712\""
+            )
             buildConfigField(
                 "String",
                 "AMPLITUDE_KEY",
@@ -89,6 +105,22 @@ android {
             manifestPlaceholders["appName"] = "@string/app_name"
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
 
+            buildConfigField("String", "ADMOB_CA_APP_PUB", localProps["admobCaAppPub"] as String)
+            buildConfigField(
+                "String",
+                "ADMOB_ROOM_CREATE_ID",
+                localProps["admobRoomCreateId"] as String
+            )
+            buildConfigField(
+                "String",
+                "ADMOB_ENTER_ROOM_ID",
+                localProps["admobEnterRoomId"] as String
+            )
+            buildConfigField(
+                "String",
+                "ADMOB_MATCHING_RESULT_ID",
+                localProps["admobMatchingResultId"] as String
+            )
             buildConfigField(
                 "String",
                 "AMPLITUDE_KEY",
