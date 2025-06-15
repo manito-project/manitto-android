@@ -142,9 +142,9 @@ class JoinRoomFragment : BaseFragment<FragmentJoinRoomBinding>(R.layout.fragment
     }
 
     private fun onJoinSuccess(joinRoomResponse: JoinRoomResponseModel) {
-        adHelper.showAdIfAvailable {
+//        adHelper.showAdIfAvailable {
             navigateToRoom(joinRoomResponse)
-        }
+//        }
     }
 
     private fun navigateToRoom(joinRoomResponse: JoinRoomResponseModel) {

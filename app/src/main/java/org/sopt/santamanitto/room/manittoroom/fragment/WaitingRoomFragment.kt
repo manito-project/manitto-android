@@ -62,9 +62,9 @@ class WaitingRoomFragment :
     ): View {
         if (viewModel.isMatched) {
             if (viewModel.isFinished) {
-                adHelper.showAdIfAvailable {
+//                adHelper.showAdIfAvailable {
                     navigateFinishFragment()
-                }
+//                }
             } else {
                 navigateMatchingFragment()
             }
