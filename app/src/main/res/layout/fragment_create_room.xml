@@ -155,7 +155,7 @@
                         android:gravity="center"
                         android:letterSpacing="-0.04"
                         android:paddingHorizontal="16dp"
-                        android:textSize="16sp"
+                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="@id/santaswitch_createroom_ampm"
                         app:layout_constraintEnd_toStartOf="@id/santaswitch_createroom_ampm"
                         app:layout_constraintStart_toStartOf="parent"

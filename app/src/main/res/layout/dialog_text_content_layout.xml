@@ -23,7 +23,7 @@
         android:lineSpacingMultiplier="1.1"
         android:textColor="@color/dark_gray"
         android:textFontWeight="600"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
