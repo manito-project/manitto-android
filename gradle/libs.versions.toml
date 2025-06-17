@@ -5,8 +5,8 @@ minSdk = "23"
 playServicesAds = "22.2.0"
 targetSdk = "34"
 compileSdk = "34"
-versionCode = "18"
-versionName = "2.1.0"
+versionCode = "19"
+versionName = "2.1.1"
 jvmVersion = "17"
 
 # Build Tools
