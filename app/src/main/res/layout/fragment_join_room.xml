@@ -67,7 +67,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/joinroom_card_title"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +116,7 @@
                 android:layout_marginStart="8dp"
                 android:textColor="@color/red"
                 android:textFontWeight="500"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@id/imageview_invitecode_alert"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageview_invitecode_alert"
