@@ -22,6 +22,7 @@ class ChatOverviewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initAdapter()
+        getManittoChatList()
         // TODO: 배너광고 추가
     }
 
@@ -38,7 +39,11 @@ class ChatOverviewActivity : AppCompatActivity() {
     }
 
     private fun initItemLongClickListener(roomId: String) {
-        // TODO: 삭제 기능 추가
+        // TODO: 삭제 기능 추가 (다이얼로그)
+    }
+
+    private fun getManittoChatList() {
+        adapter.submitList(viewModel.sampleChatItems)
     }
 
     override fun onDestroy() {
