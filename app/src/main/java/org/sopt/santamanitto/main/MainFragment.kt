@@ -26,6 +26,7 @@ import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
+import org.sopt.santamanitto.chat.overview.ChatOverviewActivity
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.main.list.MyManittoListAdapter
 import org.sopt.santamanitto.room.create.CreateRoomActivity
@@ -165,7 +166,7 @@ class MainFragment : Fragment() {
 
     private fun startChatActivity() {
         requireActivity().run {
-            startActivity(Intent(this, CreateRoomActivity::class.java))
+            startActivity(Intent(this, ChatOverviewActivity::class.java))
         }
     }
 

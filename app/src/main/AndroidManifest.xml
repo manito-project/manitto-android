@@ -48,6 +48,11 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".chat.overview.ChatOverviewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".main.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
