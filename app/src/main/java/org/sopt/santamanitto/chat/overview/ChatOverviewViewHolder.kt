@@ -5,6 +5,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.databinding.ItemChatOverviewBinding
+import org.sopt.santamanitto.util.TimeUtil.convertToElapsedTime
 import org.sopt.santamanitto.util.TimeUtil.isExpired
 import java.util.Locale
 
@@ -20,7 +21,7 @@ class ChatOverviewViewHolder(
             textviewOverviewItemSubtitle.text = item.lastContent
             textviewOverviewItemUnread.text =
                 String.format(Locale.getDefault(), "%d", item.unreadMessage)
-            textviewOverviewItemTime.text = item.lastMessageAt
+            textviewOverviewItemTime.text = item.lastMessageAt?.let { convertToElapsedTime(it) }
             textviewOverviewItemUnread.isVisible = item.unreadMessage > 0
 
             if (item.isMyManitto) {
