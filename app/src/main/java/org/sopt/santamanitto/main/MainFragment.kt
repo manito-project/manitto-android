@@ -114,6 +114,10 @@ class MainFragment : Fragment() {
             imagebuttonMainSetting.setOnClickListener {
                 navigateSettingFragment()
             }
+            //TODO: 서버통신 이후, 안읽은 채팅 있으면 XML 이미지 ic_noti_on으로 바꾸기
+            imagebuttonMainNoti.setOnClickListener {
+                startChatActivity()
+            }
         }
 
         adapter.run {
@@ -157,6 +161,12 @@ class MainFragment : Fragment() {
 
     private fun navigateJoinRoomFragment() {
         findNavController().navigate(MainFragmentDirections.actionMainFragmentToJoinRoomFragment())
+    }
+
+    private fun startChatActivity() {
+        requireActivity().run {
+            startActivity(Intent(this, CreateRoomActivity::class.java))
+        }
     }
 
     private fun startCreateRoomActivity() {
