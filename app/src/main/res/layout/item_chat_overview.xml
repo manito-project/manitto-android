@@ -18,7 +18,6 @@
             android:id="@+id/imageview_overview_item_logo"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/round_background_navy"
             android:src="@drawable/ic_santa_ic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
