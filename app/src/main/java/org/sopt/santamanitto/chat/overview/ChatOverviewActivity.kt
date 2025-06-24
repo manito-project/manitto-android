@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.chat.overview.list.ChatOverviewAdapter
 import org.sopt.santamanitto.databinding.ActivityChatOverviewBinding
 
 @AndroidEntryPoint

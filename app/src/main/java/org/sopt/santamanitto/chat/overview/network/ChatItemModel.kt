@@ -1,4 +1,4 @@
-package org.sopt.santamanitto.chat.overview
+package org.sopt.santamanitto.chat.overview.network
 
 data class ChatItemModel(
     val roomId: String,

@@ -2,6 +2,7 @@ package org.sopt.santamanitto.chat.overview
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import org.sopt.santamanitto.chat.overview.network.ChatItemModel
 import javax.inject.Inject
 
 @HiltViewModel

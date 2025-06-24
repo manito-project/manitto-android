@@ -1,8 +1,9 @@
-package org.sopt.santamanitto.chat.overview
+package org.sopt.santamanitto.chat.overview.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.santamanitto.chat.overview.network.ChatItemModel
 import org.sopt.santamanitto.databinding.ItemChatOverviewBinding
 import org.sopt.santamanitto.util.ItemDiffCallback
 
