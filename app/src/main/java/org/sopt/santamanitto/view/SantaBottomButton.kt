@@ -23,7 +23,7 @@ class SantaBottomButton : AppCompatButton {
 
     private fun init(attrs: AttributeSet?) {
         initAttribute(attrs)
-        setBackgroundResource(R.drawable.round_ractangle_background)
+        setBackgroundResource(R.drawable.shape_light_gray_line_10_rect)
         if (isEnabled) {
             enable()
         }
@@ -62,7 +62,7 @@ class SantaBottomButton : AppCompatButton {
     }
 
     override fun setEnabled(enabled: Boolean) {
-        setBackgroundResource(R.drawable.round_ractangle_background)
+        setBackgroundResource(R.drawable.shape_light_gray_line_10_rect)
 
         if (enabled) {
             enable()

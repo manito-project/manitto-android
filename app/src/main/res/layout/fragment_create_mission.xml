@@ -61,7 +61,7 @@
                 android:paddingHorizontal="@dimen/padding_createmission_recyclerview_horizontal"
                 android:paddingBottom="@dimen/padding_createmission_recyclerview_bottom"
                 android:scrollbarSize="@dimen/size_createmission_scrollbar"
-                android:scrollbarThumbVertical="@drawable/scrollbar_round_30"
+                android:scrollbarThumbVertical="@drawable/shape_gray2_fill_30_rect"
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_create_mission" />

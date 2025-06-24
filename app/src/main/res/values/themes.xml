@@ -41,7 +41,7 @@
 
     <style name="RecyclerViewScrollbar">
         <item name="android:scrollbarSize">@dimen/size_createmission_scrollbar</item>
-        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_round_30</item>
+        <item name="android:scrollbarThumbVertical">@drawable/shape_gray2_fill_30_rect</item>
         <item name="android:scrollbars">vertical</item>
     </style>
 

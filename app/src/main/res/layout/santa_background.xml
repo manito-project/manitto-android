@@ -12,7 +12,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/round_ractangle_bottom_background"
+            android:background="@drawable/shape_navy_fill_bottom30_rect"
             android:elevation="@dimen/elevation_shadow"
             android:outlineSpotShadowColor="@color/shadow_gray"
             app:layout_constraintBottom_toBottomOf="parent"

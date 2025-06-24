@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:minWidth="@dimen/width_santaswitch_min"
         android:minHeight="@dimen/height_santaswitch_min"
-        android:background="@drawable/round_ractangle_background"
+        android:background="@drawable/shape_light_gray_line_10_rect"
         android:backgroundTint="@color/light_bg"
         android:clipChildren="false">
 

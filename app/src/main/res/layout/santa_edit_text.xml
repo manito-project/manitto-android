@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_ractangle_background"
+        android:background="@drawable/shape_light_gray_line_10_rect"
         android:paddingHorizontal="@dimen/padding_santaedittext_root_horizontal">
 
         <FrameLayout
