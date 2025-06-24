@@ -18,10 +18,22 @@ class ChatOverviewViewHolder(
     fun onBind(item: ChatItemModel) {
         with(binding) {
             textviewOverviewItemTitle.text = item.roomName
-            textviewOverviewItemSubtitle.text = item.lastContent
+
+            textviewOverviewItemContent.text = if (item.lastContent.isNullOrBlank()) {
+                "${item.opponentName}에게 쪽지를 보내보자!"
+            } else {
+                item.lastContent
+            }
+
+            textviewOverviewItemTime.text = if (item.lastMessageAt.isNullOrBlank()) {
+                ""
+            } else {
+                convertToElapsedTime(item.lastMessageAt)
+            }
+
             textviewOverviewItemUnread.text =
                 String.format(Locale.getDefault(), "%d", item.unreadMessage)
-            textviewOverviewItemTime.text = item.lastMessageAt?.let { convertToElapsedTime(it) }
+
             textviewOverviewItemUnread.isVisible = item.unreadMessage > 0
 
             if (item.isMyManitto) {

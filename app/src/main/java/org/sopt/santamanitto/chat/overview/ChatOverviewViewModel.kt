@@ -21,14 +21,14 @@ class ChatOverviewViewModel @Inject constructor() : ViewModel() {
             unreadMessage = 5
         ),
 
-        // 2) 20분 전 메시지, 읽음, 상대방 마니또
+        // 2) 메세지 없음, 상대방 마니또
         ChatItemModel(
             roomId = "room-2",
             roomName = "주간 회의",
-            expirationDate = "2025-06-24T10:00:00.000Z",  // 오늘 오전, 이미 만료
-            opponentName = "팀원들",
-            lastMessageAt = "2025-06-24T12:50:00.000Z",   // 20분 전
-            lastContent = "준비사항 공유",
+            expirationDate = "2025-06-26T10:00:00.000Z",
+            opponentName = "이태희",
+            lastMessageAt = "",
+            lastContent = "",
             conversationId = "conv-2",
             isMyManitto = false,
             unreadMessage = 0
@@ -41,7 +41,7 @@ class ChatOverviewViewModel @Inject constructor() : ViewModel() {
             expirationDate = "2025-06-20T00:00:00.000Z",  // 4일 전, 만료
             opponentName = "알림봇",
             lastMessageAt = "2025-06-23T15:00:00.000Z",   // 약 22시간 전
-            lastContent = "빌드 실패 알림",
+            lastContent = "빌드 성공 알림",
             conversationId = "conv-3",
             isMyManitto = false,
             unreadMessage = 2
@@ -65,24 +65,11 @@ class ChatOverviewViewModel @Inject constructor() : ViewModel() {
             roomId = "room-5",
             roomName = "개발 토론",
             expirationDate = "2025-05-20T00:00:00.000Z",  // 34일 전, 만료
-            opponentName = "토론방",
+            opponentName = "김상호",
             lastMessageAt = "2025-05-15T09:30:00.000Z",   // 40일 전 → "2025-05-15"
             lastContent = null,
             conversationId = "conv-5",
             isMyManitto = false,
-            unreadMessage = 0
-        ),
-
-        // 6) 대화 시작 전 (message, conversationId 모두 null), 읽음 상태
-        ChatItemModel(
-            roomId = "room-6",
-            roomName = "새 채팅",
-            expirationDate = "2025-07-10T00:00:00.000Z",  // 미래라 만료 아님
-            opponentName = "호스트",
-            lastMessageAt = null,
-            lastContent = null,
-            conversationId = null,
-            isMyManitto = true,
             unreadMessage = 0
         )
     )
