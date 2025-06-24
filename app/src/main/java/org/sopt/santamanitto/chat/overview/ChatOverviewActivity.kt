@@ -23,6 +23,7 @@ class ChatOverviewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initAdapter()
+        initBackBtnClickListener()
         getManittoChatList()
         // TODO: 배너광고 추가
     }
@@ -41,6 +42,12 @@ class ChatOverviewActivity : AppCompatActivity() {
 
     private fun initItemLongClickListener(roomId: String) {
         // TODO: 삭제 기능 추가 (다이얼로그)
+    }
+
+    private fun initBackBtnClickListener() {
+        binding.buttonChatOverviewBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getManittoChatList() {
