@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_chat_right_item_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/shape_navy_fill_rightchat"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:textColor="@color/white"
+            android:textFontWeight="500"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="안녕하세요저는당신의" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_chat_right_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/dark_gray"
+            android:textFontWeight="400"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/textview_chat_right_item_content"
+            app:layout_constraintEnd_toStartOf="@id/textview_chat_right_item_content"
+            tools:text="12:34" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
