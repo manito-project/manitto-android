@@ -2,6 +2,8 @@ package org.sopt.santamanitto.util
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Calendar.DAY_OF_YEAR
+import java.util.Calendar.YEAR
 import java.util.Date
 import java.util.GregorianCalendar
 import java.util.Locale
@@ -95,27 +97,29 @@ object TimeUtil {
         )
     }
 
+    // 현재 시각과의 차이를 지정된 텍스트로 변환
     fun convertToElapsedTime(utcFormatString: String): String {
         val eventDate = utcFormat.parse(utcFormatString) ?: return ""
-        val now = Date()
-        val diffMillis = now.time - eventDate.time
-        val diffSeconds = diffMillis / 1000
-        if (diffSeconds < 60) return "방금"
-        val diffMinutes = diffSeconds / 60
-        if (diffMinutes < 60) return "${diffMinutes}분 전"
-        val diffHours = diffMinutes / 60
 
+        val diffSec = (Date().time - eventDate.time) / 1000
+        when {
+            diffSec < 0 -> return ""
+            diffSec < 60 -> return "방금"
+            diffSec < 3_600 -> return "${diffSec / 60}분 전"
+        }
+
+        val diffHours = diffSec / 3_600
         val eventCal = Calendar.getInstance(KOREA_TIME_ZONE).apply { time = eventDate }
         val nowCal = Calendar.getInstance(KOREA_TIME_ZONE)
-
-        if (eventCal[Calendar.YEAR] == nowCal[Calendar.YEAR] && eventCal[Calendar.DAY_OF_YEAR] == nowCal[Calendar.DAY_OF_YEAR]) {
+        if (eventCal[YEAR] == nowCal[YEAR] && eventCal[DAY_OF_YEAR] == nowCal[DAY_OF_YEAR]) {
             return "${diffHours}시간 전"
         }
 
-        return when (val diffDays = diffHours / 24) {
-            in 1..6 -> "${diffDays}일 전"
-            in 7..13 -> "1주일 전"
-            in 14..29 -> "${diffDays / 7}주 전"
+        val diffDays = diffHours / 24
+        return when {
+            diffDays <= 6 -> "${diffDays}일 전"
+            diffDays <= 13 -> "1주일 전"
+            diffDays <= 29 -> "${diffDays / 7}주 전"
             else -> noTimeKstFormat.format(eventCal.time)
         }
     }
