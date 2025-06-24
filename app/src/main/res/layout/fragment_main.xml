@@ -52,9 +52,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_main_setting_top"
                     android:background="@null"
-                    android:padding="@dimen/padding_entire"
+                    android:paddingVertical="@dimen/padding_entire"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="@dimen/padding_entire"
                     android:src="@drawable/ic_my_page"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imagebutton_main_noti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_main_setting_top"
+                    android:background="@null"
+                    android:paddingVertical="@dimen/padding_entire"
+                    android:paddingStart="@dimen/padding_entire"
+                    android:paddingEnd="8dp"
+                    android:src="@drawable/ic_noti_off"
+                    ads:layout_constraintEnd_toStartOf="@id/imagebutton_main_setting"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
@@ -191,10 +206,10 @@
             android:id="@+id/spacer_bottom"
             android:layout_width="0dp"
             android:layout_height="32dp"
-            app:layout_constraintTop_toBottomOf="@id/nsv_main_content"
-            app:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintBottom_toTopOf="@id/ad_container"
             app:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintBottom_toTopOf="@id/ad_container" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nsv_main_content" />
 
         <FrameLayout
             android:id="@+id/ad_container"

@@ -26,6 +26,7 @@ import org.sopt.santamanitto.BuildConfig
 import org.sopt.santamanitto.R
 import org.sopt.santamanitto.analytics.AmplitudeManager
 import org.sopt.santamanitto.analytics.EventType
+import org.sopt.santamanitto.chat.overview.ChatOverviewActivity
 import org.sopt.santamanitto.databinding.FragmentMainBinding
 import org.sopt.santamanitto.main.list.MyManittoListAdapter
 import org.sopt.santamanitto.room.create.CreateRoomActivity
@@ -114,6 +115,10 @@ class MainFragment : Fragment() {
             imagebuttonMainSetting.setOnClickListener {
                 navigateSettingFragment()
             }
+            //TODO: 서버통신 이후, 안읽은 채팅 있으면 XML 이미지 ic_noti_on으로 바꾸기
+            imagebuttonMainNoti.setOnClickListener {
+                startChatActivity()
+            }
         }
 
         adapter.run {
@@ -157,6 +162,12 @@ class MainFragment : Fragment() {
 
     private fun navigateJoinRoomFragment() {
         findNavController().navigate(MainFragmentDirections.actionMainFragmentToJoinRoomFragment())
+    }
+
+    private fun startChatActivity() {
+        requireActivity().run {
+            startActivity(Intent(this, ChatOverviewActivity::class.java))
+        }
     }
 
     private fun startCreateRoomActivity() {
