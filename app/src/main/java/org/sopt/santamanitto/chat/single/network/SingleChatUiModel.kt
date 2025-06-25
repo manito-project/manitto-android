@@ -10,6 +10,7 @@ data class SingleChatUiModel(
     val timeText: String,
     val isMyManitto: Boolean,
     val opponentName: String,
+    val isPlaceholder: Boolean = false
 ) {
     companion object {
         fun createDateChatUiModel(date: String): SingleChatUiModel =

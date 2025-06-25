@@ -17,7 +17,11 @@ class SingleChatViewModel @Inject constructor() : ViewModel() {
     var opponentName: String = ""
 
     fun getChatList(): List<SingleChatUiModel> {
-        return mapToUiModels(tempChatList)
+        return if (tempChatList.isNotEmpty()) {
+            createPlaceHolderUiModels()
+        } else {
+            mapToUiModels(tempChatList)
+        }
     }
 
     private fun mapToUiModels(raw: List<SingleChatModel>): List<SingleChatUiModel> {
@@ -43,6 +47,27 @@ class SingleChatViewModel @Inject constructor() : ViewModel() {
             )
         }
         return result
+    }
+
+    private fun createPlaceHolderUiModels(): List<SingleChatUiModel> {
+        val nowUtc = TimeUtil.getDateWithOffsetFromNow(0)
+        val date = TimeUtil.convertUtcToKstDate(nowUtc)
+        val time = TimeUtil.convertUtcToKstTime(nowUtc)
+        return listOf(
+            SingleChatUiModel.createDateChatUiModel(date),
+            SingleChatUiModel(
+                content = "마니또에게 응원의 메시지를 보내볼까?\n메세지는 10자 이내로 보낼 수 있어!",
+                createdAt = nowUtc,
+                isMine = false,
+                isRead = true,
+                chatType = TYPE_OPPONENT,
+                dateText = date,
+                timeText = time,
+                isMyManitto = isMyManitto,
+                opponentName = "산타마니또",
+                isPlaceholder = true
+            )
+        )
     }
 
     private val tempChatList = listOf(

@@ -40,6 +40,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/shape_gray3_fill_leftchat"
+            android:lineSpacingMultiplier="1.1"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
             android:textColor="@color/dark_gray"
