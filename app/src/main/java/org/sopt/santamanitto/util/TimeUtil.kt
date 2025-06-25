@@ -19,6 +19,7 @@ object TimeUtil {
 
     private const val UTC_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     private const val NO_TIME_FORMAT = "yyyy-MM-dd"
+    private const val ONLY_TIME_FORMAT = "HH:mm"
     private const val WRONG_FORMAT = "날짜 형식이 잘못되었습니다."
 
     private val UTC_TIME_ZONE: TimeZone = TimeZone.getTimeZone("UTC")
@@ -31,6 +32,9 @@ object TimeUtil {
         timeZone = KOREA_TIME_ZONE
     }
     private val noTimeKstFormat = SimpleDateFormat(NO_TIME_FORMAT, Locale.KOREA).apply {
+        timeZone = KOREA_TIME_ZONE
+    }
+    private val onlyTimeKstFormat = SimpleDateFormat(ONLY_TIME_FORMAT, Locale.KOREA).apply {
         timeZone = KOREA_TIME_ZONE
     }
 
@@ -72,6 +76,20 @@ object TimeUtil {
     // Utc(+0) -> Utc(KST)
     fun convertUtcToKst(utcFormatString: String): String {
         return kstFormat.format(
+            utcFormat.parse(utcFormatString) ?: throw IllegalArgumentException(WRONG_FORMAT)
+        )
+    }
+
+    // Utc(+0) -> Utc(KST) Date
+    fun convertUtcToKstDate(utcFormatString: String): String {
+        return noTimeKstFormat.format(
+            utcFormat.parse(utcFormatString) ?: throw IllegalArgumentException(WRONG_FORMAT)
+        )
+    }
+
+    // Utc(+0) -> Utc(KST) Time
+    fun convertUtcToKstTime(utcFormatString: String): String {
+        return onlyTimeKstFormat.format(
             utcFormat.parse(utcFormatString) ?: throw IllegalArgumentException(WRONG_FORMAT)
         )
     }

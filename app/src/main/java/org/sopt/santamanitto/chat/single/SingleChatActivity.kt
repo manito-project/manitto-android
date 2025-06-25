@@ -5,13 +5,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.chat.single.list.ChatAdapter
-import org.sopt.santamanitto.databinding.ActivityChatOverviewBinding
+import org.sopt.santamanitto.databinding.ActivitySingleChatBinding
 
 @AndroidEntryPoint
 class SingleChatActivity : AppCompatActivity() {
     private val viewModel by viewModels<SingleChatViewModel>()
 
-    private lateinit var binding: ActivityChatOverviewBinding
+    private lateinit var binding: ActivitySingleChatBinding
 
     private var _adapter: ChatAdapter? = null
     val adapter
@@ -19,9 +19,16 @@ class SingleChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChatOverviewBinding.inflate(layoutInflater)
+        binding = ActivitySingleChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initBackBtnClickListener()
+    }
+
+    private fun initBackBtnClickListener() {
+        binding.buttonSingleChatBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onDestroy() {
