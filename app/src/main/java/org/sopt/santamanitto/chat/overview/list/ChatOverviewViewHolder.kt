@@ -12,8 +12,8 @@ import java.util.Locale
 
 class ChatOverviewViewHolder(
     val binding: ItemChatOverviewBinding,
-    val itemClick: (String) -> Unit,
-    val itemLongClick: (String) -> Unit
+    val itemClick: (String, String, String, Boolean, String) -> Unit,
+    val itemLongClick: (String, String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val santaDrawable by lazy {
@@ -45,10 +45,18 @@ class ChatOverviewViewHolder(
             )
 
             root.setOnClickListener {
-                item.conversationId?.let { itemClick(it) }
+                item.conversationId?.let { convId ->
+                    itemClick(
+                        item.roomName,
+                        item.roomId,
+                        convId,
+                        item.isMyManitto,
+                        item.opponentName
+                    )
+                }
             }
             root.setOnLongClickListener {
-                item.conversationId?.let { itemLongClick(it) }
+                item.conversationId?.let { convId -> itemLongClick(item.roomId, convId) }
                 true
             }
 

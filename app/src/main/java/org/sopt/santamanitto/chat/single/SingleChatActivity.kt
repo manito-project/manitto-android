@@ -1,5 +1,8 @@
 package org.sopt.santamanitto.chat.single
 
+import android.content.Context
+import android.content.Intent
+
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +25,25 @@ class SingleChatActivity : AppCompatActivity() {
         binding = ActivitySingleChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initViewWithIntent()
+        initAdapter()
         initBackBtnClickListener()
+        getChatList()
+    }
+
+    private fun initViewWithIntent() {
+        with(viewModel) {
+            roomId = intent.getStringExtra(EXTRA_ROOM_ID).orEmpty()
+            conversationId = intent.getStringExtra(EXTRA_CONVERSATION_ID).orEmpty()
+            isMyManitto = intent.getBooleanExtra(EXTRA_IS_MY_MANITTO, false)
+            opponentName = intent.getStringExtra(EXTRA_OPPONENT_NAME).orEmpty()
+        }
+        binding.textviewSingleChatTitle.text = intent.getStringExtra(EXTRA_ROOM_NAME).orEmpty()
+    }
+
+    private fun initAdapter() {
+        _adapter = ChatAdapter()
+        binding.recyclerviewSingleChat.adapter = adapter
     }
 
     private fun initBackBtnClickListener() {
@@ -31,8 +52,37 @@ class SingleChatActivity : AppCompatActivity() {
         }
     }
 
+    private fun getChatList() {
+        adapter.submitList(viewModel.getChatList())
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _adapter = null
+    }
+
+    companion object {
+        private const val EXTRA_ROOM_NAME = "EXTRA_ROOM_NAME"
+        private const val EXTRA_ROOM_ID = "EXTRA_ROOM_ID"
+        private const val EXTRA_CONVERSATION_ID = "EXTRA_CONVERSATION_ID"
+        private const val EXTRA_IS_MY_MANITTO = "EXTRA_IS_MY_MANITTO"
+        private const val EXTRA_OPPONENT_NAME = "EXTRA_OPPONENT_NAME"
+
+        @JvmStatic
+        fun createIntent(
+            context: Context,
+            roomName: String,
+            roomId: String,
+            conversationId: String,
+            isMyManitto: Boolean,
+            opponentName: String
+        ): Intent =
+            Intent(context, SingleChatActivity::class.java).apply {
+                putExtra(EXTRA_ROOM_NAME, roomName)
+                putExtra(EXTRA_ROOM_ID, roomId)
+                putExtra(EXTRA_CONVERSATION_ID, conversationId)
+                putExtra(EXTRA_IS_MY_MANITTO, isMyManitto)
+                putExtra(EXTRA_OPPONENT_NAME, opponentName)
+            }
     }
 }

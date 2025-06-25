@@ -10,7 +10,7 @@ class ChatDateViewHolder(
 
     fun onBind(item: SingleChatUiModel) {
         with(binding) {
-            textviewChatDateItem.text = item.date
+            textviewChatDateItem.text = item.dateText
         }
     }
 }

@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/constraintlayout_single_chat_header"
-            tools:listitem="@layout/item_chat_overview" />
+            tools:listitem="@layout/item_chat_left" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
