@@ -59,21 +59,21 @@ class SingleChatViewModel @Inject constructor() : ViewModel() {
             isRead = true
         ),
         SingleChatModel(
-            content = "하루에 한번만 가능",
-            createdAt = "2025-05-25T11:05:00.000Z",
-            isMine = false,
-            isRead = true
-        ),
-        SingleChatModel(
             content = "앱 잘 동작하나요?",
-            createdAt = "2025-05-26T11:05:00.000Z",
+            createdAt = "2025-05-25T05:31:00.000Z",
             isMine = false,
             isRead = true
         ),
         SingleChatModel(
             content = "네, 아주 잘 돼요 👍",
-            createdAt = "2025-05-26T11:06:30.000Z",
+            createdAt = "2025-05-25T07:52:30.000Z",
             isMine = true,
+            isRead = true
+        ),
+        SingleChatModel(
+            content = "하루에 한번만 가능",
+            createdAt = "2025-05-26T11:05:00.000Z",
+            isMine = false,
             isRead = true
         ),
     )

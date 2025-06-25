@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.santamanitto.chat.single.list.ChatAdapter
+import org.sopt.santamanitto.chat.single.list.TopPaddingDecoration
 import org.sopt.santamanitto.databinding.ActivitySingleChatBinding
 
 @AndroidEntryPoint
@@ -44,6 +45,7 @@ class SingleChatActivity : AppCompatActivity() {
     private fun initAdapter() {
         _adapter = ChatAdapter()
         binding.recyclerviewSingleChat.adapter = adapter
+        binding.recyclerviewSingleChat.addItemDecoration(TopPaddingDecoration(24))
     }
 
     private fun initBackBtnClickListener() {
