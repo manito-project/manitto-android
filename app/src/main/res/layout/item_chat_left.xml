@@ -17,7 +17,7 @@
             android:id="@+id/imageview_chat_left_item_logo"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_santa_ic"
+            android:src="@drawable/ic_rudolf_ic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
