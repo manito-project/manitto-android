@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="org.sopt.santamanitto.chat.single.SingleChatViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,6 +94,7 @@
                     android:paddingVertical="10dp"
                     android:paddingStart="16dp"
                     android:singleLine="true"
+                    android:text="@={vm.inputText}"
                     android:textColor="@color/dark_gray"
                     android:textColorHint="@color/light_gray"
                     android:textCursorDrawable="@drawable/cursor_edittext"

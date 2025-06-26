@@ -44,6 +44,13 @@ class ChatAdapter() : ListAdapter<SingleChatUiModel, RecyclerView.ViewHolder>(di
 
     override fun getItemViewType(position: Int): Int = getItem(position).chatType.ordinal
 
+    fun addItems(newItems: List<SingleChatUiModel>) {
+        val updatedList = currentList.toMutableList().apply {
+            addAll(newItems)
+        }
+        submitList(updatedList)
+    }
+
     companion object {
         private val diffUtil = ItemDiffCallback<SingleChatUiModel>(
             onItemsTheSame = { old, new -> old.createdAt == new.createdAt },

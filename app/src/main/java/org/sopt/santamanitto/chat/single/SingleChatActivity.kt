@@ -2,7 +2,6 @@ package org.sopt.santamanitto.chat.single
 
 import android.content.Context
 import android.content.Intent
-
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -26,9 +25,12 @@ class SingleChatActivity : AppCompatActivity() {
         binding = ActivitySingleChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.lifecycleOwner = this
+        binding.vm = viewModel
         initViewWithIntent()
         initAdapter()
         initBackBtnClickListener()
+        initSendBtnClickListener()
         getChatList()
     }
 
@@ -51,6 +53,14 @@ class SingleChatActivity : AppCompatActivity() {
     private fun initBackBtnClickListener() {
         binding.buttonSingleChatBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun initSendBtnClickListener() {
+        // TODO : 글자수 제한 & 오늘 쪽지 보냄 여부 확인 후 제한
+        binding.buttonSingleChatInput.setOnClickListener {
+            adapter.addItems(viewModel.postNewChat())
+            viewModel.inputText.value = ""
         }
     }
 

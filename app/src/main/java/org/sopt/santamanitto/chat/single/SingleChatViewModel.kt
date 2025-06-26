@@ -1,5 +1,6 @@
 package org.sopt.santamanitto.chat.single
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.santamanitto.chat.single.network.SingleChatModel
@@ -16,17 +17,44 @@ class SingleChatViewModel @Inject constructor() : ViewModel() {
     var isMyManitto: Boolean = false
     var opponentName: String = ""
 
+    val inputText = MutableLiveData("")
+
+    private var lastDate = ""
+
     fun getChatList(): List<SingleChatUiModel> {
-        return if (tempChatList.isNotEmpty()) {
+        return if (tempChatList.isEmpty()) {
             createPlaceHolderUiModels()
         } else {
             mapToUiModels(tempChatList)
         }
     }
 
+    fun postNewChat(): List<SingleChatUiModel> {
+        if (inputText.value.isNullOrBlank()) return listOf()
+        val result = mutableListOf<SingleChatUiModel>()
+        val nowUtc = TimeUtil.getDateWithOffsetFromNow(0)
+        val date = TimeUtil.convertUtcToKstDate(nowUtc)
+        val time = TimeUtil.convertUtcToKstTime(nowUtc)
+        if (lastDate != date) {
+            result += SingleChatUiModel.createDateChatUiModel(date)
+            lastDate = date
+        }
+        result += SingleChatUiModel(
+            content = inputText.value!!,
+            createdAt = nowUtc,
+            isMine = true,
+            isRead = false,
+            chatType = TYPE_MINE,
+            dateText = date,
+            timeText = time,
+            isMyManitto = isMyManitto,
+            opponentName = opponentName
+        )
+        return result
+    }
+
     private fun mapToUiModels(raw: List<SingleChatModel>): List<SingleChatUiModel> {
         val result = mutableListOf<SingleChatUiModel>()
-        var lastDate = ""
         raw.forEach { model ->
             val date = TimeUtil.convertUtcToKstDate(model.createdAt)
             val time = TimeUtil.convertUtcToKstTime(model.createdAt)
