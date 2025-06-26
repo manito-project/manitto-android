@@ -12,7 +12,7 @@ import java.util.Locale
 
 class ChatOverviewViewHolder(
     val binding: ItemChatOverviewBinding,
-    val itemClick: (String, String, String, Boolean, String) -> Unit,
+    val itemClick: (String, String, String, Boolean, String, Boolean) -> Unit,
     val itemLongClick: (String, String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -51,7 +51,8 @@ class ChatOverviewViewHolder(
                         item.roomId,
                         convId,
                         item.isMyManitto,
-                        item.opponentName
+                        item.opponentName,
+                        isExpired(item.expirationDate)
                     )
                 }
             }

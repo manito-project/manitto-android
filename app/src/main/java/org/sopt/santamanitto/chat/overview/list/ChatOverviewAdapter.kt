@@ -8,7 +8,7 @@ import org.sopt.santamanitto.databinding.ItemChatOverviewBinding
 import org.sopt.santamanitto.util.ItemDiffCallback
 
 class ChatOverviewAdapter(
-    private val itemClick: (String, String, String, Boolean, String) -> Unit,
+    private val itemClick: (String, String, String, Boolean, String, Boolean) -> Unit,
     private val itemLongClick: (String, String) -> Unit
 ) : ListAdapter<ChatItemModel, ChatOverviewViewHolder>(diffUtil) {
     override fun onCreateViewHolder(

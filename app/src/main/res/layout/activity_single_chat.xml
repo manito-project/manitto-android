@@ -70,15 +70,16 @@
             android:layout_height="wrap_content"
             android:background="@color/gray_3"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"
+            android:paddingVertical="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintlayout_single_chat_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_light_gray_line_20_rect"
+                android:background="@{vm.isExpired ? @drawable/shape_light_gray_line_gray3_fill_20_rect : @drawable/shape_light_gray_line_20_rect}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,16 +90,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:enabled="@{!vm.isExpired}"
                     android:hint="마니또에게 하루 1회 10자 이내 쪽지를 보내세요"
                     android:letterSpacing="-0.03"
                     android:paddingVertical="10dp"
                     android:paddingStart="16dp"
                     android:singleLine="true"
                     android:text="@={vm.inputText}"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@{vm.isExpired ? @color/gray_3 : @color/dark_gray}"
                     android:textColorHint="@color/light_gray"
                     android:textCursorDrawable="@drawable/cursor_edittext"
-                    android:textSize="14dp"
+                    android:textSize="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/button_single_chat_input"
                     app:layout_constraintStart_toStartOf="parent"
@@ -110,8 +112,10 @@
                     android:layout_height="40dp"
                     android:padding="8dp"
                     android:src="@drawable/ic_send"
+                    android:visibility="@{vm.inputText.length() > 0 ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

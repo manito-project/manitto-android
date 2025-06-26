@@ -18,6 +18,7 @@ class SingleChatViewModel @Inject constructor() : ViewModel() {
     var opponentName: String = ""
 
     val inputText = MutableLiveData("")
+    val isExpired = MutableLiveData(false)
 
     private var lastDate = ""
 
@@ -121,12 +122,6 @@ class SingleChatViewModel @Inject constructor() : ViewModel() {
             content = "네, 아주 잘 돼요 👍",
             createdAt = "2025-05-25T07:52:30.000Z",
             isMine = true,
-            isRead = true
-        ),
-        SingleChatModel(
-            content = "하루에 한번만 가능",
-            createdAt = "2025-05-26T11:05:00.000Z",
-            isMine = false,
             isRead = true
         ),
     )

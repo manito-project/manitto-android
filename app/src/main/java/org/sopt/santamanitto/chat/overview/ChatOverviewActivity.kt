@@ -42,7 +42,8 @@ class ChatOverviewActivity : AppCompatActivity() {
         roomId: String,
         conversationId: String,
         isMyManitto: Boolean,
-        opponentName: String
+        opponentName: String,
+        isExpired: Boolean
     ) {
         startActivity(
             SingleChatActivity.createIntent(
@@ -51,7 +52,8 @@ class ChatOverviewActivity : AppCompatActivity() {
                 roomId,
                 conversationId,
                 isMyManitto,
-                opponentName
+                opponentName,
+                isExpired
             )
         )
     }

@@ -44,6 +44,7 @@ class SingleChatActivity : AppCompatActivity() {
             conversationId = intent.getStringExtra(EXTRA_CONVERSATION_ID).orEmpty()
             isMyManitto = intent.getBooleanExtra(EXTRA_IS_MY_MANITTO, false)
             opponentName = intent.getStringExtra(EXTRA_OPPONENT_NAME).orEmpty()
+            isExpired.value = intent.getBooleanExtra(EXTRA_IS_EXPIRED, false)
         }
         binding.textviewSingleChatTitle.text = intent.getStringExtra(EXTRA_ROOM_NAME).orEmpty()
     }
@@ -51,7 +52,7 @@ class SingleChatActivity : AppCompatActivity() {
     private fun initAdapter() {
         _adapter = ChatAdapter()
         binding.recyclerviewSingleChat.adapter = adapter
-        binding.recyclerviewSingleChat.addItemDecoration(TopPaddingDecoration(24))
+        binding.recyclerviewSingleChat.addItemDecoration(TopPaddingDecoration(20))
     }
 
     private fun initBackBtnClickListener() {
@@ -106,6 +107,7 @@ class SingleChatActivity : AppCompatActivity() {
         private const val EXTRA_CONVERSATION_ID = "EXTRA_CONVERSATION_ID"
         private const val EXTRA_IS_MY_MANITTO = "EXTRA_IS_MY_MANITTO"
         private const val EXTRA_OPPONENT_NAME = "EXTRA_OPPONENT_NAME"
+        private const val EXTRA_IS_EXPIRED = "EXTRA_IS_EXPIRED"
 
         @JvmStatic
         fun createIntent(
@@ -114,7 +116,8 @@ class SingleChatActivity : AppCompatActivity() {
             roomId: String,
             conversationId: String,
             isMyManitto: Boolean,
-            opponentName: String
+            opponentName: String,
+            isExpired: Boolean
         ): Intent =
             Intent(context, SingleChatActivity::class.java).apply {
                 putExtra(EXTRA_ROOM_NAME, roomName)
@@ -122,6 +125,7 @@ class SingleChatActivity : AppCompatActivity() {
                 putExtra(EXTRA_CONVERSATION_ID, conversationId)
                 putExtra(EXTRA_IS_MY_MANITTO, isMyManitto)
                 putExtra(EXTRA_OPPONENT_NAME, opponentName)
+                putExtra(EXTRA_IS_EXPIRED, isExpired)
             }
     }
 }
