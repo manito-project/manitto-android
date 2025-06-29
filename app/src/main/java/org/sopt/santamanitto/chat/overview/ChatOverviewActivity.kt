@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import org.sopt.santamanitto.chat.overview.list.ChatOverviewAdapter
+import org.sopt.santamanitto.chat.single.SingleChatActivity
 import org.sopt.santamanitto.databinding.ActivityChatOverviewBinding
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class ChatOverviewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initAdapter()
+        initBackBtnClickListener()
         getManittoChatList()
         // TODO: 배너광고 추가
     }
@@ -34,12 +37,35 @@ class ChatOverviewActivity : AppCompatActivity() {
         binding.recyclerviewChatOverview.adapter = adapter
     }
 
-    private fun initItemClickListener(roomId: String) {
-
+    private fun initItemClickListener(
+        roomName: String,
+        roomId: String,
+        conversationId: String,
+        isMyManitto: Boolean,
+        opponentName: String,
+        isExpired: Boolean
+    ) {
+        startActivity(
+            SingleChatActivity.createIntent(
+                this,
+                roomName,
+                roomId,
+                conversationId,
+                isMyManitto,
+                opponentName,
+                isExpired
+            )
+        )
     }
 
-    private fun initItemLongClickListener(roomId: String) {
+    private fun initItemLongClickListener(roomId: String, conversationId: String) {
         // TODO: 삭제 기능 추가 (다이얼로그)
+    }
+
+    private fun initBackBtnClickListener() {
+        binding.buttonChatOverviewBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getManittoChatList() {

@@ -11,7 +11,7 @@
         xmlns:tool="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_santaperiodpicker"
-        android:background="@drawable/round_ractangle_background_30"
+        android:background="@drawable/shape_white_fill_30_rect"
         android:backgroundTint="@color/light_bg">
 
         <org.sopt.santamanitto.view.SantaSmallButton

@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintlayout_setting_header"
+            android:id="@+id/constraintlayout_chat_overview_header"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/navy"
@@ -56,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraintlayout_setting_header"
+            app:layout_constraintTop_toBottomOf="@id/constraintlayout_chat_overview_header"
             tools:listitem="@layout/item_chat_overview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

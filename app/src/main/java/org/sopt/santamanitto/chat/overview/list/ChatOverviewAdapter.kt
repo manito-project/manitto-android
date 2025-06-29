@@ -1,14 +1,15 @@
-package org.sopt.santamanitto.chat.overview
+package org.sopt.santamanitto.chat.overview.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.santamanitto.chat.overview.network.ChatItemModel
 import org.sopt.santamanitto.databinding.ItemChatOverviewBinding
 import org.sopt.santamanitto.util.ItemDiffCallback
 
 class ChatOverviewAdapter(
-    private val itemClick: (String) -> Unit,
-    private val itemLongClick: (String) -> Unit
+    private val itemClick: (String, String, String, Boolean, String, Boolean) -> Unit,
+    private val itemLongClick: (String, String) -> Unit
 ) : ListAdapter<ChatItemModel, ChatOverviewViewHolder>(diffUtil) {
     override fun onCreateViewHolder(
         parent: ViewGroup,

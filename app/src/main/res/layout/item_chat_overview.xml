@@ -90,7 +90,7 @@
                     android:id="@+id/textview_overview_item_unread"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_background_dark_gray"
+                    android:background="@drawable/shape_dark_gray_fill_6_rect"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
                     android:textColor="@color/white"

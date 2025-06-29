@@ -1,9 +1,10 @@
-package org.sopt.santamanitto.chat.overview
+package org.sopt.santamanitto.chat.overview.list
 
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.santamanitto.R
+import org.sopt.santamanitto.chat.overview.network.ChatItemModel
 import org.sopt.santamanitto.databinding.ItemChatOverviewBinding
 import org.sopt.santamanitto.util.TimeUtil.convertToElapsedTime
 import org.sopt.santamanitto.util.TimeUtil.isExpired
@@ -11,8 +12,8 @@ import java.util.Locale
 
 class ChatOverviewViewHolder(
     val binding: ItemChatOverviewBinding,
-    val itemClick: (String) -> Unit,
-    val itemLongClick: (String) -> Unit
+    val itemClick: (String, String, String, Boolean, String, Boolean) -> Unit,
+    val itemLongClick: (String, String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val santaDrawable by lazy {
@@ -44,10 +45,19 @@ class ChatOverviewViewHolder(
             )
 
             root.setOnClickListener {
-                item.conversationId?.let { itemClick(it) }
+                item.conversationId?.let { convId ->
+                    itemClick(
+                        item.roomName,
+                        item.roomId,
+                        convId,
+                        item.isMyManitto,
+                        item.opponentName,
+                        isExpired(item.expirationDate)
+                    )
+                }
             }
             root.setOnLongClickListener {
-                item.conversationId?.let { itemLongClick(it) }
+                item.conversationId?.let { convId -> itemLongClick(item.roomId, convId) }
                 true
             }
 
